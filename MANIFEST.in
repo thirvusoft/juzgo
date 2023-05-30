@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include juzgo *.css
+recursive-include juzgo *.csv
+recursive-include juzgo *.html
+recursive-include juzgo *.ico
+recursive-include juzgo *.js
+recursive-include juzgo *.json
+recursive-include juzgo *.md
+recursive-include juzgo *.png
+recursive-include juzgo *.py
+recursive-include juzgo *.svg
+recursive-include juzgo *.txt
+recursive-exclude juzgo *.pyc
