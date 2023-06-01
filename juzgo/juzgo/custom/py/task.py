@@ -20,27 +20,29 @@ def user_todo(doc, actions):
         doc_.save()
 
 def update_number(doc, actions):
-        if doc.assigned_to:
+        user(doc, doc.assigned_to)
+        assigned = frappe.db.get_value("Task",doc.name,"assigned_to")
+        if doc.assigned_to != assigned:
+            user(doc, assigned)
+        
+            
+def user(doc, user):
+    if user:
+        priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
+        if doc.name not in priority_update:
+            priority_update.insert((doc.priority_number or len(priority_update)) -1, doc.name)
+            doc.priority_number =priority_update.index(doc.name)+1
+        if user!= doc.assigned_to:
+            priority_update.remove(doc.name)
+        if doc.status not in ["Open", "Working"]:
+            doc.priority_number = 0 
+            priority_update.remove(doc.name)
+        if doc.name in priority_update:
             if not doc.priority_number:
-                task_list = frappe.get_value("Task", {"status": ["in", ["Open", "Working"]], 'assigned_to':doc.assigned_to, 'name':['!=',doc.name]}, "priority_number", order_by = "priority_number desc" ) or 0
-                if doc.status in ["Open", "Working"]:
-                    doc.priority_number = task_list + 1
-            task_dec = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to':doc.assigned_to, 'name':['!=',doc.name],'priority_number':[">",doc.priority_number]}, fields=['priority_number','name'])
-            if doc.status == "Completed":
-                for i in task_dec:
-                    frappe.db.set_value("Task",i.name,"priority_number",i.priority_number-1)
-
-        # if doc.priority_number ==0 and doc.status in ["Open", "Working"]:
-        #      doc.priority_number += 1
-        #      print("==")
-                # frappe.db.set_value("Task",task.name,"priority_number",doc.priority_number + task.priority_number)
-        # if doc.status in ["Open", "Working"]:
-        #     doc.priority_number += 1    
-            # else:
-            #     c=task.priority_number+c
-            #     doc.priority_number = c
-
-# def on_update(doc,actions):
-#     task = frappe.get_all("Timesheet Detail",filters={'task':doc.name,'completed':["!=",1]},fields=['parent','priority_order','task'])
-#     frappe.db.set_value("Timesheet Detail",task.task,'priority_order',)
-
+                doc.priority_number = priority_update.index(doc.name)+1
+            current = priority_update.pop(priority_update.index(doc.name))
+            priority_update.insert(doc.priority_number -1, current)
+        idx =1 
+        for m in priority_update:
+            frappe.db.set_value("Task",m,"priority_number",idx)
+            idx+=1

@@ -163,7 +163,7 @@
    "module": null,
    "name": "Task-priority_number",
    "no_copy": 0,
-   "non_negative": 0,
+   "non_negative": 1,
    "options": null,
    "owner": "Administrator",
    "permlevel": 0,
