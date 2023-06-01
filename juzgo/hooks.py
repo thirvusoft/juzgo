@@ -31,7 +31,9 @@ app_license = "MIT"
 # include js in doctype views
 doctype_js = {
 		"Timesheet" : "/juzgo/custom/js/timesheet.js",
-        "Task" : "/juzgo/custom/js/task.js"
+        "Task" : "/juzgo/custom/js/task.js",
+		# "Staffing Plan" : "/juzgo/custom/js/staffplanning.js",
+		"Job Opening" : "/juzgo/custom/js/jobopening.js"
 
 	}
 doc_events = {
