@@ -31,7 +31,7 @@ app_license = "MIT"
 # include js in doctype views
 doctype_js = {
 		"Timesheet" : "/juzgo/custom/js/timesheet.js",
-
+        "Interview Feedback": "/custom/js/interview_feedback.js"
 	}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
