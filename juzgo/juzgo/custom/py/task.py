@@ -46,3 +46,17 @@ def user(doc, user):
         for m in priority_update:
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1
+
+@frappe.whitelist()
+def minutes_to_hours(minutes):
+    if minutes:
+        minutes = float(minutes)
+        hours = minutes / 60
+        return hours
+
+@frappe.whitelist()
+def hours_to_minutes(hours):
+    if hours:
+        hours = float(hours)
+        minutes = hours * 60
+        return minutes
