@@ -32,7 +32,6 @@ def user(doc, user):
         if doc.name not in priority_update:
             priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
-            print(doc.priority_number,"-----")
         if user!= doc.assigned_to:
             priority_update.remove(doc.name)
         if doc.status not in ["Open", "Working"]:
@@ -44,7 +43,6 @@ def user(doc, user):
             current = priority_update.pop(priority_update.index(doc.name))
             priority_update.insert(doc.priority_number -1, current)
         idx =1 
-        frappe.errprint(priority_update)
         for m in priority_update:
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1

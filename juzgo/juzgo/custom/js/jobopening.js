@@ -1,22 +1,33 @@
+var desig_filter = [];
 frappe.ui.form.on('Job Opening', {
-    refresh:function(frm){
-        frm.add_custom_button(__('Staffing Plan'), () => frm.events.get_items_from_staffing_plan(frm),
-            __("Get Items From"));
+    refresh:async function(frm){
+		await frm.trigger("staffing_plan")
+		frm.set_query("designation",function(){
+			return {
+				filters:desig_filter.length?{
+					name:["in", desig_filter]
+				}:{}
+				
+			}
+		})
+    },
+    staffing_plan: async function(frm){
+        await frappe.call({
+            
+            method: "juzgo.juzgo.custom.py.jobopening.get_staf_designation",
+            args:{
+                staffing_plan:frm.doc.staffing_plan,
+            },
+            callback: function(r) {
+				desig_filter=r.message
+				if(desig_filter.length == 1){
+					frm.set_value("designation",desig_filter[0])
+				}
+
+        }
+        })
         
     },
-	get_items_from_staffing_plan: function(frm) {
-		erpnext.utils.map_current_doc({
-			method: "juzgo.juzgo.custom.py.jobopening.make_material_request",
-			source_doctype: "Staffing Plan",
-			target: frm,
-			setters: {
-				// name: undefined,
-			},
-			get_query_filters: {
-				docstatus: 1,
-				company: frm.doc.company
-			}
-		});
-	},
 
 })
+
