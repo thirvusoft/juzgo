@@ -38,6 +38,7 @@ frappe.ui.form.on('Timesheet', {
 						}
 						else{
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'priority_order',row.priority_order)
+							frappe.model.set_value("Timesheet Detail",tasks[row.task],'description',row.description)
 						}
 						  
 					})

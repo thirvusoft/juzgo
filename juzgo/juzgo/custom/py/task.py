@@ -30,7 +30,7 @@ def user(doc, user):
     if user:
         priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
         if doc.name not in priority_update:
-            priority_update.insert((doc.priority_number or len(priority_update)) -1, doc.name)
+            priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
         if user!= doc.assigned_to:
             priority_update.remove(doc.name)
@@ -46,3 +46,17 @@ def user(doc, user):
         for m in priority_update:
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1
+
+@frappe.whitelist()
+def minutes_to_hours(minutes):
+    if minutes:
+        minutes = float(minutes)
+        hours = minutes / 60
+        return hours
+
+@frappe.whitelist()
+def hours_to_minutes(hours):
+    if hours:
+        hours = float(hours)
+        minutes = hours * 60
+        return minutes
