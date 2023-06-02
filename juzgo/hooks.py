@@ -31,8 +31,22 @@ app_license = "MIT"
 # include js in doctype views
 doctype_js = {
 		"Timesheet" : "/juzgo/custom/js/timesheet.js",
+        "Task" : "/juzgo/custom/js/task.js",
+		"Job Opening" : "/juzgo/custom/js/jobopening.js"
 
 	}
+doc_events = {
+    "Task" : {
+        "validate" : ["juzgo.juzgo.custom.py.task.user_todo",
+                      "juzgo.juzgo.custom.py.task.update_number",
+                      
+					  ],
+        "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",
+	},
+	"Timesheet": {
+		"validate": "juzgo.juzgo.custom.py.timesheet.status_updated",
+	}
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
