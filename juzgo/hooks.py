@@ -49,7 +49,9 @@ doc_events = {
 		"validate": "juzgo.juzgo.custom.py.timesheet.status_updated",
 	},
     "Interview": {
-        "validate": "juzgo.custom.py.interview.get_url"
+        "validate": "juzgo.custom.py.interview.get_url",
+        "after_insert" : "juzgo.juzgo.custom.py.interview.send_mail_interview_created",
+        "on_submit": "juzgo.juzgo.custom.py.interview.send_interview_round_status"
 	}
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -87,6 +89,11 @@ doc_events = {
 
 # before_install = "juzgo.install.before_install"
 # after_install = "juzgo.install.after_install"
+
+# Migrate
+# ------------
+
+after_migrate = "juzgo.juzgo.utils.setup.setup"
 
 # Uninstallation
 # ------------
