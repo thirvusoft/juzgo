@@ -20,6 +20,7 @@
    "label": "Email Templates"
   },
   {
+   "description": " {{ frappe.defaults.get_user_default(\"Company\") }}: Interview Scheduled",
    "fieldname": "subject_template",
    "fieldtype": "Code",
    "label": "Email Subject Template",
@@ -32,6 +33,7 @@
    "label": "Allow Multiple Responses"
   },
   {
+   "description": "<pre>&lt;div class=\"email-interview-content\"&gt;\n    &lt;div&gt;\n        &lt;h2&gt;\n            {{ frappe.defaults.get_user_default(\"Company\") }}\n        &lt;/h2&gt;\n    &lt;/div&gt;\n    &lt;div style=\"max-width: 70%; margin-left: 15%;\"&gt;\n        Hello &lt;b&gt;{{ job_application.applicant_name }}&lt;/b&gt;, Your Interview has been conducted through Online Webform and it is scheduled on &lt;b&gt;{{ frappe.utils.formatdate(interview.scheduled_on) }} {% if interview.from_time %} {{ interview.from_time }} {% endif %}&lt;/b&gt;- &lt;b&gt;{{ frappe.utils.formatdate(interview.scheduled_on) }} {% if interview.to_time %} {{ interview.to_time }} {% endif %}&lt;/b&gt;\n    &lt;/div&gt;\n    &lt;div&gt;\n       &lt;a class=\"material-button material-button-filled\" data-saferedirecturl=\"https://www.google.com/url?q={{ interview.web_form_url }}\" href=\"{{ interview.web_form_url }}\" rel=\"noreferrer noopener\" role=\"button\" style=\"padding: 0 24px; font: 500 14px/36px Google Sans, Roboto, Arial, Helvetica, sans-serif; border: none; border-radius: 18px; box-sizing: border-box; display: inline-block; letter-spacing: 0.25px; min-height: 36px; background-color: #1a73e8; color: #fff; text-align: center; text-decoration: none;\" tabindex=\"0\" target=\"_blank\"&gt;\n            Open Form\n        &lt;/a&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n\n&lt;style&gt;\n    .email-interview-content {\n        background-color: #ededed;\n        text-align: center;\n        width: 100%;\n        border-radius: 6px;\n        padding: 15px;\n    }\n    .open-form-button {\n        margin-top: 15px;\n        font-weight: bold;\n        padding: 4px 10px;\n        min-width: 40px;\n        cursor: pointer;\n        height: 30px;\n        margin-left: 8px;\n        border-radius: 6px;\n        background-color: #2490EF;\n        color: #fff;\n        white-space: nowrap;\n        border: none;\n        box-shadow: rgba(0, 0, 0, 0.05) 0px 0.5px 0px 0px,\n                    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,\n                    rgba(0, 0, 0, 0.05) 0px 2px 4px 0px;\n        font-size: 13px;\n    }\n&lt;/style&gt;\n</pre>\n",
    "fieldname": "message_template",
    "fieldtype": "Code",
    "label": "Email Message Template",
@@ -41,7 +43,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-06-03 12:01:28.426947",
+ "modified": "2023-06-03 16:19:12.660488",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Settings",
