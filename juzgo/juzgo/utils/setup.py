@@ -10,15 +10,32 @@ def setup_fields():
             dict(
                 fieldname= "send_interview_round_status",
                 fieldtype= "Check",
-                insert_after= "feedback_reminder_notification_template ",
+                insert_after= "feedback_reminder_notification_template",
                 label= "Send Interview Round Status",
             ),
             dict(
                 fieldname= "send_interview_round_status_template",
-                fieldtype= "Check",
-                insert_after= "send_interview_round_status ",
+                fieldtype= "Link",
+                options= "Email Template",
+                insert_after= "send_interview_round_status",
                 label= "Send Interview Round Status Template",
-                depends_on= "eval:doc.send_interview_round_status"
+                depends_on= "eval:doc.send_interview_round_status",
+                mandatory_depends_on= "eval:doc.send_interview_round_status"
+            ),
+            dict(
+                fieldname= "send_mail_interview_created",
+                fieldtype= "Check",
+                insert_after= "send_interview_round_status_template",
+                label= "Send Mail Interview Created",
+            ),
+            dict(
+                fieldname= "send_mail_interview_created_template",
+                fieldtype= "Link",
+                options= "Email Template",
+                insert_after= "send_mail_interview_created",
+                label= "Send Mail Interview Created Template",
+                depends_on= "eval:doc.send_mail_interview_created",
+                mandatory_depends_on= "eval:doc.send_mail_interview_created"
             ),
         ]
     }
