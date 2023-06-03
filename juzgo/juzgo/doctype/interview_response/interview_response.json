@@ -18,7 +18,7 @@
   "phone_number",
   "country",
   "section_break_1ptj9",
-  "interview_reponse_question_tab"
+  "interview_response_question_tab"
  ],
  "fields": [
   {
@@ -80,15 +80,15 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "interview_reponse_question_tab",
+   "fieldname": "interview_response_question_tab",
    "fieldtype": "Table",
-   "label": "Interview Reponse Question",
-   "options": "Interview Reponse Question"
+   "label": "Interview Response Question",
+   "options": "Interview Response Question"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-02 16:42:03.178040",
+ "modified": "2023-06-03 17:07:03.224474",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Response",

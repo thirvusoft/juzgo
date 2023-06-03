@@ -8,18 +8,19 @@ frappe.ready(function () {
     setuppages()
     frappe.web_form.questions = [];
     function fill_question_fields() {
-        let grid_is_editable = frappe.web_form.fields_dict.interview_reponse_question_tab.grid.is_editable;
-        frappe.web_form.fields_dict.interview_reponse_question_tab.grid.is_editable = () => 1;
+        let grid_is_editable = frappe.web_form.fields_dict.interview_response_question_tab.grid.is_editable;
+        frappe.web_form.fields_dict.interview_response_question_tab.grid.is_editable = () => 1;
 
-        frappe.web_form.fields_dict.interview_reponse_question_tab.grid.data = [];
+        frappe.web_form.fields_dict.interview_response_question_tab.grid.data = [];
         frappe.web_form.questions.forEach(field => {
-            frappe.web_form.fields_dict.interview_reponse_question_tab.grid.add_new_row()
-            let idx = frappe.web_form.fields_dict.interview_reponse_question_tab.grid.data.length - 1;
-            frappe.web_form.fields_dict.interview_reponse_question_tab.grid.data[idx]['question'] = field.label || "";
-            frappe.web_form.fields_dict.interview_reponse_question_tab.grid.data[idx]['answer'] = frappe.web_form.doc[field.fieldname] || "";
+            frappe.web_form.fields_dict.interview_response_question_tab.grid.add_new_row()
+            let idx = frappe.web_form.fields_dict.interview_response_question_tab.grid.data.length - 1;
+            frappe.web_form.fields_dict.interview_response_question_tab.grid.data[idx]['question'] = field.label || "";
+            frappe.web_form.fields_dict.interview_response_question_tab.grid.data[idx]['interview_question'] = field.interview_question || "";
+            frappe.web_form.fields_dict.interview_response_question_tab.grid.data[idx]['answer'] = frappe.web_form.doc[field.fieldname] || "";
         });
 
-        frappe.web_form.fields_dict.interview_reponse_question_tab.grid.is_editable = grid_is_editable;
+        frappe.web_form.fields_dict.interview_response_question_tab.grid.is_editable = grid_is_editable;
     }
 
     let save = frappe.web_form.save;

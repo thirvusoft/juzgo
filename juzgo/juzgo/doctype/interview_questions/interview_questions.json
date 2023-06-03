@@ -6,21 +6,30 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "interview_question",
   "question"
  ],
  "fields": [
   {
+   "fetch_from": "interview_question.question",
    "fieldname": "question",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Question",
    "reqd": 1
+  },
+  {
+   "fieldname": "interview_question",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Interview Question",
+   "options": "Interview Question"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-02 12:12:13.916576",
+ "modified": "2023-06-03 16:43:00.824452",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Questions",
