@@ -21,7 +21,7 @@ def get_question_fields(data):
 		cipher_suite = Fernet(encode(get_encryption_key()))
 		interview = cstr(cipher_suite.decrypt(encode(data)))
 		interview = frappe.get_doc("Interview", interview)
-		questions = frappe.get_all("Interview Questions", filters={"parent": interview.interview_round}, pluck="question", order_by="idx")
+		questions = frappe.get_all("Interview Questions", filters={"parent": interview.interview_round}, fields=["question", "interview_question"], order_by="idx")
 		job_applicant = frappe.get_doc("Job Applicant", interview.job_applicant)
 		already_response_submitted = False
 		form_status = ""
@@ -60,7 +60,8 @@ def get_question_fields(data):
 			"questions": [
 				{
 					"fieldname": f"interview_question_{ques+1}",
-					"label": questions[ques],
+					"interview_question": questions[ques]["interview_question"],
+					"label": questions[ques]["question"],
 					"fieldtype": "Small Text"
 				} for ques in range(len(questions))
 			],

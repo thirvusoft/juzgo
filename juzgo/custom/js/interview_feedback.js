@@ -3,6 +3,7 @@ frappe.ui.form.on("Interview Feedback", {
         frappe.call({
             method: 'juzgo.custom.py.interview_feedback.get_interview_questions',
             args: {
+                interview: frm.doc.interview,
                 interview_round: frm.doc.interview_round
             },
             callback: function (r) {
