@@ -1,0 +1,38 @@
+<div class="error-page hide">
+    <div class="error-header">
+        
+        <h2 class="error-title">
+            <svg class="error-icon icon">
+                <use href="#icon-solid-error"></use>
+            </svg>
+            Couldn't Load Form</h2>
+    </div>
+
+    <div class="error-body">
+        <p class="error-message">There is a problem while loading this form. Please contact the organisation.</p>
+    </div>
+</div>
+
+<style>
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .error-page {
+        background-color: var(--fg-color);
+        padding: 5rem 2rem;
+        margin-top: 3rem;
+        border: 1px solid var(--dark-border-color);
+        border-radius: var(--border-radius);
+        text-align: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .error-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .error-icon {
+        width: 3rem;
+        height: 3rem;
+        flex: 2;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .error-title {
+        flex: 8;
+    }
+</style>

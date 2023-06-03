@@ -1,38 +1,27 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-06-01 18:22:46.831562",
- "default_view": "List",
+ "creation": "2023-06-02 16:41:34.695477",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "interview_question",
   "question",
-  "applicants_answer",
-  "rating"
+  "answer"
  ],
  "fields": [
   {
-   "fetch_from": "interview_question.question",
-   "fetch_if_empty": 1,
    "fieldname": "question",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Question",
-   "reqd": 1
+   "label": "Question"
   },
   {
-   "fieldname": "applicants_answer",
+   "fieldname": "answer",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Applicants Answer"
-  },
-  {
-   "fieldname": "rating",
-   "fieldtype": "Rating",
-   "in_list_view": 1,
-   "label": "Rating"
+   "label": "Answer"
   },
   {
    "fieldname": "interview_question",
@@ -45,10 +34,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-03 16:44:20.973322",
+ "modified": "2023-06-03 16:51:03.064997",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Interview Questions Results",
+ "name": "Interview Response Question",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

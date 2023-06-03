@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-02 16:38:16.823392",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "job_applicant",
+  "column_break_auzwl",
+  "interview",
+  "section_break_enrwj",
+  "job_opening",
+  "designation",
+  "column_break_6rkqo",
+  "email_id",
+  "phone_number",
+  "country",
+  "section_break_1ptj9",
+  "interview_response_question_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_applicant",
+   "fieldtype": "Link",
+   "label": " Job Applicant",
+   "options": "Job Applicant"
+  },
+  {
+   "fieldname": "column_break_auzwl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interview",
+   "fieldtype": "Link",
+   "label": "Interview",
+   "options": "Interview"
+  },
+  {
+   "fieldname": "section_break_enrwj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "job_opening",
+   "fieldtype": "Link",
+   "label": "Job Opening",
+   "options": "Job Opening"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "column_break_6rkqo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email Id",
+   "options": "Email"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "section_break_1ptj9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "interview_response_question_tab",
+   "fieldtype": "Table",
+   "label": "Interview Response Question",
+   "options": "Interview Response Question"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-03 17:07:03.224474",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Interview Response",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
