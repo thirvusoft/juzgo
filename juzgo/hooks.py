@@ -16,7 +16,7 @@ app_license = "MIT"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/juzgo/css/juzgo.css"
-# web_include_js = "/assets/juzgo/js/juzgo.js"
+web_include_js = ["juzgo.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "juzgo/public/scss/website"
@@ -32,6 +32,7 @@ app_license = "MIT"
 doctype_js = {
 		"Timesheet" : "/juzgo/custom/js/timesheet.js",
         "Interview Feedback": "/custom/js/interview_feedback.js",
+		"Interview": "/custom/js/interview.js",
         "Task" : "/juzgo/custom/js/task.js",
 		"Job Opening" : "/juzgo/custom/js/jobopening.js"
 
@@ -46,6 +47,9 @@ doc_events = {
 	},
 	"Timesheet": {
 		"validate": "juzgo.juzgo.custom.py.timesheet.status_updated",
+	},
+    "Interview": {
+        "validate": "juzgo.custom.py.interview.get_url"
 	}
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -164,9 +168,9 @@ doc_events = {
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-#	"Task": "juzgo.task.get_dashboard_data"
-# }
+override_doctype_dashboards = {
+	"Interview": "juzgo.custom.py.dashboards.interview.get_data"
+}
 
 # exempt linked doctypes from being automatically cancelled
 #
