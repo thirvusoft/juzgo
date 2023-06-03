@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-03 11:52:47.998891",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "allow_multiple_responses",
+  "email_templates_section",
+  "subject_template",
+  "message_template"
+ ],
+ "fields": [
+  {
+   "collapsible": 1,
+   "fieldname": "email_templates_section",
+   "fieldtype": "Tab Break",
+   "label": "Email Templates"
+  },
+  {
+   "fieldname": "subject_template",
+   "fieldtype": "Code",
+   "label": "Email Subject Template",
+   "options": "HTML"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_multiple_responses",
+   "fieldtype": "Check",
+   "label": "Allow Multiple Responses"
+  },
+  {
+   "fieldname": "message_template",
+   "fieldtype": "Code",
+   "label": "Email Message Template",
+   "options": "HTML"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-06-03 12:01:28.426947",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Interview Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

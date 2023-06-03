@@ -1,0 +1,38 @@
+<div class="already-responded-page hide">
+    <div class="already-responded-header">
+        
+        <h2 class="already-responded-title">
+            <svg class="error-icon icon">
+                <use href="#icon-solid-error"></use>
+            </svg>
+            You've already responded</h2>
+    </div>
+
+    <div class="already-responded-body">
+        <p class="already-responded-message">You can fill this form only once, try contacting the organisation.</p>
+    </div>
+</div>
+
+<style>
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .already-responded-page {
+        background-color: var(--fg-color);
+        padding: 5rem 2rem;
+        margin-top: 3rem;
+        border: 1px solid var(--dark-border-color);
+        border-radius: var(--border-radius);
+        text-align: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .already-responded-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .already-responded-icon {
+        width: 3rem;
+        height: 3rem;
+        flex: 2;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .already-responded-title {
+        flex: 8;
+    }
+</style>
