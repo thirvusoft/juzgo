@@ -3,7 +3,7 @@ from frappe.utils.password import encrypt
 from time import sleep
 
 def get_url(self, event=None):
-    url = f"{frappe.utils.get_site_url(frappe.local.site)}/interview/new?#{encrypt(self.name)}"
+    url = f"{frappe.utils.get_url()}/interview/new?#{encrypt(self.name)}"
     self.web_form_url = url
 
 @frappe.whitelist()
