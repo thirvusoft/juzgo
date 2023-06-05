@@ -7,18 +7,20 @@ def send_mail_interview_created(doc,action):
     send_main(doc,"send_mail_interview_created", "send_mail_interview_created_template")
 
 def send_main(doc, check_field, template_field):
-    reminder_settings = frappe.db.get_value(
+    
+    if not frappe.get_value(
         "HR Settings",
         "HR Settings",
-        [check_field, template_field],
-        as_dict=True,
-    )
-
-    if not reminder_settings[check_field] or reminder_settings[check_field] == "0":
+        check_field
+    ):
         return
     
     interview_template = frappe.get_doc(
-        "Email Template", reminder_settings.get(template_field)
+        "Email Template", frappe.get_value(
+        "HR Settings",
+        "HR Settings",
+        template_field
+    )
     )
     
     context = doc.as_dict()
