@@ -23,7 +23,7 @@
 				</span>
 			</div>
 			<div>
-				<label><input type="text" placeholder="Rename the File" v-model="file.system_file_name_">.{{file.name.split('.')[1]}}</label>
+				<label><input type="text" placeholder="Enter File Name" v-model="file.system_file_name_">.{{file.name.split('.')[1]}}</label>
 			</div>
 			<div class="flex config-area">
 				<label v-if="is_optimizable" class="frappe-checkbox"><input type="checkbox" :checked="optimize" @change="$emit('toggle_optimize')">Optimize</label>

@@ -142,23 +142,23 @@ after_migrate = "juzgo.juzgo.utils.setup.setup"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-#	"all": [
-#		"juzgo.tasks.all"
-#	],
-#	"daily": [
-#		"juzgo.tasks.daily"
-#	],
-#	"hourly": [
-#		"juzgo.tasks.hourly"
-#	],
-#	"weekly": [
-#		"juzgo.tasks.weekly"
-#	],
-#	"monthly": [
-#		"juzgo.tasks.monthly"
-#	],
-# }
+scheduler_events = {
+	# "all": [
+	# 	"juzgo.tasks.all"
+	# ],
+	"daily": [
+		"juzgo.juzgo.custom.py.task.overdue_days"
+	],
+	# "hourly": [
+	# 	"juzgo.tasks.hourly"
+	# ],
+	# "weekly": [
+	# 	"juzgo.tasks.weekly"
+	# ],
+	# "monthly": [
+	# 	"juzgo.tasks.monthly"
+	# ],
+}
 
 # Testing
 # -------
