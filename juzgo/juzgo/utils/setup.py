@@ -3,7 +3,7 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 def setup():
     setup_fields()
-
+    role_creation()
 def setup_fields():
     custom_fields = {
         'HR Settings':[
@@ -40,3 +40,9 @@ def setup_fields():
         ]
     }
     create_custom_fields(custom_fields)
+
+def role_creation():
+    if not frappe.db.exists("Role", "Juzgo Employee"):
+        role = frappe.new_doc("Role")
+        role.role_name = "Juzgo Employee"
+        role.save()
