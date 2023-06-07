@@ -1,10 +1,13 @@
 {
+ "accept_payment": 0,
  "allow_comments": 0,
  "allow_delete": 0,
  "allow_edit": 0,
  "allow_incomplete": 0,
  "allow_multiple": 0,
  "allow_print": 0,
+ "amount": 0.0,
+ "amount_based_on_field": 0,
  "anonymous": 1,
  "apply_document_permissions": 0,
  "breadcrumbs": "",
@@ -119,7 +122,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -136,13 +139,13 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "fieldname": "currency",
-   "fieldtype": "Link",
+   "fieldname": "",
+   "fieldtype": "Section Break",
    "hidden": 0,
-   "label": "Currency",
+   "label": "Salary Expectation",
    "max_length": 0,
    "max_value": 0,
-   "options": "Currency",
+   "options": "",
    "read_only": 0,
    "reqd": 0,
    "show_in_filter": 0
@@ -156,6 +159,19 @@
    "max_length": 0,
    "max_value": 0,
    "options": "currency",
+   "read_only": 0,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "",
+   "fieldtype": "Column Break",
+   "hidden": 0,
+   "label": "",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "",
    "read_only": 0,
    "reqd": 0,
    "show_in_filter": 0

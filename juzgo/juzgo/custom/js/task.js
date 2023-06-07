@@ -47,11 +47,11 @@ async function filter(frm){
             var d = await frappe.db
             .get_list("ToDo", {
                 filters: { reference_type: "Project", reference_name: frm.doc.project},
-                fields: ["assigned_by"],
+                fields: ["allocated_to"],
             })
             .then((l) => {
                 for(var i=0;i<l.length;i++){
-                    list.push(l[i].assigned_by)
+                    list.push(l[i].allocated_to)
                 }
             })
         }

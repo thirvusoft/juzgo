@@ -21,22 +21,23 @@ def get_assigned_tasks(tasks=[]):
 
 def status_updated(doc,actions):
     for i in doc.time_logs:
-        if i.completed == 1:
-            desc = frappe.get_value("Task",i.task,'status')
-            if desc != "Completed":
-                i.priority_order = 0
-                user = frappe.db.get_value("User",doc.owner,"name")
-                task = frappe.get_doc("Task",i.task)
-                task.update({
-                        'status':'Completed',
-                        'completed_by':user,
-                        'completed_on':doc.end_date,
-                        'priority_number':0
-                })
-                task.save()
-        # else:
-        #     desc = frappe.get_value("Task",i.task,'status')
-        #     if desc != "Completed":
-        #         if i.priority_order > 0:
-        #             i.priority_order =-1
-                            
+        if i.task:
+            if i.completed == 1:
+                desc = frappe.get_value("Task",i.task,'status')
+                if desc != "Completed":
+                    i.priority_order = 0
+                    user = frappe.db.get_value("User",doc.owner,"name")
+                    task = frappe.get_doc("Task",i.task)
+                    task.update({
+                            'status':'Completed',
+                            'completed_by':user,
+                            'completed_on':doc.end_date,
+                            'priority_number':0
+                    })
+                    task.save()
+            # else:
+            #     desc = frappe.get_value("Task",i.task,'status')
+            #     if desc != "Completed":
+            #         if i.priority_order > 0:
+            #             i.priority_order =-1
+                                
