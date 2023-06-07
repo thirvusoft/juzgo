@@ -34,7 +34,8 @@ doctype_js = {
         "Interview Feedback": "/custom/js/interview_feedback.js",
 		"Interview": "/custom/js/interview.js",
         "Task" : "/juzgo/custom/js/task.js",
-		"Job Opening" : "/juzgo/custom/js/jobopening.js"
+		"Job Opening" : "/juzgo/custom/js/jobopening.js",
+        "Project" : "/juzgo/custom/js/project.js"
 
 	}
 doc_events = {

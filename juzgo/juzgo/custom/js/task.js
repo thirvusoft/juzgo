@@ -1,4 +1,9 @@
 frappe.ui.form.on('Task', {
+    onload:function (frm) {
+        setTimeout(() => {
+            $("[data-doctype='Expense Claim']").hide();
+        }, 10);
+    },
     project: function(frm){
         filter(frm)
     },

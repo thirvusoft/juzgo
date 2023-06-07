@@ -1,5 +1,9 @@
 frappe.ui.form.on('Timesheet', {
-    
+    onload:function (frm) {
+        setTimeout(() => {
+            $("[data-doctype='Expense Claim']").hide();
+        }, 10);
+    },
 	refresh: function(frm){
         let fetch_task_btn = document.querySelector('button[data-fieldname="fetch_task"]')
 		if(fetch_task_btn){
