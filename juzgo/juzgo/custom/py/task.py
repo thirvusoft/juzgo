@@ -48,18 +48,20 @@ def user(doc, user):
             idx+=1
 
 @frappe.whitelist()
-def minutes_to_hours(minutes):
+def minutes_to_hours(minutes = None):
     if minutes:
         minutes = float(minutes)
         hours = minutes / 60
         return hours
+    return 0
 
 @frappe.whitelist()
-def hours_to_minutes(hours):
+def hours_to_minutes(hours = None):
     if hours:
         hours = float(hours)
         minutes = hours * 60
         return minutes
+    return 0
 from frappe.utils import date_diff,getdate, now,nowdate
 def overdue_days():
     overdue_task = frappe.db.get_all("Task",filters={"status":"Overdue"},fields=["exp_end_date","name"])
