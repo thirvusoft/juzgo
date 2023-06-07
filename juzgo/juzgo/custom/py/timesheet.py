@@ -9,9 +9,9 @@ def get_assigned_tasks(tasks=[]):
     tasks = eval(tasks)
     user = frappe.session.user
     assigned_tasks = frappe.get_all('ToDo', filters={'reference_type':'Task', 'allocated_to':user, 'status':['!=', 'Cancelled']}, pluck='reference_name')
-    filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval',]]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min'],order_by = "priority_number")
+    filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval',]]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name'],order_by = "priority_number")
     filtered_tasks.extend(
-        frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'exp_end_date':['>=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min'],order_by = "priority_number")
+        frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'exp_end_date':['>=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name'],order_by = "priority_number")
         )
     for i in filtered_tasks:
         if(i.get('description')):

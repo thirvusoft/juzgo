@@ -39,8 +39,9 @@ frappe.ui.form.on('Timesheet', {
 						else{
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'priority_order',row.priority_order)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'description',row.description)
+							frappe.model.set_value("Timesheet Detail",tasks[row.task],'task_name',row.task_name)
 						}
-						  
+						calculate_time(frm);
 					})
 	
 				}
@@ -51,3 +52,43 @@ frappe.ui.form.on('Timesheet', {
 		frm.events.get_tasks(frm)
 	},
 })
+frappe.ui.form.on('Timesheet Detail', {
+	time_logs_remove: function(frm) {
+		calculate_time(frm);
+	},
+	taken_min: function(frm,cdt,cdn){
+		var row = locals[cdt][cdn]
+		frappe.call({
+		method: "juzgo.juzgo.custom.py.task.minutes_to_hours",
+		args:{
+			minutes:row.taken_min,
+		},
+		callback: function(r) {
+			frappe.model.set_value(cdt,cdn,"hours",r.message)
+	   	}
+	   })       
+	},
+	hours: function(frm,cdt,cdn){
+		var row = locals[cdt][cdn]
+	   frappe.call({
+		method: "juzgo.juzgo.custom.py.task.hours_to_minutes",
+		args:{
+			hours:row.hours,
+		},
+		callback: function(r) {
+			frappe.model.set_value(cdt,cdn,"taken_min",r.message)
+	  	}
+	  })       
+  },
+})
+
+function calculate_time(frm){
+	let tl = frm.doc.time_logs || [];
+	let total_exp_hr = 0;
+	for(var i=0; i<tl.length; i++) {
+		if (tl[i].expected_hours) {
+			total_exp_hr += tl[i].expected_hours;
+		}
+	}
+	frm.set_value("total_expected_hours", total_exp_hr);
+}
