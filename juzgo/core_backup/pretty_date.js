@@ -76,6 +76,7 @@ function prettyDate(date, mini) {
 frappe.provide("frappe.datetime");
 window.comment_when = function (datetime, mini) {
 	var timestamp = frappe.datetime.str_to_user ? frappe.datetime.str_to_user(datetime) : datetime;
+	//thirvu changes
 	return (
 		'<span class="frappe-timestamp ' +
 		(mini ? " mini" : "") +

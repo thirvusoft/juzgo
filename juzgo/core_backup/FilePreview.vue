@@ -22,9 +22,11 @@
 					{{ file.file_obj.size | file_size }}
 				</span>
 			</div>
+			<!-- thirvu change -->
 			<div>
 				<label><input type="text" placeholder="Enter File Name" v-model="file.system_file_name_">.{{file.name.split('.')[1]}}</label>
 			</div>
+			<!-- end -->
 			<div class="flex config-area">
 				<label v-if="is_optimizable" class="frappe-checkbox"><input type="checkbox" :checked="optimize" @change="$emit('toggle_optimize')">Optimize</label>
 				<label class="frappe-checkbox"><input type="checkbox" :checked="file.private" @change="$emit('toggle_private')">Private</label>
