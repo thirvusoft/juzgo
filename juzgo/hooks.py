@@ -169,9 +169,9 @@ scheduler_events = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-#	"frappe.desk.doctype.event.event.get_events": "juzgo.event.get_events"
-# }
+override_whitelisted_methods = {
+	"hrms.hr.doctype.job_applicant.job_applicant.create_interview": "juzgo.juzgo.custom.py.interview.create_interview"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,

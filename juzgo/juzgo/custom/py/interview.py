@@ -34,3 +34,33 @@ def send_main(doc, check_field, template_field):
         reference_doctype=doc.doctype,
         reference_name=doc.name,
     )
+from hrms.hr.doctype.interview.interview import get_interviewers
+@frappe.whitelist()
+def create_interview(doc, interview_round):
+	import json
+
+	if isinstance(doc, str):
+		doc = json.loads(doc)
+		doc = frappe.get_doc(doc)
+
+	round_designation = frappe.db.get_value("Interview Round", interview_round, "designation")
+
+	if round_designation and doc.designation and round_designation != doc.designation:
+		frappe.throw(
+			_("Interview Round {0} is only applicable for the Designation {1}").format(
+				interview_round, round_designation
+			)
+		)
+
+	interview = frappe.new_doc("Interview")
+	interview.interview_round = interview_round
+	interview.job_applicant = doc.name
+	interview.designation = doc.designation
+	interview.resume_link = doc.resume_link
+	interview.job_opening = doc.job_title
+	interview.resume_attachment = doc.resume_attachment
+	interviewer_detail = get_interviewers(interview_round)
+
+	for d in interviewer_detail:
+		interview.append("interview_details", {"interviewer": d.interviewer})
+	return interview
