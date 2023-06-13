@@ -46,3 +46,7 @@ def role_creation():
         role = frappe.new_doc("Role")
         role.role_name = "Juzgo Employee"
         role.save()
+    if not frappe.db.exists("Role", "Juzgo Admin"):
+        role = frappe.new_doc("Role")
+        role.role_name = "Juzgo Admin"
+        role.save()

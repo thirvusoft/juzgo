@@ -498,7 +498,7 @@ class FormTimeline extends BaseTimeline {
 		//thirvu changes
 		if (
 			frappe.model.can_delete("Comment") &&
-			(frappe.session.user == doc.owner || frappe.user.has_role("System Manager")) && frappe.user.has_role("Juzgo Employee") == undefined
+			(frappe.session.user == doc.owner || frappe.user.has_role("System Manager") || frappe.user.has_role("Juzgo Admin"))
 		) {
 			const delete_option = $(`
 				<li>
