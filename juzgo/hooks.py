@@ -47,7 +47,8 @@ doc_events = {
         "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",
 	},
 	"Timesheet": {
-		"validate": "juzgo.juzgo.custom.py.timesheet.status_updated",
+		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
+			   	]
 	},
     "Interview": {
         "validate": "juzgo.custom.py.interview.get_url",

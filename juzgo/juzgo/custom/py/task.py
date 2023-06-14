@@ -35,7 +35,6 @@ def user(doc, user):
         if user!= doc.assigned_to:
             priority_update.remove(doc.name)
         if doc.status not in ["Open", "Working"]:
-            doc.priority_number = 0 
             priority_update.remove(doc.name)
         if doc.name in priority_update:
             if not doc.priority_number:
@@ -46,7 +45,7 @@ def user(doc, user):
         for m in priority_update:
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1
-
+            
 @frappe.whitelist()
 def minutes_to_hours(minutes = None):
     if minutes:
