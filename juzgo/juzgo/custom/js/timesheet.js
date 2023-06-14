@@ -5,13 +5,24 @@ frappe.ui.form.on('Timesheet', {
         }, 10);
     },
 	refresh: function(frm){
+		frm.$wrapper.find(".row.form-dashboard-section.form-links").addClass("hidden")
         let fetch_task_btn = document.querySelector('button[data-fieldname="fetch_task"]')
 		if(fetch_task_btn){
 			fetch_task_btn.style.backgroundColor = "#ffe6a1"
 		}
 		if(frm.is_new()){
 			frm.events.get_tasks(frm)
-		}	
+		}
+		frappe.call({
+			method: "juzgo.juzgo.custom.py.timesheet.existing_draft_timesheet",
+			args:{
+				owner: frm.doc.owner,
+				doc_name : frm.doc.name
+			},
+			callback: function(r){
+				
+			}
+		})
 	},
 	validate(frm){
 		frm.events.get_tasks(frm)

@@ -20,6 +20,7 @@ def get_assigned_tasks(tasks=[]):
     return filtered_tasks
 
 def status_updated(doc,actions):
+    existing_draft_timesheet(doc.owner, doc.name)
     for i in doc.time_logs:
         if i.task:
             if i.completed == 1:
@@ -35,9 +36,11 @@ def status_updated(doc,actions):
                             'priority_number':0
                     })
                     task.save()
-            # else:
-            #     desc = frappe.get_value("Task",i.task,'status')
-            #     if desc != "Completed":
-            #         if i.priority_order > 0:
-            #             i.priority_order =-1
-                                
+
+@frappe.whitelist()               
+def existing_draft_timesheet(owner,doc_name):
+    user = frappe.db.get_value("User", owner, "name")
+    timesheets = frappe.get_all("Timesheet", filters={'owner': user,'name':['!=',doc_name], 'status': ['not in', ['Cancelled', 'Submitted']]},fields=['name','status'])
+    for timesheet in timesheets:
+        if timesheet.status != "Completed" or timesheet.status != "Cancelled":
+            return frappe.throw(f"Already have Timesheet {timesheet.name}")
