@@ -1,0 +1,40 @@
+<div class="form-not-opened-page hide">
+    <div class="form-not-opened-header">
+        
+        <h2 class="form-not-opened-title">
+            <svg class="error-icon icon">
+                <use href="#icon-solid-error"></use>
+            </svg>
+            Form has been Closed.</h2>
+    </div>
+
+    <div class="form-not-opened-body">
+        {% if (form_opening_date && form_closing_date) { %}
+            <p class="form-not-opened-message">The Scheduled time is <b>{{ form_opening_date }} {% if (form_opening_time) { %} {{ form_opening_time }} {% } %}</b>- <b>{{ form_closing_date }} {% if (form_closing_time) { %} {{ form_closing_time }} {% } %}</b>.</p>
+        {% } %}
+    </div>
+</div>
+
+<style>
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .form-not-opened-page {
+        background-color: var(--fg-color);
+        padding: 5rem 2rem;
+        margin-top: 3rem;
+        border: 1px solid var(--dark-border-color);
+        border-radius: var(--border-radius);
+        text-align: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .form-not-opened-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .form-not-opened-icon {
+        width: 3rem;
+        height: 3rem;
+        flex: 2;
+    }
+    [data-doctype="Web Form"] .page-content-wrapper .container .page_content .form-not-opened-title {
+        flex: 8;
+    }
+</style>

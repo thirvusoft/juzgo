@@ -1,4 +1,21 @@
 frappe.ui.form.on('Task', {
+    onload:function (frm) {
+        setTimeout(() => {
+            $("[data-doctype='Expense Claim']").hide();
+        }, 10);
+    },
+    project: function(frm){
+        filter(frm)
+    },
+    refresh: function(frm){
+        filter(frm)
+    },
+    assigned_to: function(frm){
+        if(!frm.doc.project){
+            frappe.msgprint("Kindly Select Project.")
+            frm.set_value("assigned_to","")
+        }
+    },
     expected_min: function(frm){
          frappe.call({
             
@@ -28,3 +45,26 @@ frappe.ui.form.on('Task', {
        })       
    },
 })
+
+async function filter(frm){
+    var list = []
+        if(frm.doc.project){
+            var d = await frappe.db
+            .get_list("ToDo", {
+                filters: { reference_type: "Project", reference_name: frm.doc.project},
+                fields: ["allocated_to"],
+            })
+            .then((l) => {
+                for(var i=0;i<l.length;i++){
+                    list.push(l[i].allocated_to)
+                }
+            })
+        }
+        frm.set_query("assigned_to", function () {
+			return {
+				filters: {
+					name: ["in",list],
+				},
+			};
+		});
+}
