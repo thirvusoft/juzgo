@@ -37,6 +37,13 @@ def status_updated(doc,actions):
                     })
                     task.save()
 
+            task_ = frappe.get_doc("Task",i.task)
+            task_.update({
+                    'notes': i.notes
+            })
+            task_.save()
+
+
 @frappe.whitelist()               
 def existing_draft_timesheet(owner,doc_name):
     user = frappe.db.get_value("User", owner, "name")
@@ -44,3 +51,4 @@ def existing_draft_timesheet(owner,doc_name):
     for timesheet in timesheets:
         if timesheet.status != "Completed" or timesheet.status != "Cancelled":
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")
+
