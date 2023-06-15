@@ -52,6 +52,13 @@ def user(doc, user):
         for m in priority_update:
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1
+
+def trash_task(doc, actions):
+    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
+    idx =1 
+    for n in priority_rearrange:
+        frappe.db.set_value("Task",n,"priority_number",idx)
+        idx+=1
             
 @frappe.whitelist()
 def minutes_to_hours(minutes = None):

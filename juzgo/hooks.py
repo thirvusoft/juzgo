@@ -45,6 +45,7 @@ doc_events = {
                       
 					  ],
         "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",
+        "on_trash" : "juzgo.juzgo.custom.py.task.trash_task",
 	},
 	"Timesheet": {
 		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
