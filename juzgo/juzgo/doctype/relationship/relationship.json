@@ -1,38 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:destination_name",
- "creation": "2023-06-13 11:55:14.639616",
+ "autoname": "field:relationship",
+ "creation": "2023-06-14 11:50:58.063076",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "destination_name",
-  "destination_abbr"
+  "relationship"
  ],
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "destination_name",
+   "fieldname": "relationship",
    "fieldtype": "Data",
-   "label": "Destination Name",
+   "label": "Relationship",
    "unique": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "destination_abbr",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Destination Abbr",
-   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-14 11:00:02.415103",
+ "modified": "2023-06-14 11:50:58.063076",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Destination",
+ "name": "Relationship",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

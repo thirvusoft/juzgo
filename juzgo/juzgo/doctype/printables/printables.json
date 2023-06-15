@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-14 11:20:02.551121",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "file_type",
+  "attachments",
+  "print",
+  "printed"
+ ],
+ "fields": [
+  {
+   "fieldname": "file_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "File Type",
+   "options": "File Type"
+  },
+  {
+   "columns": 3,
+   "fieldname": "attachments",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "print",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Print"
+  },
+  {
+   "default": "0",
+   "fieldname": "printed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Printed"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-14 11:20:02.551121",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Printables",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
