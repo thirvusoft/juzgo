@@ -9,6 +9,17 @@ frappe.ui.form.on('Task', {
     },
     refresh: function(frm){
         filter(frm)
+        let quality_inspection_field = frm.fields_dict.depends_on.grid.get_docfield("task")
+        quality_inspection_field.get_route_options_for_new_doc = function(row) {
+            return  {
+                "project": row.frm.doc.project,
+                "subject": row.frm.doc.subject,
+                "assigned_to": row.frm.doc.assigned_to,
+                "exp_start_date":row.frm.doc.exp_start_date,
+                "department":row.frm.doc.department,
+
+            };
+        };
     },
     assigned_to: function(frm){
         if(!frm.doc.project){
@@ -68,3 +79,23 @@ async function filter(frm){
 			};
 		});
 }
+
+frappe.ui.form.on('Task Depends On', {
+	task: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		
+        frappe.call({
+			method:"juzgo.juzgo.custom.py.task.getdesc",
+			args:{
+				'task':row.task
+			},
+			callback:function(r){
+				if(r.message){
+					frappe.model.set_value(row.doctype,row.name,"subject",r.message[0])
+					frappe.model.set_value(row.doctype,row.name,"notes",r.message[1])
+					frm.refresh_field('depends_on')
+				}
+			}
+		})
+	},
+})

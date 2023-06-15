@@ -45,15 +45,18 @@ doc_events = {
                       
 					  ],
         "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",
+        "on_trash" : "juzgo.juzgo.custom.py.task.trash_task",
 	},
 	"Timesheet": {
-		"validate": "juzgo.juzgo.custom.py.timesheet.status_updated",
+		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
+			   	]
 	},
     "Interview": {
         "validate": "juzgo.custom.py.interview.get_url",
         "after_insert" : "juzgo.juzgo.custom.py.interview.send_mail_interview_created",
         "on_submit": "juzgo.juzgo.custom.py.interview.send_interview_round_status"
-	}
+	},
+
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

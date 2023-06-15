@@ -24,6 +24,13 @@ def update_number(doc, actions):
         assigned = frappe.db.get_value("Task",doc.name,"assigned_to")
         if doc.assigned_to != assigned:
             user(doc, assigned)
+        for i in doc.depends_on:
+            if i.task:
+                task_ = frappe.get_doc("Task",i.task)
+                task_.update({
+                        'description': i.subject
+                })
+                task_.save()
         
             
 def user(doc, user):
@@ -35,7 +42,6 @@ def user(doc, user):
         if user!= doc.assigned_to:
             priority_update.remove(doc.name)
         if doc.status not in ["Open", "Working"]:
-            doc.priority_number = 0 
             priority_update.remove(doc.name)
         if doc.name in priority_update:
             if not doc.priority_number:
@@ -47,6 +53,13 @@ def user(doc, user):
             frappe.db.set_value("Task",m,"priority_number",idx)
             idx+=1
 
+def trash_task(doc, actions):
+    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
+    idx =1 
+    for n in priority_rearrange:
+        frappe.db.set_value("Task",n,"priority_number",idx)
+        idx+=1
+            
 @frappe.whitelist()
 def minutes_to_hours(minutes = None):
     if minutes:
@@ -62,7 +75,7 @@ def hours_to_minutes(hours = None):
         minutes = hours * 60
         return minutes
     return 0
-from frappe.utils import date_diff,getdate, now,nowdate
+from frappe.utils import date_diff,getdate, now,nowdate, strip_html_tags
 def overdue_days():
     overdue_task = frappe.db.get_all("Task",filters={"status":"Overdue"},fields=["exp_end_date","name"])
     for i in overdue_task:
@@ -74,3 +87,10 @@ def overdue_days():
                     "overdue_days",
                     overdue_days 
                 )
+
+@frappe.whitelist()
+def getdesc(task):
+    if task:
+        doc = frappe.get_doc("Task",task)
+        return strip_html_tags(doc.get('description') or ""),strip_html_tags(doc.get('notes') or "")
+

@@ -1,0 +1,55 @@
+{
+ "charts": [
+  {
+   "chart_name": "Project Summary",
+   "label": "Open Projects"
+  }
+ ],
+ "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"Oe67nfM-Sg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet\",\"col\":3}}]",
+ "creation": "2023-06-13 16:00:08.019671",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "folder-open",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Operational Executive",
+ "links": [],
+ "modified": "2023-06-13 16:19:26.109773",
+ "modified_by": "prithivraj@thirvusoft.in",
+ "module": "Operational Executive",
+ "name": "Operational Executive",
+ "number_cards": [],
+ "owner": "prithivraj@thirvusoft.in",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Timesheet",
+   "link_to": "Timesheet",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Project",
+   "link_to": "Project",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Task",
+   "link_to": "Task",
+   "type": "DocType"
+  }
+ ],
+ "title": "Operational Executive"
+}
