@@ -24,9 +24,9 @@ frappe.ui.form.on('Timesheet', {
 			}
 		})
 	},
-	validate(frm){
-		frm.events.get_tasks(frm)
-	},
+	// validate(frm){
+	// 	frm.events.get_tasks(frm)
+	// },
 	get_tasks: async function(frm){
         let tasks = {}
 		for(let c=0; c<frm.doc.time_logs.length; c++){
