@@ -19,8 +19,8 @@ frappe.ui.form.on('Timesheet', {
 				owner: frm.doc.owner,
 				doc_name : frm.doc.name
 			},
-			callback: function(r){
-				
+			error: function(r){
+				window.history.back()
 			}
 		})
 	},
