@@ -13,7 +13,10 @@ frappe.ui.form.on('Task', {
         quality_inspection_field.get_route_options_for_new_doc = function(row) {
             return  {
                 "project": row.frm.doc.project,
-                "subject": row.frm.doc.subject
+                "subject": row.frm.doc.subject,
+                "assigned_to": row.frm.doc.assigned_to,
+                "exp_start_date":row.frm.doc.exp_start_date,
+                "department":row.frm.doc.department,
 
             };
         };
