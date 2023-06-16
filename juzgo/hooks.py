@@ -36,7 +36,11 @@ doctype_js = {
         "Task" : "/juzgo/custom/js/task.js",
 		"Job Opening" : "/juzgo/custom/js/jobopening.js",
         "Project" : "/juzgo/custom/js/project.js",
-        "Employee" : "/juzgo/custom/js/employee.js"
+  
+    "Employee" : "/juzgo/custom/js/employee.js"
+
+
+		"Customer" : "/juzgo/custom/js/customer.js"
 
 	}
 doc_events = {

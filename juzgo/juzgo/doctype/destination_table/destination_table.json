@@ -12,6 +12,7 @@
   {
    "fieldname": "destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Destination",
    "options": "Destination",
    "unique": 1
@@ -20,7 +21,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-13 12:19:42.963905",
+ "modified": "2023-06-13 16:56:21.477565",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination Table",

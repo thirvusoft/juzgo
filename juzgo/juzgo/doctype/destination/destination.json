@@ -7,7 +7,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "destination_name"
+  "destination_name",
+  "destination_abbr"
  ],
  "fields": [
   {
@@ -16,11 +17,19 @@
    "fieldtype": "Data",
    "label": "Destination Name",
    "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "destination_abbr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination Abbr",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-13 12:52:43.828339",
+ "modified": "2023-06-15 16:52:24.925932",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
@@ -36,6 +45,28 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
    "share": 1,
    "write": 1
   }

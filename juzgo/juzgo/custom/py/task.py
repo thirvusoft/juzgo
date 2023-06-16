@@ -38,13 +38,13 @@ def update_number(doc, actions):
             
 def user(doc, user):
     if user:
-        priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
+        priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
         if doc.name not in priority_update:
             priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
         if user!= doc.assigned_to:
             priority_update.remove(doc.name)
-        if doc.status not in ["Open", "Working"]:
+        if doc.status not in ["Open", "Working","Overdue"]:
             priority_update.remove(doc.name)
         if doc.name in priority_update:
             if not doc.priority_number:
@@ -57,7 +57,7 @@ def user(doc, user):
             idx+=1
 
 def trash_task(doc, actions):
-    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
+    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
     idx =1 
     for n in priority_rearrange:
         frappe.db.set_value("Task",n,"priority_number",idx)
