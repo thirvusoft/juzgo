@@ -1,5 +1,8 @@
 import frappe
+from frappe.model.naming import make_autoname, revert_series_if_last
 from frappe.utils.data import nowdate
+from frappe import _, msgprint
+from frappe.utils import cint, cstr
 
 def user_todo(doc, actions):
     if doc.assigned_to and (actions == "after_insert" or not doc.is_new()):
@@ -94,3 +97,11 @@ def getdesc(task):
         doc = frappe.get_doc("Task",task)
         return strip_html_tags(doc.get('description') or ""),strip_html_tags(doc.get('notes') or "")
 
+def autoname(doc, actions):
+    if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
+        doc.name = make_autoname(doc.abbr + "-" + doc.subject + "-.#")
+
+def on_trash(doc, actions):
+    if doc.abbr and doc.subject:
+        revert_series_if_last(doc.abbr + "-" + doc.subject+"-.#", doc.name)
+    
