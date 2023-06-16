@@ -49,6 +49,6 @@ def existing_draft_timesheet(owner,doc_name):
     user = frappe.db.get_value("User", owner, "name")
     timesheets = frappe.get_all("Timesheet", filters={'owner': user,'name':['!=',doc_name], 'status': ['not in', ['Cancelled', 'Submitted']]},fields=['name','status'])
     for timesheet in timesheets:
-        if timesheet.status != "Completed" or timesheet.status != "Cancelled":
+        if timesheet.status != "Submitted" or timesheet.status != "Cancelled":
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")
 
