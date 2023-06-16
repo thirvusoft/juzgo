@@ -20,6 +20,15 @@ frappe.ui.form.on('Task', {
 
             };
         };
+        if(!frappe.user.has_role('System Manager') && !frappe.user.has_role('Thirvu Admin') && !frappe.user.has_role('Juzgo Admin') ){
+            if(frm.doc.owner != frappe.session.user){
+                for(let i=0;i<frm.fields.length;i++){
+                    if(frm.fields[i].df.fieldname != "notes"){
+                        frm.set_df_property(frm.fields[i].df.fieldname,"read_only",1)
+                    }
+                }
+            }
+        }
     },
     assigned_to: function(frm){
         if(!frm.doc.project){
