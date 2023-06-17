@@ -42,8 +42,8 @@ frappe.ui.form.on('Supplier Final Copies', {
     }
 })
 function auto_end_date(frm){
-    if(frm.doc.travel_start_date && frm.doc.no_of_days){
-        frm.set_value("travel_end_date",frappe.datetime.add_days(frm.doc.travel_start_date, frm.doc.no_of_days))
+    if(frm.doc.travel_start_date && frm.doc.no_of_nights){
+        frm.set_value("travel_end_date",frappe.datetime.add_days(frm.doc.travel_start_date, frm.doc.no_of_nights))
     } else {
         frm.set_value("travel_end_date","")
     }
