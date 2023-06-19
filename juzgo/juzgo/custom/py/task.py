@@ -5,6 +5,24 @@ from frappe import _, msgprint
 from frappe.utils import cint, cstr
 
 def user_todo(doc, actions):
+    if(doc.owner != frappe.session.user and not doc.is_new()):
+        if(frappe.get_value("Task",doc.name,"notes") != doc.notes):
+            notification(
+            doc.owner,
+            frappe.session.user, 
+            doc.name, 
+            doc.notes, 
+            doc.doctype,
+            "Notes")
+    if(doc.owner == frappe.session.user and not doc.is_new()):
+        if(frappe.get_value("Task",doc.name,"description") != doc.description):
+            notification(
+            doc.assigned_to,
+            frappe.session.user, 
+            doc.name, 
+            doc.description, 
+            doc.doctype,
+            "Description")
     if doc.assigned_to and (actions == "after_insert" or not doc.is_new()):
         doc_ = frappe.new_doc("ToDo")        
         if frappe.db.exists("ToDo", {'reference_name': doc.name}):
@@ -105,7 +123,7 @@ def on_trash(doc, actions):
     if doc.abbr and doc.subject:
         revert_series_if_last(doc.abbr + "-" + doc.subject+"-.#", doc.name)
     
-@frappe.whitelist()
+# @frappe.whitelist()
 def notification(to_user, from_user, field, task_name, data, doctype):
     doc=frappe.new_doc('Notification Log')
     doc.update({
