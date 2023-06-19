@@ -33,7 +33,7 @@ def user_todo(doc, actions):
                     "project":doc.project,
                     "abbr":doc.abbr,
                     "assigned_to":doc.assigned_to,
-                    "exp_start_date":today(),
+                    "exp_start_date":doc.exp_start_date,
                     "description":(i.get("subject",""))
                 })
                     sub_task.run_method=lambda *a,**b:0
