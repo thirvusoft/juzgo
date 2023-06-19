@@ -66,6 +66,37 @@ frappe.ui.form.on('Task', {
        })       
    },
 
+//    notes: function(frm){
+//     if(frm.doc.owner != frappe.session.user && frm.doc.notes != ""){
+//         frappe.call({
+//             method: "juzgo.juzgo.custom.py.task.notification",
+//             args:{
+//                 to_user: frm.doc.owner,
+//                 from_user: frappe.session.user, 
+//                 task_name: frm.doc.name, 
+//                 data: frm.doc.notes, 
+//                 doctype: frm.doc.doctype,
+//                 field: "Notes"
+//             }
+//         })     
+//     }
+//    },
+//    description: function(frm){
+//     if(frm.doc.owner == frappe.session.user && frm.doc.description != ""){
+//         frappe.call({
+//             method: "juzgo.juzgo.custom.py.task.notification",
+//             args:{
+//                 to_user: frm.doc.assigned_to,
+//                 from_user: frappe.session.user, 
+//                 task_name: frm.doc.name, 
+//                 data: frm.doc.description, 
+//                 doctype: frm.doc.doctype,
+//                 field: "Description"
+//             }
+//         })     
+//     }
+//    }
+
 })
 
 async function filter(frm){

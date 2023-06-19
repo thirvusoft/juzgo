@@ -116,7 +116,10 @@ frappe.ui.form.on('Customer', {
         }
         let p=[]
         let keys=Object.keys(user);
+        let checkboxFields = {}, _checkboxFields = {}
         for(let i=0;i<keys.length;i++){
+            _checkboxFields[keys[i]] = []
+            checkboxFields[keys[i]] = []
             p.push({
                 fieldtype: 'Section Break',
                 fieldname:keys[i],
@@ -127,14 +130,42 @@ frappe.ui.form.on('Customer', {
                 p.push(user[keys[i]][j])
             }
             // p.push({
-            //     fieldtype: 'Column Break',
-            //     fieldname: 'cb_'+keys[i]
+            //     fieldtype: 'HTML',
+            //     fieldname:`${keys[i]}_checkbox_html`,
+            //     label:keys[i],
             // })
+            // for(let j=0;j<user[keys[i]].length;j++){
+            //     _checkboxFields[keys[i]].push(user[keys[i]][j])
+            // }
+            // console.log(Math.round(_checkboxFields[keys[i]].length/4))
+
+            // let checkfields = [[], [], [], []]
+            // for(let j=0; j<_checkboxFields[keys[i]].length;j++) {
+            //     checkfields[j%(checkfields.length)].push(_checkboxFields[keys[i]][j])
+
+               
+            // }
+            // console.log(checkfields)
+            // for (let j = 0; j<checkfields.length;j++) {
+            //     if (checkfields[j]) {
+            //         console.log(true, checkboxFields[keys[i]],  checkboxFields[keys[i]].length, checkfields[j].length)
+            //         checkboxFields[keys[i]].concat(checkfields[j]);
+            //         console.log(true, checkboxFields[keys[i]].length, checkfields[j].length)
+            //         if (checkfields[j+1]) {
+            //             checkboxFields[keys[i]].push({
+            //                 fieldtype: 'Column Break'
+            //             })
+            //         }
+            //     }
+            //     console.log(checkboxFields[keys[i]])
+
+            // }
+        
             if(file_table[keys[i]].length != 0){
                 p.push({
                     fieldname: 'table'+keys[i],
                     fieldtype: 'Table',
-                    label: __('Family members Table'),
+                    label: keys[i]+" Attachment Table",
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     fields: fields,
@@ -150,6 +181,14 @@ frappe.ui.form.on('Customer', {
             body: attr_html
         });
         form.make()
+
+        // for(let i=0;i<keys.length;i++){
+        //     new frappe.ui.FieldGroup({
+        //         fields: checkboxFields[keys[i]],
+        //         body: form.get_field(`${keys[i]}_checkbox_html`).wrapper
+        //     }).make();
+        // }
+        // console.log(form)
     },
 })
 
@@ -176,9 +215,9 @@ frappe.ui.form.on('Family Members Details', {
         create_id(frm,row)
 
     },
-    before_family_members_details_remove:async function (frm,cdt,cdn) {
+    before_family_members_details_remove:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
-        await frappe.call({
+        frappe.call({
             method:'juzgo.juzgo.custom.py.customer.remove_list',
             args:{
                 row:row,
@@ -273,6 +312,14 @@ frappe.ui.form.on('Family Members Documents', {
                     break
                 }else{
                     c =0
+                }
+            }
+        } else {
+            for(let i=0; i<frm.doc.family_members_table.length; i++){
+                if((frm.doc.family_members_table[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_table[i].file_type == row.check_list_name) ){
+                    frm.doc.family_members_table.splice(i, 1);
+                    refresh_field("family_members_table");
+                    frm.save()
                 }
             }
         }

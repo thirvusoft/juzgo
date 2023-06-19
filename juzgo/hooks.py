@@ -175,7 +175,8 @@ scheduler_events = {
 # ------------------------------
 #
 override_whitelisted_methods = {
-	"hrms.hr.doctype.job_applicant.job_applicant.create_interview": "juzgo.juzgo.custom.py.interview.create_interview"
+	"hrms.hr.doctype.job_applicant.job_applicant.create_interview": "juzgo.juzgo.custom.py.interview.create_interview",
+    "frappe.desk.doctype.notification_log.notification_log.get_notification_logs": "juzgo.juzgo.custom.py.notification_log.get_notification_logs"
 }
 #
 # each overriding function accepts a `data` argument;

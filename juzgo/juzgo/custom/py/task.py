@@ -144,3 +144,18 @@ def on_trash(doc, actions):
     if doc.abbr and doc.subject:
         revert_series_if_last(doc.abbr + "-" + doc.subject+"-.#", doc.name)
     
+@frappe.whitelist()
+def notification(to_user, from_user, field, task_name, data, doctype):
+    doc=frappe.new_doc('Notification Log')
+    doc.update({
+    'subject': f'{from_user} added {field} in Task {task_name}: {data}',
+    'for_user': to_user,
+    'send_email': 1,
+    'type': 'Alert',
+    'document_type': doctype,
+    'document_name': task_name,
+    'from_user':from_user,
+    'email_content': f'{data}'
+    })
+    doc.flags.ignore_permissions=True
+    doc.save()
