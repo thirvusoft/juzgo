@@ -3,7 +3,6 @@ var form_destination_details = {}
 var form_destination
 frappe.ui.form.on('Project', {
     refresh:function (frm,cdt,cdn) {
-        console.log(frm.doc.family_members_attachment)
         if(frm.doc.family_members_attachment.length > 0){
             let fields=[
                 {
@@ -285,7 +284,6 @@ frappe.ui.form.on('Project', {
                     body: desti_html
                 });
                 form_destination_details['destination_table'+keys[user]]=form_destination
-                console.log(form_destination_details)
                 form_destination.make()
             }
         }
