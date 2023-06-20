@@ -84,6 +84,7 @@ def user(doc, user):
             priority_update.remove(doc.name)
         if doc.status not in ["Open", "Working","Overdue"]:
             priority_update.remove(doc.name)
+            doc.priority_number =0
         if doc.name in priority_update:
             if not doc.priority_number:
                 doc.priority_number = priority_update.index(doc.name)+1

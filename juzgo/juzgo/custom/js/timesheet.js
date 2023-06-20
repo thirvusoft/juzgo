@@ -55,6 +55,7 @@ frappe.ui.form.on('Timesheet', {
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'priority_order',row.priority_order)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'description',row.description)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'task_name',row.task_name)
+							frappe.model.set_value("Timesheet Detail",tasks[row.task],'expected_hours',row.expected_hours)
 						}
 						calculate_time(frm);
 					})
