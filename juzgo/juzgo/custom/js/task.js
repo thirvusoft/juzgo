@@ -3,27 +3,30 @@ frappe.ui.form.on('Task', {
         setTimeout(() => {
             $("[data-doctype='Expense Claim']").hide();
         }, 10);
+        frm.refresh_field('depends_on')
     },
     project: function(frm){
         filter(frm)
     },
     refresh: function(frm){
         filter(frm)
-        let quality_inspection_field = frm.fields_dict.depends_on.grid.get_docfield("task")
-        quality_inspection_field.get_route_options_for_new_doc = function(row) {
-            return  {
-                "project": row.frm.doc.project,
-                "subject": row.frm.doc.subject,
-                "assigned_to": row.frm.doc.assigned_to,
-                "exp_start_date":row.frm.doc.exp_start_date,
-                "department":row.frm.doc.department,
+        // let quality_inspection_field = frm.fields_dict.depends_on.grid.get_docfield("task")
+        // quality_inspection_field.get_route_options_for_new_doc = function(row) {
+        //     return  {
+        //         "project": row.frm.doc.project,
+        //         "subject": row.frm.doc.subject,
+        //         "assigned_to": row.frm.doc.assigned_to,
+        //         "exp_start_date":row.frm.doc.exp_start_date,
+        //         "department":row.frm.doc.department,
 
-            };
-        };
+        //     };
+        // };
         if(!frappe.user.has_role('System Manager') && !frappe.user.has_role('Thirvu Admin') && !frappe.user.has_role('Juzgo Admin') ){
             if(frm.doc.owner != frappe.session.user){
                 for(let i=0;i<frm.fields.length;i++){
-                    if(frm.fields[i].df.fieldname != "notes"){
+                    if((frm.fields[i].df.fieldname == "sb_details") || (frm.fields[i].df.fieldname == "notes") || (frm.fields[i].df.fieldname == "completed_by") || (frm.fields[i].df.fieldname == "completed_on") || (frm.fields[i].df.fieldname == "status")){
+                        
+                    } else {
                         frm.set_df_property(frm.fields[i].df.fieldname,"read_only",1)
                     }
                 }
@@ -131,10 +134,12 @@ frappe.ui.form.on('Task Depends On', {
 			callback:function(r){
 				if(r.message){
 					frappe.model.set_value(row.doctype,row.name,"subject",r.message[0])
-					frappe.model.set_value(row.doctype,row.name,"notes",r.message[1])
+					// frappe.model.set_value(row.doctype,row.name,"notes",r.message[1])
 					frm.refresh_field('depends_on')
+                    frm.save()
 				}
 			}
 		})
 	},
+   
 })
