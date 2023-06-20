@@ -108,6 +108,8 @@ def validate_minutes_to_hours(doc, actions):
         minutes = float(doc.expected_min)
         hours = minutes / 60
         doc.expected_time = hours
+    if doc.status == "Completed":
+        doc.priority_number = 0
 
 
 def validate_hours_to_minutes(doc, actions):
