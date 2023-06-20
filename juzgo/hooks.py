@@ -47,6 +47,9 @@ doc_events = {
     "Task" : {
         "validate" : ["juzgo.juzgo.custom.py.task.user_todo",
                       "juzgo.juzgo.custom.py.task.update_number",
+                      "juzgo.juzgo.custom.py.task.validate_minutes_to_hours",
+                      "juzgo.juzgo.custom.py.task.validate_hours_to_minutes",
+					  
                       
 					  ],
         "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",

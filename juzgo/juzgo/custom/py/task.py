@@ -62,7 +62,21 @@ def trash_task(doc, actions):
     for n in priority_rearrange:
         frappe.db.set_value("Task",n,"priority_number",idx)
         idx+=1
-            
+
+
+def validate_minutes_to_hours(doc, actions):
+    if doc.expected_min:
+        minutes = float(doc.expected_min)
+        hours = minutes / 60
+        doc.expected_time = hours
+
+
+def validate_hours_to_minutes(doc, actions):
+    if doc.expected_time:
+        hours = float(doc.expected_time)
+        minutes = hours * 60
+        doc.expected_min = minutes
+    
 @frappe.whitelist()
 def minutes_to_hours(minutes = None):
     if minutes:
