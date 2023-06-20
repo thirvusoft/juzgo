@@ -88,25 +88,46 @@ def add_destination_details(name,destination):
     list = []
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
+    old_destination_check_list = doc.destination_check_list
     if(destination):
         for des in destination:
             for row in doc.family_member_details:
-                for j in doc.family_member_details:
-                    for i in doc.destination_check_list:
-                        if((row.get('member_row_id') != i.family_member_details_name) and (j.member_row_id == i.family_member_details_name)):
-                            list.append({'members_name':i.get('members_name'),'age':i.get('age'),'gender':i.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':i.get('family_member_details_name'),'check':i.get('check'),'destination':des,'customer_id':row.get('customer_id')})
                 destination_list = frappe.get_all("Destination Table",{"Destination":des,"parentfield":"destination_name"},pluck="parent") 
                 table_doc = []
                 for i in destination_list:
                     table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
-                
                 if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","destination_name":des}) 
                 if not table_doc:frappe.throw("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age')))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:
-                        if((row.get('member_row_id') != i.family_member_details_name) and (j.member_row_id == i.family_member_details_name)):
-                            pass
-                        else:
-                            list.append({'members_name':row.get('members_name'),'age':row.get('age'),'gender':row.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':row.get('member_row_id'),'check':0,'destination':des,'customer_id':row.get('customer_id')})
+                       list.append({'members_name':row.get('members_name'),'age':row.get('age'),'gender':row.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':row.get('member_row_id'),'check':0,'destination':des,'customer_id':row.get('customer_id')})
+    for i in list:
+        for j in old_destination_check_list:
+            if ((i['members_name'] == j.members_name) and (str(i['age']) == str(j.age)) and (i['gender'] == j.gender) and (i['check_list_name'] == j.check_list_name) and (i['family_member_details_name'] == j.family_member_details_name) and (i['customer_id'] == j.customer_id)):
+                i['check'] = j.check
+    
     return(list)
+
+@frappe.whitelist()
+def remove_function(table_field,custom_list):
+    table_field = json.loads(table_field)
+    custom_list = json.loads(custom_list)
+    exiting_customer = []
+    missing_customer =[]
+    for i in table_field:
+        if i.get('customer_id') not in exiting_customer:exiting_customer.append(i.get('customer_id'))
+   
+    for i in exiting_customer:
+        if i not in custom_list:
+            missing_customer.append(i)
+
+    remove_idx= []
+    if(missing_customer):
+        for i in range(0,len(table_field),1):
+            if(table_field[i].get('customer_id') in missing_customer):
+                remove_idx.append(i)
+
+    for i in reversed(remove_idx):
+        table_field.pop(i)
+    return table_field
