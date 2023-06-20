@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-19 11:36:08.954492",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "members_name",
+  "date_of_birth",
+  "gender",
+  "age",
+  "relationship",
+  "customer_id",
+  "member_row_id"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "members_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Members Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date Of Birth",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Gender",
+   "options": "Male\nFemale",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Age",
+   "reqd": 1
+  },
+  {
+   "fieldname": "relationship",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Relationship",
+   "options": "Relationship"
+  },
+  {
+   "fieldname": "member_row_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "member_row_id"
+  },
+  {
+   "columns": 1,
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer ID",
+   "options": "Customer"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-19 12:32:55.632254",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Project Family Details",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

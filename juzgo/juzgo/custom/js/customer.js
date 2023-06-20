@@ -168,6 +168,7 @@ frappe.ui.form.on('Customer', {
                     label: keys[i]+" Attachment Table",
                     cannot_add_rows: true,
                     in_editable_grid: true,
+                    cannot_delete_rows:true,
                     fields: fields,
                     data: file_table[keys[i]]
                 })

@@ -123,6 +123,7 @@ class Meta(Document):
 			super().load_from_db()
 		except frappe.DoesNotExistError:
 			if self.doctype == "DocType" and self.name in self.special_doctypes:
+				
 				self.__dict__.update(load_doctype_from_file(self.name))
 			else:
 				raise
@@ -574,7 +575,6 @@ class Meta(Document):
 		return permissions
 
 	def get_dashboard_data(self):
-		
 		"""Returns dashboard setup related to this doctype.
 
 		This method will return the `data` property in the `[doctype]_dashboard.py`
@@ -595,8 +595,9 @@ class Meta(Document):
 		if not self.custom:
 			for hook in frappe.get_hooks("override_doctype_dashboards", {}).get(self.name, []):
 				data = frappe._dict(frappe.get_attr(hook)(data=data))
-		if frappe.session.user and (not frappe.db.get_all("Has Role", {"parent": frappe.session.user,'parenttype':"User","role": ["in",["Juzgo Admin", "Thirvu Admin"]]})):
-			data['transactions']=[] ##core code change
+		if self.name == "Employee":
+			if frappe.session.user and (frappe.db.get_all("Has Role", {"parent": frappe.session.user,'parenttype':"User","role": ["in",["Operational Executive"]]})):
+				data['transactions']=[] ##corecodechange
 		return data
 
 	def add_doctype_links(self, data):
