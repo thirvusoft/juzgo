@@ -52,3 +52,11 @@ def existing_draft_timesheet(owner,doc_name):
         if timesheet.status != "Submitted" or timesheet.status != "Cancelled":
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")
 
+from erpnext.projects.doctype.timesheet.timesheet import Timesheet
+from frappe.utils import add_to_date, flt, get_datetime, getdate, time_diff_in_hours
+class time_sheet(Timesheet):
+    def validate_dates(self):
+        print("kkk")
+        for data in self.time_logs:
+            if data.from_time and data.to_time and time_diff_in_hours(data.to_time, data.from_time) < 0:
+                frappe.throw(("To Time {0} cannot be before from Time {1} (Negative time {2} is not accept) for the {3}").format(data.to_time, data.from_time,round(data.taken_min), data.task))
