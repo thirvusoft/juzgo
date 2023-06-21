@@ -255,15 +255,28 @@ frappe.ui.form.on('Project', {
             }
             for(let user=0;user<keys.length;user++){
                 let desti = []
-                
+                let checkboxFields = []
                 desti.push({
                     fieldtype: 'Section Break',
                     fieldname:keys[user],
                     label:keys[user]+" Destination Check List",
                 })
+                let check_len = check_list[keys[user]].length/4
                 for(let j=0;j<check_list[keys[user]].length;j++){
-                    desti.push(check_list[keys[user]][j])
+                    checkboxFields.push(check_list[keys[user]][j])
+                    if(((j+1) % Math.ceil(check_len)) == 0){
+                        if(j+1 != check_list[keys[user]].length)
+                            checkboxFields.push({
+                                fieldtype: 'Column Break',
+                                fieldname:'cb_'+keys[user]+j,
+                            })
+                    }
                 }
+                desti.push({
+                    fieldtype: 'HTML',
+                    fieldname:`${keys[user]}_checkbox_html`,
+                    label:keys[user],
+                })
                 if(desti_attach_table[keys[user]].length != 0){
                     desti.push({
                         fieldname: 'destination_table'+keys[user],
@@ -285,6 +298,10 @@ frappe.ui.form.on('Project', {
                 });
                 form_destination_details['destination_table'+keys[user]]=form_destination
                 form_destination.make()
+                new frappe.ui.FieldGroup({
+                    fields: checkboxFields,
+                    body: form_destination.get_field(`${keys[user]}_checkbox_html`).wrapper
+                }).make();
             }
         }
         
