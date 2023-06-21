@@ -116,9 +116,8 @@ frappe.ui.form.on('Customer', {
         }
         let p=[]
         let keys=Object.keys(user);
-        let checkboxFields = {}, _checkboxFields = {}
+        let checkboxFields = {}
         for(let i=0;i<keys.length;i++){
-            _checkboxFields[keys[i]] = []
             checkboxFields[keys[i]] = []
             p.push({
                 fieldtype: 'Section Break',
@@ -126,40 +125,25 @@ frappe.ui.form.on('Customer', {
                 label:keys[i],
                 collapsible:1
             })
-            for(let j=0;j<user[keys[i]].length;j++){
-                p.push(user[keys[i]][j])
-            }
-            // p.push({
-            //     fieldtype: 'HTML',
-            //     fieldname:`${keys[i]}_checkbox_html`,
-            //     label:keys[i],
-            // })
             // for(let j=0;j<user[keys[i]].length;j++){
-            //     _checkboxFields[keys[i]].push(user[keys[i]][j])
+            //     p.push(user[keys[i]][j])
             // }
-            // console.log(Math.round(_checkboxFields[keys[i]].length/4))
-
-            // let checkfields = [[], [], [], []]
-            // for(let j=0; j<_checkboxFields[keys[i]].length;j++) {
-            //     checkfields[j%(checkfields.length)].push(_checkboxFields[keys[i]][j])
-
-               
-            // }
-            // console.log(checkfields)
-            // for (let j = 0; j<checkfields.length;j++) {
-            //     if (checkfields[j]) {
-            //         console.log(true, checkboxFields[keys[i]],  checkboxFields[keys[i]].length, checkfields[j].length)
-            //         checkboxFields[keys[i]].concat(checkfields[j]);
-            //         console.log(true, checkboxFields[keys[i]].length, checkfields[j].length)
-            //         if (checkfields[j+1]) {
-            //             checkboxFields[keys[i]].push({
-            //                 fieldtype: 'Column Break'
-            //             })
-            //         }
-            //     }
-            //     console.log(checkboxFields[keys[i]])
-
-            // }
+            let check_len = user[keys[i]].length/4
+            for(let j=0;j<user[keys[i]].length;j++){
+                checkboxFields[keys[i]].push(user[keys[i]][j])
+                if(((j+1) % Math.ceil(check_len)) == 0){
+                    if(j+1 != user[keys[i]].length)
+                        checkboxFields[keys[i]].push({
+                            fieldtype: 'Column Break',
+                            fieldname:'cb_'+keys[i]+j,
+                        })
+                }
+            }
+            p.push({
+                fieldtype: 'HTML',
+                fieldname:`${keys[i]}_checkbox_html`,
+                label:keys[i],
+            })
         
             if(file_table[keys[i]].length != 0){
                 p.push({
@@ -183,12 +167,12 @@ frappe.ui.form.on('Customer', {
         });
         form.make()
 
-        // for(let i=0;i<keys.length;i++){
-        //     new frappe.ui.FieldGroup({
-        //         fields: checkboxFields[keys[i]],
-        //         body: form.get_field(`${keys[i]}_checkbox_html`).wrapper
-        //     }).make();
-        // }
+        for(let i=0;i<keys.length;i++){
+            new frappe.ui.FieldGroup({
+                fields: checkboxFields[keys[i]],
+                body: form.get_field(`${keys[i]}_checkbox_html`).wrapper
+            }).make();
+        }
         // console.log(form)
     },
 })
