@@ -24,8 +24,24 @@ frappe.ui.form.on('Timesheet', {
 			}
 		})
 	},
-	// validate(frm){
-	// 	frm.events.get_tasks(frm)
+	// on_submit(frm){
+	// 	// frm.events.get_tasks(frm)
+	// 	for(let c=0; c<frm.doc.time_logs.length; c++){
+	// 		if(frm.doc.time_logs[c].task){
+	// 			frappe.db
+	// 			.get_list("Task", {
+	// 				filters: { name: frm.doc.time_logs[c].task },
+	// 				fields: ["notes"],
+	// 			})
+	// 			.then((result) => {
+	// 			if(result){
+	// 				frappe.model.set_value("Timesheet Detail",tasks[row.task],'notes',result)
+	// 			}
+	// 			});
+	// 		}
+	// 	}
+
+		
 	// },
 	get_tasks: async function(frm){
         let tasks = {}
@@ -113,3 +129,4 @@ function calculate_time(frm){
 	}
 	frm.set_value("total_expected_hours", total_exp_hr);
 }
+

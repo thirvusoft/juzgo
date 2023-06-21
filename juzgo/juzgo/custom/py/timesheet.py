@@ -52,3 +52,11 @@ def existing_draft_timesheet(owner,doc_name):
         if timesheet.status != "Submitted" or timesheet.status != "Cancelled":
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")
 
+
+def get_notes(doc, actions):
+    for i in doc.time_logs:
+        if i.task:
+            notes,description = frappe.get_value("Task",  i.task,['notes','description']) or ["",""]
+            i.notes = strip_html_tags(notes) 
+            i.description = strip_html_tags(description) 
+
