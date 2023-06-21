@@ -216,7 +216,7 @@ frappe.ui.form.on('Project', {
                     p.push({
                         fieldname: 'table'+keys[i],
                         fieldtype: 'Table',
-                        label: keys[i]+" Basic Attachment Table",
+                        label: keys[i]+" Customer Attachment Table",
                         cannot_add_rows: true,
                         in_editable_grid: true,
                         cannot_delete_rows:true,
