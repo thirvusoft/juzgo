@@ -36,12 +36,20 @@ doctype_js = {
         "Task" : "/juzgo/custom/js/task.js",
 		"Job Opening" : "/juzgo/custom/js/jobopening.js",
         "Project" : "/juzgo/custom/js/project.js",
+  
+    "Employee" : "/juzgo/custom/js/employee.js",
+
+
 		"Customer" : "/juzgo/custom/js/customer.js"
+
 	}
 doc_events = {
     "Task" : {
         "validate" : ["juzgo.juzgo.custom.py.task.user_todo",
                       "juzgo.juzgo.custom.py.task.update_number",
+                      "juzgo.juzgo.custom.py.task.validate_minutes_to_hours",
+                      "juzgo.juzgo.custom.py.task.validate_hours_to_minutes",
+					  
                       
 					  ],
         "after_insert" : "juzgo.juzgo.custom.py.task.user_todo",
@@ -50,7 +58,9 @@ doc_events = {
         "on_trash": "juzgo.juzgo.custom.py.task.on_trash"
 	},
 	"Timesheet": {
-		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
+		"validate": [
+			"juzgo.juzgo.custom.py.timesheet.status_updated",
+					"juzgo.juzgo.custom.py.timesheet.get_notes"
 			   	]
 	},
     "Interview": {

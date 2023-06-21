@@ -72,22 +72,22 @@ frappe.ui.form.on("Employee", {
 		});
 	},
 
-	create_user: function(frm) {
-		if (!frm.doc.prefered_email) {
-			frappe.throw(__("Please enter Preferred Contact Email"));
-		}
-		frappe.call({
-			method: "erpnext.setup.doctype.employee.employee.create_user",
-			args: {
-				employee: frm.doc.name,
-				email: frm.doc.prefered_email
-			},
-			callback: function (r) {
-				frm.set_value("user_id", r.message);
-				frm.save() //corecodewhile creating a user employee can save the auto
-			}
-		});
-	}
+	// create_user: function(frm) {
+	// 	if (!frm.doc.prefered_email) {
+	// 		frappe.throw(__("Please enter Preferred Contact Email"));
+	// 	}
+	// 	frappe.call({
+	// 		method: "erpnext.setup.doctype.employee.employee.create_user",
+	// 		args: {
+	// 			employee: frm.doc.name,
+	// 			email: frm.doc.prefered_email
+	// 		},
+	// 		callback: function (r) {
+	// 			frm.set_value("user_id", r.message);
+	// 			// frm.save() //corecodewhile creating a user employee can save the auto
+	// 		}
+	// 	});
+	// }
 });
 
 cur_frm.cscript = new erpnext.setup.EmployeeController({

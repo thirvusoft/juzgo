@@ -2,7 +2,9 @@ import frappe
 from frappe.model.naming import make_autoname, revert_series_if_last
 from frappe.utils.data import nowdate
 from frappe import _, msgprint
+from frappe.utils import today
 from frappe.utils import cint, cstr
+import json
 
 def user_todo(doc, actions):
     if(doc.owner != frappe.session.user and not doc.is_new()):
@@ -39,6 +41,41 @@ def user_todo(doc, actions):
         doc_.flags.ignore_permissions = True
         doc_.flags.ignore_links = True
         doc_.save()
+        
+        if(doc.depends_on):
+            for i in doc.depends_on:
+                sub_task=frappe.new_doc("Task")
+                if not frappe.db.exists("Task",{"subject":i.subject1}):
+                    sub_task.update({
+                    "subject":i.subject1,
+                    "project":doc.project,
+                    "abbr":doc.abbr,
+                    "assigned_to":doc.assigned_to,
+                    "exp_start_date":doc.exp_start_date,
+                    "description":(i.get("subject",""))
+                })
+                    sub_task.run_method=lambda *a,**b:0
+                    sub_task.save(ignore_permissions = True)   
+                    i.task=sub_task.name
+                    frappe.msgprint(_("Sub Tasks Created successfully"))
+                elif(frappe.db.exists("Task",{"name":i.task})):
+                    task_doc=frappe.get_doc("Task",i.task)
+                    if i.subject != task_doc.description:
+                        task_doc.description=i.subject
+                        task_doc.save()
+
+            
+        else:
+            if frappe.db.exists("Task Depends On",{"task":doc.name}):
+                parent_task=frappe.get_doc("Task Depends On",{"task":doc.name})
+                if parent_task.notes!=doc.notes:
+                    parent_task.notes=doc.notes
+                    parent_task.save()
+                if parent_task.subject!=doc.description:
+                    parent_task.subject=doc.description
+                    parent_task.save()
+
+              
 
 def update_number(doc, actions):
         user(doc, doc.assigned_to)
@@ -49,10 +86,11 @@ def update_number(doc, actions):
             if i.task:
                 task_ = frappe.get_doc("Task",i.task)
                 task_.update({
-                        'description': i.subject
+                        'description': i.subject,      
                 })
                 task_.save()
-        
+       
+
             
 def user(doc, user):
     if user:
@@ -64,6 +102,7 @@ def user(doc, user):
             priority_update.remove(doc.name)
         if doc.status not in ["Open", "Working","Overdue"]:
             priority_update.remove(doc.name)
+            doc.priority_number =0
         if doc.name in priority_update:
             if not doc.priority_number:
                 doc.priority_number = priority_update.index(doc.name)+1
@@ -80,7 +119,23 @@ def trash_task(doc, actions):
     for n in priority_rearrange:
         frappe.db.set_value("Task",n,"priority_number",idx)
         idx+=1
-            
+
+
+def validate_minutes_to_hours(doc, actions):
+    if doc.expected_min:
+        minutes = float(doc.expected_min)
+        hours = minutes / 60
+        doc.expected_time = hours
+    if doc.status == "Completed":
+        doc.priority_number = 0
+
+
+def validate_hours_to_minutes(doc, actions):
+    if doc.expected_time:
+        hours = float(doc.expected_time)
+        minutes = hours * 60
+        doc.expected_min = minutes
+    
 @frappe.whitelist()
 def minutes_to_hours(minutes = None):
     if minutes:
@@ -108,12 +163,14 @@ def overdue_days():
                     "overdue_days",
                     overdue_days 
                 )
+   
 
 @frappe.whitelist()
 def getdesc(task):
     if task:
         doc = frappe.get_doc("Task",task)
-        return strip_html_tags(doc.get('description') or ""),strip_html_tags(doc.get('notes') or "")
+        return strip_html_tags(doc.get('description') or "")
+
 
 def autoname(doc, actions):
     if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
