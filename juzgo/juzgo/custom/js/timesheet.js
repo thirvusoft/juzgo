@@ -24,8 +24,24 @@ frappe.ui.form.on('Timesheet', {
 			}
 		})
 	},
-	// validate(frm){
-	// 	frm.events.get_tasks(frm)
+	// on_submit(frm){
+	// 	// frm.events.get_tasks(frm)
+	// 	for(let c=0; c<frm.doc.time_logs.length; c++){
+	// 		if(frm.doc.time_logs[c].task){
+	// 			frappe.db
+	// 			.get_list("Task", {
+	// 				filters: { name: frm.doc.time_logs[c].task },
+	// 				fields: ["notes"],
+	// 			})
+	// 			.then((result) => {
+	// 			if(result){
+	// 				frappe.model.set_value("Timesheet Detail",tasks[row.task],'notes',result)
+	// 			}
+	// 			});
+	// 		}
+	// 	}
+
+		
 	// },
 	get_tasks: async function(frm){
         let tasks = {}
@@ -52,15 +68,20 @@ frappe.ui.form.on('Timesheet', {
 							  	
 						}
 						else{
+							
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'priority_order',row.priority_order)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'description',row.description)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'task_name',row.task_name)
 							frappe.model.set_value("Timesheet Detail",tasks[row.task],'expected_hours',row.expected_hours)
+							frappe.model.set_value("Timesheet Detail",tasks[row.task],'expected_min',row.expected_min)
+							frappe.model.set_value("Timesheet Detail",tasks[row.task],'notes',row.notes)
 						}
 						calculate_time(frm);
 					})
 	
 				}
+
+				frm.save();
 			}
 		})
 	},
@@ -108,3 +129,4 @@ function calculate_time(frm){
 	}
 	frm.set_value("total_expected_hours", total_exp_hr);
 }
+

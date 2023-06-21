@@ -171,6 +171,7 @@ def getdesc(task):
         doc = frappe.get_doc("Task",task)
         return strip_html_tags(doc.get('description') or "")
 
+
 def autoname(doc, actions):
     if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
         doc.name = make_autoname(doc.abbr + "-" + doc.subject + "-.#")

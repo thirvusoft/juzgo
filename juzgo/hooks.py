@@ -58,7 +58,9 @@ doc_events = {
         "on_trash": "juzgo.juzgo.custom.py.task.on_trash"
 	},
 	"Timesheet": {
-		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
+		"validate": [
+			"juzgo.juzgo.custom.py.timesheet.status_updated",
+					"juzgo.juzgo.custom.py.timesheet.get_notes"
 			   	]
 	},
     "Interview": {
