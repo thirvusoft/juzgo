@@ -96,7 +96,7 @@ def add_destination_details(name,destination):
                 table_doc = []
                 for i in destination_list:
                     table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
-                if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","destination_name":des}) 
+                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
                 if not table_doc:frappe.throw("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age')))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items

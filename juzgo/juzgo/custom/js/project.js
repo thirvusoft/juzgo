@@ -293,7 +293,7 @@ frappe.ui.form.on('Project', {
         setTimeout(() => {
             $("[data-doctype='Expense Claim']").hide();
         }, 10);
-        add_destination_details(frm)
+        // add_destination_details(frm)
     },
     project_name:function(frm){
         frappe.call({
