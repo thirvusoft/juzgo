@@ -81,7 +81,6 @@ frappe.ui.form.on('Timesheet', {
 	
 				}
 
-				frm.save();
 			}
 		})
 	},
