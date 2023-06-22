@@ -58,7 +58,9 @@ doc_events = {
         "on_trash": "juzgo.juzgo.custom.py.task.on_trash"
 	},
 	"Timesheet": {
-		"validate": ["juzgo.juzgo.custom.py.timesheet.status_updated",
+		"validate": [
+			"juzgo.juzgo.custom.py.timesheet.status_updated",
+					"juzgo.juzgo.custom.py.timesheet.get_notes"
 			   	]
 	},
     "Interview": {
@@ -137,9 +139,9 @@ after_migrate = "juzgo.juzgo.utils.setup.setup"
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Timesheet": "juzgo.juzgo.custom.py.timesheet.time_sheet"
+}
 
 # Document Events
 # ---------------

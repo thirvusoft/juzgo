@@ -45,26 +45,27 @@ def user_todo(doc, actions):
         if(doc.doctype=="Task"):
             if(doc.depends_on):
                 for i in doc.depends_on:
-                    sub_task=frappe.new_doc("Task")
-                    if not frappe.db.exists("Task",{"subject":i.subject1}):
-                        sub_task.update({
-                        "subject":i.subject1,
-                        "project":doc.project,
-                        "abbr":doc.abbr,
-                        "assigned_to":doc.assigned_to,
-                        "exp_start_date":doc.exp_start_date,
-                        "description":(i.get("subject",""))
-                    })
-                        sub_task.run_method=lambda *a,**b:0
-                        sub_task.save(ignore_permissions = True)   
-                        i.task=sub_task.name
-                        msgprint =1
-                        
-                    elif(frappe.db.exists("Task",{"name":i.task})):
-                        task_doc=frappe.get_doc("Task",i.task)
-                        if i.subject != task_doc.description:
-                            task_doc.description=i.subject
-                            task_doc.save()
+                    if not i.task:
+                        sub_task=frappe.new_doc("Task")
+                        if not frappe.db.exists("Task",{"subject":i.subject1}):
+                            sub_task.update({
+                            "subject":i.subject1,
+                            "project":doc.project,
+                            "abbr":doc.abbr,
+                            "assigned_to":doc.assigned_to,
+                            "exp_start_date":doc.exp_start_date,
+                            "description":(i.get("subject",""))
+                        })
+                            sub_task.run_method=lambda *a,**b:0
+                            sub_task.save(ignore_permissions = True)   
+                            i.task=sub_task.name
+                            msgprint =1
+                            
+                        elif(frappe.db.exists("Task",{"name":i.task})):
+                            task_doc=frappe.get_doc("Task",i.task)
+                            if i.subject != task_doc.description:
+                                task_doc.description=i.subject
+                                task_doc.save()
                 if(msgprint == 1):
                     frappe.msgprint(_("Sub Tasks Created successfully"))
                 
@@ -102,9 +103,15 @@ def user(doc, user):
             priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
         if user!= doc.assigned_to:
-            priority_update.remove(doc.name)
+            try:
+                priority_update.remove(doc.name)
+            except:
+                pass
         if doc.status not in ["Open", "Working","Overdue"]:
-            priority_update.remove(doc.name)
+            try:
+                priority_update.remove(doc.name)
+            except:
+                pass
             doc.priority_number =0
         if doc.name in priority_update:
             if not doc.priority_number:
@@ -173,6 +180,7 @@ def getdesc(task):
     if task:
         doc = frappe.get_doc("Task",task)
         return strip_html_tags(doc.get('description') or "")
+
 
 def autoname(doc, actions):
     if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):

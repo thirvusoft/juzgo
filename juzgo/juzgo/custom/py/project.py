@@ -65,7 +65,10 @@ def get_family_member_attachment(family_members_attachment,custom_list):
 
     for i in reversed(remove_idx):
         family_members_attachment.pop(i)
-
+    cus_file_type={}
+    for cus in custom_list:
+        cus_file_type[cus] = []
+    exiting_doc = [(i.get("members_name") or '')+(i.get("file_type") or '') for i in family_members_attachment]
     for cus in custom_list:
         custom_details = frappe.get_doc("Customer",cus).family_members_table
         for i in custom_details:
@@ -80,6 +83,28 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                     "family_members_documents_name":i.family_members_documents_name,
                     "customer_id":cus
                 })
+            else:
+                for update in range (len(family_members_attachment)):
+                    if((family_members_attachment[update].get('members_name') == i.members_name) and (family_members_attachment[update].get('family_members_documents_name') == i.family_members_documents_name) and (family_members_attachment[update].get('file_type') == i.file_type) ):
+                        family_members_attachment[update].update({
+                            'file_type':i.file_type,
+                            'file' : i.file,
+                            'next_remainder_or_expiry_on' : i.next_remainder_or_expiry_on,
+                            'description' : i.description,
+                            'attached_by' : i.attached_by,
+                        })
+                    if (i.get("members_name") or '')+(i.get("file_type") or '') not in exiting_doc:
+                        family_members_attachment.append({
+                            "members_name":i.members_name,
+                            "file_type":i.file_type,
+                            "file":i.file,
+                            "next_remainder_or_expiry_on":i.next_remainder_or_expiry_on,
+                            "description":i.description,
+                            "attached_by":i.attached_by,
+                            "family_members_documents_name":i.family_members_documents_name,
+                            "customer_id":cus
+                        })
+                        exiting_doc.append((i.get("members_name") or '')+(i.get("file_type") or ''))
     return family_members_attachment
 
 
@@ -96,8 +121,8 @@ def add_destination_details(name,destination):
                 table_doc = []
                 for i in destination_list:
                     table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
-                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
-                if not table_doc:frappe.throw("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age')))
+                if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","destination_name":des}) 
+                if not table_doc:frappe.msgprint("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:

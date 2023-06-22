@@ -9,9 +9,9 @@ def get_assigned_tasks(tasks=[]):
     tasks = eval(tasks)
     user = frappe.session.user
     assigned_tasks = frappe.get_all('ToDo', filters={'reference_type':'Task', 'allocated_to':user, 'status':['!=', 'Cancelled']}, pluck='reference_name')
-    filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval',]]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name'],order_by = "priority_number")
+    filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval',]]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'],order_by = "priority_number")
     filtered_tasks.extend(
-        frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'exp_end_date':['>=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name'],order_by = "priority_number")
+        frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'exp_end_date':['>=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Client Approval']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time - actual_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'],order_by = "priority_number")
         )
     for i in filtered_tasks:
         if(i.get('description')):
@@ -37,11 +37,11 @@ def status_updated(doc,actions):
                     })
                     task.save()
 
-            task_ = frappe.get_doc("Task",i.task)
-            task_.update({
-                    'notes': i.notes
-            })
-            task_.save()
+            # task_ = frappe.get_doc("Task",i.task)
+            # task_.update({
+            #         'notes': i.notes
+            # })
+            # task_.save()
 
 
 @frappe.whitelist()               
@@ -51,4 +51,21 @@ def existing_draft_timesheet(owner,doc_name):
     for timesheet in timesheets:
         if timesheet.status != "Submitted" or timesheet.status != "Cancelled":
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")
+
+from erpnext.projects.doctype.timesheet.timesheet import Timesheet
+from frappe.utils import add_to_date, flt, get_datetime, getdate, time_diff_in_hours
+class time_sheet(Timesheet):
+    def validate_dates(self):
+        for data in self.time_logs:
+            if data.from_time and data.to_time and time_diff_in_hours(data.to_time, data.from_time) < 0:
+                frappe.throw(("To Time {0} cannot be before from Time {1} (Negative time {2} is not accept) for the {3}").format(data.to_time, data.from_time,round(data.taken_min), data.task))
+
+def get_notes(doc, actions):
+    for i in doc.time_logs:
+        if i.task:
+            notes,description = frappe.get_value("Task",  i.task,['notes','description']) or ["",""]
+            if notes:
+                i.notes = strip_html_tags(notes) 
+            if description:
+                i.description = strip_html_tags(description) 
 
