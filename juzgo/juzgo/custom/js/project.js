@@ -492,21 +492,42 @@ function check_list(frm){
             body: attr_html
         });
         form.make()
-        for(let i=0;i<frm.doc.destination_check_list.length;i++){
-            
-            check_list[frm.doc.destination_check_list[i].members_name].push(
-                {
-                    fieldtype: 'Check',
-                    fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
-                    label:(frm.doc.destination_check_list[i].check_list_name)+(frm.doc.destination_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.destination_check_list[i].receive_or_send=="To Receive"?"(R)":""),
-                    default:frm.doc.destination_check_list[i].check,
-                    onchange: function(event) {
-                        let row = frm.doc.destination_check_list[i]
-                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+        for(let resend=0;resend<2;resend++){
+            for(let i=0;i<frm.doc.destination_check_list.length;i++){
+                if(resend == 0){
+                    if(frm.doc.destination_check_list[i].receive_or_send=="To Receive"){
+                        check_list[frm.doc.destination_check_list[i].members_name].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
+                                label:(frm.doc.destination_check_list[i].check_list_name)+(frm.doc.destination_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.destination_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.destination_check_list[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.destination_check_list[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
+                    }
+                } else {
+                    if(frm.doc.destination_check_list[i].receive_or_send=="To Send"){
+                        check_list[frm.doc.destination_check_list[i].members_name].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
+                                label:(frm.doc.destination_check_list[i].check_list_name)+(frm.doc.destination_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.destination_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.destination_check_list[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.destination_check_list[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
                     }
                 }
-            )
+            }
         }
+
         for(let user=0;user<keys.length;user++){
             let desti = []
             let checkboxFields = []
