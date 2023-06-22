@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-22 15:19:44.571058",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "member_name",
+  "check_list",
+  "next_remainder_on",
+  "notes",
+  "user"
+ ],
+ "fields": [
+  {
+   "fieldname": "check_list",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Check List",
+   "options": "Check List Name"
+  },
+  {
+   "fieldname": "next_remainder_on",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Next Remainder On"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Member Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-22 16:07:35.584659",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Check List Remainder",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
