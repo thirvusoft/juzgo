@@ -64,6 +64,8 @@ def get_notes(doc, actions):
     for i in doc.time_logs:
         if i.task:
             notes,description = frappe.get_value("Task",  i.task,['notes','description']) or ["",""]
-            i.notes = strip_html_tags(notes) 
-            i.description = strip_html_tags(description) 
+            if notes:
+                i.notes = strip_html_tags(notes) 
+            if description:
+                i.description = strip_html_tags(description) 
 

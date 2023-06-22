@@ -99,9 +99,15 @@ def user(doc, user):
             priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
         if user!= doc.assigned_to:
-            priority_update.remove(doc.name)
+            try:
+                priority_update.remove(doc.name)
+            except:
+                pass
         if doc.status not in ["Open", "Working","Overdue"]:
-            priority_update.remove(doc.name)
+            try:
+                priority_update.remove(doc.name)
+            except:
+                pass
             doc.priority_number =0
         if doc.name in priority_update:
             if not doc.priority_number:
