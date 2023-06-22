@@ -2,6 +2,18 @@ var form
 frappe.ui.form.on('Customer', {
     refresh:function (frm,cdt,cdn) {
         check_list(frm)
+        option_in_members(frm)
+        frm.set_query("check_list" ,"check_list_remainder_table", function(){
+			let list=[]
+            for(let i=0;i<frm.doc.family_members_documents.length;i++){
+                if(!frm.doc.family_members_documents[i].check)
+                    list.push(frm.doc.family_members_documents[i].check_list_name);
+            }
+            let filters = {
+				name: ["in",list],
+			};
+			return { filters: filters };
+		});
     },
     customer_name:function (frm,cdt,cdn){
         if(frm.is_new()){
@@ -11,6 +23,22 @@ frappe.ui.form.on('Customer', {
             frappe.model.set_value(child.doctype, child.name, "relationship", "Self")
             refresh_field("family_members_details");
         }
+    }
+})
+function option_in_members(frm){
+    var option = []
+    for(let i=0;i<frm.doc.family_members_details.length;i++){
+        option.push(frm.doc.family_members_details[i].members_name);
+    }
+    frm.doc.check_list_remainder_table.forEach(element => {
+        let row = locals[element.doctype][element.name]
+        let df = frappe.meta.get_docfield("Check List Remainder","member_name", row.name);
+        df.options = option;
+    });
+}
+frappe.ui.form.on('Check List Remainder', {
+    check_list_remainder_table_add: function (frm,cdt,cdn) {
+        option_in_members(frm) 
     }
 })
 
@@ -106,6 +134,7 @@ function add_member_details(frm,row){
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"check_list_name",d.check_list_name)
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"family_member_details_name",d.family_member_details_name)
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"check",d.check)
+                        frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"receive_or_send",d.receive_or_send)
                         i++;
                     }
                     refresh_field("family_members_documents");
@@ -116,17 +145,6 @@ function add_member_details(frm,row){
     }
 }
 
-frappe.ui.form.on('Family members Table', {
-    family_members_table_add:function (frm,cdt,cdn) {
-        frappe.model.set_value(cdt,cdn,"attached_by",frappe.session.user)
-    },
-    print: function (frm,cdt,cdn){
-        let row = locals[cdt][cdn]
-        var win = window.open('');
-        win.document.write('<img src="' + row.file + '" onload="window.print();window.close()" />');
-        win.focus();
-    }
-})
 frappe.ui.form.on('Family Members Documents', {
     check:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
@@ -158,6 +176,7 @@ frappe.ui.form.on('Family Members Documents', {
             frappe.model.set_value(child.doctype, child.name, "file_type", row.check_list_name)
             frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
             frappe.model.set_value(child.doctype, child.name, "family_members_documents_name", row.family_member_details_name)
+            frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
             refresh_field("family_members_table");
             // frm.save()
             check_list(frm)
@@ -178,7 +197,7 @@ function check_list(frm){
             fieldname: 'file_type',
             label: __('File Type'),
             in_list_view: 1,
-            columns:2
+            columns:1
         },
         {
             fieldtype: 'Attach',
@@ -201,6 +220,7 @@ function check_list(frm){
                     if(htmlrow.parent_name1 == el.name){
                         frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
                         frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
+                        frm.save()
                     }
                 });
             }
@@ -242,6 +262,24 @@ function check_list(frm){
         },
         {
             fieldtype: 'Read Only',
+            fieldname: 'receive_or_send',
+            label: __('Receive Or Send'),
+            in_list_view: 1,
+            columns:2,
+            // options:['','To Receive','To Send'],
+            // onchange: function(event) {
+            //     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+            //     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+            //     let htmlrow = form.get_field(table).get_value()[index]
+            //     frm.doc.family_members_table.forEach((el) => {
+            //         if(htmlrow.parent_name1 == el.name){
+            //             frappe.model.set_value(el.doctype, el.name, 'receive_or_send', event.target.value)
+            //         }
+            //     });
+            // }
+        },
+        {
+            fieldtype: 'Read Only',
             fieldname: 'parent_name1',
             label: __('Parent Name'),
         },
@@ -252,23 +290,59 @@ function check_list(frm){
         user[frm.doc.family_members_details[i].members_name]=[]
         file_table[frm.doc.family_members_details[i].members_name]=[]
     }
-    for(let i=0;i<frm.doc.family_members_documents.length;i++){
-        
-        user[frm.doc.family_members_documents[i].members_name ].push(
-            {
-                fieldtype: 'Check',
-                fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
-                label:frm.doc.family_members_documents[i].check_list_name,
-                default:frm.doc.family_members_documents[i].check,
-                onchange: function(event) {
-                    let row = frm.doc.family_members_documents[i]
-                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+    for(let resend=0;resend<2;resend++){
+        for(let i=0;i<frm.doc.family_members_documents.length;i++){
+            if(resend == 0){
+                if(frm.doc.family_members_documents[i].receive_or_send=="To Receive"){
+                    user[frm.doc.family_members_documents[i].members_name ].push(
+                        {
+                            fieldtype: 'Check',
+                            fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                            label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                            default:frm.doc.family_members_documents[i].check,
+                            onchange: function(event) {
+                                let row = frm.doc.family_members_documents[i]
+                                frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                            }
+                        }
+                    )
+                }
+            } else {
+                if(frm.doc.family_members_documents[i].receive_or_send=="To Send"){
+                    user[frm.doc.family_members_documents[i].members_name ].push(
+                        {
+                            fieldtype: 'Check',
+                            fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                            label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                            default:frm.doc.family_members_documents[i].check,
+                            onchange: function(event) {
+                                let row = frm.doc.family_members_documents[i]
+                                frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                            }
+                        }
+                    )
                 }
             }
-        )
+        }
     }
+
+    // for(let i=0;i<frm.doc.family_members_documents.length;i++){
+        
+    //     user[frm.doc.family_members_documents[i].members_name ].push(
+    //         {
+    //             fieldtype: 'Check',
+    //             fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+    //             label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+    //             default:frm.doc.family_members_documents[i].check,
+    //             onchange: function(event) {
+    //                 let row = frm.doc.family_members_documents[i]
+    //                 frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+    //             }
+    //         }
+    //     )
+    // }
     for(let i=0;i<frm.doc.family_members_table.length;i++){
-        file_table[frm.doc.family_members_table[i].members_name ].push(
+        file_table[frm.doc.family_members_table[i].members_name].push(
             {
                 members_name:frm.doc.family_members_table[i].members_name,
                 file_type:frm.doc.family_members_table[i].file_type,
@@ -276,7 +350,8 @@ function check_list(frm){
                 next_remainder_or_expiry_on:frm.doc.family_members_table[i].next_remainder_or_expiry_on,
                 description:frm.doc.family_members_table[i].description,
                 parent_name1:frm.doc.family_members_table[i].name,
-                checkfile:frm.doc.family_members_table[i].file?1:0
+                checkfile:frm.doc.family_members_table[i].file?1:0,
+                receive_or_send:frm.doc.family_members_table[i].receive_or_send,
             }
         )
     }

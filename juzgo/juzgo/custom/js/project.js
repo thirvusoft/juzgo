@@ -9,7 +9,7 @@ frappe.ui.form.on('Project', {
         setTimeout(() => {
             $("[data-doctype='Expense Claim']").hide();
         }, 10);
-        multi_customer(frm)
+        multi_customer(frm,"onload")
     },
     project_name:function(frm){
         frappe.call({
@@ -64,7 +64,7 @@ function auto_end_date(frm){
     
 }
 
-function add_destination_details(frm){
+function add_destination_details(frm,event=''){
         let destination_list = []
         for(let i=0;i<frm.doc.destination.length;i++){
             destination_list.push(frm.doc.destination[i].destination)
@@ -88,9 +88,11 @@ function add_destination_details(frm){
                         frappe.model.set_value(child.doctype, child.name, "check", row.check)
                         frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
                         frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+                        frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("destination_check_list");
-                    // frm.save()
+                    if(event!='onload')
+                        frm.save()
                 }
             }
         })
@@ -128,6 +130,7 @@ frappe.ui.form.on('Customer Destination Check List', {
             frappe.model.set_value(child.doctype, child.name, "family_members_documents_name", row.family_member_details_name)
             frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
             frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
+            frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
             refresh_field("family_members_destination_attachment");
             check_list(frm)
         }
@@ -135,7 +138,7 @@ frappe.ui.form.on('Customer Destination Check List', {
     }
 })
 
-function multi_customer(frm){
+function multi_customer(frm,event=''){
     let custom_list = []
         for(let i=0;i<frm.doc.multi_customer.length;i++){
             custom_list.push(frm.doc.multi_customer[i].customer)
@@ -180,6 +183,7 @@ function multi_customer(frm){
                         frappe.model.set_value(child.doctype, child.name, "attached_by", row.attached_by)
                         frappe.model.set_value(child.doctype, child.name, "family_members_documents_name", row.family_members_documents_name)
                         frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+                        frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("family_members_attachment");
                 }
@@ -207,7 +211,7 @@ function multi_customer(frm){
                 refresh_field("destination_check_list");
             }
         })
-        add_destination_details(frm)
+        add_destination_details(frm,event)
         check_list(frm)
 }
 
@@ -249,6 +253,7 @@ function check_list(frm){
                         if(htmlrow.parent_name1 == el.name){
                             frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
                             frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
+                            frm.save()
                         }
                     });
                 }
@@ -290,6 +295,24 @@ function check_list(frm){
             },
             {
                 fieldtype: 'Read Only',
+                fieldname: 'receive_or_send',
+                label: __('Receive Or Send'),
+                in_list_view: 1,
+                columns:1,
+                // options:['','To Receive','To Send'],
+                // onchange: function(event) {
+                //     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                //     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                //     let htmlrow = form.get_field(table).get_value()[index]
+                //     frm.doc.family_members_table.forEach((el) => {
+                //         if(htmlrow.parent_name1 == el.name){
+                //             frappe.model.set_value(el.doctype, el.name, 'receive_or_send', event.target.value)
+                //         }
+                //     });
+                // }
+            },
+            {
+                fieldtype: 'Read Only',
                 fieldname: 'parent_name1',
                 label: __('Parent Name'),
                 hidden:1
@@ -314,7 +337,9 @@ function check_list(frm){
                     next_remainder_or_expiry_on:frm.doc.family_members_attachment[i].next_remainder_or_expiry_on,
                     description:frm.doc.family_members_attachment[i].description,
                     parent_name1:frm.doc.family_members_attachment[i].name,
-                    checkfile:frm.doc.family_members_attachment[i].file?1:0
+                    checkfile:frm.doc.family_members_attachment[i].file?1:0,
+                    receive_or_send:frm.doc.family_members_attachment[i].receive_or_send,
+                    customer_id:frm.doc.family_members_attachment[i].customer_id,
                 }
             )
         }
@@ -327,7 +352,9 @@ function check_list(frm){
                     next_remainder_or_expiry_on:frm.doc.family_members_destination_attachment[i].next_remainder_or_expiry_on,
                     description:frm.doc.family_members_destination_attachment[i].description,
                     parent_name1:frm.doc.family_members_destination_attachment[i].name,
-                    checkfile:frm.doc.family_members_destination_attachment[i].file?1:0
+                    checkfile:frm.doc.family_members_destination_attachment[i].file?1:0,
+                    receive_or_send:frm.doc.family_members_destination_attachment[i].receive_or_send,
+                    customer_id:frm.doc.family_members_attachment[i].customer_id,
                 }
             )
         }
@@ -368,6 +395,7 @@ function check_list(frm){
                             if(htmlrow.parent_name1 == el.name){
                                 frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
                                 frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
+                                frm.save()
                             }
                         });
                     }
@@ -409,6 +437,24 @@ function check_list(frm){
                 },
                 {
                     fieldtype: 'Read Only',
+                    fieldname: 'receive_or_send',
+                    label: __('Receive Or Send'),
+                    in_list_view: 1,
+                    columns:1,
+                    // options:['','To Receive','To Send'],
+                    // onchange: function(event) {
+                    //     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                    //     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                    //     let htmlrow = form.get_field(table).get_value()[index]
+                    //     frm.doc.family_members_table.forEach((el) => {
+                    //         if(htmlrow.parent_name1 == el.name){
+                    //             frappe.model.set_value(el.doctype, el.name, 'receive_or_send', event.target.value)
+                    //         }
+                    //     });
+                    // }
+                },
+                {
+                    fieldtype: 'Read Only',
                     fieldname: 'parent_name1',
                     label: __('Parent Name'),
                     hidden:1
@@ -427,7 +473,11 @@ function check_list(frm){
                 p.push({
                     fieldname: 'table'+keys[i],
                     fieldtype: 'Table',
+<<<<<<< HEAD
                     label: keys[i]+" Customer Attachment Table",
+=======
+                    label: keys[i]+" - "+file_table[keys[i]][0].customer_id+" - Customer Attachment Table",
+>>>>>>> eb11905ba64ed0f4b2208b7eb34ca48e62b72dd2
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     cannot_delete_rows:true,
@@ -446,21 +496,42 @@ function check_list(frm){
             body: attr_html
         });
         form.make()
-        for(let i=0;i<frm.doc.destination_check_list.length;i++){
-            
-            check_list[frm.doc.destination_check_list[i].members_name ].push(
-                {
-                    fieldtype: 'Check',
-                    fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
-                    label:frm.doc.destination_check_list[i].check_list_name,
-                    default:frm.doc.destination_check_list[i].check,
-                    onchange: function(event) {
-                        let row = frm.doc.destination_check_list[i]
-                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+        for(let resend=0;resend<2;resend++){
+            for(let i=0;i<frm.doc.destination_check_list.length;i++){
+                if(resend == 0){
+                    if(frm.doc.destination_check_list[i].receive_or_send=="To Receive"){
+                        check_list[frm.doc.destination_check_list[i].members_name].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
+                                label:(frm.doc.destination_check_list[i].check_list_name)+(frm.doc.destination_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.destination_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.destination_check_list[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.destination_check_list[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
+                    }
+                } else {
+                    if(frm.doc.destination_check_list[i].receive_or_send=="To Send"){
+                        check_list[frm.doc.destination_check_list[i].members_name].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.destination_check_list[i].members_name+frm.doc.destination_check_list[i].check_list_name,
+                                label:(frm.doc.destination_check_list[i].check_list_name)+(frm.doc.destination_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.destination_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.destination_check_list[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.destination_check_list[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
                     }
                 }
-            )
+            }
         }
+
         for(let user=0;user<keys.length;user++){
             let desti = []
             let checkboxFields = []
@@ -489,7 +560,7 @@ function check_list(frm){
                 desti.push({
                     fieldname: 'destination_table'+keys[user],
                     fieldtype: 'Table',
-                    label: keys[user]+" Destination Attachment Table",
+                    label: keys[user]+" - "+desti_attach_table[keys[user]][0].customer_id+" - Destination Attachment Table",
                     cannot_add_rows: true,
                     cannot_delete_rows:true,
                     in_editable_grid: true,

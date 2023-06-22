@@ -81,7 +81,8 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                     "description":i.description,
                     "attached_by":i.attached_by,
                     "family_members_documents_name":i.family_members_documents_name,
-                    "customer_id":cus
+                    "customer_id":cus,
+                    "receive_or_send":i.receive_or_send
                 })
             else:
                 for update in range (len(family_members_attachment)):
@@ -92,6 +93,7 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                             'next_remainder_or_expiry_on' : i.next_remainder_or_expiry_on,
                             'description' : i.description,
                             'attached_by' : i.attached_by,
+                            "receive_or_send":i.receive_or_send
                         })
                     if (i.get("members_name") or '')+(i.get("file_type") or '') not in exiting_doc:
                         family_members_attachment.append({
@@ -102,7 +104,8 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                             "description":i.description,
                             "attached_by":i.attached_by,
                             "family_members_documents_name":i.family_members_documents_name,
-                            "customer_id":cus
+                            "customer_id":cus,
+                            "receive_or_send":i.receive_or_send
                         })
                         exiting_doc.append((i.get("members_name") or '')+(i.get("file_type") or ''))
     return family_members_attachment
@@ -126,7 +129,7 @@ def add_destination_details(name,destination):
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:
-                       list.append({'members_name':row.get('members_name'),'age':row.get('age'),'gender':row.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':row.get('member_row_id'),'check':0,'destination':des,'customer_id':row.get('customer_id')})
+                       list.append({'members_name':row.get('members_name'),'age':row.get('age'),'gender':row.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':row.get('member_row_id'),'check':0,'destination':des,'customer_id':row.get('customer_id'),"receive_or_send":i.receive_or_send})
     for i in list:
         for j in old_destination_check_list:
             if ((i['members_name'] == j.members_name) and (str(i['age']) == str(j.age)) and (i['gender'] == j.gender) and (i['check_list_name'] == j.check_list_name) and (i['family_member_details_name'] == j.family_member_details_name) and (i['customer_id'] == j.customer_id)):
