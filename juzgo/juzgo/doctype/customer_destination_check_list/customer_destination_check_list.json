@@ -13,7 +13,8 @@
   "check",
   "family_member_details_name",
   "destination",
-  "customer_id"
+  "customer_id",
+  "receive_or_send"
  ],
  "fields": [
   {
@@ -62,12 +63,20 @@
    "fieldtype": "Link",
    "label": "Customer ID",
    "options": "Customer"
+  },
+  {
+   "fetch_from": "check_list_name.receive_or_send",
+   "fetch_if_empty": 1,
+   "fieldname": "receive_or_send",
+   "fieldtype": "Select",
+   "label": "Receive or Send",
+   "options": "\nTo Receive\nTo Send"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-19 16:24:30.939237",
+ "modified": "2023-06-22 12:45:13.482858",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Customer Destination Check List",

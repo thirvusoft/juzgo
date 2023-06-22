@@ -6,22 +6,36 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "check_list_name"
+  "check_list_name",
+  "receive_or_send"
  ],
  "fields": [
   {
    "fieldname": "check_list_name",
    "fieldtype": "Link",
+   "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Check List Name",
    "options": "Check List Name"
+  },
+  {
+   "fetch_from": "check_list_name.receive_or_send",
+   "fetch_if_empty": 1,
+   "fieldname": "receive_or_send",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Receive or Send",
+   "options": "\nTo Receive\nTo Send",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-13 12:25:10.236197",
+ "modified": "2023-06-22 10:52:13.911579",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Check List Items",

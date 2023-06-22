@@ -11,7 +11,8 @@
   "gender",
   "check_list_name",
   "check",
-  "family_member_details_name"
+  "family_member_details_name",
+  "receive_or_send"
  ],
  "fields": [
   {
@@ -48,12 +49,21 @@
    "fieldname": "family_member_details_name",
    "fieldtype": "Data",
    "label": "Family Member details Name"
+  },
+  {
+   "fetch_from": "check_list_name.receive_or_send",
+   "fetch_if_empty": 1,
+   "fieldname": "receive_or_send",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Receive or Send",
+   "options": "\nTo Receive\nTo Send"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-14 15:39:19.382216",
+ "modified": "2023-06-22 12:40:52.804671",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Family Members Documents",
