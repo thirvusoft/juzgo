@@ -12,17 +12,18 @@ frappe.ui.form.on('Timesheet', {
 		}
 		if(frm.is_new()){
 			frm.events.get_tasks(frm)
+		
+			frappe.call({
+				method: "juzgo.juzgo.custom.py.timesheet.existing_draft_timesheet",
+				args:{
+					owner: frm.doc.owner,
+					doc_name : frm.doc.name
+				},
+				error: function(r){
+					window.history.back()
+				}
+			})
 		}
-		frappe.call({
-			method: "juzgo.juzgo.custom.py.timesheet.existing_draft_timesheet",
-			args:{
-				owner: frm.doc.owner,
-				doc_name : frm.doc.name
-			},
-			error: function(r){
-				window.history.back()
-			}
-		})
 	},
 	// on_submit(frm){
 	// 	// frm.events.get_tasks(frm)
