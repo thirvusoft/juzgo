@@ -473,11 +473,7 @@ function check_list(frm){
                 p.push({
                     fieldname: 'table'+keys[i],
                     fieldtype: 'Table',
-<<<<<<< HEAD
-                    label: keys[i]+" Customer Attachment Table",
-=======
                     label: keys[i]+" - "+file_table[keys[i]][0].customer_id+" - Customer Attachment Table",
->>>>>>> eb11905ba64ed0f4b2208b7eb34ca48e62b72dd2
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     cannot_delete_rows:true,
