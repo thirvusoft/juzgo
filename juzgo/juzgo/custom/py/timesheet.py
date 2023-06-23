@@ -58,7 +58,7 @@ class time_sheet(Timesheet):
     def validate_dates(self):
         for data in self.time_logs:
             if data.from_time and data.to_time and time_diff_in_hours(data.to_time, data.from_time) < 0:
-                frappe.throw(("To Time {0} cannot be before from Time {1} (Negative time {2} is not accept) for the {3}").format(data.to_time, data.from_time,round(data.taken_min), data.task))
+                frappe.throw(("To Time {0} cannot be before from Time {1} (Negative time {2} is not accept) for the Task {3}").format(data.to_time, data.from_time,round(data.taken_min), data.task))
 
 def get_notes(doc, actions):
     for i in doc.time_logs:

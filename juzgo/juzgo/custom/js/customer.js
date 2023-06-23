@@ -3,10 +3,10 @@ frappe.ui.form.on('Customer', {
     refresh:function (frm,cdt,cdn) {
         check_list(frm)
         option_in_members(frm)
-        frm.set_query("check_list" ,"check_list_remainder_table", function(){
-			let list=[]
+        frm.set_query("check_list" ,"check_list_remainder_table", function(doc, cdt, cdn){
+			let list=[], data = locals[cdt][cdn];
             for(let i=0;i<frm.doc.family_members_documents.length;i++){
-                if(!frm.doc.family_members_documents[i].check)
+                if(!frm.doc.family_members_documents[i].check && frm.doc.family_members_documents[i].members_name == data.member_name)
                     list.push(frm.doc.family_members_documents[i].check_list_name);
             }
             let filters = {
@@ -39,7 +39,10 @@ function option_in_members(frm){
 frappe.ui.form.on('Check List Remainder', {
     check_list_remainder_table_add: function (frm,cdt,cdn) {
         option_in_members(frm) 
-    }
+    },
+    // member_name:function (frm,cdt,cdn){
+    //     frm.set_query("me")
+    // }
 })
 
 frappe.ui.form.on('Family Members Details', {
