@@ -8,7 +8,7 @@ frappe.ui.form.on('Task', {
     project: function(frm){
         filter(frm)
     },
-    refresh: function(frm){
+    refresh: function(frm,cdt,cdn){
         filter(frm)
         // let quality_inspection_field = frm.fields_dict.depends_on.grid.get_docfield("task")
         // quality_inspection_field.get_route_options_for_new_doc = function(row) {
@@ -29,6 +29,13 @@ frappe.ui.form.on('Task', {
                     }
                 }
             }
+        }
+        if(frappe.user.has_role('Juzgo Admin') ){
+            let rows = locals[cdt][cdn]
+            console.log("saufhsjdhf")
+            frm.set_df_property("task", "read_only", 0, rows.name, 'depends_on');
+            frm.refresh_field('depends_on');
+
         }
     },
     assigned_to: function(frm){
@@ -65,37 +72,6 @@ frappe.ui.form.on('Task', {
        }
        })       
    },
-
-//    notes: function(frm){
-//     if(frm.doc.owner != frappe.session.user && frm.doc.notes != ""){
-//         frappe.call({
-//             method: "juzgo.juzgo.custom.py.task.notification",
-//             args:{
-//                 to_user: frm.doc.owner,
-//                 from_user: frappe.session.user, 
-//                 task_name: frm.doc.name, 
-//                 data: frm.doc.notes, 
-//                 doctype: frm.doc.doctype,
-//                 field: "Notes"
-//             }
-//         })     
-//     }
-//    },
-//    description: function(frm){
-//     if(frm.doc.owner == frappe.session.user && frm.doc.description != ""){
-//         frappe.call({
-//             method: "juzgo.juzgo.custom.py.task.notification",
-//             args:{
-//                 to_user: frm.doc.assigned_to,
-//                 from_user: frappe.session.user, 
-//                 task_name: frm.doc.name, 
-//                 data: frm.doc.description, 
-//                 doctype: frm.doc.doctype,
-//                 field: "Description"
-//             }
-//         })     
-//     }
-//    }
 
 })
 

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "autoincrement",
- "creation": "2023-06-14 12:28:52.518477",
+ "creation": "2023-06-19 15:59:31.741514",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -12,6 +12,8 @@
   "check_list_name",
   "check",
   "family_member_details_name",
+  "destination",
+  "customer_id",
   "receive_or_send"
  ],
  "fields": [
@@ -51,11 +53,22 @@
    "label": "Family Member details Name"
   },
   {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "label": "Customer ID",
+   "options": "Customer"
+  },
+  {
    "fetch_from": "check_list_name.receive_or_send",
    "fetch_if_empty": 1,
    "fieldname": "receive_or_send",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Receive or Send",
    "options": "\nTo Receive\nTo Send"
   }
@@ -63,10 +76,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-22 12:40:52.804671",
+ "modified": "2023-06-22 12:45:13.482858",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Family Members Documents",
+ "name": "Customer Destination Check List",
  "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [],

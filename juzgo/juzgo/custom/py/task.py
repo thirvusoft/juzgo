@@ -7,6 +7,24 @@ from frappe.utils import cint, cstr
 import json
 
 def user_todo(doc, actions):
+    if(doc.owner != frappe.session.user and not doc.is_new()):
+        if(frappe.get_value("Task",doc.name,"notes") != doc.notes):
+            notification(
+            doc.owner,
+            frappe.session.user, 
+            doc.name, 
+            doc.notes, 
+            doc.doctype,
+            "Notes")
+    if(doc.owner == frappe.session.user and not doc.is_new()):
+        if(frappe.get_value("Task",doc.name,"description") != doc.description):
+            notification(
+            doc.assigned_to,
+            frappe.session.user, 
+            doc.name, 
+            doc.description, 
+            doc.doctype,
+            "Description")
     if doc.assigned_to and (actions == "after_insert" or not doc.is_new()):
         doc_ = frappe.new_doc("ToDo")        
         if frappe.db.exists("ToDo", {'reference_name': doc.name}):
@@ -26,25 +44,29 @@ def user_todo(doc, actions):
         
         if(doc.depends_on):
             for i in doc.depends_on:
-                sub_task=frappe.new_doc("Task")
-                if not frappe.db.exists("Task",{"subject":i.subject1}):
-                    sub_task.update({
-                    "subject":i.subject1,
-                    "project":doc.project,
-                    "abbr":doc.abbr,
-                    "assigned_to":doc.assigned_to,
-                    "exp_start_date":doc.exp_start_date,
-                    "description":(i.get("subject",""))
-                })
-                    sub_task.run_method=lambda *a,**b:0
-                    sub_task.save(ignore_permissions = True)   
-                    i.task=sub_task.name
-                    frappe.msgprint(_("Sub Tasks Created successfully"))
-                elif(frappe.db.exists("Task",{"name":i.task})):
-                    task_doc=frappe.get_doc("Task",i.task)
-                    if i.subject != task_doc.description:
-                        task_doc.description=i.subject
-                        task_doc.save()
+                if not i.task:
+                    sub_task=frappe.new_doc("Task")
+                    if not frappe.db.exists("Task",{"subject":i.subject1}):
+                        sub_task.update({
+                        "subject":i.subject1,
+                        "project":doc.project,
+                        "abbr":doc.abbr,
+                        "assigned_to":doc.assigned_to,
+                        "exp_start_date":doc.exp_start_date,
+                        "description":(i.get("subject",""))
+                    })
+                        sub_task.run_method=lambda *a,**b:0
+                        sub_task.save(ignore_permissions = True)   
+                        i.task=sub_task.name
+                        frappe.msgprint(_("Sub Tasks Created successfully"))
+                    elif(frappe.db.exists("Task",{"name":i.task})):
+                        task_doc=frappe.get_doc("Task",i.task)
+                        if i.subject != task_doc.description:
+                            task_doc.description=i.subject
+                            task_doc.save()
+                else:
+                    sub_task = frappe.get_doc("Task",i.task)
+                    i.update({'subject1':sub_task.subject,'subject':sub_task.description})
 
             
         else:
@@ -161,15 +183,18 @@ def getdesc(task):
 
 
 def autoname(doc, actions):
-    if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
-        doc.name = make_autoname(doc.abbr + "-" + doc.subject + "-.#")
+    if doc.abbr :
+        if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
+            doc.name = make_autoname(doc.abbr + "-" + doc.subject + "-.#")
+    else:
+        frappe.throw("Kindly Fill the Project Abbr in Project")
 
 def on_trash(doc, actions):
     if doc.abbr and doc.subject:
         revert_series_if_last(doc.abbr + "-" + doc.subject+"-.#", doc.name)
     
-@frappe.whitelist()
-def notification(to_user, from_user, field, task_name, data, doctype):
+# @frappe.whitelist()
+def notification(to_user, from_user, task_name, data, doctype, field):
     doc=frappe.new_doc('Notification Log')
     doc.update({
     'subject': f'{from_user} added {field} in Task {task_name}: {data}',

@@ -1,22 +1,36 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2023-06-14 17:24:10.336686",
+ "autoname": "autoincrement",
+ "creation": "2023-06-20 11:32:03.350637",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "members_name",
+  "customer_id",
   "file_type",
   "file",
   "next_remainder_or_expiry_on",
   "description",
   "attached_by",
   "family_members_documents_name",
-  "receive_or_send",
-  "print"
+  "destination",
+  "receive_or_send"
  ],
  "fields": [
+  {
+   "fieldname": "members_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Members Name"
+  },
+  {
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer ID",
+   "options": "Customer"
+  },
   {
    "fieldname": "file_type",
    "fieldtype": "Link",
@@ -33,11 +47,9 @@
   {
    "fieldname": "next_remainder_or_expiry_on",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Next remainder or expiry on"
   },
   {
-   "columns": 2,
    "fieldname": "description",
    "fieldtype": "Long Text",
    "in_list_view": 1,
@@ -50,40 +62,32 @@
    "options": "User"
   },
   {
-   "fieldname": "members_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Members Name"
-  },
-  {
    "fieldname": "family_members_documents_name",
    "fieldtype": "Data",
    "label": "Family Members Documents Name"
   },
   {
-   "fieldname": "print",
-   "fieldtype": "Button",
-   "in_list_view": 1,
-   "label": "\ud83d\udda8\ufe0f"
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
   },
   {
-   "columns": 1,
    "fetch_from": "file_type.receive_or_send",
    "fetch_if_empty": 1,
    "fieldname": "receive_or_send",
    "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Receive or Send",
-   "options": "\nTo Receive\nTo Send"
+   "label": "Receive or Send"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-22 17:38:49.240412",
+ "modified": "2023-06-22 12:40:41.576251",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Family members Table",
+ "name": "Family Members Destination Attachment",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
