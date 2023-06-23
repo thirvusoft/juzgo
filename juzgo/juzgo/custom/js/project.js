@@ -319,7 +319,7 @@ function check_list(frm){
             },
         ]
 
-        
+        let for_label = {}
         let check_list = {}
         let file_table ={}
         let desti_attach_table ={}
@@ -327,6 +327,7 @@ function check_list(frm){
             check_list[frm.doc.family_member_details[i].members_name]=[]
             file_table[frm.doc.family_member_details[i].members_name]=[]
             desti_attach_table[frm.doc.family_member_details[i].members_name]=[]
+            for_label[frm.doc.family_member_details[i].members_name] = frm.doc.family_member_details[i].customer_id
         }
         for(let i=0;i<frm.doc.family_members_attachment.length;i++){  
             file_table[frm.doc.family_members_attachment[i].members_name ].push(
@@ -465,7 +466,7 @@ function check_list(frm){
             p.push({
                 fieldtype: 'Section Break',
                 fieldname:keys[i],
-                label:keys[i],
+                label: for_label[keys[i]] +" - "+keys[i],
                 collapsible:1
             })
         
@@ -473,7 +474,7 @@ function check_list(frm){
                 p.push({
                     fieldname: 'table'+keys[i],
                     fieldtype: 'Table',
-                    label: keys[i]+" - "+file_table[keys[i]][0].customer_id+" - Customer Attachment Table",
+                    label: '<span style="color:#003300">'+for_label[keys[i]]+'</span>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Attachment Table </span>",
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     cannot_delete_rows:true,
@@ -531,11 +532,6 @@ function check_list(frm){
         for(let user=0;user<keys.length;user++){
             let desti = []
             let checkboxFields = []
-            desti.push({
-                fieldtype: 'Section Break',
-                fieldname:keys[user],
-                label:keys[user]+" Destination Check List",
-            })
             let check_len = check_list[keys[user]].length/4
             for(let j=0;j<check_list[keys[user]].length;j++){
                 checkboxFields.push(check_list[keys[user]][j])
@@ -548,6 +544,11 @@ function check_list(frm){
                 }
             }
             desti.push({
+                fieldtype: 'Section Break',
+                fieldname:keys[user],
+                label:'<span style="font-weight: normal;"><span style="color:#003300">'+for_label[keys[user]]+'</span> - <span style="color:#330000">'+keys[user]+' Destination Check List </span> </span>',
+            })
+            desti.push({
                 fieldtype: 'HTML',
                 fieldname:`${keys[user]}_checkbox_html`,
                 label:keys[user],
@@ -556,7 +557,7 @@ function check_list(frm){
                 desti.push({
                     fieldname: 'destination_table'+keys[user],
                     fieldtype: 'Table',
-                    label: keys[user]+" - "+desti_attach_table[keys[user]][0].customer_id+" - Destination Attachment Table",
+                    label: '<span style="color:#003300">'+for_label[keys[user]]+"</span> - <span style='color:#000033'>"+keys[user]+" Destination Attachment Table </span>",
                     cannot_add_rows: true,
                     cannot_delete_rows:true,
                     in_editable_grid: true,
