@@ -40,9 +40,6 @@ frappe.ui.form.on('Check List Remainder', {
     check_list_remainder_table_add: function (frm,cdt,cdn) {
         option_in_members(frm) 
     },
-    // member_name:function (frm,cdt,cdn){
-    //     frm.set_query("me")
-    // }
 })
 
 frappe.ui.form.on('Family Members Details', {
