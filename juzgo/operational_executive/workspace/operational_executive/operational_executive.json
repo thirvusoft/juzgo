@@ -5,7 +5,7 @@
    "label": "Open Projects"
   }
  ],
- "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"Oe67nfM-Sg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet\",\"col\":3}}]",
+ "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"Oe67nfM-Sg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet\",\"col\":3}},{\"id\":\"gvLuROA6rj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"U8F5Q6pc6I\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Check List\",\"col\":3}}]",
  "creation": "2023-06-13 16:00:08.019671",
  "custom_blocks": [],
  "docstatus": 0,
@@ -17,8 +17,8 @@
  "is_hidden": 0,
  "label": "Operational Executive",
  "links": [],
- "modified": "2023-06-16 14:52:50.782589",
- "modified_by": "Administrator",
+ "modified": "2023-06-27 11:03:29.732499",
+ "modified_by": "sibi.kumar@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Operational Executive",
  "number_cards": [],
@@ -36,6 +36,13 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Customer",
+   "link_to": "Customer",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Timesheet",
    "link_to": "Timesheet",
    "type": "DocType"
@@ -45,6 +52,13 @@
    "doc_view": "List",
    "label": "Project",
    "link_to": "Project",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Check List",
+   "link_to": "Check List",
    "type": "DocType"
   },
   {
