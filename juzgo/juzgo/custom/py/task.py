@@ -57,7 +57,7 @@ def user_todo(doc, actions):
                     })
                         sub_task.run_method=lambda *a,**b:0
                         sub_task.save(ignore_permissions = True)   
-                        i.task=sub_task.name
+                        i.update({'task':sub_task.name})
                         frappe.msgprint(_("Sub Tasks Created successfully"))
                     elif(frappe.db.exists("Task",{"name":i.task})):
                         task_doc=frappe.get_doc("Task",i.task)

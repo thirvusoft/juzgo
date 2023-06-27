@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:keyword",
  "creation": "2023-06-03 16:30:07.099540",
@@ -9,6 +10,11 @@
  "engine": "InnoDB",
  "field_order": [
   "keyword",
+  "section_break_xizdi",
+  "designation",
+  "column_break_2oco4",
+  "point",
+  "section_break_vai1i",
   "question"
  ],
  "fields": [
@@ -28,11 +34,36 @@
    "label": "Keyword",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "point",
+   "fieldtype": "Int",
+   "label": "Point"
+  },
+  {
+   "fieldname": "section_break_xizdi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_2oco4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vai1i",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-03 18:05:07.461646",
+ "modified": "2023-06-27 10:52:03.724345",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Question",
@@ -69,6 +100,7 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,

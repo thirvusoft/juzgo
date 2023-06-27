@@ -115,12 +115,14 @@ function create_id(frm,row){
     }
 }
 function add_member_details(frm,row){
+    if(frm.is_new())
+        frm.save()
     if(row.age && row.gender){
         frappe.call({
             method:'juzgo.juzgo.custom.py.customer.add_member_details',
             args:{
                 row:row,
-                name:frm.doc.name
+                doc:frm.doc.name
             },
             callback(r1){
                 if(r1.message){
