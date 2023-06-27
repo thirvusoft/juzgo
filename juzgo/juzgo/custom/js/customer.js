@@ -46,7 +46,6 @@ frappe.ui.form.on('Family Members Details', {
     date_of_birth:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
         frappe.model.set_value(cdt,cdn,"age",new Date().getFullYear() - new Date(row.date_of_birth).getFullYear())
-        create_id(frm,row)
     },
     age:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
@@ -61,6 +60,12 @@ frappe.ui.form.on('Family Members Details', {
         }
     },
     members_name:function (frm,cdt,cdn) {
+        let row = locals[cdt][cdn]
+        if(row.member_row_id){
+            add_member_details(frm,row)
+        }
+    },
+    family_members_details_add:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
         create_id(frm,row)
 
@@ -110,9 +115,8 @@ frappe.ui.form.on('Family Members Details', {
     },
 })
 function create_id(frm,row){
-    if(row.age && row.date_of_birth){
-        frappe.model.set_value(row.doctype,row.name,"member_row_id",row.members_name+row.date_of_birth )
-    }
+        frappe.model.set_value(row.doctype,row.name,"member_row_id", Math.random().toString(36).substring(2,7) )
+    
 }
 function add_member_details(frm,row){
     if(frm.is_new())
