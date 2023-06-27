@@ -1,6 +1,14 @@
 import json
 import frappe
-
+from frappe.contacts.doctype.address.address import get_address_display
+def validate(doc,action):
+    doc.customer_contact_details = []
+    for i in doc.family_member_details:
+        doc.append("customer_contact_details",{
+            "customer":i.customer_id,
+            "address":frappe.get_value("Customer",i.customer_id,'customer_primary_address'),
+            "contact":frappe.get_value("Customer",i.customer_id,'customer_primary_contact')
+        })
 @frappe.whitelist()
 def get_project_abbr(project_name):
     m = project_name
@@ -159,3 +167,68 @@ def remove_function(table_field,custom_list):
     for i in reversed(remove_idx):
         table_field.pop(i)
     return table_field
+
+@frappe.whitelist()
+def family_member_details_seprate(table):
+    table = json.loads(table)
+    table_seprate ={}
+    html = ''
+    for i in table:
+        table_seprate[i["customer_id"]]=[]
+    for i in table:
+        table_seprate[i["customer_id"]].append({
+            "customer":i["customer_id"],
+            "address":frappe.get_value("Customer",i['customer_id'],'customer_primary_address'),
+            "contact":frappe.get_value("Customer",i['customer_id'],'customer_primary_contact'),
+            "member_name":i["members_name"],
+            "date_of_birth":i["date_of_birth"],
+            "gender":i['gender'],
+            "age":i['age'],
+            "relationship":i.get("relationship")
+        })
+    if table_seprate:
+        html = """
+        <div>
+            <h4>Family Member Details with Contact and Address</h4>
+        </div>
+        """
+    
+        for i in table_seprate:
+            html = html + f"""
+            Customer Name :- {i} <br>
+            Contact       :- {frappe.get_value("Contact",table_seprate[i][0].get("contact"),'phone') or "" } <br>
+            Address       :- <div style="padding-left:80px;">{get_address_display(table_seprate[i][0].get("address")) if table_seprate[i][0].get("address") else ""}</div>
+           <table>
+            <tr>
+                <th>Member Name</th>
+                <th>Date Of Birth</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Relationship</th>
+            </tr>
+            """
+            for j in table_seprate[i]:
+                html = html + """
+                <tr>
+                <td>
+                    """+j.get("member_name")+"""
+                </td>
+                <td>
+                   """+str(j.get("date_of_birth"))+"""
+                </td>
+                <td>
+                    """+j.get("gender")+"""
+                </td>
+                <td>
+                    """+str(j.get("age"))+"""
+                </td>
+                <td>
+                    """+str(j.get("relationship") or "")+"""
+                </td>
+                </tr>
+                """
+            html = html + """
+            </table>
+            <hr>
+            """
+    return html

@@ -4,6 +4,29 @@ var form_destination
 frappe.ui.form.on('Project', {
     refresh:function (frm,cdt,cdn) {
         check_list(frm)
+        frappe.call({
+            method:'juzgo.juzgo.custom.py.project.family_member_details_seprate',
+            args:{
+                table:frm.doc.family_member_details,
+            },
+            callback(r1){
+               frm.set_df_property("family_member_details_html","options",r1.message)
+            }
+        })
+    },
+    phone_number:function(frm){
+        if(frm.doc.phone_number){
+            var phoneno = /^\d{10,12}$/;
+            if(!frm.doc.phone_number.match(phoneno)){
+                frm.set_df_property("phone_number",'description',"<b style='color:red'>"+frm.doc.phone_number.length+"</b> no. Entered."+"<span style='color:red'>Enter Correct Phone No.</span>")
+            }
+            else{
+                frm.set_df_property("phone_number",'description',"")
+                if(frm.doc.phone_number.length > 10){
+                    frm.set_df_property("phone_number",'description',"<b style='color:Orange'>"+frm.doc.phone_number.length+"</b> no. Entered.")
+                }
+            }
+        }
     },
     onload:function (frm) {
         setTimeout(() => {
