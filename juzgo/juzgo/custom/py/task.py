@@ -78,6 +78,8 @@ def user_todo(doc, actions):
                 if parent_task.subject!=doc.description:
                     parent_task.subject=doc.description
                     parent_task.save()
+    if(actions == "after_insert"):
+        doc.save()
 
               
 
@@ -90,7 +92,8 @@ def update_number(doc, actions):
             if i.task:
                 task_ = frappe.get_doc("Task",i.task)
                 task_.update({
-                        'description': i.subject,      
+                        'description': i.subject,   
+                        'subject': i.subject1
                 })
                 task_.save()
        
