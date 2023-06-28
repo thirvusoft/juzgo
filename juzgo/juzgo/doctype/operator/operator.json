@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:operator_name",
+ "creation": "2023-06-28 11:09:24.578101",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "operator_name",
+  "mode_of_transport",
+  "destination",
+  "tariff_based_on",
+  "tariff_range",
+  "associated_vehicles_section",
+  "vehicles",
+  "flight_tab",
+  "flight_name",
+  "timing",
+  "onward",
+  "return",
+  "hours_of_journey",
+  "from_destination",
+  "to_destination",
+  "advisable_destinations",
+  "leg_space",
+  "seating_capacity",
+  "provide_group_quotes",
+  "options_to_block",
+  "free_luggage",
+  "cabin_baggage",
+  "checkin_baggage",
+  "baggages_count_specific",
+  "carrier_category",
+  "suggestible_booking",
+  "possibility_of_web_checkin",
+  "hours_to_checkin",
+  "train_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "mode_of_transport",
+   "fieldtype": "Link",
+   "label": "Mode of Transport",
+   "options": "Mode of Transport"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "tariff_based_on",
+   "fieldtype": "Link",
+   "label": "Tariff Based on",
+   "options": "Tariff Based On"
+  },
+  {
+   "fieldname": "tariff_range",
+   "fieldtype": "Table",
+   "label": "Tariff Range",
+   "options": "Tariff Range"
+  },
+  {
+   "fieldname": "associated_vehicles_section",
+   "fieldtype": "Section Break",
+   "label": "Associated Vehicles"
+  },
+  {
+   "fieldname": "vehicles",
+   "fieldtype": "Table",
+   "label": "Vehicles",
+   "options": "Operator Vehicle"
+  },
+  {
+   "fieldname": "flight_tab",
+   "fieldtype": "Tab Break",
+   "label": "Flight"
+  },
+  {
+   "fieldname": "flight_name",
+   "fieldtype": "Data",
+   "label": "Flight Name"
+  },
+  {
+   "fieldname": "timing",
+   "fieldtype": "Data",
+   "label": "Timing"
+  },
+  {
+   "fieldname": "onward",
+   "fieldtype": "Data",
+   "label": "Onward"
+  },
+  {
+   "fieldname": "return",
+   "fieldtype": "Data",
+   "label": "Return"
+  },
+  {
+   "fieldname": "hours_of_journey",
+   "fieldtype": "Data",
+   "label": "Hours of journey"
+  },
+  {
+   "fieldname": "from_destination",
+   "fieldtype": "Data",
+   "label": "From Destination"
+  },
+  {
+   "fieldname": "to_destination",
+   "fieldtype": "Data",
+   "label": "To Destination"
+  },
+  {
+   "fieldname": "advisable_destinations",
+   "fieldtype": "Table MultiSelect",
+   "label": "Advisable Destinations",
+   "options": "Destination Table"
+  },
+  {
+   "fieldname": "leg_space",
+   "fieldtype": "Data",
+   "label": "Leg space "
+  },
+  {
+   "fieldname": "seating_capacity",
+   "fieldtype": "Data",
+   "label": "Seating Capacity "
+  },
+  {
+   "default": "0",
+   "fieldname": "provide_group_quotes",
+   "fieldtype": "Check",
+   "label": "Provide Group Quotes "
+  },
+  {
+   "default": "0",
+   "fieldname": "options_to_block",
+   "fieldtype": "Check",
+   "label": "Options to Block"
+  },
+  {
+   "fieldname": "free_luggage",
+   "fieldtype": "Data",
+   "label": "Free Luggage "
+  },
+  {
+   "fieldname": "cabin_baggage",
+   "fieldtype": "Data",
+   "label": "Cabin Baggage "
+  },
+  {
+   "fieldname": "checkin_baggage",
+   "fieldtype": "Data",
+   "label": "Checkin Baggage"
+  },
+  {
+   "fieldname": "baggages_count_specific",
+   "fieldtype": "Select",
+   "label": "baggages count specific "
+  },
+  {
+   "fieldname": "carrier_category",
+   "fieldtype": "Select",
+   "label": "carrier category "
+  },
+  {
+   "fieldname": "suggestible_booking",
+   "fieldtype": "Data",
+   "label": "Suggestible Booking "
+  },
+  {
+   "default": "0",
+   "fieldname": "possibility_of_web_checkin",
+   "fieldtype": "Check",
+   "label": "Possibility of Web Checkin "
+  },
+  {
+   "fieldname": "hours_to_checkin",
+   "fieldtype": "Float",
+   "label": "Hours to checkin"
+  },
+  {
+   "fieldname": "train_tab",
+   "fieldtype": "Tab Break",
+   "label": "Train"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-28 12:24:29.581553",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Operator",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

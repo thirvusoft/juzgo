@@ -195,6 +195,7 @@ def family_member_details_seprate(table):
     
         for i in table_seprate:
             html = html + f"""
+            <div style="background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;">
             Customer Name :- {i} <br>
             Contact       :- {frappe.get_value("Contact",table_seprate[i][0].get("contact"),'phone') or "" } <br>
             Address       :- <div style="padding-left:80px;">{get_address_display(table_seprate[i][0].get("address")) if table_seprate[i][0].get("address") else ""}</div>
@@ -208,27 +209,28 @@ def family_member_details_seprate(table):
             </tr>
             """
             for j in table_seprate[i]:
-                html = html + """
+                html = html + f"""
                 <tr>
                 <td>
-                    """+j.get("member_name")+"""
+                    {j.get("member_name")}
                 </td>
                 <td>
-                   """+str(j.get("date_of_birth"))+"""
+                   {str(j.get("date_of_birth"))}
                 </td>
                 <td>
-                    """+j.get("gender")+"""
+                    {j.get("gender")}
                 </td>
                 <td>
-                    """+str(j.get("age"))+"""
+                    {str(j.get("age"))}
                 </td>
                 <td>
-                    """+str(j.get("relationship") or "")+"""
+                    {str(j.get("relationship") or "")}
                 </td>
                 </tr>
                 """
             html = html + """
             </table>
+            </div>
             <hr>
             """
     return html
