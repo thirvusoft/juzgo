@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 12:19:16.285705",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cusines"
+ ],
+ "fields": [
+  {
+   "fieldname": "cusines",
+   "fieldtype": "Link",
+   "label": "Cusines",
+   "options": "Cusines"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 12:19:31.061094",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Cusines Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

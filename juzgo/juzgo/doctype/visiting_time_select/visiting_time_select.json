@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 11:45:58.017454",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "visiting"
+ ],
+ "fields": [
+  {
+   "fieldname": "visiting",
+   "fieldtype": "Link",
+   "label": "Visiting Time",
+   "options": "Visiting Time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 11:46:05.440476",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Visiting Time Select",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

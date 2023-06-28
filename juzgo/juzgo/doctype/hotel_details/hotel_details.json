@@ -1,0 +1,273 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:hotel_name",
+ "creation": "2023-06-28 11:05:36.673637",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "hotel_name",
+  "contact_person",
+  "destination",
+  "city",
+  "area",
+  "country",
+  "hotel_type",
+  "check_in_time",
+  "check_out_time",
+  "column_break_10",
+  "is_advance__prepaid_hotel",
+  "is_jtt",
+  "print_name",
+  "star_rating",
+  "website_link",
+  "pin_location",
+  "address_and_contact_details_section",
+  "address",
+  "contact",
+  "room_details_section",
+  "room_details_table",
+  "nearby_places",
+  "nearby_indian_restaurants",
+  "bank_details_section",
+  "bank_account",
+  "bank_name",
+  "column_break_25",
+  "account_type",
+  "account_number",
+  "column_break_28",
+  "branch",
+  "ifscswift_code",
+  "images_section",
+  "image_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "hotel_name",
+   "fieldtype": "Data",
+   "label": "Hotel Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person "
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination ",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Link",
+   "label": "Area",
+   "options": "Area"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "hotel_type",
+   "fieldtype": "Select",
+   "label": "Hotel Type",
+   "options": "\nAdventure Hotels\nAirport Hotels\nBusiness Hotels\nBed and Breakfast\nCasino Hotels\nResots Hotels\nSelf catering Hotels\nService Hotels\nSuit appartments\nBoatels\nCity center\nMotel\nSuberb hotels\nFloating Hotels\nHeritage Hotels\nRotel"
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Datetime",
+   "label": "Check In Time "
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Datetime",
+   "label": "Check out Time "
+  },
+  {
+   "default": "0",
+   "fieldname": "is_advance__prepaid_hotel",
+   "fieldtype": "Check",
+   "label": "Is Advance / Prepaid Hotel"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_jtt",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is JTT"
+  },
+  {
+   "depends_on": "eval:doc.is_jtt",
+   "fieldname": "print_name",
+   "fieldtype": "Data",
+   "label": "Print Name"
+  },
+  {
+   "fieldname": "star_rating",
+   "fieldtype": "Select",
+   "label": "Star Rating",
+   "options": "\n1\n2\n3\n4\n5\n6\n7"
+  },
+  {
+   "fieldname": "website_link",
+   "fieldtype": "Data",
+   "label": "Website Link",
+   "options": "URL"
+  },
+  {
+   "fieldname": "pin_location",
+   "fieldtype": "Data",
+   "label": "Pin Location",
+   "options": "URL"
+  },
+  {
+   "fieldname": "address_and_contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Address and Contact Details "
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Link",
+   "label": "Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Link",
+   "label": "Contact",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "room_details_section",
+   "fieldtype": "Section Break",
+   "label": "Room Details"
+  },
+  {
+   "fieldname": "room_details_table",
+   "fieldtype": "Table",
+   "label": "Room Details Table",
+   "options": "Room Details Table"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_details_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Bank Account"
+  },
+  {
+   "fetch_from": "bank_account.bank",
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Name",
+   "options": "Bank",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "bank_account.account_type",
+   "fieldname": "account_type",
+   "fieldtype": "Link",
+   "label": "Account type",
+   "options": "Bank Account Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "bank_account.bank_account_no",
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "bank_account.branch_code",
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "bank_name.swift_number",
+   "fieldname": "ifscswift_code",
+   "fieldtype": "Data",
+   "label": "IFSC/SWIFT Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "images_section",
+   "fieldtype": "Section Break",
+   "label": "Images"
+  },
+  {
+   "fieldname": "image_table",
+   "fieldtype": "Table",
+   "label": "image Table",
+   "options": "Images Table"
+  },
+  {
+   "fieldname": "nearby_places",
+   "fieldtype": "Table MultiSelect",
+   "label": "Nearby places",
+   "options": "Spots in Hotal"
+  },
+  {
+   "fieldname": "nearby_indian_restaurants",
+   "fieldtype": "Table MultiSelect",
+   "label": "Nearby Indian Restaurants",
+   "options": "Restaurant in Hotal"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2023-06-28 12:45:10.580291",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Hotel Details",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

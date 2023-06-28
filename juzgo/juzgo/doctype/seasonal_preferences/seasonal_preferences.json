@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 11:43:28.554686",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "season_name",
+  "budget_type",
+  "preferences",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "season_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Season Name",
+   "options": "Season"
+  },
+  {
+   "fieldname": "budget_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Budget Type",
+   "options": "Budget Type"
+  },
+  {
+   "fieldname": "preferences",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Preferences",
+   "options": "Preferences"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 12:24:57.215767",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Seasonal Preferences",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

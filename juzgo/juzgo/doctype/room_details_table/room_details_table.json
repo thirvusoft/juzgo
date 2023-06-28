@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 11:20:33.331142",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "room_type",
+  "spec",
+  "no_of_beds",
+  "no_of_adults",
+  "no_of_kids",
+  "meal_plan",
+  "tariff",
+  "season",
+  "image"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "columns": 2,
+   "fieldname": "spec",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Spec"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_beds",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "No of Beds",
+   "options": "\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_adults",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Adults"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_kids",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Kids"
+  },
+  {
+   "columns": 1,
+   "fieldname": "meal_plan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Meal Plan",
+   "options": "Meal Plan"
+  },
+  {
+   "columns": 1,
+   "fieldname": "tariff",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tariff"
+  },
+  {
+   "columns": 1,
+   "fieldname": "season",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Season",
+   "options": "Season"
+  },
+  {
+   "columns": 1,
+   "fieldname": "image",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 11:38:37.051998",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Room Details Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

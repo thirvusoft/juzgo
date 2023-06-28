@@ -8,7 +8,20 @@
  "engine": "InnoDB",
  "field_order": [
   "destination_name",
-  "destination_abbr"
+  "destination_abbr",
+  "country",
+  "column_break_4",
+  "suitable_age_group",
+  "flavour",
+  "visa_type",
+  "seasonal_preferences_section",
+  "seasonal",
+  "section_break_10",
+  "terms_conditions",
+  "terms",
+  "column_break_12",
+  "cancellation_policy",
+  "policy"
  ],
  "fields": [
   {
@@ -25,11 +38,84 @@
    "in_list_view": 1,
    "label": "Destination Abbr",
    "reqd": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "suitable_age_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Suitable Age group ",
+   "options": "Age Group"
+  },
+  {
+   "fieldname": "flavour",
+   "fieldtype": "Table MultiSelect",
+   "label": "Flavour",
+   "options": "Flavour"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "seasonal_preferences_section",
+   "fieldtype": "Section Break",
+   "label": "Seasonal Preferences "
+  },
+  {
+   "fieldname": "seasonal",
+   "fieldtype": "Table",
+   "label": "Seasonal",
+   "options": "Seasonal Preferences"
+  },
+  {
+   "fieldname": "visa_type",
+   "fieldtype": "Select",
+   "label": "Visa Type",
+   "options": "\nTourist Visa\nStudent Visa\nBusiness Visa\nEmployment Visa"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "terms_conditions",
+   "fieldtype": "Link",
+   "label": "Terms Conditions",
+   "options": "Terms Conditions"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancellation_policy",
+   "fieldtype": "Link",
+   "label": "Cancellation policy",
+   "options": "Cancellation policy"
+  },
+  {
+   "fetch_from": "terms_conditions.terms_and_conditions",
+   "fieldname": "terms",
+   "fieldtype": "Text Editor",
+   "label": "Terms",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "cancellation_policy.cancellation_policy",
+   "fieldname": "policy",
+   "fieldtype": "Text Editor",
+   "label": "Policy",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-15 16:52:24.925932",
+ "modified": "2023-06-28 12:40:58.400415",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
