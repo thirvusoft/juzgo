@@ -10,15 +10,16 @@
  "field_order": [
   "hotel_name",
   "contact_person",
+  "is_advance__prepaid_hotel",
+  "check_in_time",
+  "check_out_time",
+  "column_break_uubr6",
   "destination",
   "city",
   "area",
   "country",
   "hotel_type",
-  "check_in_time",
-  "check_out_time",
   "column_break_10",
-  "is_advance__prepaid_hotel",
   "is_jtt",
   "print_name",
   "star_rating",
@@ -87,13 +88,13 @@
   },
   {
    "fieldname": "check_in_time",
-   "fieldtype": "Datetime",
-   "label": "Check In Time "
+   "fieldtype": "Time",
+   "label": "Opening Time "
   },
   {
    "fieldname": "check_out_time",
-   "fieldtype": "Datetime",
-   "label": "Check out Time "
+   "fieldtype": "Time",
+   "label": "Closing Time "
   },
   {
    "default": "0",
@@ -234,7 +235,7 @@
   {
    "fieldname": "nearby_places",
    "fieldtype": "Table MultiSelect",
-   "label": "Nearby places",
+   "label": "Nearby Places",
    "options": "Spots in Hotal"
   },
   {
@@ -242,12 +243,16 @@
    "fieldtype": "Table MultiSelect",
    "label": "Nearby Indian Restaurants",
    "options": "Restaurant in Hotal"
+  },
+  {
+   "fieldname": "column_break_uubr6",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-06-28 12:45:10.580291",
+ "modified": "2023-06-28 13:36:31.884630",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",

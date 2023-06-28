@@ -1,0 +1,43 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}}]",
+ "creation": "2023-06-28 14:12:25.335044",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "branch",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Masters",
+ "links": [],
+ "modified": "2023-06-28 14:13:51.739773",
+ "modified_by": "prithivraj@thirvusoft.in",
+ "module": "Juzgo",
+ "name": "Masters",
+ "number_cards": [],
+ "owner": "prithivraj@thirvusoft.in",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 40.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Hotel Details",
+   "link_to": "Hotel Details",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Destination",
+   "link_to": "Destination",
+   "type": "DocType"
+  }
+ ],
+ "title": "Masters"
+}
