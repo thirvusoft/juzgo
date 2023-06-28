@@ -102,7 +102,8 @@
   {
    "fieldname": "pin_location",
    "fieldtype": "Data",
-   "label": "Pin Location"
+   "label": "Pin Location",
+   "options": "URL"
   },
   {
    "fieldname": "preferred_transfer",
@@ -178,7 +179,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 12:11:04.632020",
+ "modified": "2023-06-28 16:26:16.659488",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

@@ -10,6 +10,7 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "inclusion",
    "fieldtype": "Data",
    "label": "Inclusion"
@@ -17,7 +18,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 11:13:14.160256",
+ "modified": "2023-06-28 16:29:46.721715",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Inclusion",

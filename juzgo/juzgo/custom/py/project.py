@@ -177,6 +177,7 @@ def family_member_details_seprate(table):
         table_seprate[i["customer_id"]]=[]
     for i in table:
         table_seprate[i["customer_id"]].append({
+            "no":i["idx"],
             "customer":i["customer_id"],
             "address":frappe.get_value("Customer",i['customer_id'],'customer_primary_address'),
             "contact":frappe.get_value("Customer",i['customer_id'],'customer_primary_contact'),
@@ -190,6 +191,20 @@ def family_member_details_seprate(table):
         html = """
         <div>
             <h4>Family Member Details with Contact and Address</h4>
+            <style>
+                table {
+                border-collapse: collapse;
+                width: 100%;
+                }
+
+                th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #DDD;
+                }
+
+                tr:hover {background-color: #D6EEEE;}
+            </style>
         </div>
         """
     
@@ -201,6 +216,7 @@ def family_member_details_seprate(table):
             Address       :- <div style="padding-left:80px;">{get_address_display(table_seprate[i][0].get("address")) if table_seprate[i][0].get("address") else ""}</div>
            <table>
             <tr>
+                <th>No</th>
                 <th>Member Name</th>
                 <th>Date Of Birth</th>
                 <th>Gender</th>
@@ -211,6 +227,9 @@ def family_member_details_seprate(table):
             for j in table_seprate[i]:
                 html = html + f"""
                 <tr>
+                <td>
+                    {j.get("no")}
+                </td>
                 <td>
                     {j.get("member_name")}
                 </td>

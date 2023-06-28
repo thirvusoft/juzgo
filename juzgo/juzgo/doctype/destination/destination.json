@@ -74,9 +74,9 @@
   },
   {
    "fieldname": "visa_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Visa Type",
-   "options": "\nTourist Visa\nStudent Visa\nBusiness Visa\nEmployment Visa"
+   "options": "Visa Type"
   },
   {
    "fieldname": "section_break_10",
@@ -115,7 +115,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 12:40:58.400415",
+ "modified": "2023-06-28 17:49:12.934993",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

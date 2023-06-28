@@ -10,6 +10,7 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "season",
    "fieldtype": "Data",
    "label": "Season"
@@ -17,7 +18,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 11:39:27.458424",
+ "modified": "2023-06-28 16:28:34.664661",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Season Select",

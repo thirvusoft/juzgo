@@ -11,6 +11,7 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "tariff_based_on",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -21,7 +22,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 12:02:56.090991",
+ "modified": "2023-06-28 16:29:11.159747",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Tariff Based On",
