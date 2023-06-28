@@ -103,7 +103,8 @@
   {
    "fieldname": "pin_location",
    "fieldtype": "Data",
-   "label": "Pin Location"
+   "label": "Pin Location",
+   "options": "URL"
   },
   {
    "fieldname": "preferred_transfer",

@@ -9,35 +9,23 @@
  "engine": "InnoDB",
  "field_order": [
   "vehicle_name",
-  "mode_of_transport",
-  "type",
-  "vehicle_make",
-  "column_break_5",
   "vehicle_model",
+  "vehicle_make",
+  "destination",
+  "column_break_5",
+  "mode_of_transport",
+  "bus_suspension",
   "passenger_capacity",
   "luggage_capacity",
-  "bus_suspension",
   "section_break_10",
-  "tariff_details"
+  "tariff__details"
  ],
  "fields": [
   {
-   "fieldname": "vehicle_name",
-   "fieldtype": "Data",
-   "label": "Vehicle Name",
-   "unique": 1
-  },
-  {
    "fieldname": "mode_of_transport",
-   "fieldtype": "Link",
-   "label": "Mode Of Transport",
-   "options": "Mode of Transport"
-  },
-  {
-   "fieldname": "type",
    "fieldtype": "Select",
-   "label": "Type",
-   "options": "\nCar\nBus"
+   "label": "Mode Of Transport",
+   "options": "\nRoad\nAir\nTrain\nBus\nCar"
   },
   {
    "fieldname": "vehicle_make",
@@ -60,15 +48,10 @@
    "label": "Luggage Capacity"
   },
   {
+   "depends_on": "eval:doc.mode_of_transport == \"Bus\"",
    "fieldname": "bus_suspension",
    "fieldtype": "Data",
    "label": "Bus Suspension"
-  },
-  {
-   "fieldname": "tariff_details",
-   "fieldtype": "Table",
-   "label": "Tariff Details",
-   "options": "Tariff Range"
   },
   {
    "fieldname": "column_break_5",
@@ -77,6 +60,24 @@
   {
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Table MultiSelect",
+   "label": "Destination",
+   "options": "Project Destination"
+  },
+  {
+   "fieldname": "tariff__details",
+   "fieldtype": "Table",
+   "label": "Tariff  Details",
+   "options": "Tariff Detail for Vehicle"
+  },
+  {
+   "fieldname": "vehicle_name",
+   "fieldtype": "Data",
+   "label": "Vehicle Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,

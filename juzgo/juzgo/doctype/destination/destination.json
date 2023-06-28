@@ -75,9 +75,9 @@
   },
   {
    "fieldname": "visa_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Visa Type",
-   "options": "\nTourist Visa\nStudent Visa\nBusiness Visa\nEmployment Visa"
+   "options": "Visa Type"
   },
   {
    "fieldname": "section_break_10",

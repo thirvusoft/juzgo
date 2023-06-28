@@ -1,1 +1,5 @@
 juzgo.patches.mode_of_transport
+juzgo.patches.coach
+juzgo.patches.seat_train
+juzgo.patches.quota
+juzgo.patches.bus_type

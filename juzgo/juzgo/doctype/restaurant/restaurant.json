@@ -10,6 +10,7 @@
  "field_order": [
   "restaurant_name",
   "destination",
+  "country",
   "city",
   "pin_location",
   "area",
@@ -146,15 +147,25 @@
    "fieldtype": "Link",
    "label": "Type",
    "options": "Restaurant Type"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
+<<<<<<< HEAD:juzgo/juzgo/doctype/restaurant_name/restaurant_name.json
  "modified": "2023-06-28 16:58:20.684576",
+=======
+ "modified": "2023-06-28 17:56:07.830517",
+>>>>>>> dca37989d6a388bed06c5c10203f41cb77d5365e:juzgo/juzgo/doctype/restaurant/restaurant.json
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Restaurant Name",
+ "name": "Restaurant",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

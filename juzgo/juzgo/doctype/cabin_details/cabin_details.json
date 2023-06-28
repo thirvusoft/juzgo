@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 17:04:18.438146",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabin_name",
+  "spec",
+  "size",
+  "bedding",
+  "max_accomodates",
+  "extra_bed",
+  "tariff",
+  "cost",
+  "benefits_on_cabin_category",
+  "inclusive_of_insurance"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabin_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cabin Name"
+  },
+  {
+   "fieldname": "spec",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Spec",
+   "options": "Cabin Specifications"
+  },
+  {
+   "fieldname": "size",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Size"
+  },
+  {
+   "fieldname": "bedding",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bedding"
+  },
+  {
+   "fieldname": "max_accomodates",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Max Accomodates "
+  },
+  {
+   "default": "0",
+   "fieldname": "extra_bed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Extra bed "
+  },
+  {
+   "fieldname": "tariff",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tariff"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost of Adult"
+  },
+  {
+   "fieldname": "benefits_on_cabin_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Benefits on cabin category "
+  },
+  {
+   "default": "0",
+   "fieldname": "inclusive_of_insurance",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Inclusive of insurance "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 17:19:47.370302",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Cabin Details",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

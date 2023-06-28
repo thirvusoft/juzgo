@@ -9,24 +9,25 @@
  "engine": "InnoDB",
  "field_order": [
   "hotel_name",
-  "contact_person",
-  "is_advance__prepaid_hotel",
-  "check_in_time",
-  "check_out_time",
-  "column_break_uubr6",
   "destination",
+  "country",
   "city",
   "area",
-  "country",
+  "column_break_uubr6",
+  "is_advance__prepaid_hotel",
   "hotel_type",
-  "column_break_10",
-  "is_jtt",
-  "print_name",
   "star_rating",
+  "contact_person",
+  "column_break_10",
   "website_link",
   "pin_location",
+  "check_in_time",
+  "check_out_time",
+  "is_jtt",
+  "print_name",
   "address_and_contact_details_section",
   "address",
+  "column_break_20",
   "contact",
   "room_details_section",
   "room_details_table",
@@ -89,12 +90,12 @@
   {
    "fieldname": "check_in_time",
    "fieldtype": "Time",
-   "label": "Opening Time "
+   "label": "Check In "
   },
   {
    "fieldname": "check_out_time",
    "fieldtype": "Time",
-   "label": "Closing Time "
+   "label": "Check Out"
   },
   {
    "default": "0",
@@ -247,12 +248,20 @@
   {
    "fieldname": "column_break_uubr6",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
+<<<<<<< HEAD
  "modified": "2023-06-28 16:53:57.953585",
+=======
+ "modified": "2023-06-28 17:38:58.138923",
+>>>>>>> dca37989d6a388bed06c5c10203f41cb77d5365e
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",

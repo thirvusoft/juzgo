@@ -9,34 +9,66 @@
  "engine": "InnoDB",
  "field_order": [
   "operator_name",
+  "column_break_3",
   "mode_of_transport",
+  "column_break_6",
   "destination",
+  "section_break_6",
   "tariff_based_on",
   "tariff_range",
   "associated_vehicles_section",
   "vehicles",
   "flight_tab",
   "flight_name",
-  "timing",
-  "onward",
-  "return",
   "hours_of_journey",
-  "from_destination",
-  "to_destination",
+  "from_destination_flight",
+  "column_break_12",
+  "from_time_flight",
+  "onward",
+  "to_destination_flight",
+  "column_break_16",
+  "to_time_flight",
+  "return",
   "advisable_destinations",
-  "leg_space",
-  "seating_capacity",
-  "provide_group_quotes",
+  "section_break_19",
   "options_to_block",
-  "free_luggage",
-  "cabin_baggage",
-  "checkin_baggage",
-  "baggages_count_specific",
-  "carrier_category",
-  "suggestible_booking",
   "possibility_of_web_checkin",
+  "provide_group_quotes",
+  "leg_space",
+  "column_break_25",
+  "seating_capacity",
+  "checkin_baggage",
+  "free_luggage",
+  "baggages_count_specific",
+  "column_break_30",
+  "suggestible_booking",
+  "cabin_baggage",
+  "carrier_category",
   "hours_to_checkin",
-  "train_tab"
+  "train_tab",
+  "from_time_train",
+  "column_break_31",
+  "to_time_train",
+  "section_break_33",
+  "from_destination",
+  "column_break_35",
+  "to_destination",
+  "section_break_37",
+  "coach",
+  "column_break_39",
+  "seat_train",
+  "column_break_41",
+  "quota",
+  "section_break_43",
+  "special_notes_for_train",
+  "bus_tab",
+  "bus_type",
+  "column_break_40",
+  "from_time",
+  "column_break_49",
+  "to_time",
+  "section_break_51",
+  "special_notes_for_bus"
  ],
  "fields": [
   {
@@ -81,6 +113,7 @@
    "options": "Operator Vehicle"
   },
   {
+   "depends_on": "eval: doc.mode_of_transport == \"Flight\"",
    "fieldname": "flight_tab",
    "fieldtype": "Tab Break",
    "label": "Flight"
@@ -91,18 +124,13 @@
    "label": "Flight Name"
   },
   {
-   "fieldname": "timing",
-   "fieldtype": "Data",
-   "label": "Timing"
-  },
-  {
    "fieldname": "onward",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Onward"
   },
   {
    "fieldname": "return",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Return"
   },
   {
@@ -112,13 +140,15 @@
   },
   {
    "fieldname": "from_destination",
-   "fieldtype": "Data",
-   "label": "From Destination"
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
   },
   {
    "fieldname": "to_destination",
-   "fieldtype": "Data",
-   "label": "To Destination"
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
   },
   {
    "fieldname": "advisable_destinations",
@@ -190,9 +220,164 @@
    "label": "Hours to checkin"
   },
   {
+   "depends_on": "eval: doc.mode_of_transport == \"Train\"",
    "fieldname": "train_tab",
    "fieldtype": "Tab Break",
    "label": "Train"
+  },
+  {
+   "fieldname": "from_destination_flight",
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "to_destination_flight",
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "special_notes_for_train",
+   "fieldtype": "Small Text",
+   "label": "Special notes for train"
+  },
+  {
+   "fieldname": "coach",
+   "fieldtype": "Table MultiSelect",
+   "label": "Coach",
+   "options": "Coaches"
+  },
+  {
+   "fieldname": "seat_train",
+   "fieldtype": "Table MultiSelect",
+   "label": "Seat train",
+   "options": "Seat Trains"
+  },
+  {
+   "fieldname": "quota",
+   "fieldtype": "Table MultiSelect",
+   "label": "Quota",
+   "options": "Quotas"
+  },
+  {
+   "fieldname": "from_time",
+   "fieldtype": "Datetime",
+   "label": "From Time"
+  },
+  {
+   "fieldname": "to_time",
+   "fieldtype": "Datetime",
+   "label": "To Time"
+  },
+  {
+   "fieldname": "from_time_train",
+   "fieldtype": "Datetime",
+   "label": "From Time"
+  },
+  {
+   "fieldname": "to_time_train",
+   "fieldtype": "Datetime",
+   "label": "To time"
+  },
+  {
+   "depends_on": "eval: doc.mode_of_transport == \"Bus\"",
+   "fieldname": "bus_tab",
+   "fieldtype": "Tab Break",
+   "label": "Bus"
+  },
+  {
+   "fieldname": "special_notes_for_bus",
+   "fieldtype": "Small Text",
+   "label": "Special notes for Bus"
+  },
+  {
+   "fieldname": "bus_type",
+   "fieldtype": "Link",
+   "label": "Bus Type",
+   "options": "Bus Type"
+  },
+  {
+   "fieldname": "column_break_41",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_43",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_40",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_33",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_35",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_37",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_49",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_51",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "from_time_flight",
+   "fieldtype": "Datetime",
+   "label": "From Time"
+  },
+  {
+   "fieldname": "to_time_flight",
+   "fieldtype": "Datetime",
+   "label": "To Time"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,

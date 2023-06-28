@@ -9,7 +9,9 @@
   "vehicle",
   "model",
   "make",
-  "capacity"
+  "column_break_4",
+  "passenger_capacity",
+  "luggage_capacity"
  ],
  "fields": [
   {
@@ -20,28 +22,42 @@
    "options": "Vehicle Detail"
   },
   {
+   "fetch_from": "vehicle.vehicle_model",
    "fieldname": "model",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Model"
   },
   {
+   "fetch_from": "vehicle.vehicle_make",
    "fieldname": "make",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Make"
   },
   {
-   "fieldname": "capacity",
+   "fetch_from": "vehicle.passenger_capacity",
+   "fieldname": "passenger_capacity",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Capacity"
+   "label": "Passenger Capacity"
+  },
+  {
+   "fetch_from": "vehicle.luggage_capacity",
+   "fieldname": "luggage_capacity",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Luggage Capacity"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-28 12:11:11.557136",
+ "modified": "2023-06-28 17:37:42.482157",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Operator Vehicle",
