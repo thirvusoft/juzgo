@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:flavour",
  "creation": "2023-06-28 11:30:54.958798",
@@ -20,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 12:33:47.947984",
+ "modified": "2023-06-28 17:00:30.778831",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Flavour Type",
@@ -36,6 +37,20 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
+   "select": 1,
    "share": 1,
    "write": 1
   }

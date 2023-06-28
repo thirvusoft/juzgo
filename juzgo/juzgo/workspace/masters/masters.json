@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}}]",
+ "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant Name\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}}]",
  "creation": "2023-06-28 14:12:25.335044",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "Masters",
  "links": [],
- "modified": "2023-06-28 14:13:51.739773",
+ "modified": "2023-06-28 16:27:52.853400",
  "modified_by": "prithivraj@thirvusoft.in",
  "module": "Juzgo",
  "name": "Masters",
@@ -24,6 +24,13 @@
  "roles": [],
  "sequence_id": 40.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Restaurant Name",
+   "link_to": "Restaurant Name",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
