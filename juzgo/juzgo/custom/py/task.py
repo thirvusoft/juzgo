@@ -46,7 +46,7 @@ def user_todo(doc, actions):
             for i in doc.depends_on:
                 if not i.task:
                     sub_task=frappe.new_doc("Task")
-                    if not frappe.db.exists("Task",{"subject":i.subject1}):
+                    if not frappe.db.exists("Task",{"name":i.task}):
                         sub_task.update({
                         "subject":i.subject1,
                         "project":doc.project,
