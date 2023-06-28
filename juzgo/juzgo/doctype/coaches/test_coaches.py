@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestRestaurantName(FrappeTestCase):
+class TestCoaches(FrappeTestCase):
 	pass

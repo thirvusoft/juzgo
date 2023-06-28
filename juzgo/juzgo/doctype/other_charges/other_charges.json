@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 17:21:29.447683",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tipping",
+  "cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "tipping",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tipping"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 17:21:37.994155",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Other Charges",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

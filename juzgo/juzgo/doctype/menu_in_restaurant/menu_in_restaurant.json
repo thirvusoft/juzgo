@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "image",
-  "menu"
+  "menu",
+  "description"
  ],
  "fields": [
   {
@@ -21,12 +22,18 @@
    "fieldtype": "Long Text",
    "in_list_view": 1,
    "label": "Menu"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-28 12:30:56.506459",
+ "modified": "2023-06-28 17:59:38.748623",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Menu in Restaurant",

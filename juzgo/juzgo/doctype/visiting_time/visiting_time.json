@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:visiting_time",
  "creation": "2023-06-28 11:45:22.101747",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -10,17 +11,20 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "visiting_time",
    "fieldtype": "Data",
-   "label": "Visiting Time"
+   "label": "Visiting Time",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 11:45:22.101747",
+ "modified": "2023-06-28 16:31:28.173944",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Visiting Time",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
