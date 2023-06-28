@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:cruise_name",
+ "creation": "2023-06-28 12:37:55.352565",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cruise_name",
+  "section_break_2",
+  "from_destination",
+  "column_break_4",
+  "to_destination",
+  "section_break_6",
+  "no_of_nights",
+  "data_8"
+ ],
+ "fields": [
+  {
+   "fieldname": "cruise_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cruise Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "from_destination",
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_destination",
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "no_of_nights",
+   "fieldtype": "Int",
+   "label": "No of Nights"
+  },
+  {
+   "fieldname": "data_8",
+   "fieldtype": "Data"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-28 12:39:03.954848",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Cruise",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

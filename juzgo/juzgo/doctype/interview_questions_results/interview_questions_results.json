@@ -10,6 +10,8 @@
   "interview_question",
   "question",
   "applicants_answer",
+  "actual_points",
+  "score_points",
   "rating"
  ],
  "fields": [
@@ -40,12 +42,28 @@
    "in_list_view": 1,
    "label": "Interview Question",
    "options": "Interview Question"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "interview_question.point",
+   "fieldname": "actual_points",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Actual Points",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "score_points",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Score Points"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-03 16:44:20.973322",
+ "modified": "2023-06-27 13:32:42.494946",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Questions Results",

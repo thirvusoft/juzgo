@@ -32,6 +32,7 @@ web_include_js = ["juzgo.bundle.js"]
 doctype_js = {
 		"Timesheet" : "/juzgo/custom/js/timesheet.js",
         "Interview Feedback": "/custom/js/interview_feedback.js",
+        "Interview Round": "/juzgo/custom/js/interview_round.js",
 		"Interview": "/custom/js/interview.js",
         "Task" : "/juzgo/custom/js/task.js",
 		"Job Opening" : "/juzgo/custom/js/jobopening.js",
@@ -57,6 +58,9 @@ doc_events = {
         "autoname": "juzgo.juzgo.custom.py.task.autoname",
         "on_trash": "juzgo.juzgo.custom.py.task.on_trash"
 	},
+    "Interview Feedback":{
+        "validate" : "juzgo.custom.py.interview_feedback.validate",
+	},
 	"Timesheet": {
 		"validate": [
 			"juzgo.juzgo.custom.py.timesheet.status_updated",
@@ -68,6 +72,9 @@ doc_events = {
         "after_insert" : "juzgo.juzgo.custom.py.interview.send_mail_interview_created",
         "on_submit": "juzgo.juzgo.custom.py.interview.send_interview_round_status"
 	},
+    # "Project":{
+    #     "validate": "juzgo.juzgo.custom.py.project.validate"
+	# }
 
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}

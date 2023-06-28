@@ -12,3 +12,11 @@ frappe.ui.form.on("Interview Feedback", {
         });
     },
 });
+frappe.ui.form.on("Interview Questions Results", {
+    score_points: function (frm,cdt,cdn) {
+        var row = locals[cdt][cdn]
+        if(row.score_points > row.actual_points ){
+            frappe.throw("Score Points Cannot be Greater then Actual Points")
+        }
+    },
+});

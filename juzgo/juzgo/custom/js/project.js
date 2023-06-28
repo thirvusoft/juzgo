@@ -4,6 +4,29 @@ var form_destination
 frappe.ui.form.on('Project', {
     refresh:function (frm,cdt,cdn) {
         check_list(frm)
+        frappe.call({
+            method:'juzgo.juzgo.custom.py.project.family_member_details_seprate',
+            args:{
+                table:frm.doc.family_member_details,
+            },
+            callback(r1){
+               frm.set_df_property("family_member_details_html","options",r1.message)
+            }
+        })
+    },
+    phone_number:function(frm){
+        if(frm.doc.phone_number){
+            var phoneno = /^\d{10,12}$/;
+            if(!frm.doc.phone_number.match(phoneno)){
+                frm.set_df_property("phone_number",'description',"<b style='color:red'>"+frm.doc.phone_number.length+"</b> no. Entered."+"<span style='color:red'>Enter Correct Phone No.</span>")
+            }
+            else{
+                frm.set_df_property("phone_number",'description',"")
+                if(frm.doc.phone_number.length > 10){
+                    frm.set_df_property("phone_number",'description',"<b style='color:Orange'>"+frm.doc.phone_number.length+"</b> no. Entered.")
+                }
+            }
+        }
     },
     onload:function (frm) {
         setTimeout(() => {
@@ -329,35 +352,39 @@ function check_list(frm){
             desti_attach_table[frm.doc.family_member_details[i].members_name]=[]
             for_label[frm.doc.family_member_details[i].members_name] = frm.doc.family_member_details[i].customer_id
         }
-        for(let i=0;i<frm.doc.family_members_attachment.length;i++){  
-            file_table[frm.doc.family_members_attachment[i].members_name ].push(
-                {
-                    members_name:frm.doc.family_members_attachment[i].members_name,
-                    file_type:frm.doc.family_members_attachment[i].file_type,
-                    file:frm.doc.family_members_attachment[i].file,
-                    next_remainder_or_expiry_on:frm.doc.family_members_attachment[i].next_remainder_or_expiry_on,
-                    description:frm.doc.family_members_attachment[i].description,
-                    parent_name1:frm.doc.family_members_attachment[i].name,
-                    checkfile:frm.doc.family_members_attachment[i].file?1:0,
-                    receive_or_send:frm.doc.family_members_attachment[i].receive_or_send,
-                    customer_id:frm.doc.family_members_attachment[i].customer_id,
-                }
-            )
+        for(let i=0;i<frm.doc.family_members_attachment.length;i++){ 
+            if(file_table[frm.doc.family_members_attachment[i].members_name]){
+                file_table[frm.doc.family_members_attachment[i].members_name ].push(
+                    {
+                        members_name:frm.doc.family_members_attachment[i].members_name,
+                        file_type:frm.doc.family_members_attachment[i].file_type,
+                        file:frm.doc.family_members_attachment[i].file,
+                        next_remainder_or_expiry_on:frm.doc.family_members_attachment[i].next_remainder_or_expiry_on,
+                        description:frm.doc.family_members_attachment[i].description,
+                        parent_name1:frm.doc.family_members_attachment[i].name,
+                        checkfile:frm.doc.family_members_attachment[i].file?1:0,
+                        receive_or_send:frm.doc.family_members_attachment[i].receive_or_send,
+                        customer_id:frm.doc.family_members_attachment[i].customer_id,
+                    }
+                )
+            }
         }
         for(let i=0;i<frm.doc.family_members_destination_attachment.length;i++){  
-            desti_attach_table[frm.doc.family_members_destination_attachment[i].members_name ].push(
-                {
-                    members_name:frm.doc.family_members_destination_attachment[i].members_name,
-                    file_type:frm.doc.family_members_destination_attachment[i].file_type,
-                    file:frm.doc.family_members_destination_attachment[i].file,
-                    next_remainder_or_expiry_on:frm.doc.family_members_destination_attachment[i].next_remainder_or_expiry_on,
-                    description:frm.doc.family_members_destination_attachment[i].description,
-                    parent_name1:frm.doc.family_members_destination_attachment[i].name,
-                    checkfile:frm.doc.family_members_destination_attachment[i].file?1:0,
-                    receive_or_send:frm.doc.family_members_destination_attachment[i].receive_or_send,
-                    customer_id:frm.doc.family_members_attachment[i].customer_id,
-                }
-            )
+            if(desti_attach_table[frm.doc.family_members_destination_attachment[i].members_name]){
+                desti_attach_table[frm.doc.family_members_destination_attachment[i].members_name ].push(
+                    {
+                        members_name:frm.doc.family_members_destination_attachment[i].members_name,
+                        file_type:frm.doc.family_members_destination_attachment[i].file_type,
+                        file:frm.doc.family_members_destination_attachment[i].file,
+                        next_remainder_or_expiry_on:frm.doc.family_members_destination_attachment[i].next_remainder_or_expiry_on,
+                        description:frm.doc.family_members_destination_attachment[i].description,
+                        parent_name1:frm.doc.family_members_destination_attachment[i].name,
+                        checkfile:frm.doc.family_members_destination_attachment[i].file?1:0,
+                        receive_or_send:frm.doc.family_members_destination_attachment[i].receive_or_send,
+                        customer_id:frm.doc.family_members_attachment[i].customer_id,
+                    }
+                )
+            }
         }
         let p=[]
         let keys=Object.keys(file_table);

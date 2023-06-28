@@ -1,0 +1,204 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:spot_name",
+ "creation": "2023-06-28 11:11:03.486761",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "spot_name",
+  "destination",
+  "city",
+  "area",
+  "age_group",
+  "is_combo_spot",
+  "combo_spot",
+  "column_break_6",
+  "flavour_of_the_sopt",
+  "opening_time",
+  "closing_time",
+  "duration_of_the_tour",
+  "holiday_list",
+  "best_time_to_visit",
+  "is_jtt",
+  "jtt_id",
+  "column_break_12",
+  "pin_location",
+  "preferred_transfer",
+  "inclusion",
+  "exclusion",
+  "best_season",
+  "budget",
+  "section_break_15",
+  "image_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "spot_name",
+   "fieldtype": "Data",
+   "label": "Spot Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Link",
+   "label": "Area",
+   "options": "Age Group"
+  },
+  {
+   "fieldname": "age_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Age Group",
+   "options": "Age Group"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "flavour_of_the_sopt",
+   "fieldtype": "Link",
+   "label": "Flavour of the Sopt",
+   "options": "Flavour Type"
+  },
+  {
+   "fieldname": "opening_time",
+   "fieldtype": "Time",
+   "label": "Opening Time"
+  },
+  {
+   "fieldname": "closing_time",
+   "fieldtype": "Time",
+   "label": "Closing Time"
+  },
+  {
+   "fieldname": "duration_of_the_tour",
+   "fieldtype": "Int",
+   "label": "Duration of the Tour"
+  },
+  {
+   "fieldname": "holiday_list",
+   "fieldtype": "Select",
+   "label": "Holiday List",
+   "options": "\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pin_location",
+   "fieldtype": "Data",
+   "label": "Pin Location"
+  },
+  {
+   "fieldname": "preferred_transfer",
+   "fieldtype": "Link",
+   "label": "Preferred Transfer",
+   "options": "Mode of Transport"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "inclusion",
+   "fieldtype": "Table MultiSelect",
+   "label": "Inclusion",
+   "options": "Inclusion Select"
+  },
+  {
+   "fieldname": "exclusion",
+   "fieldtype": "Table MultiSelect",
+   "label": "Exclusion",
+   "options": "Exclusion Select"
+  },
+  {
+   "fieldname": "best_season",
+   "fieldtype": "Table MultiSelect",
+   "label": "Best Season",
+   "options": "Best Season"
+  },
+  {
+   "fieldname": "budget",
+   "fieldtype": "Link",
+   "label": "Budget",
+   "options": "Budget"
+  },
+  {
+   "fieldname": "best_time_to_visit",
+   "fieldtype": "Table MultiSelect",
+   "label": "Best Time to Visit",
+   "options": "Visiting Time Select"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_combo_spot",
+   "fieldtype": "Check",
+   "label": "Is Combo Spot"
+  },
+  {
+   "depends_on": "eval:doc.is_combo_spot",
+   "fieldname": "combo_spot",
+   "fieldtype": "Table MultiSelect",
+   "label": "Combo Spot",
+   "options": "Combo Spot"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_jtt",
+   "fieldtype": "Check",
+   "label": "Is JTT"
+  },
+  {
+   "depends_on": "eval:doc.is_jtt",
+   "fieldname": "jtt_id",
+   "fieldtype": "Data",
+   "label": "JTT ID"
+  },
+  {
+   "fieldname": "image_details",
+   "fieldtype": "Table",
+   "label": "Image Details",
+   "options": "Spot Images"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-28 12:11:04.632020",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Spots",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

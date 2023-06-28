@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-28 11:50:45.170939",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "range",
+  "class",
+  "season"
+ ],
+ "fields": [
+  {
+   "fieldname": "range",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Range"
+  },
+  {
+   "fieldname": "class",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Class",
+   "options": "Class"
+  },
+  {
+   "fieldname": "season",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Season",
+   "options": "Season Select"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-28 11:51:30.378580",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Tariff Range",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

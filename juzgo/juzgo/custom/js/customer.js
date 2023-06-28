@@ -46,7 +46,6 @@ frappe.ui.form.on('Family Members Details', {
     date_of_birth:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
         frappe.model.set_value(cdt,cdn,"age",new Date().getFullYear() - new Date(row.date_of_birth).getFullYear())
-        create_id(frm,row)
     },
     age:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
@@ -61,6 +60,12 @@ frappe.ui.form.on('Family Members Details', {
         }
     },
     members_name:function (frm,cdt,cdn) {
+        let row = locals[cdt][cdn]
+        if(row.member_row_id){
+            add_member_details(frm,row)
+        }
+    },
+    family_members_details_add:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
         create_id(frm,row)
 
@@ -110,9 +115,8 @@ frappe.ui.form.on('Family Members Details', {
     },
 })
 function create_id(frm,row){
-    if(row.age && row.date_of_birth){
-        frappe.model.set_value(row.doctype,row.name,"member_row_id",row.members_name+row.date_of_birth )
-    }
+        frappe.model.set_value(row.doctype,row.name,"member_row_id", Math.random().toString(36).substring(2,7) )
+    
 }
 function add_member_details(frm,row){
     if(frm.is_new())
@@ -344,18 +348,20 @@ function check_list(frm){
     //     )
     // }
     for(let i=0;i<frm.doc.family_members_table.length;i++){
-        file_table[frm.doc.family_members_table[i].members_name].push(
-            {
-                members_name:frm.doc.family_members_table[i].members_name,
-                file_type:frm.doc.family_members_table[i].file_type,
-                file:frm.doc.family_members_table[i].file,
-                next_remainder_or_expiry_on:frm.doc.family_members_table[i].next_remainder_or_expiry_on,
-                description:frm.doc.family_members_table[i].description,
-                parent_name1:frm.doc.family_members_table[i].name,
-                checkfile:frm.doc.family_members_table[i].file?1:0,
-                receive_or_send:frm.doc.family_members_table[i].receive_or_send,
-            }
-        )
+        if(file_table[frm.doc.family_members_table[i].members_name]){
+            file_table[frm.doc.family_members_table[i].members_name].push(
+                {
+                    members_name:frm.doc.family_members_table[i].members_name,
+                    file_type:frm.doc.family_members_table[i].file_type,
+                    file:frm.doc.family_members_table[i].file,
+                    next_remainder_or_expiry_on:frm.doc.family_members_table[i].next_remainder_or_expiry_on,
+                    description:frm.doc.family_members_table[i].description,
+                    parent_name1:frm.doc.family_members_table[i].name,
+                    checkfile:frm.doc.family_members_table[i].file?1:0,
+                    receive_or_send:frm.doc.family_members_table[i].receive_or_send,
+                }
+            )
+        }
     }
     let p=[]
     let keys=Object.keys(user);

@@ -1,5 +1,12 @@
 import frappe
-
+def validate(doc,action):
+    total_act_point = 0
+    total_sco_point = 0
+    for i in doc.interview_results:
+        total_act_point = i.actual_points + total_act_point
+        total_sco_point = i.score_points + total_sco_point
+    doc.total_actual_points = total_act_point
+    doc.total_score_points = total_sco_point
 @frappe.whitelist()
 def get_interview_questions(interview_round = None, interview = None):
     if (not interview or not interview_round):

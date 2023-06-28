@@ -7,12 +7,11 @@ def send_mail_interview_created(doc,action):
     send_main(doc,"send_mail_interview_created", "send_mail_interview_created_template")
 
 def send_main(doc, check_field, template_field):
-    
-    if not frappe.get_value(
+    if frappe.get_value(
         "HR Settings",
         "HR Settings",
         check_field
-    ):
+    ) == "0":
         return
     
     interview_template = frappe.get_doc(
