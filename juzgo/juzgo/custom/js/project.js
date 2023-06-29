@@ -28,11 +28,14 @@ frappe.ui.form.on('Project', {
             }
         }
     },
+    update_data:function (frm) {
+        multi_customer(frm)
+        frm.save()
+    },
     onload:function (frm) {
         setTimeout(() => {
             $("[data-doctype='Expense Claim']").hide();
         }, 10);
-        multi_customer(frm,"onload")
     },
     project_name:function(frm){
         frappe.call({
@@ -114,11 +117,12 @@ function add_destination_details(frm,event=''){
                         frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("destination_check_list");
-                    if(event!='onload')
-                        frm.save()
+                    // if(event!='onload')
+                    //     frm.save()
                 }
             }
         })
+        check_list(frm)
 }
 
 frappe.ui.form.on('Customer Destination Check List', {
@@ -130,7 +134,7 @@ frappe.ui.form.on('Customer Destination Check List', {
                 c = 0
             }
             for(let i=0; i<frm.doc.family_members_destination_attachment.length; i++){
-                if((frm.doc.family_members_destination_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_destination_attachment[i].file_type == row.check_list_name) ){
+                if((frm.doc.family_members_destination_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_destination_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_destination_attachment[i].destination == row.destination) ){
                     c = 1
                     break
                 }else{
@@ -139,7 +143,7 @@ frappe.ui.form.on('Customer Destination Check List', {
             }
         } else {
             for(let i=0; i<frm.doc.family_members_destination_attachment.length; i++){
-                if((frm.doc.family_members_destination_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_destination_attachment[i].file_type == row.check_list_name) ){
+                if((frm.doc.family_members_destination_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_destination_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_destination_attachment[i].destination == row.destination)){
                     frm.doc.family_members_destination_attachment.splice(i, 1);
                     refresh_field("family_members_destination_attachment");
                     check_list(frm)
@@ -162,6 +166,9 @@ frappe.ui.form.on('Customer Destination Check List', {
 })
 
 function multi_customer(frm,event=''){
+    if(frm.is_new()){
+        frappe.throw("First Kindly Save This Project.")
+    }
     let custom_list = []
         for(let i=0;i<frm.doc.multi_customer.length;i++){
             custom_list.push(frm.doc.multi_customer[i].customer)
@@ -195,8 +202,9 @@ function multi_customer(frm,event=''){
                     custom_list : custom_list
                 },
                 callback: function(r) {
+                    console.log("kkkk999",r)
                     frm.doc.family_members_attachment = []
-                    r.message.forEach(row => {
+                    r.message[0].forEach(row => {
                         let child = cur_frm.add_child("family_members_attachment")
                         frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
                         frappe.model.set_value(child.doctype, child.name, "file_type", row.file_type)
@@ -209,6 +217,15 @@ function multi_customer(frm,event=''){
                         frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("family_members_attachment");
+                    frm.doc.project_members_check_list = []
+                    r.message[1].forEach(row => {
+                        let child = cur_frm.add_child("project_members_check_list")
+                        frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
+                        frappe.model.set_value(child.doctype, child.name, "check_list_name", row.check_list_name)
+                        frappe.model.set_value(child.doctype, child.name, "check", row.check)
+                        frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
+                    });
+                    refresh_field("project_members_check_list");
                 }
             })
         }
@@ -235,30 +252,32 @@ function multi_customer(frm,event=''){
             }
         })
         add_destination_details(frm,event)
-        check_list(frm)
 }
 
 function check_list(frm){
     let attr_html = frm.$wrapper.find('div[data-fieldname="family_member_html"]')[0]
     attr_html.innerHTML=''
-    if(frm.doc.family_members_attachment.length > 0){
+    if(frm.doc.project_members_check_list.length > 0){
         let fields=[
             {
-                fieldtype: 'Read Only',
+                fieldtype: 'Data',
                 fieldname: 'members_name',
                 label: __('Members Name'),
+                read_only:1,
             }, 
             {
-                fieldtype: 'Read Only',
+                fieldtype: 'Data',
                 fieldname: 'file_type',
                 label: __('File Type'),
                 in_list_view: 1,
-                columns:2
+                columns:2,
+                read_only:1,
             },
             {
                 fieldtype: 'Attach',
                 fieldname: 'file',
                 label: __('File'),
+                read_only:1,
                 in_list_view: 1,
                 columns:2,
             },
@@ -268,6 +287,7 @@ function check_list(frm){
                 label: __('Attached'),
                 in_list_view: 1,
                 columns:1,
+                read_only:1,
                 onchange: function(event) {
                     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
                     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
@@ -287,6 +307,7 @@ function check_list(frm){
                 label: __('Next remainder or expiry on'),
                 in_list_view: 1,
                 columns:2,
+                read_only:1,
                 onchange: function(event) {
                     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
                     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
@@ -305,6 +326,7 @@ function check_list(frm){
                 label: __('Description'),
                 in_list_view: 1,
                 columns:2,
+                read_only:1,
                 onchange: function(event) {
                     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
                     let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
@@ -317,11 +339,12 @@ function check_list(frm){
                 }
             },
             {
-                fieldtype: 'Read Only',
+                fieldtype: 'Data',
                 fieldname: 'receive_or_send',
                 label: __('Receive Or Send'),
                 in_list_view: 1,
                 columns:1,
+                read_only:1,
                 // options:['','To Receive','To Send'],
                 // onchange: function(event) {
                 //     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
@@ -335,20 +358,50 @@ function check_list(frm){
                 // }
             },
             {
-                fieldtype: 'Read Only',
+                fieldtype: 'Data',
                 fieldname: 'parent_name1',
                 label: __('Parent Name'),
-                hidden:1
+                hidden:1,
+                read_only:1,
+            },
+        ]
+        console.log("kk")
+        let check=[
+            {
+                fieldtype: 'Data',
+                fieldname: 'check_list_name',
+                label: __('Check List Name'),
+                in_list_view: 1,
+                read_only:1,
+                columns:2,
+            }, 
+            {
+                fieldtype: 'Check',
+                fieldname: 'check',
+                label: __('Check'),
+                in_list_view: 1,
+                read_only:1,
+                columns:2,
+            },
+            {
+                fieldtype: 'Data',
+                fieldname: 'receive_or_send',
+                label: __('Receive Or Send'),
+                in_list_view: 1,
+                read_only:1,
+                columns:2,
             },
         ]
 
         let for_label = {}
         let check_list = {}
         let file_table ={}
+        let check_table ={}
         let desti_attach_table ={}
         for(let i=0;i<frm.doc.family_member_details.length;i++){
             check_list[frm.doc.family_member_details[i].members_name]=[]
             file_table[frm.doc.family_member_details[i].members_name]=[]
+            check_table[frm.doc.family_member_details[i].members_name]=[]
             desti_attach_table[frm.doc.family_member_details[i].members_name]=[]
             for_label[frm.doc.family_member_details[i].members_name] = frm.doc.family_member_details[i].customer_id
         }
@@ -365,6 +418,19 @@ function check_list(frm){
                         checkfile:frm.doc.family_members_attachment[i].file?1:0,
                         receive_or_send:frm.doc.family_members_attachment[i].receive_or_send,
                         customer_id:frm.doc.family_members_attachment[i].customer_id,
+                    }
+                )
+            }
+        }
+        console.log("kkkk")
+        for(let i=0;i<frm.doc.project_members_check_list.length;i++){ 
+            if(check_table[frm.doc.project_members_check_list[i].members_name]){
+                check_table[frm.doc.project_members_check_list[i].members_name ].push(
+                    {
+                        members_name:frm.doc.project_members_check_list[i].members_name,
+                        check_list_name:frm.doc.project_members_check_list[i].check_list_name,
+                        check:frm.doc.project_members_check_list[i].check,
+                        receive_or_send:frm.doc.project_members_check_list[i].receive_or_send,
                     }
                 )
             }
@@ -393,6 +459,7 @@ function check_list(frm){
                 {
                     fieldtype: 'Read Only',
                     fieldname: 'members_name',
+                    read_only:1,
                     label: __('Members Name'),
                 }, 
                 {
@@ -400,6 +467,7 @@ function check_list(frm){
                     fieldname: 'file_type',
                     label: __('File Type'),
                     in_list_view: 1,
+                    read_only:1,
                     columns:2
                 },
                 {
@@ -407,6 +475,7 @@ function check_list(frm){
                     fieldname: 'file',
                     label: __('File'),
                     in_list_view: 1,
+                    reqd:1,
                     columns:2,
                 },
                 {
@@ -414,7 +483,9 @@ function check_list(frm){
                     fieldname: 'checkfile',
                     label: __('Attached'),
                     in_list_view: 1,
+                    reqd:1,
                     columns:1,
+
                     onchange: function(event) {
                         let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
                         let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
@@ -464,11 +535,12 @@ function check_list(frm){
                     }
                 },
                 {
-                    fieldtype: 'Read Only',
+                    fieldtype: 'Data',
                     fieldname: 'receive_or_send',
                     label: __('Receive Or Send'),
                     in_list_view: 1,
                     columns:1,
+                    read_only:1,
                     // options:['','To Receive','To Send'],
                     // onchange: function(event) {
                     //     let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
@@ -485,7 +557,8 @@ function check_list(frm){
                     fieldtype: 'Read Only',
                     fieldname: 'parent_name1',
                     label: __('Parent Name'),
-                    hidden:1
+                    hidden:1,
+                    read_only:1,
                 },
             ]
 
@@ -496,7 +569,18 @@ function check_list(frm){
                 label: for_label[keys[i]] +" - "+keys[i],
                 collapsible:1
             })
-        
+            if(check_table[keys[i]].length != 0){
+                p.push({
+                    fieldname: 'table'+keys[i]+'check',
+                    fieldtype: 'Table',
+                    label: '<span style="color:#003300">'+for_label[keys[i]]+'</span>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Check List </span>",
+                    cannot_add_rows: true,
+                    in_editable_grid: true,
+                    cannot_delete_rows:true,
+                    fields: check,
+                    data: check_table[keys[i]]
+                })
+            }
             if(file_table[keys[i]].length != 0){
                 p.push({
                     fieldname: 'table'+keys[i],
@@ -586,6 +670,7 @@ function check_list(frm){
                     fieldtype: 'Table',
                     label: '<span style="color:#003300">'+for_label[keys[user]]+"</span> - <span style='color:#000033'>"+keys[user]+" Destination Attachment Table </span>",
                     cannot_add_rows: true,
+                    read_only:1,
                     cannot_delete_rows:true,
                     in_editable_grid: true,
                     fields: desti_table_field,

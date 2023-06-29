@@ -13,8 +13,7 @@
   "description",
   "attached_by",
   "family_members_documents_name",
-  "receive_or_send",
-  "print"
+  "receive_or_send"
  ],
  "fields": [
   {
@@ -61,12 +60,6 @@
    "label": "Family Members Documents Name"
   },
   {
-   "fieldname": "print",
-   "fieldtype": "Button",
-   "in_list_view": 1,
-   "label": "\ud83d\udda8\ufe0f"
-  },
-  {
    "columns": 1,
    "fetch_from": "file_type.receive_or_send",
    "fetch_if_empty": 1,
@@ -80,7 +73,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-22 17:38:49.240412",
+ "modified": "2023-06-29 21:06:55.077425",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Family members Table",
