@@ -72,9 +72,9 @@ doc_events = {
         "after_insert" : "juzgo.juzgo.custom.py.interview.send_mail_interview_created",
         "on_submit": "juzgo.juzgo.custom.py.interview.send_interview_round_status"
 	},
-    # "Customer":{
-    #     "validate": "juzgo.juzgo.custom.py.customer.validate"
-	# }
+    "Customer":{
+        "validate": "juzgo.juzgo.custom.py.customer.validate"
+	}
 
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
