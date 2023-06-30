@@ -34,7 +34,6 @@ frappe.ui.form.on('Task', {
         }
         if(frappe.user.has_role('Juzgo Admin') ){
             let rows = locals[cdt][cdn]
-            console.log("saufhsjdhf")
             frm.set_df_property("task", "read_only", 0, rows.name, 'depends_on');
             frm.refresh_field('depends_on');
 

@@ -215,7 +215,7 @@ def family_member_details_seprate(table):
 
                 tr:hover {background-color: #D6EEEE;}
                 .main{
-                    background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;border-radius: 2em / 5em;
+                    background-color: lightgrey;border: 2px solid #4287f5;padding: 10px;margin: 10px;border-radius: 10px;
                 }
                 div.main:hover{
                     box-shadow: 5px 5px 5px 5px;
