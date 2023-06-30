@@ -120,27 +120,35 @@ frappe.ui.form.on('Task Depends On', {
 	},
     subject: function(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
-		
-        frappe.call({
-			method:"juzgo.juzgo.custom.py.task.update_data",
-			args:{
-				'task':row.task,
-                'subject':row.subject,
-                'subject1':row.subject1
-			}
-		})
+		update_data(row)
 	},
     subject1: function(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
-		
-        frappe.call({
-			method:"juzgo.juzgo.custom.py.task.update_data",
-			args:{
-				'task':row.task,
-                'subject':row.subject,
-                'subject1':row.subject1
-			}
-		})
+		update_data(row)
 	},
-   
+    assigned_to: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		update_data(row)
+	},
+    expected_min: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		update_data(row)
+	},
+    depends_on_add: function(frm,cdt,cdn){
+        frappe.model.set_value(cdt,cdn,"assigned_to",frm.doc.assigned_to)
+        frappe.model.set_value(cdt,cdn,"expected_min",frm.doc.expected_min)
+    }
 })
+
+function update_data(row){
+    frappe.call({
+        method:"juzgo.juzgo.custom.py.task.update_data",
+        args:{
+            'subject':row.subject,
+            'subject1':row.subject1,
+            'task':row.task,
+            'assigned_to':row.assigned_to,
+            'expected_min':row.expected_min
+        }
+    })
+}

@@ -51,13 +51,18 @@ def user_todo(doc, actions):
                         "subject":i.subject1,
                         "project":doc.project,
                         "abbr":doc.abbr,
-                        "assigned_to":doc.assigned_to,
+                        "assigned_to":i.assigned_to,
                         "exp_start_date":doc.exp_start_date,
+                        "expected_min":i.expected_min,
                         "description":(i.get("subject",""))
                     })
                         sub_task.run_method=lambda *a,**b:0
                         sub_task.save(ignore_permissions = True)   
-                        i.update({'task':sub_task.name})
+                        i.update({
+                            'task':sub_task.name,
+                            'assigned_to':sub_task.assigned_to,
+                            'expected_min':sub_task.expected_min
+                        })
                         frappe.msgprint(_("Sub Tasks Created successfully"))
                     elif(frappe.db.exists("Task",{"name":i.task})):
                         task_doc=frappe.get_doc("Task",i.task)
@@ -71,15 +76,24 @@ def user_todo(doc, actions):
             
         else:
             if frappe.db.exists("Task Depends On",{"task":doc.name}):
+                save =0
                 parent_task=frappe.get_doc("Task Depends On",{"task":doc.name})
                 if parent_task.notes!=doc.notes:
                     parent_task.notes=doc.notes
-                    parent_task.save()
+                    save =1
                 if parent_task.subject!=doc.description:
                     parent_task.subject=doc.description
-                    parent_task.save()
+                    save =1
                 if parent_task.subject1!=doc.subject:
                     parent_task.subject1=doc.subject
+                    save =1
+                if parent_task.assigned_to!=doc.assigned_to:
+                    parent_task.assigned_to=doc.assigned_to
+                    save =1
+                if parent_task.expected_min!=doc.expected_min:
+                    parent_task.expected_min=doc.expected_min
+                    save =1
+                if save == 1:
                     parent_task.save()
     if(actions == "after_insert"):
         doc.save()
@@ -188,15 +202,23 @@ def getdesc(task):
         return strip_html_tags(doc.get('description') or "")
 
 @frappe.whitelist()
-def update_data(task,subject,subject1):
+def update_data(subject=None,subject1=None,task=None,assigned_to=None,expected_min=None):
     if task:
+        save = 0
         doc = frappe.get_doc("Task",task)
-        if doc.description!=subject:
+        if doc.description!=subject and subject:
             doc.description=subject
-            doc.run_method=lambda *a,**b:0
-            doc.save(ignore_permissions = True)
-        if doc.subject!=subject1:
+            save =1
+        if doc.subject!=subject1 and subject1:
             doc.subject=subject1
+            save =1
+        if doc.assigned_to!=assigned_to:
+            doc.assigned_to=assigned_to
+            save =1
+        if doc.expected_min!=expected_min:
+            doc.expected_min=expected_min
+            save =1
+        if save == 1:
             doc.run_method=lambda *a,**b:0
             doc.save(ignore_permissions = True)
 
