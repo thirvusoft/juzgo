@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant Name\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}}]",
+ "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}},{\"id\":\"vYhCVMTGdo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Spots\",\"col\":3}},{\"id\":\"MTVFBely2t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Detail\",\"col\":3}},{\"id\":\"8VvRVpcFRQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Operator\",\"col\":3}},{\"id\":\"xoakTM4SpS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cruise\",\"col\":3}},{\"id\":\"gfN-s_YDUA\",\"type\":\"card\",\"data\":{\"card_name\":\"Import Tool\",\"col\":4}}]",
  "creation": "2023-06-28 14:12:25.335044",
  "custom_blocks": [],
  "docstatus": 0,
@@ -11,8 +11,27 @@
  "idx": 0,
  "is_hidden": 0,
  "label": "Masters",
- "links": [],
- "modified": "2023-06-28 16:27:52.853400",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Import Tool",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Data Import",
+   "link_count": 0,
+   "link_to": "Data Import",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-06-30 10:12:42.376435",
  "modified_by": "prithivraj@thirvusoft.in",
  "module": "Juzgo",
  "name": "Masters",
@@ -27,8 +46,8 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Restaurant Name",
-   "link_to": "Restaurant Name",
+   "label": "Spots",
+   "link_to": "Spots",
    "type": "DocType"
   },
   {
@@ -41,8 +60,36 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Restaurant",
+   "link_to": "Restaurant",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Vehicle Detail",
+   "link_to": "Vehicle Detail",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Destination",
    "link_to": "Destination",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Operator",
+   "link_to": "Operator",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Cruise",
+   "link_to": "Cruise",
    "type": "DocType"
   }
  ],
