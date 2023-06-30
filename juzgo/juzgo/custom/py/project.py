@@ -56,31 +56,32 @@ def get_family_member_details_list(family_member_details,custom_list):
 def get_family_member_attachment(family_members_attachment,custom_list):
     family_members_attachment = json.loads(family_members_attachment)
     custom_list = json.loads(custom_list)
-    exiting_customer = []
-    missing_customer =[]
-    for i in family_members_attachment:
-        if i.get('customer_id') not in exiting_customer:exiting_customer.append(i.get('customer_id'))
+    # exiting_customer = []
+    # missing_customer =[]
+    # for i in family_members_attachment:
+    #     if i.get('customer_id') not in exiting_customer:exiting_customer.append(i.get('customer_id'))
    
-    for i in exiting_customer:
-        if i not in custom_list:
-            missing_customer.append(i)
+    # for i in exiting_customer:
+    #     if i not in custom_list:
+    #         missing_customer.append(i)
 
-    remove_idx= []
-    if(missing_customer):
-        for i in range(0,len(family_members_attachment),1):
-            if(family_members_attachment[i].get('customer_id') in missing_customer):
-                remove_idx.append(i)
+    # remove_idx= []
+    # if(missing_customer):
+    #     for i in range(0,len(family_members_attachment),1):
+    #         if(family_members_attachment[i].get('customer_id') in missing_customer):
+    #             remove_idx.append(i)
 
-    for i in reversed(remove_idx):
-        family_members_attachment.pop(i)
-    cus_file_type={}
-    for cus in custom_list:
-        cus_file_type[cus] = []
-    exiting_doc = [(i.get("members_name") or '')+(i.get("file_type") or '') for i in family_members_attachment]
+    # for i in reversed(remove_idx):
+    #     family_members_attachment.pop(i)
+    # cus_file_type={}
+    # for cus in custom_list:
+    #     cus_file_type[cus] = []
+    # exiting_doc = [(i.get("members_name") or '')+(i.get("file_type") or '') for i in family_members_attachment]
+    family_members_attachment = []
     for cus in custom_list:
         custom_details = frappe.get_doc("Customer",cus).family_members_table
         for i in custom_details:
-            if cus not in exiting_customer:
+            # if cus not in exiting_customer:
                 family_members_attachment.append({
                     "members_name":i.members_name,
                     "file_type":i.file_type,
@@ -92,31 +93,41 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                     "customer_id":cus,
                     "receive_or_send":i.receive_or_send
                 })
-            else:
-                for update in range (len(family_members_attachment)):
-                    if((family_members_attachment[update].get('members_name') == i.members_name) and (family_members_attachment[update].get('family_members_documents_name') == i.family_members_documents_name) and (family_members_attachment[update].get('file_type') == i.file_type) ):
-                        family_members_attachment[update].update({
-                            'file_type':i.file_type,
-                            'file' : i.file,
-                            'next_remainder_or_expiry_on' : i.next_remainder_or_expiry_on,
-                            'description' : i.description,
-                            'attached_by' : i.attached_by,
-                            "receive_or_send":i.receive_or_send
-                        })
-                    if (i.get("members_name") or '')+(i.get("file_type") or '') not in exiting_doc:
-                        family_members_attachment.append({
-                            "members_name":i.members_name,
-                            "file_type":i.file_type,
-                            "file":i.file,
-                            "next_remainder_or_expiry_on":i.next_remainder_or_expiry_on,
-                            "description":i.description,
-                            "attached_by":i.attached_by,
-                            "family_members_documents_name":i.family_members_documents_name,
-                            "customer_id":cus,
-                            "receive_or_send":i.receive_or_send
-                        })
-                        exiting_doc.append((i.get("members_name") or '')+(i.get("file_type") or ''))
-    return family_members_attachment
+            # else:
+            #     for update in range (len(family_members_attachment)):
+            #         if((family_members_attachment[update].get('members_name') == i.members_name) and (family_members_attachment[update].get('family_members_documents_name') == i.family_members_documents_name) and (family_members_attachment[update].get('file_type') == i.file_type) ):
+            #             family_members_attachment[update].update({
+            #                 'file_type':i.file_type,
+            #                 'file' : i.file,
+            #                 'next_remainder_or_expiry_on' : i.next_remainder_or_expiry_on,
+            #                 'description' : i.description,
+            #                 'attached_by' : i.attached_by,
+            #                 "receive_or_send":i.receive_or_send
+            #             })
+            #         if (i.get("members_name") or '')+(i.get("file_type") or '') not in exiting_doc:
+            #             family_members_attachment.append({
+            #                 "members_name":i.members_name,
+            #                 "file_type":i.file_type,
+            #                 "file":i.file,
+            #                 "next_remainder_or_expiry_on":i.next_remainder_or_expiry_on,
+            #                 "description":i.description,
+            #                 "attached_by":i.attached_by,
+            #                 "family_members_documents_name":i.family_members_documents_name,
+            #                 "customer_id":cus,
+            #                 "receive_or_send":i.receive_or_send
+            #             })
+            #             exiting_doc.append((i.get("members_name") or '')+(i.get("file_type") or ''))
+    members_attachment_project = []
+    for cus in custom_list:
+        custom_details = frappe.get_doc("Customer",cus).family_members_documents
+        for i in custom_details:
+            members_attachment_project.append({
+                "members_name":i.members_name,
+                "check_list_name":i.check_list_name,
+                "check":i.check,
+                "receive_or_send":i.receive_or_send,
+            })
+    return family_members_attachment,members_attachment_project
 
 
 @frappe.whitelist()
@@ -190,7 +201,6 @@ def family_member_details_seprate(table):
     if table_seprate:
         html = """
         <div>
-            <h4>Family Member Details with Contact and Address</h4>
             <style>
                 table {
                 border-collapse: collapse;
@@ -204,16 +214,37 @@ def family_member_details_seprate(table):
                 }
 
                 tr:hover {background-color: #D6EEEE;}
+                .main{
+                    background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;border-radius: 2em / 5em;
+                }
+                div.main:hover{
+                    box-shadow: 5px 5px 5px 5px;
+                }
             </style>
         </div>
         """
     
         for i in table_seprate:
             html = html + f"""
-            <div style="background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;">
-            Customer Name :- {i} <br>
-            Contact       :- {frappe.get_value("Contact",table_seprate[i][0].get("contact"),'phone') or "" } <br>
-            Address       :- <div style="padding-left:80px;">{get_address_display(table_seprate[i][0].get("address")) if table_seprate[i][0].get("address") else ""}</div>
+            <div class="main">
+            <table>
+                <tr>
+                    <td style="width:20%;">
+                        <b>Customer Name </b> 
+                    </td>
+                    <td>
+                        :- {i} 
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Contact       </b></td> 
+                    <td>:- {frappe.get_value("Contact",table_seprate[i][0].get("contact"),'phone') or "" } </td>
+                </tr>
+                <tr>
+                    <td><b>Address       </b></td>
+                    <td> {get_address_display(table_seprate[i][0].get("address")) if table_seprate[i][0].get("address") else ""}</td>
+                </tr>
+           </table>
            <table>
             <tr>
                 <th>No</th>

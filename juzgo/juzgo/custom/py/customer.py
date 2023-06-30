@@ -27,8 +27,8 @@ def remove_list(row,name):
     doc = frappe.get_doc("Customer",name)
     for i in doc.family_members_documents:
         if(row.get('member_row_id') != i.family_member_details_name):
-            list.append({'members_name':i.get('members_name'),'age':i.get('age'),'gender':i.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':i.get('family_member_details_name'),'check':i.get('check')})
+            list.append({'members_name':i.get('members_name'),'age':i.get('age'),'gender':i.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':i.get('family_member_details_name'),'check':i.get('check'),'receive_or_send':i.receive_or_send})
     for i in doc.family_members_table:
         if(row.get('member_row_id') != i.family_members_documents_name):
-            list1.append({'members_name':i.get('members_name'),'file_type':i.get('file_type'),'file':i.get('file'),'next_remainder_or_expiry_on':i.next_remainder_or_expiry_on,'family_members_documents_name':i.get('family_members_documents_name'),'description':i.get('description'),'attached_by':i.get('attached_by')})
+            list1.append({'members_name':i.get('members_name'),'file_type':i.get('file_type'),'file':i.get('file'),'next_remainder_or_expiry_on':i.next_remainder_or_expiry_on,'family_members_documents_name':i.get('family_members_documents_name'),'description':i.get('description'),'attached_by':i.get('attached_by'),'receive_or_send':i.receive_or_send})
     return(list,list1)

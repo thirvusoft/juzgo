@@ -2,18 +2,20 @@ var form
 frappe.ui.form.on('Customer', {
     refresh:function (frm,cdt,cdn) {
         check_list(frm)
-        option_in_members(frm)
-        frm.set_query("check_list" ,"check_list_remainder_table", function(doc, cdt, cdn){
-			let list=[], data = locals[cdt][cdn];
-            for(let i=0;i<frm.doc.family_members_documents.length;i++){
-                if(!frm.doc.family_members_documents[i].check && frm.doc.family_members_documents[i].members_name == data.member_name)
-                    list.push(frm.doc.family_members_documents[i].check_list_name);
-            }
-            let filters = {
-				name: ["in",list],
-			};
-			return { filters: filters };
-		});
+        if(!frm.is_new()){
+            option_in_members(frm)
+            frm.set_query("check_list" ,"check_list_remainder_table", function(doc, cdt, cdn){
+                let list=[], data = locals[cdt][cdn];
+                for(let i=0;i<frm.doc.family_members_documents.length;i++){
+                    if(!frm.doc.family_members_documents[i].check && frm.doc.family_members_documents[i].members_name == data.member_name)
+                        list.push(frm.doc.family_members_documents[i].check_list_name);
+                }
+                let filters = {
+                    name: ["in",list],
+                };
+                return { filters: filters };
+            });
+        }
     },
     customer_name:function (frm,cdt,cdn){
         if(frm.is_new()){
@@ -21,6 +23,7 @@ frappe.ui.form.on('Customer', {
             let child = cur_frm.add_child("family_members_details")
             frappe.model.set_value(child.doctype, child.name, "members_name", frm.doc.customer_name)
             frappe.model.set_value(child.doctype, child.name, "relationship", "Self")
+            frappe.model.set_value(child.doctype, child.name, "member_row_id", Math.random().toString(36).substring(2,7))
             refresh_field("family_members_details");
         }
     }
@@ -61,7 +64,7 @@ frappe.ui.form.on('Family Members Details', {
     },
     members_name:function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
-        if(row.member_row_id){
+        if(row.member_row_id && !frm.is_new()){
             add_member_details(frm,row)
         }
     },
@@ -90,6 +93,7 @@ frappe.ui.form.on('Family Members Details', {
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"check_list_name",d.check_list_name)
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"family_member_details_name",d.family_member_details_name)
                         frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"check",d.check)
+                        frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"receive_or_send",d.receive_or_send)
                         i++;
                     }
                     refresh_field("family_members_documents");
@@ -104,6 +108,7 @@ frappe.ui.form.on('Family Members Details', {
                         frappe.model.set_value(frm.doc.family_members_table[j].doctype,frm.doc.family_members_table[j].name,"family_members_documents_name",d.family_members_documents_name)
                         frappe.model.set_value(frm.doc.family_members_table[j].doctype,frm.doc.family_members_table[j].name,"description",d.description)
                         frappe.model.set_value(frm.doc.family_members_table[j].doctype,frm.doc.family_members_table[j].name,"attached_by",d.attached_by)
+                        frappe.model.set_value(frm.doc.family_members_documents[i].doctype,frm.doc.family_members_documents[i].name,"receive_or_send",d.receive_or_send)
                         j++;
                     }
                     refresh_field("family_members_table");
@@ -292,45 +297,49 @@ function check_list(frm){
     ]
     let user = {}
     let file_table ={}
-    for(let i=0;i<frm.doc.family_members_details.length;i++){
-        user[frm.doc.family_members_details[i].members_name]=[]
-        file_table[frm.doc.family_members_details[i].members_name]=[]
-    }
-    for(let resend=0;resend<2;resend++){
-        for(let i=0;i<frm.doc.family_members_documents.length;i++){
-            if(resend == 0){
-                if(frm.doc.family_members_documents[i].receive_or_send=="To Receive"){
-                    user[frm.doc.family_members_documents[i].members_name ].push(
-                        {
-                            fieldtype: 'Check',
-                            fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
-                            label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
-                            default:frm.doc.family_members_documents[i].check,
-                            onchange: function(event) {
-                                let row = frm.doc.family_members_documents[i]
-                                frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
-                            }
-                        }
-                    )
-                }
-            } else {
-                if(frm.doc.family_members_documents[i].receive_or_send=="To Send"){
-                    user[frm.doc.family_members_documents[i].members_name ].push(
-                        {
-                            fieldtype: 'Check',
-                            fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
-                            label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
-                            default:frm.doc.family_members_documents[i].check,
-                            onchange: function(event) {
-                                let row = frm.doc.family_members_documents[i]
-                                frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
-                            }
-                        }
-                    )
-                }
-            }
+    if(frm.doc.family_members_details){
+        for(let i=0;i<frm.doc.family_members_details.length;i++){
+            user[frm.doc.family_members_details[i].members_name]=[]
+            file_table[frm.doc.family_members_details[i].members_name]=[]
         }
     }
+    for(let resend=0;resend<2;resend++){
+        if(frm.doc.family_members_documents)
+            for(let i=0;i<frm.doc.family_members_documents.length;i++){
+                if(resend == 0){
+                    if(frm.doc.family_members_documents[i].receive_or_send=="To Receive"){
+                        user[frm.doc.family_members_documents[i].members_name ].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                                label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.family_members_documents[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.family_members_documents[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
+                    }
+                } else {
+                    if(frm.doc.family_members_documents[i].receive_or_send=="To Send"){
+                        user[frm.doc.family_members_documents[i].members_name ].push(
+                            {
+                                fieldtype: 'Check',
+                                fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                                label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                                default:frm.doc.family_members_documents[i].check,
+                                onchange: function(event) {
+                                    let row = frm.doc.family_members_documents[i]
+                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+    }
+    console.log(user)
 
     // for(let i=0;i<frm.doc.family_members_documents.length;i++){
         
@@ -347,22 +356,23 @@ function check_list(frm){
     //         }
     //     )
     // }
-    for(let i=0;i<frm.doc.family_members_table.length;i++){
-        if(file_table[frm.doc.family_members_table[i].members_name]){
-            file_table[frm.doc.family_members_table[i].members_name].push(
-                {
-                    members_name:frm.doc.family_members_table[i].members_name,
-                    file_type:frm.doc.family_members_table[i].file_type,
-                    file:frm.doc.family_members_table[i].file,
-                    next_remainder_or_expiry_on:frm.doc.family_members_table[i].next_remainder_or_expiry_on,
-                    description:frm.doc.family_members_table[i].description,
-                    parent_name1:frm.doc.family_members_table[i].name,
-                    checkfile:frm.doc.family_members_table[i].file?1:0,
-                    receive_or_send:frm.doc.family_members_table[i].receive_or_send,
-                }
-            )
+    if(frm.doc.family_members_table)
+        for(let i=0;i<frm.doc.family_members_table.length;i++){
+            if(file_table[frm.doc.family_members_table[i].members_name]){
+                file_table[frm.doc.family_members_table[i].members_name].push(
+                    {
+                        members_name:frm.doc.family_members_table[i].members_name,
+                        file_type:frm.doc.family_members_table[i].file_type,
+                        file:frm.doc.family_members_table[i].file,
+                        next_remainder_or_expiry_on:frm.doc.family_members_table[i].next_remainder_or_expiry_on,
+                        description:frm.doc.family_members_table[i].description,
+                        parent_name1:frm.doc.family_members_table[i].name,
+                        checkfile:frm.doc.family_members_table[i].file?1:0,
+                        receive_or_send:frm.doc.family_members_table[i].receive_or_send,
+                    }
+                )
+            }
         }
-    }
     let p=[]
     let keys=Object.keys(user);
     let checkboxFields = {}
