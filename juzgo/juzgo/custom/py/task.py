@@ -78,6 +78,9 @@ def user_todo(doc, actions):
                 if parent_task.subject!=doc.description:
                     parent_task.subject=doc.description
                     parent_task.save()
+                if parent_task.subject1!=doc.subject:
+                    parent_task.subject1=doc.subject
+                    parent_task.save()
     if(actions == "after_insert"):
         doc.save()
 
@@ -183,6 +186,19 @@ def getdesc(task):
     if task:
         doc = frappe.get_doc("Task",task)
         return strip_html_tags(doc.get('description') or "")
+
+@frappe.whitelist()
+def update_data(task,subject,subject1):
+    if task:
+        doc = frappe.get_doc("Task",task)
+        if doc.description!=subject:
+            doc.description=subject
+            doc.run_method=lambda *a,**b:0
+            doc.save(ignore_permissions = True)
+        if doc.subject!=subject1:
+            doc.subject=subject1
+            doc.run_method=lambda *a,**b:0
+            doc.save(ignore_permissions = True)
 
 
 def autoname(doc, actions):

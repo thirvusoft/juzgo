@@ -118,5 +118,29 @@ frappe.ui.form.on('Task Depends On', {
 			}
 		})
 	},
+    subject: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		
+        frappe.call({
+			method:"juzgo.juzgo.custom.py.task.update_data",
+			args:{
+				'task':row.task,
+                'subject':row.subject,
+                'subject1':row.subject1
+			}
+		})
+	},
+    subject1: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		
+        frappe.call({
+			method:"juzgo.juzgo.custom.py.task.update_data",
+			args:{
+				'task':row.task,
+                'subject':row.subject,
+                'subject1':row.subject1
+			}
+		})
+	},
    
 })
