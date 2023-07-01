@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-06-29 18:34:21.005363",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "members_name",
+  "check_list_name",
+  "check",
+  "receive_or_send"
+ ],
+ "fields": [
+  {
+   "fieldname": "members_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Members Name"
+  },
+  {
+   "fieldname": "check_list_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Check List Name",
+   "options": "Check List Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "check",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Check"
+  },
+  {
+   "fetch_from": "check_list_name.receive_or_send",
+   "fetch_if_empty": 1,
+   "fieldname": "receive_or_send",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Receive or Send",
+   "options": "\nTo Receive\nTo Send"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-29 18:34:21.005363",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Project Members Check List",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
