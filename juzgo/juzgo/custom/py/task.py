@@ -92,8 +92,8 @@ def update_number(doc, actions):
             if i.task:
                 task_ = frappe.get_doc("Task",i.task)
                 task_.update({
-                        'description': i.subject,   
-                        'subject': i.subject1
+                        'description': strip_html_tags(i.subject),   
+                        'subject': strip_html_tags(i.subject1)
                 })
                 task_.save()
        
