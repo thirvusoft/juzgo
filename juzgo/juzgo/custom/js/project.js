@@ -202,7 +202,6 @@ function multi_customer(frm,event=''){
                     custom_list : custom_list
                 },
                 callback: function(r) {
-                    console.log("kkkk999",r)
                     frm.doc.family_members_attachment = []
                     r.message[0].forEach(row => {
                         let child = cur_frm.add_child("family_members_attachment")
@@ -365,7 +364,6 @@ function check_list(frm){
                 read_only:1,
             },
         ]
-        console.log("kk")
         let check=[
             {
                 fieldtype: 'Data',
@@ -422,7 +420,6 @@ function check_list(frm){
                 )
             }
         }
-        console.log("kkkk")
         for(let i=0;i<frm.doc.project_members_check_list.length;i++){ 
             if(check_table[frm.doc.project_members_check_list[i].members_name]){
                 check_table[frm.doc.project_members_check_list[i].members_name ].push(

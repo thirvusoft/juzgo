@@ -184,8 +184,10 @@ def family_member_details_seprate(table):
     table = json.loads(table)
     table_seprate ={}
     html = ''
+    parent = ""
     for i in table:
         table_seprate[i["customer_id"]]=[]
+        parent = i["parent"]
     for i in table:
         table_seprate[i["customer_id"]].append({
             "no":i["idx"],
@@ -220,6 +222,25 @@ def family_member_details_seprate(table):
                 div.main:hover{
                     box-shadow: 5px 5px 5px 5px;
                 }
+                .modal {
+                    display: none; /* Hidden by default */
+                    position: fixed; /* Stay in place */
+                    z-index: 6; /* Sit on top */
+                    left: 0;
+                    top: 0;
+                    width: 100%; /* Full width */
+                    height: 100%; /* Full height */
+                    overflow: auto; /* Enable scroll if needed */
+                    background-color: #474e5d;
+                    padding-top: 50px;
+                }
+
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                    border: 1px solid #888;
+                    width: 30%; /* Could be more or less, depending on screen size */
+                    }
             </style>
         </div>
         """
@@ -278,9 +299,76 @@ def family_member_details_seprate(table):
                 </td>
                 </tr>
                 """
-            html = html + """
+            html = html + f"""
             </table>
+            <button onclick="addmember('{i}','{parent}')" style="width:auto;">Add Member</button>
             </div>
             <hr>
             """
+        html = html+"""
+<div id="id01" class="modal">
+  <form class="modal-content" onsubmit="return AddtoTable()">
+    <div class="container">
+      <h1 id="member_name_label">Add New Family Member</h1>
+      <label for="member_name"><b>Member Name</b></label>
+	  <select id="child_select"><option value="" disabled="disabled">Select Family Member</option></select>
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="AddtoTable()" class="signupbtn">Add</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+function addmember(cus_id,table) {
+  document.getElementById('id01').style.display='block';
+  document.getElementById('member_name_label').innerHTML="Add "+cus_id+"'s Family Member";
+  document.getElementById('customer_id').value=cus_id;
+  var el_child = document.getElementById("child_select");
+  frappe.db.get_list('Family Members Details', {filters:{'parent':cus_id}, fields:['name','members_name','member_row_id']}).then((r)=>{
+        frappe.db.get_list('Project Family Details', {filters:{'parent':table,'customer_id':cus_id}, fields:['name','members_name','member_row_id']}).then((r1)=>{
+            for(let i=0;i<r.length;i++){
+                let p = 0
+                for(let j=0;j<r1.length;j++){
+                    if(r[i].members_name == r1[j].members_name && r[i].member_row_id == r1[j].member_row_id){
+                     p=1
+                    }
+                }
+                if(p == 0){
+                    el_child.innerHTML = el_child.innerHTML + '<option value='+r[i].name+'>'+ r[i].members_name +'</option>';
+                }
+            }
+        })
+    })
+}
+function AddtoTable(){
+    let cus_id =  document.getElementById('customer_id').value
+    let member_row_id = document.getElementById('child_select').value
+    frappe.db.get_list('Family Members Details', {filters:{'name':member_row_id}, fields:['date_of_birth','gender','age','relationship','members_name','member_row_id']}).then((row)=>{
+        let child = cur_frm.add_child("family_member_details")
+        frappe.model.set_value(child.doctype, child.name, "members_name", row[0].members_name)
+        frappe.model.set_value(child.doctype, child.name, "date_of_birth", row[0].date_of_birth)
+        frappe.model.set_value(child.doctype, child.name, "gender", row[0].gender)
+        frappe.model.set_value(child.doctype, child.name, "age", row[0].age)
+        frappe.model.set_value(child.doctype, child.name, "relationship", row[0].relationship)
+        frappe.model.set_value(child.doctype, child.name, "member_row_id", row[0].member_row_id)
+        frappe.model.set_value(child.doctype, child.name, "customer_id", cus_id)
+        refresh_field("family_member_details");
+        document.getElementById('id01').style.display='none'
+    })
+    
+}
+</script>
+
+        """
     return html
