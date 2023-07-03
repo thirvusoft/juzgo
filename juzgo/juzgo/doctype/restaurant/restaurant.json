@@ -13,6 +13,7 @@
   "country",
   "city",
   "pin_location",
+  "open_url",
   "area",
   "suggestion_area",
   "column_break_7",
@@ -56,6 +57,7 @@
    "fieldname": "pin_location",
    "fieldtype": "Data",
    "label": "Pin Location",
+   "length": 1000,
    "options": "URL"
   },
   {
@@ -160,12 +162,18 @@
    "fieldtype": "Table MultiSelect",
    "label": "Suggestion Area",
    "options": "Suggestion Area"
+  },
+  {
+   "fieldname": "open_url",
+   "fieldtype": "Button",
+   "label": "Open URL",
+   "length": 1000
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-06-28 18:38:43.902367",
+ "modified": "2023-07-03 12:57:07.550620",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",

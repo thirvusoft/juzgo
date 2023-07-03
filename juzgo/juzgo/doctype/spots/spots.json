@@ -26,13 +26,15 @@
   "jtt_id",
   "column_break_12",
   "pin_location",
+  "open_url",
   "preferred_transfer",
   "inclusion",
   "exclusion",
   "best_season",
   "budget",
   "section_break_15",
-  "image_details"
+  "image_details",
+  "notes"
  ],
  "fields": [
   {
@@ -104,6 +106,7 @@
    "fieldname": "pin_location",
    "fieldtype": "Data",
    "label": "Pin Location",
+   "length": 1000,
    "options": "URL"
   },
   {
@@ -176,11 +179,21 @@
    "fieldtype": "Table",
    "label": "Image Details",
    "options": "Spot Images"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "open_url",
+   "fieldtype": "Button",
+   "label": "Open URL"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 16:50:24.447765",
+ "modified": "2023-07-03 13:12:42.067933",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

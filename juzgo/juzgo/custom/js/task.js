@@ -123,6 +123,13 @@ async function filter(frm){
 				},
 			};
 		});
+        frm.set_query("assigned_to","depends_on", function () {
+			return {
+				filters: {
+					name: ["in",list],
+				},
+			};
+		});
 }
 
 frappe.ui.form.on('Task Depends On', {

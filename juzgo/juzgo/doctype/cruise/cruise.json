@@ -17,12 +17,12 @@
   "cabin_name",
   "tariff",
   "extra_visa_required_for_enroute_tours",
-  "notes",
   "child_age_limit",
   "section_break_12",
   "cabin_details",
   "section_break_14",
-  "other_charges"
+  "other_charges",
+  "notes"
  ],
  "fields": [
   {
@@ -76,7 +76,7 @@
   },
   {
    "fieldname": "notes",
-   "fieldtype": "Data",
+   "fieldtype": "Text Editor",
    "label": "Notes"
   },
   {
@@ -107,7 +107,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 16:55:24.775288",
+ "modified": "2023-07-03 12:54:29.453817",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
