@@ -47,11 +47,11 @@ frappe.ui.form.on('Task', {
                 });
         }
         }) 
-        if(frappe.user.has_role('Juzgo Admin') ){
-            let rows = locals[cdt][cdn]
-            frm.set_df_property("task", "read_only", 0, rows.name, 'depends_on');
-            frm.refresh_field('depends_on');
-        }
+        // if(frappe.user.has_role('Juzgo Admin') ){
+        //     let rows = locals[cdt][cdn]
+        //     frm.set_df_property("task", "read_only", 0, rows.name, 'depends_on');
+        //     frm.refresh_field('depends_on');
+        // }
 
     },
     assigned_to: function(frm){
@@ -59,6 +59,9 @@ frappe.ui.form.on('Task', {
             frappe.msgprint("Kindly Select Project.")
             frm.set_value("assigned_to","")
         }
+    },
+    status: function(frm){
+        frm.refresh()
     },
     expected_min: function(frm){
          frappe.call({
@@ -105,6 +108,13 @@ async function filter(frm){
             })
         }
         frm.set_query("assigned_to", function () {
+			return {
+				filters: {
+					name: ["in",list],
+				},
+			};
+		});
+        frm.set_query("task_lead", function () {
 			return {
 				filters: {
 					name: ["in",list],
@@ -166,3 +176,29 @@ function update_data(row){
         }
     })
 }
+
+frappe.ui.form.on('Task Approval', {
+	status: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+        frm.call({
+            method: "juzgo.juzgo.custom.py.task.status_approval",
+            args: {
+                name: frm.doc.name,
+                task_approval:row
+            },
+            callback: function (r) {
+                console.log(r.message)
+                if(frappe.session.user != row.user){
+                    frappe.model.set_value(cdt, cdn, "status", r.message)
+                    frappe.throw("You are not allow to update others status")
+                    
+                } 
+            }
+        })
+        
+     
+
+           
+        
+	},
+})
