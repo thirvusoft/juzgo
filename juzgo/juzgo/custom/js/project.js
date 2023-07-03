@@ -30,7 +30,7 @@ frappe.ui.form.on('Project', {
     },
     update_data:function (frm) {
         multi_customer(frm)
-        frm.save()
+        // frm.save()
     },
     onload:function (frm) {
         setTimeout(() => {
@@ -117,8 +117,7 @@ function add_destination_details(frm,event=''){
                         frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("destination_check_list");
-                    // if(event!='onload')
-                    //     frm.save()
+                    frm.save()
                 }
             }
         })

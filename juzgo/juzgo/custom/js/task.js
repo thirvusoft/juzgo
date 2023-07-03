@@ -32,6 +32,7 @@ frappe.ui.form.on('Task', {
                 }
             }
         }
+        
         frappe.call({
             
             method: "juzgo.juzgo.custom.py.task.juzgo_admin_users",
@@ -45,6 +46,7 @@ frappe.ui.form.on('Task', {
                         },
                     };
                 });
+
         }
         }) 
         // if(frappe.user.has_role('Juzgo Admin') ){

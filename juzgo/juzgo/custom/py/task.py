@@ -115,17 +115,17 @@ def update_number(doc, actions):
                 task_.save()
         if len(doc.task_approval) !=0:
             for m in doc.task_approval:
-                if frappe.session.user == m.user:
-                    if m.status != "Approved":
-                        if doc.status == "Completed":
-                            frappe.throw("Task Approval Status is Pending")
-            stat = 0
-            for n in doc.task_approval:
-                if n.status != "Approved":
-                    stat = 1
+                # if frappe.session.user == m.user:
+                if m.status != "Approved":
+                    if doc.status == "Completed":
+                        frappe.throw("Task Approval Status is Pending")
+            # stat = 0
+            # for n in doc.task_approval:
+            #     if n.status != "Approved":
+            #         stat = 1
 
-            if stat == 0:
-                doc.status = "Completed"
+            # if stat == 0:
+                # doc.status = "Completed"
                 # else:
                 #     doc.status = "Working"
 
