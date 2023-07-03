@@ -124,8 +124,8 @@ def update_number(doc, actions):
                 if n.status != "Approved":
                     stat = 1
 
-                if stat == 0:
-                    doc.status = "Completed"
+            if stat == 0:
+                doc.status = "Completed"
                 # else:
                 #     doc.status = "Working"
 
