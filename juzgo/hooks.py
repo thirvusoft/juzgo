@@ -12,7 +12,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/juzgo/css/juzgo.css"
-# app_include_js = "/assets/juzgo/js/juzgo.js"
+app_include_js = ["juzgo.bundle.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/juzgo/css/juzgo.css"
@@ -74,6 +74,9 @@ doc_events = {
 	},
     "Customer":{
         "validate": "juzgo.juzgo.custom.py.customer.validate"
+	},
+    "Project" : {
+        "validate" : "juzgo.juzgo.custom.py.project.project_head"
 	}
 
 }

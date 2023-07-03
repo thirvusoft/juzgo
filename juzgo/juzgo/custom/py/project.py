@@ -372,3 +372,22 @@ function AddtoTable(){
 
         """
     return html
+
+def project_head(doc,actions):
+    doc_ = frappe.new_doc("ToDo")        
+    if frappe.db.exists("ToDo", {'reference_name': doc.name}):
+        doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name})
+    user = frappe.db.get_value("User", doc.owner, "username")
+    doc_.update({
+        'date': frappe.utils.nowdate(),
+        'allocated_to': doc.project_head,
+        'description': f'Project is assigned {doc.name}',
+        'reference_type': doc.doctype,
+        'reference_name': doc.name,
+        'assigned_by': user,
+    })
+    doc_.flags.ignore_permissions = True
+    doc_.flags.ignore_links = True
+    doc_.save()
+
+

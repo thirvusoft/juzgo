@@ -109,16 +109,44 @@ def update_number(doc, actions):
             if i.task:
                 task_ = frappe.get_doc("Task",i.task)
                 task_.update({
-                        'description': i.subject,   
+                        'description': strip_html_tags(i.subject or "") or "",   
                         'subject': i.subject1
                 })
                 task_.save()
+        if len(doc.task_approval) !=0:
+            for m in doc.task_approval:
+                if frappe.session.user == m.user:
+                    if m.status != "Approved":
+                        if doc.status == "Completed":
+                            frappe.throw("Task Approval Status is Pending")
+            stat = 0
+            for n in doc.task_approval:
+                if n.status != "Approved":
+                    stat = 1
+
+            if stat == 0:
+                doc.status = "Completed"
+                # else:
+                #     doc.status = "Working"
+
+
+@frappe.whitelist()
+def juzgo_admin_users():
+        admin_user = frappe.db.get_all("User", {'role_profile_name':"Juzgo Admin"},pluck="name")
+        return admin_user
+
+@frappe.whitelist()
+def status_approval(name,task_approval):
+    task_approval = json.loads(task_approval)
+    status = frappe.get_value("Task Approval", {"parent": name,"user":task_approval["user"]}, 'status')
+    return status
+
        
 
             
 def user(doc, user):
     if user:
-        priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
+        priority_update = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue","Pending Review"]], 'assigned_to': user}, pluck='name',order_by = "priority_number")
         if doc.name not in priority_update:
             priority_update.insert(((doc.priority_number  -1) if doc.priority_number else len(priority_update)), doc.name)
             doc.priority_number =priority_update.index(doc.name)+1
@@ -127,7 +155,7 @@ def user(doc, user):
                 priority_update.remove(doc.name)
             except:
                 pass
-        if doc.status not in ["Open", "Working","Overdue"]:
+        if doc.status not in ["Open", "Working","Overdue","Pending Review"]:
             try:
                 priority_update.remove(doc.name)
             except:
@@ -144,7 +172,7 @@ def user(doc, user):
             idx+=1
 
 def trash_task(doc, actions):
-    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
+    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue","Pending Review"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
     idx =1 
     for n in priority_rearrange:
         frappe.db.set_value("Task",n,"priority_number",idx)
@@ -249,3 +277,4 @@ def notification(to_user, from_user, task_name, data, doctype, field):
     })
     doc.flags.ignore_permissions=True
     doc.save()
+
