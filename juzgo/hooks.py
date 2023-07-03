@@ -74,6 +74,9 @@ doc_events = {
 	},
     "Customer":{
         "validate": "juzgo.juzgo.custom.py.customer.validate"
+	},
+    "Project" : {
+        "validate" : "juzgo.juzgo.custom.py.project.project_head"
 	}
 
 }

@@ -8,6 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "status",
+  "section_break_x7641",
   "destination_name",
   "destination_abbr",
   "country",
@@ -112,11 +114,22 @@
    "fieldtype": "Text Editor",
    "label": "Policy",
    "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "section_break_x7641",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 16:55:54.969866",
+ "modified": "2023-06-30 11:06:48.668967",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
