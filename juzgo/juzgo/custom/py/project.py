@@ -208,7 +208,37 @@ def family_member_details_seprate(table):
                 border-collapse: collapse;
                 width: 100%;
                 }
-
+                .addbutton {
+                    background-color: #4287f5;
+                    border: none;
+                    color: white;
+                    padding: 5px 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 10px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    -webkit-transition-duration: 0.4s; /* Safari */
+                    transition-duration: 0.4s;
+                }
+                .removebutton {
+                    background-color: red;
+                    border: none;
+                    color: white;
+                    padding: 5px 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 10px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    -webkit-transition-duration: 0.4s; /* Safari */
+                    transition-duration: 0.4s;
+                }
+                .addbutton:hover {
+                    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                }
                 th, td {
                 padding: 8px;
                 text-align: left;
@@ -223,23 +253,28 @@ def family_member_details_seprate(table):
                     box-shadow: 5px 5px 5px 5px;
                 }
                 .modal1 {
-                    display: none; /* Hidden by default */
-                    position: fixed; /* Stay in place */
-                    z-index: 6; /* Sit on top */
+                    display: none; 
+                    position: fixed; 
+                    z-index: 6; 
                     left: 0;
                     top: 0;
-                    width: 100%; /* Full width */
-                    height: 100%; /* Full height */
-                    overflow: auto; /* Enable scroll if needed */
+                    width: 100%; 
+                    height: 100%; 
+                    overflow: auto;
                     background-color: #474e5d;
                     padding-top: 50px;
                 }
-
+                .clearfix::after {
+                    content: "";
+                    clear: both;
+                    display: table;
+                }
                 .modal1-content {
                     background-color: #fefefe;
-                    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
                     border: 1px solid #888;
-                    width: 30%; /* Could be more or less, depending on screen size */
+                    width: 30%;
+                    border-radius: 10px;
                     }
             </style>
         </div>
@@ -301,7 +336,7 @@ def family_member_details_seprate(table):
                 """
             html = html + f"""
             </table>
-            <button onclick="addmember('{i}','{parent}')" style="width:auto;">Add Member</button>
+            <button class="addbutton" onclick="addmember('{i}','{parent}')" style="width:auto;">Add Member</button>
             </div>
             <hr>
             """
@@ -309,13 +344,13 @@ def family_member_details_seprate(table):
 <div id="id01" class="modal1">
   <form class="modal1-content" onsubmit="return AddtoTable()">
     <div class="container">
-      <h1 id="member_name_label">Add New Family Member</h1>
+      <h4 id="member_name_label">Add New Family Member</h4>
       <label for="member_name"><b>Member Name</b></label>
       <input id="customer_id" value="" hidden=1 ></input>
 	  <select id="child_select"><option value="" disabled="disabled">Select Family Member</option></select>
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="button" onclick="AddtoTable()" class="signupbtn">Add</button>
+        <button class="removebutton" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button class="addbutton" type="button" onclick="AddtoTable()" class="signupbtn">Add</button>
       </div>
     </div>
   </form>

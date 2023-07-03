@@ -562,14 +562,14 @@ function check_list(frm){
             p.push({
                 fieldtype: 'Section Break',
                 fieldname:keys[i],
-                label: for_label[keys[i]] +" - "+keys[i],
+                label: '<a href="/app/customer/'+for_label[keys[i]]+'" target="_blank" style="color:#003300">'+for_label[keys[i]]+'</a>' +' - '+keys[i],
                 collapsible:1
             })
             if(check_table[keys[i]].length != 0){
                 p.push({
                     fieldname: 'table'+keys[i]+'check',
                     fieldtype: 'Table',
-                    label: '<span style="color:#003300">'+for_label[keys[i]]+'</span>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Check List </span>",
+                    label: '<a href="/app/customer/'+for_label[keys[i]]+'" target="_blank" style="color:#003300">'+for_label[keys[i]]+'</a>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Check List </span>",
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     cannot_delete_rows:true,
@@ -581,7 +581,7 @@ function check_list(frm){
                 p.push({
                     fieldname: 'table'+keys[i],
                     fieldtype: 'Table',
-                    label: '<span style="color:#003300">'+for_label[keys[i]]+'</span>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Attachment Table </span>",
+                    label: '<a href="/app/customer/'+for_label[keys[i]]+'" target="_blank" style="color:#003300">'+for_label[keys[i]]+'</a>'+" - "+'<span style="color:#000033">'+keys[i]+" Customer Attachment Table </span>",
                     cannot_add_rows: true,
                     in_editable_grid: true,
                     cannot_delete_rows:true,
@@ -653,7 +653,7 @@ function check_list(frm){
             desti.push({
                 fieldtype: 'Section Break',
                 fieldname:keys[user],
-                label:'<span style="font-weight: normal;"><span style="color:#003300">'+for_label[keys[user]]+'</span> - <span style="color:#330000">'+keys[user]+' Destination Check List </span> </span>',
+                label:'<span style="font-weight: normal;"><a href="/app/customer/'+for_label[keys[user]]+'" target="_blank" style="color:#003300">'+for_label[keys[user]]+'</a>'+'</span> - <span style="color:#330000">'+keys[user]+' Destination Check List </span> </span>',
             })
             desti.push({
                 fieldtype: 'HTML',
@@ -664,7 +664,7 @@ function check_list(frm){
                 desti.push({
                     fieldname: 'destination_table'+keys[user],
                     fieldtype: 'Table',
-                    label: '<span style="color:#003300">'+for_label[keys[user]]+"</span> - <span style='color:#000033'>"+keys[user]+" Destination Attachment Table </span>",
+                    label: '<a href="/app/customer/'+for_label[keys[user]]+'" target="_blank" style="color:#003300">'+for_label[keys[user]]+'</a>'+"</span> - <span style='color:#000033'>"+keys[user]+" Destination Attachment Table </span>",
                     cannot_add_rows: true,
                     read_only:1,
                     cannot_delete_rows:true,
