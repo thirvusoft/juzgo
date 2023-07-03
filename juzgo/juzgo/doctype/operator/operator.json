@@ -18,6 +18,7 @@
   "tariff_range",
   "associated_vehicles_section",
   "vehicles",
+  "notes",
   "flight_tab",
   "flight_name",
   "hours_of_journey",
@@ -378,11 +379,16 @@
   {
    "fieldname": "section_break_6",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 17:33:35.536119",
+ "modified": "2023-07-03 12:51:55.471751",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Operator",

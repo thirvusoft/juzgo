@@ -217,12 +217,12 @@ def family_member_details_seprate(table):
 
                 tr:hover {background-color: #D6EEEE;}
                 .main{
-                    background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;border-radius: 2em / 5em;
+                    background-color: lightgrey;border: 2px solid #4287f5;padding: 10px;margin: 10px;border-radius: 10px;
                 }
                 div.main:hover{
                     box-shadow: 5px 5px 5px 5px;
                 }
-                .modal {
+                .modal1 {
                     display: none; /* Hidden by default */
                     position: fixed; /* Stay in place */
                     z-index: 6; /* Sit on top */
@@ -235,7 +235,7 @@ def family_member_details_seprate(table):
                     padding-top: 50px;
                 }
 
-                .modal-content {
+                .modal1-content {
                     background-color: #fefefe;
                     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
                     border: 1px solid #888;
@@ -306,11 +306,12 @@ def family_member_details_seprate(table):
             <hr>
             """
         html = html+"""
-<div id="id01" class="modal">
-  <form class="modal-content" onsubmit="return AddtoTable()">
+<div id="id01" class="modal1">
+  <form class="modal1-content" onsubmit="return AddtoTable()">
     <div class="container">
       <h1 id="member_name_label">Add New Family Member</h1>
       <label for="member_name"><b>Member Name</b></label>
+      <input id="customer_id" value="" hidden=1 ></input>
 	  <select id="child_select"><option value="" disabled="disabled">Select Family Member</option></select>
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
@@ -321,10 +322,8 @@ def family_member_details_seprate(table):
 </div>
 
 <script>
-// Get the modal
 var modal = document.getElementById('id01');
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -364,6 +363,7 @@ function AddtoTable(){
         frappe.model.set_value(child.doctype, child.name, "member_row_id", row[0].member_row_id)
         frappe.model.set_value(child.doctype, child.name, "customer_id", cus_id)
         refresh_field("family_member_details");
+        cur_frm.save()
         document.getElementById('id01').style.display='none'
     })
     

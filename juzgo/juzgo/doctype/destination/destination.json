@@ -20,6 +20,7 @@
   "section_break_10",
   "terms_conditions",
   "terms",
+  "notes",
   "column_break_12",
   "cancellation_policy",
   "policy"
@@ -112,11 +113,16 @@
    "fieldtype": "Text Editor",
    "label": "Policy",
    "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 16:55:54.969866",
+ "modified": "2023-07-03 11:55:06.931182",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
