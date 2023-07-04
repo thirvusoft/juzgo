@@ -119,13 +119,13 @@ def update_number(doc, actions):
                     if m.status != "Approved":
                         if doc.status == "Completed":
                             frappe.throw("Task Approval Status is Pending")
-            stat = 0
-            for n in doc.task_approval:
-                if n.status != "Approved":
-                    stat = 1
+            # stat = 0
+            # for n in doc.task_approval:
+            #     if n.status != "Approved":
+            #         stat = 1
 
-            if stat == 0:
-                doc.status = "Completed"
+            # if stat == 0:
+            #     doc.status = "Completed"
                 # else:
                 #     doc.status = "Working"
 
