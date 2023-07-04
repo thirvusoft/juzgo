@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "status",
   "cruise_name",
   "from_destination",
   "to_destination",
@@ -103,11 +104,18 @@
    "fieldtype": "Table",
    "label": "Other Charges",
    "options": "Other Charges"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-03 12:54:29.453817",
+ "modified": "2023-07-04 12:41:10.092078",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
