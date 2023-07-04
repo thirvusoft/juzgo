@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "status",
   "hotel_name",
   "destination",
   "country",
@@ -274,12 +275,19 @@
    "fieldname": "notes",
    "fieldtype": "Text Editor",
    "label": "Notes"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-03 12:21:20.025919",
+ "modified": "2023-07-04 12:34:52.840988",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",
