@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "status",
   "spot_name",
   "destination",
   "city",
@@ -189,11 +190,18 @@
    "fieldname": "open_url",
    "fieldtype": "Button",
    "label": "Open URL"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-03 13:12:42.067933",
+ "modified": "2023-07-04 12:37:21.583267",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

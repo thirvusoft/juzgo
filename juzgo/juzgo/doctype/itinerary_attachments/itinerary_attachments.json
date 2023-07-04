@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-03 12:29:11.607078",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "itinerary_file",
+  "cost",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "itinerary_file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Itinerary file"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Cost"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-04 13:31:01.339291",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Itinerary Attachments",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

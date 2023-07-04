@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "status",
   "vehicle_name",
   "vehicle_model",
   "vehicle_make",
@@ -84,11 +85,18 @@
    "fieldname": "notes",
    "fieldtype": "Text Editor",
    "label": "Notes"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-03 12:23:47.172699",
+ "modified": "2023-07-04 12:38:43.085252",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Vehicle Detail",

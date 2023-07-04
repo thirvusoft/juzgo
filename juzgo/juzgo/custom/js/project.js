@@ -396,7 +396,9 @@ function check_list(frm){
                             if(htmlrow.parent_name1 == el.name){
                                 frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
                                 frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
-                                frm.save()
+                                frm.save().then(()=>{
+                                    frm.reload_doc()
+                                })
                             }
                         });
                     }

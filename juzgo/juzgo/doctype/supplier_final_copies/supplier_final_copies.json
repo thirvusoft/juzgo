@@ -9,11 +9,13 @@
   "file_type",
   "attachments",
   "description",
+  "supplier_mail",
   "printables",
   "attached_by"
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "file_type",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -21,16 +23,19 @@
    "options": "File Type"
   },
   {
+   "columns": 2,
    "fieldname": "attachments",
    "fieldtype": "Attach",
    "in_list_view": 1,
    "label": "Attachments"
   },
   {
+   "columns": 2,
    "fieldname": "description",
    "fieldtype": "Long Text",
    "in_list_view": 1,
-   "label": "Description"
+   "label": "Description",
+   "reqd": 1
   },
   {
    "columns": 1,
@@ -46,12 +51,19 @@
    "fieldtype": "Link",
    "label": "Attached By",
    "options": "User"
+  },
+  {
+   "columns": 2,
+   "fieldname": "supplier_mail",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Supplier Mail"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-17 15:42:20.655192",
+ "modified": "2023-07-04 12:23:45.602660",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Supplier Final Copies",
