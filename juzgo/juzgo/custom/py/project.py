@@ -426,3 +426,33 @@ def project_head(doc,actions):
     doc_.save()
 
 
+def validate_check(doc,even):
+    re_list = []
+    for i in doc.destination_check_list:
+        if(i.check == 0):
+            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name})
+    remove_idx= []
+    for j in doc.check_list_remainder_table:
+        dele = 0
+        for i in re_list:
+            if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
+                dele = 1
+        if dele == 0:
+            remove_idx.append(j.idx-1)
+
+    for i in reversed(remove_idx):
+        doc.check_list_remainder_table.pop(i)
+    idx = 1
+    for k in doc.check_list_remainder_table:
+        k.update({'idx': idx})
+        idx = idx+1
+    for i in re_list:
+        new = 0
+        for j in doc.check_list_remainder_table:
+            if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
+                new = 1
+        if new == 0:
+            doc.append('check_list_remainder_table',dict(
+                check_list=i["check_list_name"],
+                member_name=i['members_name']
+            ))
