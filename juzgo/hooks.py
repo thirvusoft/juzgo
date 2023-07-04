@@ -76,7 +76,10 @@ doc_events = {
         "validate": "juzgo.juzgo.custom.py.customer.validate"
 	},
     "Project" : {
-        "validate" : "juzgo.juzgo.custom.py.project.project_head"
+        "validate" : ["juzgo.juzgo.custom.py.project.project_head",
+                      "juzgo.juzgo.custom.py.project.validate_check"
+					  ],
+		"after_insert" : "juzgo.juzgo.custom.py.project.project_head"
 	}
 
 }
