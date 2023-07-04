@@ -22,6 +22,7 @@
   "section_break_10",
   "terms_conditions",
   "terms",
+  "notes",
   "column_break_12",
   "cancellation_policy",
   "policy"
@@ -114,6 +115,11 @@
    "fieldtype": "Text Editor",
    "label": "Policy",
    "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
   },
   {
    "fieldname": "status",

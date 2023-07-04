@@ -18,7 +18,8 @@
   "passenger_capacity",
   "luggage_capacity",
   "section_break_10",
-  "tariff__details"
+  "tariff__details",
+  "notes"
  ],
  "fields": [
   {
@@ -78,11 +79,16 @@
    "fieldtype": "Data",
    "label": "Vehicle Name",
    "unique": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-28 17:44:00.003009",
+ "modified": "2023-07-03 12:23:47.172699",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Vehicle Detail",

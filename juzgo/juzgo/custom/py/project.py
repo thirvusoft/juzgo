@@ -184,8 +184,10 @@ def family_member_details_seprate(table):
     table = json.loads(table)
     table_seprate ={}
     html = ''
+    parent = ""
     for i in table:
         table_seprate[i["customer_id"]]=[]
+        parent = i["parent"]
     for i in table:
         table_seprate[i["customer_id"]].append({
             "no":i["idx"],
@@ -206,7 +208,37 @@ def family_member_details_seprate(table):
                 border-collapse: collapse;
                 width: 100%;
                 }
-
+                .addbutton {
+                    background-color: #4287f5;
+                    border: none;
+                    color: white;
+                    padding: 5px 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 10px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    -webkit-transition-duration: 0.4s; /* Safari */
+                    transition-duration: 0.4s;
+                }
+                .removebutton {
+                    background-color: red;
+                    border: none;
+                    color: white;
+                    padding: 5px 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 10px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    -webkit-transition-duration: 0.4s; /* Safari */
+                    transition-duration: 0.4s;
+                }
+                .addbutton:hover {
+                    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                }
                 th, td {
                 padding: 8px;
                 text-align: left;
@@ -215,11 +247,35 @@ def family_member_details_seprate(table):
 
                 tr:hover {background-color: #D6EEEE;}
                 .main{
-                    background-color: lightgrey;border: 5px solid green;padding: 10px;margin: 10px;border-radius: 2em / 5em;
+                    background-color: lightgrey;border: 2px solid #4287f5;padding: 10px;margin: 10px;border-radius: 10px;
                 }
                 div.main:hover{
                     box-shadow: 5px 5px 5px 5px;
                 }
+                .modal1 {
+                    display: none; 
+                    position: fixed; 
+                    z-index: 6; 
+                    left: 0;
+                    top: 0;
+                    width: 100%; 
+                    height: 100%; 
+                    overflow: auto;
+                    background-color: #474e5d;
+                    padding-top: 50px;
+                }
+                .clearfix::after {
+                    content: "";
+                    clear: both;
+                    display: table;
+                }
+                .modal1-content {
+                    background-color: #fefefe;
+                    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                    border: 1px solid #888;
+                    width: 30%;
+                    border-radius: 10px;
+                    }
             </style>
         </div>
         """
@@ -278,11 +334,78 @@ def family_member_details_seprate(table):
                 </td>
                 </tr>
                 """
-            html = html + """
+            html = html + f"""
             </table>
+            <button class="addbutton" onclick="addmember('{i}','{parent}')" style="width:auto;">Add Member</button>
             </div>
             <hr>
             """
+        html = html+"""
+<div id="id01" class="modal1">
+  <form class="modal1-content" onsubmit="return AddtoTable()">
+    <div class="container">
+      <h4 id="member_name_label">Add New Family Member</h4>
+      <label for="member_name"><b>Member Name</b></label>
+      <input id="customer_id" value="" hidden=1 ></input>
+	  <select id="child_select"><option value="" disabled="disabled">Select Family Member</option></select>
+      <div class="clearfix">
+        <button class="removebutton" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button class="addbutton" type="button" onclick="AddtoTable()" class="signupbtn">Add</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+var modal = document.getElementById('id01');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+function addmember(cus_id,table) {
+  document.getElementById('id01').style.display='block';
+  document.getElementById('member_name_label').innerHTML="Add "+cus_id+"'s Family Member";
+  document.getElementById('customer_id').value=cus_id;
+  var el_child = document.getElementById("child_select");
+  frappe.db.get_list('Family Members Details', {filters:{'parent':cus_id}, fields:['name','members_name','member_row_id']}).then((r)=>{
+        frappe.db.get_list('Project Family Details', {filters:{'parent':table,'customer_id':cus_id}, fields:['name','members_name','member_row_id']}).then((r1)=>{
+            for(let i=0;i<r.length;i++){
+                let p = 0
+                for(let j=0;j<r1.length;j++){
+                    if(r[i].members_name == r1[j].members_name && r[i].member_row_id == r1[j].member_row_id){
+                     p=1
+                    }
+                }
+                if(p == 0){
+                    el_child.innerHTML = el_child.innerHTML + '<option value='+r[i].name+'>'+ r[i].members_name +'</option>';
+                }
+            }
+        })
+    })
+}
+function AddtoTable(){
+    let cus_id =  document.getElementById('customer_id').value
+    let member_row_id = document.getElementById('child_select').value
+    frappe.db.get_list('Family Members Details', {filters:{'name':member_row_id}, fields:['date_of_birth','gender','age','relationship','members_name','member_row_id']}).then((row)=>{
+        let child = cur_frm.add_child("family_member_details")
+        frappe.model.set_value(child.doctype, child.name, "members_name", row[0].members_name)
+        frappe.model.set_value(child.doctype, child.name, "date_of_birth", row[0].date_of_birth)
+        frappe.model.set_value(child.doctype, child.name, "gender", row[0].gender)
+        frappe.model.set_value(child.doctype, child.name, "age", row[0].age)
+        frappe.model.set_value(child.doctype, child.name, "relationship", row[0].relationship)
+        frappe.model.set_value(child.doctype, child.name, "member_row_id", row[0].member_row_id)
+        frappe.model.set_value(child.doctype, child.name, "customer_id", cus_id)
+        refresh_field("family_member_details");
+        cur_frm.save()
+        document.getElementById('id01').style.display='none'
+    })
+    
+}
+</script>
+
+        """
     return html
 
 def project_head(doc,actions):

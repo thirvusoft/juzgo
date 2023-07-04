@@ -32,6 +32,7 @@ frappe.ui.form.on('Task', {
                 }
             }
         }
+        
         frappe.call({
             
             method: "juzgo.juzgo.custom.py.task.juzgo_admin_users",
@@ -45,6 +46,7 @@ frappe.ui.form.on('Task', {
                         },
                     };
                 });
+
         }
         }) 
         // if(frappe.user.has_role('Juzgo Admin') ){
@@ -115,6 +117,13 @@ async function filter(frm){
 			};
 		});
         frm.set_query("task_lead", function () {
+			return {
+				filters: {
+					name: ["in",list],
+				},
+			};
+		});
+        frm.set_query("assigned_to","depends_on", function () {
 			return {
 				filters: {
 					name: ["in",list],
