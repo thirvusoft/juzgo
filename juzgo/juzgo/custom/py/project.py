@@ -468,7 +468,7 @@ def validate_check(doc,even):
     re_list = []
     for i in doc.destination_check_list:
         if(i.check == 0):
-            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name})
+            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name,'customer_id':i.customer_id})
     remove_idx= []
     for j in doc.check_list_remainder_table:
         dele = 0
@@ -490,7 +490,9 @@ def validate_check(doc,even):
             if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
                 new = 1
         if new == 0:
+            print(i["customer_id"],"pppppppppppp")
             doc.append('check_list_remainder_table',dict(
                 check_list=i["check_list_name"],
-                member_name=i['members_name']
+                member_name=i['members_name'],
+                customer_id = i["customer_id"]
             ))
