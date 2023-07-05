@@ -31,16 +31,20 @@
    "type": "Link"
   }
  ],
- "modified": "2023-06-30 10:12:42.376435",
- "modified_by": "prithivraj@thirvusoft.in",
- "module": "Juzgo",
+ "modified": "2023-07-05 11:50:20.727479",
+ "modified_by": "sibi.kumar@thirvusoft.in",
+ "module": "Operational Executive",
  "name": "Masters",
  "number_cards": [],
  "owner": "prithivraj@thirvusoft.in",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "roles": [],
+ "roles": [
+  {
+   "role": "Operational Executive"
+  }
+ ],
  "sequence_id": 40.0,
  "shortcuts": [
   {

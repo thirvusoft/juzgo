@@ -6,6 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "supplier_mail",
   "data",
   "worksheet",
   "client_copy",
@@ -52,12 +53,18 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date"
+  },
+  {
+   "fieldname": "supplier_mail",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Supplier Mail"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-04 12:25:45.211583",
+ "modified": "2023-07-04 19:44:14.455338",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Quotation Copy",

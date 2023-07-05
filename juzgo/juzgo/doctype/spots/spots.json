@@ -60,7 +60,7 @@
    "fieldname": "area",
    "fieldtype": "Link",
    "label": "Area",
-   "options": "Age Group"
+   "options": "Area"
   },
   {
    "fieldname": "age_group",
@@ -192,16 +192,18 @@
    "label": "Open URL"
   },
   {
+   "default": "Not Reviewed",
+   "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "\nApproved\nRejected\nRework",
+   "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 12:37:21.583267",
+ "modified": "2023-07-05 12:06:08.421646",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",
@@ -233,9 +235,37 @@
    "select": 1,
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operational Executive",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo HR",
+   "select": 1,
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
 }
