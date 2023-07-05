@@ -117,7 +117,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 19:12:30.472282",
+ "modified": "2023-07-05 10:57:36.689899",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
@@ -145,6 +145,17 @@
    "read": 1,
    "report": 1,
    "role": "Juzgo Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operational Executive",
    "select": 1,
    "share": 1,
    "write": 1
