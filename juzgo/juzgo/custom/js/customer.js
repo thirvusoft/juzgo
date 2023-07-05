@@ -320,33 +320,37 @@ function check_list(frm){
             for(let i=0;i<frm.doc.family_members_documents.length;i++){
                 if(resend == 0){
                     if(frm.doc.family_members_documents[i].receive_or_send=="To Receive"){
-                        user[frm.doc.family_members_documents[i].members_name ].push(
-                            {
-                                fieldtype: 'Check',
-                                fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
-                                label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
-                                default:frm.doc.family_members_documents[i].check,
-                                onchange: function(event) {
-                                    let row = frm.doc.family_members_documents[i]
-                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                        if(user[frm.doc.family_members_documents[i].members_name ]){
+                            user[frm.doc.family_members_documents[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                                    label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.family_members_documents[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.family_members_documents[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 } else {
                     if(frm.doc.family_members_documents[i].receive_or_send=="To Send"){
-                        user[frm.doc.family_members_documents[i].members_name ].push(
-                            {
-                                fieldtype: 'Check',
-                                fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
-                                label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
-                                default:frm.doc.family_members_documents[i].check,
-                                onchange: function(event) {
-                                    let row = frm.doc.family_members_documents[i]
-                                    frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                        if(user[frm.doc.family_members_documents[i].members_name ]){
+                            user[frm.doc.family_members_documents[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.family_members_documents[i].members_name+frm.doc.family_members_documents[i].check_list_name,
+                                    label:(frm.doc.family_members_documents[i].check_list_name)+(frm.doc.family_members_documents[i].receive_or_send=="To Send"?"(s)":frm.doc.family_members_documents[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.family_members_documents[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.family_members_documents[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
