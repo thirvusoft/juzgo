@@ -1811,8 +1811,6 @@
    "collapsible": 0,
    "collapsible_depends_on": null,
    "columns": 0,
-<<<<<<< HEAD
-=======
    "creation": "2023-07-03 12:30:37.746097",
    "default": null,
    "depends_on": null,
@@ -1873,7 +1871,6 @@
    "collapsible": 0,
    "collapsible_depends_on": null,
    "columns": 0,
->>>>>>> 38792420423c1748ce92c4d33dee839bcc6cd5ad
    "creation": "2023-07-03 12:35:39.633386",
    "default": null,
    "depends_on": null,
