@@ -705,6 +705,7 @@ function check_list(frm){
                     data: remainder_data[key[i]]
                 })
             }
+            remainder_html.innerHTML=''
             remainder_group = new frappe.ui.FieldGroup({
                 fields: remainder_fields,
                 body: remainder_html
