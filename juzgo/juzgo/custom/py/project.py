@@ -490,7 +490,6 @@ def validate_check(doc,even):
             if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
                 new = 1
         if new == 0:
-            print(i["customer_id"],"pppppppppppp")
             doc.append('check_list_remainder_table',dict(
                 check_list=i["check_list_name"],
                 member_name=i['members_name'],
