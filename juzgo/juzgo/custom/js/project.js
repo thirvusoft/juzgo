@@ -443,7 +443,7 @@ function check_list(frm){
                         parent_name1:frm.doc.family_members_destination_attachment[i].name,
                         checkfile:frm.doc.family_members_destination_attachment[i].file?1:0,
                         receive_or_send:frm.doc.family_members_destination_attachment[i].receive_or_send,
-                        customer_id:frm.doc.family_members_attachment[i].customer_id,
+                        customer_id:frm.doc.family_members_destination_attachment[i].customer_id,
                     }
                 )
             }
@@ -490,7 +490,9 @@ function check_list(frm){
                             if(htmlrow.parent_name1 == el.name){
                                 frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
                                 frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
-                                frm.save()
+                                frm.save().then(()=>{
+                                    frm.reload_doc()
+                                })
                             }
                         });
                     }
