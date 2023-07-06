@@ -32,8 +32,10 @@
   "notes",
   "image_section_section",
   "image",
+  "img_preview",
   "menu_section_section",
-  "menu"
+  "menu",
+  "menu_preview"
  ],
  "fields": [
   {
@@ -179,6 +181,16 @@
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
+  },
+  {
+   "fieldname": "menu_preview",
+   "fieldtype": "HTML",
+   "label": "Menu Preview"
   }
  ],
  "index_web_pages_for_search": 1,

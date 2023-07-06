@@ -496,3 +496,8 @@ def validate_check(doc,even):
                 member_name=i['members_name'],
                 customer_id = i["customer_id"]
             ))
+
+@frappe.whitelist()
+def project_exist_list(project_name):
+    task_name=frappe.db.get_all("Project", filters={"project_name":["Like", "%"+project_name+"%"]}, fields=["name","project_name"])
+    return task_name

@@ -28,6 +28,8 @@
   "column_break_12",
   "pin_location",
   "open_url",
+  "website_url",
+  "open_website",
   "preferred_transfer",
   "inclusion",
   "exclusion",
@@ -35,6 +37,7 @@
   "budget",
   "section_break_15",
   "image_details",
+  "img_preview",
   "notes"
  ],
  "fields": [
@@ -90,7 +93,7 @@
   },
   {
    "fieldname": "duration_of_the_tour",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Duration of the Tour"
   },
   {
@@ -188,7 +191,7 @@
   {
    "fieldname": "open_url",
    "fieldtype": "Button",
-   "label": "Open URL"
+   "label": "Open Location"
   },
   {
    "default": "Not Reviewed",
@@ -199,6 +202,23 @@
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "website_url",
+   "fieldtype": "Data",
+   "label": "Website URL",
+   "length": 1000
+  },
+  {
+   "fieldname": "open_website",
+   "fieldtype": "Button",
+   "label": "Open Website",
+   "length": 1000
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
   }
  ],
  "index_web_pages_for_search": 1,

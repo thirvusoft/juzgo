@@ -47,6 +47,7 @@
   "ifscswift_code",
   "images_section",
   "image_table",
+  "img_preview",
   "notes"
  ],
  "fields": [
@@ -285,6 +286,11 @@
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
   }
  ],
  "index_web_pages_for_search": 1,

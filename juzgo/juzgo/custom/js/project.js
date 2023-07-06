@@ -53,7 +53,30 @@ frappe.ui.form.on('Project', {
 				
 
         }
-        })    
+        })
+        if (frm.doc.project_name.length >= 3){
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.project.project_exist_list",
+                args: {
+                    "project_name": frm.doc.project_name
+                },
+                callback: function (r) {
+                    if (r && r.message) {
+                        frm.set_df_property(
+                            "project_name",
+                            "description",
+                            ('This Project Name already exists: {0}', [r.message.map(function (d) {
+                                return repl('<a href="/app/project/%(name)s">%(or_name)s</a>', { name: d['name'], or_name: d['project_name'] })
+                            }).join(', ')]));
+                    }
+                },
+            })
+        } else {
+            frm.set_df_property(
+                "project_name",
+                "description",
+                "");
+        }
     },
     no_of_days: function(frm){
         frm.set_value("no_of_nights",frm.doc.no_of_days-1)

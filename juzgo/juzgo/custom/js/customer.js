@@ -16,9 +16,6 @@ frappe.ui.form.on('Customer', {
                 return { filters: filters };
             });
             frm.add_custom_button(('Update Checklist'), () => {
-                // for(let i=0;i<frm.doc.family_members_details.length;i++){
-                //     add_member_details(frm,frm.doc.family_members_details[i])
-                // }
                 frappe.call({
                     method:'juzgo.juzgo.custom.py.customer.fetch_checklist',
                     args:{
