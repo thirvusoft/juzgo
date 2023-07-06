@@ -159,6 +159,7 @@ def add_destination_details(name,destination):
                 for i in destination_list:
                     table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
                     if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
+                    if table_doc:break
                 if not table_doc:frappe.msgprint("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
@@ -495,3 +496,8 @@ def validate_check(doc,even):
                 member_name=i['members_name'],
                 customer_id = i["customer_id"]
             ))
+
+@frappe.whitelist()
+def project_exist_list(project_name):
+    task_name=frappe.db.get_all("Project", filters={"project_name":["Like", "%"+project_name+"%"]}, fields=["name","project_name"])
+    return task_name

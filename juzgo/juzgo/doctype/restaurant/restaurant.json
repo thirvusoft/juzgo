@@ -32,8 +32,10 @@
   "notes",
   "image_section_section",
   "image",
+  "img_preview",
   "menu_section_section",
-  "menu"
+  "menu",
+  "menu_preview"
  ],
  "fields": [
   {
@@ -178,12 +180,22 @@
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
+  },
+  {
+   "fieldname": "menu_preview",
+   "fieldtype": "HTML",
+   "label": "Menu Preview"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-05 11:01:12.251374",
+ "modified": "2023-07-06 12:24:46.068368",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",

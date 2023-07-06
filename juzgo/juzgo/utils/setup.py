@@ -37,6 +37,45 @@ def setup_fields():
                 depends_on= "eval:doc.send_mail_interview_created",
                 mandatory_depends_on= "eval:doc.send_mail_interview_created"
             ),
+        ],
+        'System Settings':[
+            dict(
+                fieldname= "sb_img_preview",
+                fieldtype= "Section Break",
+                insert_after= "disable_change_log_notification",
+                label= "Image Preview",
+                collapsible = 1
+            ),
+            dict(
+                fieldname= "layout_width",
+                fieldtype= "Data",
+                insert_after= "sb_img_preview",
+                label= "Layout Width",
+                hidden=1
+            ),
+            dict(
+                fieldname= "layout_height",
+                fieldtype= "Data",
+                insert_after= "layout_width",
+                label= "Layout Height",
+            ),
+            dict(
+                fieldname= "cb_img",
+                fieldtype= "Column Break",
+                insert_after= "layout_height",
+            ),
+            dict(
+                fieldname= "image_width",
+                fieldtype= "Data",
+                insert_after= "cb_img",
+                label= "Image Width",
+            ),
+            dict(
+                fieldname= "image_height",
+                fieldtype= "Data",
+                insert_after= "image_width",
+                label= "Image Height",
+            ),
         ]
     }
     create_custom_fields(custom_fields)

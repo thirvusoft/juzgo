@@ -141,7 +141,10 @@ def status_approval(name,task_approval):
     status = frappe.get_value("Task Approval", {"parent": name,"user":task_approval["user"]}, 'status')
     return status
 
-       
+@frappe.whitelist()
+def task_exist_list(subject):
+    task_name=frappe.db.get_all("Task", filters={"subject":["Like", "%"+subject+"%"]}, fields=["name","subject"])
+    return task_name
 
             
 def user(doc, user):
