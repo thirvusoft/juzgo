@@ -143,9 +143,8 @@
   },
   {
    "fieldname": "budget",
-   "fieldtype": "Link",
-   "label": "Budget",
-   "options": "Budget"
+   "fieldtype": "Data",
+   "label": "Budget"
   },
   {
    "fieldname": "best_time_to_visit",
@@ -199,6 +198,7 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -223,7 +223,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 11:16:57.222718",
+ "modified": "2023-07-06 12:49:10.992444",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

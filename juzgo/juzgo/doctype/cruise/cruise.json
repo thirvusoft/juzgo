@@ -110,6 +110,7 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -117,7 +118,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 10:57:36.689899",
+ "modified": "2023-07-05 16:13:25.741030",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",

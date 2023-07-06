@@ -31,7 +31,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-07-05 11:50:20.727479",
+ "modified": "2023-07-05 16:07:40.585943",
  "modified_by": "sibi.kumar@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Masters",
@@ -43,6 +43,12 @@
  "roles": [
   {
    "role": "Operational Executive"
+  },
+  {
+   "role": "Juzgo HR"
+  },
+  {
+   "role": "Juzgo Admin"
   }
  ],
  "sequence_id": 40.0,
