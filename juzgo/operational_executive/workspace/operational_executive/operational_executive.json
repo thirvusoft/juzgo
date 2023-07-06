@@ -17,7 +17,7 @@
  "is_hidden": 0,
  "label": "Operational Executive",
  "links": [],
- "modified": "2023-07-04 20:08:48.518831",
+ "modified": "2023-07-05 16:53:21.485947",
  "modified_by": "prithivraj@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Operational Executive",
@@ -52,7 +52,7 @@
    "doc_view": "List",
    "label": "Comment List",
    "link_to": "Notification Log",
-   "stats_filter": "{\"type\":[\"=\",\"Mention\"],\"_liked_by\":[\"not like\",\"%prithivraj@thirvusoft.in%\"]}",
+   "stats_filter": "{\"type\":[\"=\",\"Mention\"],\"_liked_by\":[\"not like\",frappe.session.user]}",
    "type": "DocType"
   },
   {

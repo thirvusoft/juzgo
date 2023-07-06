@@ -391,6 +391,7 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -398,7 +399,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 11:01:55.910938",
+ "modified": "2023-07-05 16:12:51.913493",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Operator",
