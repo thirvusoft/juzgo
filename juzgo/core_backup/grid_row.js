@@ -148,6 +148,18 @@ export default class GridRow {
 	}
 	insert(show, below, duplicate) {
 		var idx = this.doc.idx;
+		//thirvu change
+		if(this.doc.doctype == "Timesheet Detail"){
+			let task_id = this.doc
+			this.doc = {}
+			this.doc = {
+				'task':task_id.task,
+				'doctype':task_id.doctype,
+				'name':task_id.name,
+				'idx':task_id.idx
+			}
+		} 
+		//end thrivu change
 		var copy_doc = duplicate ? this.doc : null;
 		if (below) idx++;
 		this.toggle_view(false);
