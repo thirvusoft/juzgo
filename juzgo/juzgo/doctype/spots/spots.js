@@ -2,6 +2,12 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Spots', {
+    validate: function(frm){
+        console.log(frm.doc.closing_time)
+        if((frm.doc.opening_time.split(':')[0] == frm.doc.closing_time.split(':')[0])&&(frm.doc.opening_time.split(':')[1] == frm.doc.closing_time.split(':')[1])){
+            frappe.throw("Kindly Check Opening Time and Closing Time. Both Time cannot be same.")
+        }
+    },
 	open_url: function(frm){
         if(!frm.doc.pin_location){
             cur_frm.scroll_to_field('pin_location')
@@ -61,3 +67,15 @@ frappe.ui.form.on('Spots', {
         }
     },
 });
+
+frappe.ui.form.on('Reference Table', {
+	open_url: function(frm,cdt,cdn){
+        let row = locals[cdt][cdn]
+        if(!row.url){
+            frappe.throw('Enter URL in Row '+row.idx+' .')
+        }
+        else{
+        window.open(row.url, '_blank')
+        }
+    },
+})

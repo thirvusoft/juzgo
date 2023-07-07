@@ -38,6 +38,7 @@
   "section_break_15",
   "image_details",
   "img_preview",
+  "reference_table",
   "notes"
  ],
  "fields": [
@@ -143,8 +144,9 @@
   },
   {
    "fieldname": "budget",
-   "fieldtype": "Data",
-   "label": "Budget"
+   "fieldtype": "Link",
+   "label": "Budget",
+   "options": "Budget"
   },
   {
    "fieldname": "best_time_to_visit",
@@ -198,7 +200,6 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -219,11 +220,18 @@
    "fieldname": "img_preview",
    "fieldtype": "HTML",
    "label": "Img Preview"
+  },
+  {
+   "fieldname": "reference_table",
+   "fieldtype": "Table",
+   "label": "Reference Table",
+   "options": "Reference Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 12:49:10.992444",
+ "make_attachments_public": 1,
+ "modified": "2023-07-06 16:10:18.218559",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",
