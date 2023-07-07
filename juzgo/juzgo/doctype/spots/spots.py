@@ -72,7 +72,7 @@ def img_preview(table=None,image=None,des=None,menu=None):
 					<a target="_blank" href="{i.get(image)}">
 					<img src="{i.get(image)}" alt="No Image" >
 					</a>
-					<div class="desc">{"Menu :- "+i.get(menu)+"<br>Description :- " if i.get(menu) else ""}{i.get(des)}</div>
+					<div class="desc">{"Menu :- "+i.get(menu)+"<br>Description :- " if i.get(menu) else ""}{i.get(des) or ""}</div>
 				</div>
 				</div>
 			'''
