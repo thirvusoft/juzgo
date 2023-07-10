@@ -2,12 +2,11 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Spots', {
-    validate: function(frm){
-        console.log(frm.doc.closing_time)
-        if((frm.doc.opening_time.split(':')[0] == frm.doc.closing_time.split(':')[0])&&(frm.doc.opening_time.split(':')[1] == frm.doc.closing_time.split(':')[1])){
-            frappe.throw("Kindly Check Opening Time and Closing Time. Both Time cannot be same.")
-        }
-    },
+    // validate: function(frm){
+    //     if((frm.doc.opening_time.split(':')[0] == frm.doc.closing_time.split(':')[0])&&(frm.doc.opening_time.split(':')[1] == frm.doc.closing_time.split(':')[1])){
+    //         frappe.throw("Kindly Check Opening Time and Closing Time. Both Time cannot be same.")
+    //     }
+    // },
 	open_url: function(frm){
         if(!frm.doc.pin_location){
             cur_frm.scroll_to_field('pin_location')

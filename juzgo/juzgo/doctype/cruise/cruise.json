@@ -31,13 +31,17 @@
    "fieldname": "cruise_name",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Cruise Name",
    "reqd": 1,
    "unique": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "from_destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "From Destination",
    "options": "Destination"
   },
@@ -46,17 +50,22 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "to_destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "To Destination",
    "options": "Destination"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "no_of_nights",
    "fieldtype": "Int",
    "label": "No of Nights"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "Route"
@@ -111,6 +120,7 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -124,7 +134,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 16:24:52.587248",
+ "modified": "2023-07-10 15:14:32.585381",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
@@ -168,6 +178,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
