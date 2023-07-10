@@ -43,24 +43,28 @@
    "reqd": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
    "options": "Country"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "suitable_age_group",
    "fieldtype": "Table MultiSelect",
    "label": "Suitable Age group ",
    "options": "Age Group"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "flavour",
    "fieldtype": "Table MultiSelect",
    "label": "Flavour",
    "options": "Flavour"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
@@ -76,6 +80,7 @@
    "options": "Seasonal Preferences"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "visa_type",
    "fieldtype": "Link",
    "label": "Visa Type",
@@ -133,7 +138,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 16:10:46.360604",
+ "modified": "2023-07-10 13:32:11.993133",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
