@@ -90,7 +90,7 @@
   },
   {
    "fieldname": "duration_of_the_tour",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Duration of the Tour"
   },
   {
@@ -201,7 +201,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 12:37:21.583267",
+ "modified": "2023-07-10 09:59:16.087649",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",
