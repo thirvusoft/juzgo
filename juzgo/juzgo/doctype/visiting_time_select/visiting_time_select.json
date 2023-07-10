@@ -12,6 +12,7 @@
   {
    "fieldname": "visiting",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Visiting Time",
    "options": "Visiting Time"
   }
@@ -19,7 +20,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-28 11:46:05.440476",
+ "modified": "2023-07-06 12:48:12.431072",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Visiting Time Select",

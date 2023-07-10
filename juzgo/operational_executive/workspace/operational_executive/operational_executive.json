@@ -5,7 +5,7 @@
    "label": "Open Projects"
   }
  ],
- "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"Oe67nfM-Sg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet\",\"col\":3}},{\"id\":\"gvLuROA6rj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"U8F5Q6pc6I\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Check List\",\"col\":3}}]",
+ "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"Oe67nfM-Sg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet\",\"col\":3}},{\"id\":\"gvLuROA6rj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"U8F5Q6pc6I\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Check List\",\"col\":3}},{\"id\":\"VQl5lQKbSv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Comment List\",\"col\":3}}]",
  "creation": "2023-06-13 16:00:08.019671",
  "custom_blocks": [],
  "docstatus": 0,
@@ -17,8 +17,8 @@
  "is_hidden": 0,
  "label": "Operational Executive",
  "links": [],
- "modified": "2023-06-27 11:03:29.732499",
- "modified_by": "sibi.kumar@thirvusoft.in",
+ "modified": "2023-07-05 16:53:21.485947",
+ "modified_by": "prithivraj@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Operational Executive",
  "number_cards": [],
@@ -45,6 +45,14 @@
    "doc_view": "List",
    "label": "Timesheet",
    "link_to": "Timesheet",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Comment List",
+   "link_to": "Notification Log",
+   "stats_filter": "{\"type\":[\"=\",\"Mention\"],\"_liked_by\":[\"not like\",frappe.session.user]}",
    "type": "DocType"
   },
   {

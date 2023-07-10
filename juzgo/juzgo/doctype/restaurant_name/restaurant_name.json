@@ -8,15 +8,11 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "status",
   "restaurant_name",
   "destination",
-  "country",
   "city",
   "pin_location",
-  "open_url",
   "area",
-  "suggestion_area",
   "column_break_7",
   "opening_time",
   "closing_time",
@@ -32,11 +28,8 @@
   "notes",
   "image_section_section",
   "image",
-  "img_preview",
   "menu_section_section",
-  "menu",
-  "menu_preview",
-  "reference_table"
+  "menu"
  ],
  "fields": [
   {
@@ -61,7 +54,6 @@
    "fieldname": "pin_location",
    "fieldtype": "Data",
    "label": "Pin Location",
-   "length": 1000,
    "options": "URL"
   },
   {
@@ -71,9 +63,8 @@
    "options": "Area"
   },
   {
-   "fieldname": "budget",
-   "fieldtype": "Data",
-   "label": "Budget"
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "opening_time",
@@ -92,9 +83,24 @@
    "options": "Cusines Table"
   },
   {
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Type",
+   "options": "Restaurant Type"
+  },
+  {
    "fieldname": "contact_no",
    "fieldtype": "Data",
    "label": "contact No"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget",
+   "fieldtype": "Data",
+   "label": "Budget"
   },
   {
    "fieldname": "seating_capacity",
@@ -110,6 +116,10 @@
    "fieldname": "flexibility_of_services",
    "fieldtype": "Data",
    "label": "Flexibility of Services"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "notes",
@@ -136,76 +146,15 @@
    "fieldtype": "Table",
    "label": " ",
    "options": "Menu in Restaurant"
-  },
-  {
-   "fieldname": "column_break_7",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_12",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_16",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "type",
-   "fieldtype": "Link",
-   "label": "Type",
-   "options": "Restaurant Type"
-  },
-  {
-   "fieldname": "country",
-   "fieldtype": "Link",
-   "label": "Country",
-   "options": "Country"
-  },
-  {
-   "fieldname": "suggestion_area",
-   "fieldtype": "Table MultiSelect",
-   "label": "Suggestion Area",
-   "options": "Suggestion Area"
-  },
-  {
-   "fieldname": "open_url",
-   "fieldtype": "Button",
-   "label": "Open URL",
-   "length": 1000
-  },
-  {
-   "default": "Not Reviewed",
-   "description": "Juzgo Admins will Update this Status",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Not Reviewed\nApproved\nRejected\nRework",
-   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
-  },
-  {
-   "fieldname": "img_preview",
-   "fieldtype": "HTML",
-   "label": "Img Preview"
-  },
-  {
-   "fieldname": "menu_preview",
-   "fieldtype": "HTML",
-   "label": "Menu Preview"
-  },
-  {
-   "fieldname": "reference_table",
-   "fieldtype": "Table",
-   "label": "Reference Table",
-   "options": "Reference Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-06 16:24:04.539608",
+ "modified": "2023-07-05 11:24:45.324927",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Restaurant",
+ "name": "Restaurant Name",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -239,6 +188,20 @@
    "create": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo HR",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
@@ -250,7 +213,5 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1,
- "track_seen": 1
+ "states": []
 }

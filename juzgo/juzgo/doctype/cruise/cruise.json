@@ -23,6 +23,7 @@
   "cabin_details",
   "section_break_14",
   "other_charges",
+  "reference_table",
   "notes"
  ],
  "fields": [
@@ -106,16 +107,24 @@
    "options": "Other Charges"
   },
   {
+   "default": "Not Reviewed",
+   "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "\nApproved\nRejected\nRework",
+   "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "reference_table",
+   "fieldtype": "Table",
+   "label": "Reference Table",
+   "options": "Reference Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 12:41:10.092078",
+ "modified": "2023-07-06 16:24:52.587248",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
@@ -146,9 +155,22 @@
    "select": 1,
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operational Executive",
+   "select": 1,
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
 }

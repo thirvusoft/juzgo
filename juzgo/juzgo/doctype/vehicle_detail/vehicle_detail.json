@@ -87,16 +87,19 @@
    "label": "Notes"
   },
   {
+   "default": "Not reviewed",
+   "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
-   "options": "\nApproved\nRejected\nRework",
+   "options": "Not reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 12:38:43.085252",
+ "modified": "2023-07-05 16:11:22.326985",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Vehicle Detail",
@@ -128,9 +131,23 @@
    "select": 1,
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operational Executive",
+   "select": 1,
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
 }
