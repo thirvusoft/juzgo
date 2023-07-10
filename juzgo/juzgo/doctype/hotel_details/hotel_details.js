@@ -7,7 +7,7 @@ frappe.ui.form.on('Hotel Details', {
 			return { filters:{destination: frm.doc.destination }};
 		});
 		frm.set_query("nearby_indian_restaurants", function () {
-			return { filters:{type: "India" }};
+			return { filters:{type: "Indian" }};
 		});
         frappe.call({
             method: "juzgo.juzgo.doctype.spots.spots.img_preview",
