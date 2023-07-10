@@ -3,6 +3,12 @@
 
 frappe.ui.form.on('Hotel Details', {
 	refresh: function(frm) {
+        frappe.dynamic_link = {doc: frm.doc, fieldname: 'name', doctype: 'Hotel Details'}
+        if (!frm.is_new()) {
+			frappe.contacts.render_address_and_contact(frm);
+		} else {
+			frappe.contacts.clear_address_and_contact(frm);
+		}
 		frm.set_query("nearby_places_table", function () {
 			return { filters:{destination: frm.doc.destination }};
 		});

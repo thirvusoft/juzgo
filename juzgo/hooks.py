@@ -80,6 +80,9 @@ doc_events = {
                       "juzgo.juzgo.custom.py.project.validate_check"
 					  ],
 		"after_insert" : "juzgo.juzgo.custom.py.project.project_head"
+	},
+    "Contact":{
+        "validate" : "juzgo.juzgo.custom.py.contact.add_phone_and_contact" 
 	}
 
 }

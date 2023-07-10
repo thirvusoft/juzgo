@@ -39,6 +39,12 @@ frappe.ui.form.on('Restaurant', {
         }
     },
     refresh: function(frm){
+        frappe.dynamic_link = {doc: frm.doc, fieldname: 'name', doctype: 'Restaurant'}
+        if (!frm.is_new()) {
+			frappe.contacts.render_address_and_contact(frm);
+		} else {
+			frappe.contacts.clear_address_and_contact(frm);
+		}
         frappe.call({
             method: "juzgo.juzgo.doctype.spots.spots.img_preview",
             args: {

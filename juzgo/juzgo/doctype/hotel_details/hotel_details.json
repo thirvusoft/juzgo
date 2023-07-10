@@ -29,8 +29,10 @@
   "is_jtt",
   "print_name",
   "address_and_contact_details_section",
+  "address_html",
   "address",
   "column_break_20",
+  "contact_html",
   "contact",
   "room_details_section",
   "room_details_table",
@@ -53,7 +55,6 @@
  ],
  "fields": [
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "hotel_name",
    "fieldtype": "Data",
    "label": "Hotel Name",
@@ -65,37 +66,30 @@
    "label": "Contact Person "
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "destination",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Destination ",
    "options": "Destination"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "city",
    "fieldtype": "Link",
    "label": "City",
    "options": "City"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "area",
    "fieldtype": "Link",
    "label": "Area",
    "options": "Area"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
    "options": "Country"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "hotel_type",
    "fieldtype": "Select",
    "label": "Hotel Type",
@@ -131,15 +125,12 @@
    "label": "Print Name"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "star_rating",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Star Rating",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "website_link",
    "fieldtype": "Data",
    "label": "Website Link",
@@ -154,6 +145,7 @@
    "options": "URL"
   },
   {
+   "depends_on": "eval:!doc.__islocal",
    "fieldname": "address_and_contact_details_section",
    "fieldtype": "Section Break",
    "label": "Address and Contact Details "
@@ -161,13 +153,13 @@
   {
    "fieldname": "address",
    "fieldtype": "Link",
-   "label": "Address",
+   "label": "Primary Address",
    "options": "Address"
   },
   {
    "fieldname": "contact",
    "fieldtype": "Link",
-   "label": "Contact",
+   "label": "Primary Contact",
    "options": "Contact"
   },
   {
@@ -265,7 +257,6 @@
    "options": "Restaurant in Hotal"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "column_break_uubr6",
    "fieldtype": "Column Break"
   },
@@ -295,7 +286,6 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -310,12 +300,22 @@
    "fieldtype": "Table",
    "label": "Reference Table",
    "options": "Reference Table"
+  },
+  {
+   "fieldname": "address_html",
+   "fieldtype": "HTML",
+   "label": "Address HTML"
+  },
+  {
+   "fieldname": "contact_html",
+   "fieldtype": "HTML",
+   "label": "Contact HTML"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-10 13:28:06.284525",
+ "modified": "2023-07-10 17:31:19.978825",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",
@@ -375,7 +375,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
