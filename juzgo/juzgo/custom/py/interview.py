@@ -1,3 +1,4 @@
+import json
 import frappe
 
 def send_interview_round_status(doc,action):
@@ -63,3 +64,17 @@ def create_interview(doc, interview_round):
 	for d in interviewer_detail:
 		interview.append("interview_details", {"interviewer": d.interviewer})
 	return interview
+
+@frappe.whitelist()
+def interview_designation(designation,table):
+    table = json.loads(table)
+    l = []
+    for i in table:l.append(i.get('interview_question'))
+    designation = frappe.get_all("interview Designation",filters={'parentfield':'designation','designation':designation},pluck="parent")
+    interview_qus = frappe.get_all("Interview Question",filters={'name':['in',designation]},pluck="name")
+    list = []
+    for i in interview_qus:
+        if i not in l:
+            q = frappe.get_doc("Interview Question",i)
+            list.append({"interview_question":q.name,"question":q.question,"actual_point":q.point})
+    return list
