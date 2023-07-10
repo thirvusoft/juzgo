@@ -5,6 +5,7 @@ frappe.ui.form.on('Timesheet', {
         }, 10);
     },
 	refresh: function(frm){
+		frm.fields_dict.time_logs.$wrapper.find('.grid-remove-rows')[0].style.display = 'none'
 		frm.$wrapper.find(".row.form-dashboard-section.form-links").addClass("hidden")
         let fetch_task_btn = document.querySelector('button[data-fieldname="fetch_task"]')
 		if(fetch_task_btn){

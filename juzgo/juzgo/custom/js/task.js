@@ -1,4 +1,29 @@
 frappe.ui.form.on('Task', {
+    subject:function(frm){
+        if (frm.doc.subject.length >= 3){
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.task.task_exist_list",
+                args: {
+                    "subject": frm.doc.subject
+                },
+                callback: function (r) {
+                    if (r && r.message) {
+                        frm.set_df_property(
+                            "subject",
+                            "description",
+                            ('This Task Name already exists: {0}', [r.message.map(function (d) {
+                                return repl('<a href="/app/task/%(name)s">%(or_name)s</a>', { name: d['name'], or_name: d['subject'] })
+                            }).join(', ')]));
+                    }
+                },
+            })
+        } else {
+            frm.set_df_property(
+                "subject",
+                "description",
+                "");
+        }
+    },
     onload:function (frm) {
         setTimeout(() => {
             $("[data-doctype='Expense Claim']").hide();

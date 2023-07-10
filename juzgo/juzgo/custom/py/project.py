@@ -120,13 +120,28 @@ def get_family_member_attachment(family_members_attachment,custom_list):
     members_attachment_project = []
     for cus in custom_list:
         custom_details = frappe.get_doc("Customer",cus).family_members_documents
+        attach_details = frappe.get_doc("Customer",cus).family_members_table
         for i in custom_details:
-            members_attachment_project.append({
-                "members_name":i.members_name,
-                "check_list_name":i.check_list_name,
-                "check":i.check,
-                "receive_or_send":i.receive_or_send,
-            })
+            if i.check == 1:
+                for j in attach_details:
+                    if i.family_member_details_name == j.family_members_documents_name and i.check_list_name == j.file_type:
+                        members_attachment_project.append({
+                            "members_name":i.members_name,
+                            "check_list_name":i.check_list_name,
+                            "check":i.check,
+                            "receive_or_send":i.receive_or_send,
+                            "file":j.file,
+                            "next_remainder_or_expiry_on":j.next_remainder_or_expiry_on,
+                            "description":j.description
+                        })
+            else:
+                members_attachment_project.append({
+                    "members_name":i.members_name,
+                    "check_list_name":i.check_list_name,
+                    "check":i.check,
+                    "receive_or_send":i.receive_or_send,
+                })
+        print(members_attachment_project)
     return family_members_attachment,members_attachment_project
 
 
@@ -144,7 +159,8 @@ def add_destination_details(name,destination):
                 for i in destination_list:
                     table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
                     if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
-                if not table_doc:frappe.msgprint("Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
+                    if table_doc:break
+                if not table_doc:frappe.msgprint("In Destination Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:
@@ -369,37 +385,51 @@ function addmember(cus_id,table) {
   document.getElementById('member_name_label').innerHTML="Add "+cus_id+"'s Family Member";
   document.getElementById('customer_id').value=cus_id;
   var el_child = document.getElementById("child_select");
-  frappe.db.get_list('Family Members Details', {filters:{'parent':cus_id}, fields:['name','members_name','member_row_id']}).then((r)=>{
-        frappe.db.get_list('Project Family Details', {filters:{'parent':table,'customer_id':cus_id}, fields:['name','members_name','member_row_id']}).then((r1)=>{
+  frappe.call({
+        method:'juzgo.juzgo.custom.py.project.collect_details',
+        args:{
+            cus_id:cus_id,
+            parent:table
+        },
+        callback(t){
+            var r = t.message[0]
+            var r1 = t.message[1]
             for(let i=0;i<r.length;i++){
                 let p = 0
                 for(let j=0;j<r1.length;j++){
                     if(r[i].members_name == r1[j].members_name && r[i].member_row_id == r1[j].member_row_id){
-                     p=1
+                    p=1
                     }
                 }
                 if(p == 0){
                     el_child.innerHTML = el_child.innerHTML + '<option value='+r[i].name+'>'+ r[i].members_name +'</option>';
                 }
             }
-        })
+        }
     })
 }
 function AddtoTable(){
     let cus_id =  document.getElementById('customer_id').value
     let member_row_id = document.getElementById('child_select').value
-    frappe.db.get_list('Family Members Details', {filters:{'name':member_row_id}, fields:['date_of_birth','gender','age','relationship','members_name','member_row_id']}).then((row)=>{
-        let child = cur_frm.add_child("family_member_details")
-        frappe.model.set_value(child.doctype, child.name, "members_name", row[0].members_name)
-        frappe.model.set_value(child.doctype, child.name, "date_of_birth", row[0].date_of_birth)
-        frappe.model.set_value(child.doctype, child.name, "gender", row[0].gender)
-        frappe.model.set_value(child.doctype, child.name, "age", row[0].age)
-        frappe.model.set_value(child.doctype, child.name, "relationship", row[0].relationship)
-        frappe.model.set_value(child.doctype, child.name, "member_row_id", row[0].member_row_id)
-        frappe.model.set_value(child.doctype, child.name, "customer_id", cus_id)
-        refresh_field("family_member_details");
-        cur_frm.save()
-        document.getElementById('id01').style.display='none'
+    frappe.call({
+        method:'juzgo.juzgo.custom.py.project.add_family_details',
+        args:{
+            name:member_row_id,
+        },
+        callback(t){
+            let row = t.message
+            let child = cur_frm.add_child("family_member_details")
+            frappe.model.set_value(child.doctype, child.name, "members_name", row[0].members_name)
+            frappe.model.set_value(child.doctype, child.name, "date_of_birth", row[0].date_of_birth)
+            frappe.model.set_value(child.doctype, child.name, "gender", row[0].gender)
+            frappe.model.set_value(child.doctype, child.name, "age", row[0].age)
+            frappe.model.set_value(child.doctype, child.name, "relationship", row[0].relationship)
+            frappe.model.set_value(child.doctype, child.name, "member_row_id", row[0].member_row_id)
+            frappe.model.set_value(child.doctype, child.name, "customer_id", cus_id)
+            refresh_field("family_member_details");
+            cur_frm.save()
+            document.getElementById('id01').style.display='none'
+        }
     })
     
 }
@@ -408,6 +438,14 @@ function AddtoTable(){
         """
     return html
 
+@frappe.whitelist()
+def collect_details(cus_id,parent):
+    family_members_details = frappe.get_all('Family Members Details',filters={'parent':cus_id}, fields=['name','members_name','member_row_id'])
+    project_family_details = frappe.get_all('Project Family Details',filters={'parent':parent,'customer_id':cus_id}, fields=['name','members_name','member_row_id'])
+    return(family_members_details,project_family_details)
+@frappe.whitelist()
+def add_family_details(name):
+    return frappe.get_all('Family Members Details', filters={'name':name}, fields=['date_of_birth','gender','age','relationship','members_name','member_row_id'])
 def project_head(doc,actions):
     if doc.project_head and (actions == "after_insert" or not doc.is_new()):
         doc_ = frappe.new_doc("ToDo")        
@@ -431,7 +469,7 @@ def validate_check(doc,even):
     re_list = []
     for i in doc.destination_check_list:
         if(i.check == 0):
-            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name})
+            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name,'customer_id':i.customer_id})
     remove_idx= []
     for j in doc.check_list_remainder_table:
         dele = 0
@@ -455,5 +493,11 @@ def validate_check(doc,even):
         if new == 0:
             doc.append('check_list_remainder_table',dict(
                 check_list=i["check_list_name"],
-                member_name=i['members_name']
+                member_name=i['members_name'],
+                customer_id = i["customer_id"]
             ))
+
+@frappe.whitelist()
+def project_exist_list(project_name):
+    task_name=frappe.db.get_all("Project", filters={"project_name":["Like", "%"+project_name+"%"]}, fields=["name","project_name"])
+    return task_name
