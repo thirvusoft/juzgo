@@ -74,20 +74,25 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "operator_name",
    "fieldtype": "Data",
    "label": "Operator Name",
    "unique": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "mode_of_transport",
    "fieldtype": "Link",
    "label": "Mode of Transport",
    "options": "Mode of Transport"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Destination",
    "options": "Destination"
   },
@@ -399,7 +404,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 16:12:51.913493",
+ "modified": "2023-07-10 15:12:24.021587",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Operator",
@@ -445,6 +450,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
