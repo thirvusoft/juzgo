@@ -104,12 +104,6 @@
    "label": "Duration of the Tour"
   },
   {
-   "fieldname": "holiday_list",
-   "fieldtype": "Select",
-   "label": "Holiday List",
-   "options": "\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday"
-  },
-  {
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
   },
@@ -233,12 +227,18 @@
    "fieldtype": "Table",
    "label": "Reference Table",
    "options": "Reference Table"
+  },
+  {
+   "fieldname": "holiday_list",
+   "fieldtype": "Table MultiSelect",
+   "label": "Holiday List",
+   "options": "Holidays list table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 09:59:16.087649",
  "make_attachments_public": 1,
+ "modified": "2023-07-11 16:30:25.065053",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

@@ -80,6 +80,9 @@ doc_events = {
                       "juzgo.juzgo.custom.py.project.validate_check"
 					  ],
 		"after_insert" : "juzgo.juzgo.custom.py.project.project_head"
+	},
+    "Notification Log" : {
+        "after_insert": "juzgo.custom.py.notification_log.after_insert"
 	}
 
 }
