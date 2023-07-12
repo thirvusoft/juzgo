@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab_break_18",
   "status",
   "destination_name",
   "destination_abbr",
@@ -43,28 +44,24 @@
    "reqd": 1
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
    "options": "Country"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "suitable_age_group",
    "fieldtype": "Table MultiSelect",
    "label": "Suitable Age group ",
    "options": "Age Group"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "flavour",
    "fieldtype": "Table MultiSelect",
    "label": "Flavour",
    "options": "Flavour"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
@@ -80,7 +77,6 @@
    "options": "Seasonal Preferences"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "visa_type",
    "fieldtype": "Link",
    "label": "Visa Type",
@@ -130,15 +126,36 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "tab_break_18",
+   "fieldtype": "Tab Break",
+   "show_dashboard": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2023-07-10 13:32:11.993133",
+ "links": [
+  {
+   "link_doctype": "Hotel Details",
+   "link_fieldname": "destination"
+  },
+  {
+   "link_doctype": "Restaurant",
+   "link_fieldname": "destination"
+  },
+  {
+   "link_doctype": "Spots",
+   "link_fieldname": "destination"
+  },
+  {
+   "link_doctype": "Operator",
+   "link_fieldname": "destination"
+  }
+ ],
+ "modified": "2023-07-12 13:37:26.325607",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
