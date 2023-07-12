@@ -38,9 +38,9 @@
   {
    "allow_in_quick_entry": 1,
    "fieldname": "designation",
-   "fieldtype": "Link",
+   "fieldtype": "Table MultiSelect",
    "label": "Designation",
-   "options": "Designation"
+   "options": "interview Designation"
   },
   {
    "allow_in_quick_entry": 1,
@@ -63,7 +63,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 11:11:27.539838",
+ "modified": "2023-07-10 10:46:59.376131",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Interview Question",

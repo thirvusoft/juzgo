@@ -34,7 +34,7 @@
   "inclusion",
   "exclusion",
   "best_season",
-  "budget",
+  "budgets",
   "section_break_15",
   "image_details",
   "img_preview",
@@ -104,6 +104,15 @@
    "label": "Duration of the Tour"
   },
   {
+<<<<<<< HEAD
+=======
+   "fieldname": "holiday_list",
+   "fieldtype": "Table MultiSelect",
+   "label": "Holiday List",
+   "options": "Holidays list table"
+  },
+  {
+>>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
   },
@@ -141,12 +150,6 @@
    "fieldtype": "Table MultiSelect",
    "label": "Best Season",
    "options": "Best Season"
-  },
-  {
-   "fieldname": "budget",
-   "fieldtype": "Link",
-   "label": "Budget",
-   "options": "Budget"
   },
   {
    "fieldname": "best_time_to_visit",
@@ -229,16 +232,26 @@
    "options": "Reference Table"
   },
   {
+<<<<<<< HEAD
    "fieldname": "holiday_list",
    "fieldtype": "Table MultiSelect",
    "label": "Holiday List",
    "options": "Holidays list table"
+=======
+   "fieldname": "budgets",
+   "fieldtype": "Float",
+   "label": "Budget"
+>>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
+<<<<<<< HEAD
  "modified": "2023-07-11 16:30:25.065053",
+=======
+ "modified": "2023-07-12 11:15:40.814184",
+>>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

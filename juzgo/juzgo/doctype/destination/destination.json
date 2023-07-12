@@ -12,6 +12,7 @@
   "destination_name",
   "destination_abbr",
   "country",
+  "currency",
   "column_break_4",
   "suitable_age_group",
   "flavour",
@@ -134,11 +135,17 @@
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 13:32:11.993133",
+ "modified": "2023-07-11 12:00:12.975822",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

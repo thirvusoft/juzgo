@@ -1,29 +1,29 @@
 {
  "actions": [],
  "autoname": "autoincrement",
- "creation": "2023-06-28 12:19:16.285705",
+ "creation": "2023-07-10 10:45:21.113899",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "cusines"
+  "designation"
  ],
  "fields": [
   {
-   "fieldname": "cusines",
+   "fieldname": "designation",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Cusines",
-   "options": "Cusines"
+   "label": "Designation",
+   "options": "Designation"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-11 14:54:22.793964",
+ "modified": "2023-07-10 10:45:21.113899",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Cusines Table",
+ "name": "interview Designation",
  "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [],

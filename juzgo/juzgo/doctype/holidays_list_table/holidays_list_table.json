@@ -1,7 +1,11 @@
 {
  "actions": [],
  "allow_rename": 1,
+<<<<<<< HEAD
  "creation": "2023-07-11 16:27:27.483394",
+=======
+ "creation": "2023-07-12 09:53:34.654887",
+>>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -21,7 +25,11 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2023-07-11 16:30:12.396215",
+=======
+ "modified": "2023-07-12 09:53:34.654887",
+>>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Holidays list table",

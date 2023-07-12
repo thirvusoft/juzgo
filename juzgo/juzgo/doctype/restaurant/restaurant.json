@@ -22,12 +22,15 @@
   "closing_time",
   "cusines",
   "type",
-  "contact_no",
+  "contact_html",
+  "primary_contact",
   "column_break_12",
   "budget",
   "seating_capacity",
   "hall_availability",
   "flexibility_of_services",
+  "contact_no",
+  "mobile_no",
   "section_break_16",
   "notes",
   "image_section_section",
@@ -40,22 +43,18 @@
  ],
  "fields": [
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "restaurant_name",
    "fieldtype": "Data",
    "label": "Restaurant Name",
    "unique": 1
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "destination",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Destination",
    "options": "Destination"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "city",
    "fieldtype": "Link",
    "label": "City",
@@ -69,14 +68,12 @@
    "options": "URL"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "area",
    "fieldtype": "Link",
    "label": "Area",
    "options": "Area"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "budget",
    "fieldtype": "Data",
    "label": "Budget"
@@ -92,19 +89,20 @@
    "label": "Closing Time"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "cusines",
    "fieldtype": "Table MultiSelect",
    "label": "Cusines",
    "options": "Cusines Table"
   },
   {
+   "fetch_from": "primary_contact.phone",
+   "fetch_if_empty": 1,
    "fieldname": "contact_no",
    "fieldtype": "Data",
-   "label": "contact No"
+   "label": "Phone No",
+   "read_only": 1
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "seating_capacity",
    "fieldtype": "Data",
    "label": "Seating Capacity"
@@ -146,7 +144,6 @@
    "options": "Menu in Restaurant"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "column_break_7",
    "fieldtype": "Column Break"
   },
@@ -159,15 +156,12 @@
    "fieldtype": "Section Break"
   },
   {
-   "allow_in_quick_entry": 1,
-   "description": "Country Style like Indian, Chinese, Penang, etc,...",
    "fieldname": "type",
    "fieldtype": "Link",
-   "label": "Restaurant Type",
+   "label": "Type",
    "options": "Restaurant Type"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
@@ -190,7 +184,6 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -210,12 +203,31 @@
    "fieldtype": "Table",
    "label": "Reference Table",
    "options": "Reference Table"
+  },
+  {
+   "depends_on": "eval:!doc.__islocal",
+   "fieldname": "contact_html",
+   "fieldtype": "Button",
+   "label": "Contact HTML"
+  },
+  {
+   "fieldname": "primary_contact",
+   "fieldtype": "Link",
+   "label": "Primary Contact",
+   "options": "Contact"
+  },
+  {
+   "fetch_from": "primary_contact.mobile_no",
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-10 13:29:04.640472",
+ "modified": "2023-07-10 19:19:33.035671",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",
@@ -261,7 +273,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
