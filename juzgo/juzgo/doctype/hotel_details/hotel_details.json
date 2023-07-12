@@ -19,6 +19,8 @@
   "hotel_type",
   "star_rating",
   "contact_person",
+  "budget_from_",
+  "budget_to_",
   "column_break_10",
   "website_link",
   "open_website",
@@ -29,9 +31,11 @@
   "is_jtt",
   "print_name",
   "address_and_contact_details_section",
+  "address_details",
   "address_html",
   "address",
   "column_break_20",
+  "contact_details",
   "contact_html",
   "contact",
   "room_details_section",
@@ -68,12 +72,14 @@
   {
    "fieldname": "destination",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Destination ",
    "options": "Destination"
   },
   {
    "fieldname": "city",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "City",
    "options": "City"
   },
@@ -86,6 +92,7 @@
   {
    "fieldname": "country",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Country",
    "options": "Country"
   },
@@ -127,6 +134,7 @@
   {
    "fieldname": "star_rating",
    "fieldtype": "Select",
+   "in_standard_filter": 1,
    "label": "Star Rating",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
@@ -154,13 +162,8 @@
    "fieldname": "address",
    "fieldtype": "Link",
    "label": "Primary Address",
-   "options": "Address"
-  },
-  {
-   "fieldname": "contact",
-   "fieldtype": "Link",
-   "label": "Primary Contact",
-   "options": "Contact"
+   "options": "Address",
+   "read_only": 1
   },
   {
    "fieldname": "room_details_section",
@@ -304,18 +307,45 @@
   {
    "fieldname": "address_html",
    "fieldtype": "HTML",
-   "label": "Address HTML"
+   "label": "Address HTML",
+   "read_only": 1
   },
   {
    "fieldname": "contact_html",
    "fieldtype": "HTML",
    "label": "Contact HTML"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Link",
+   "label": "Primary Contact",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "address_details",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "contact_details",
+   "fieldtype": "Small Text",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "budget_from_",
+   "fieldtype": "Float",
+   "label": "Budget From"
+  },
+  {
+   "fieldname": "budget_to_",
+   "fieldtype": "Float",
+   "label": "Budget To"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-10 17:31:19.978825",
+ "modified": "2023-07-11 18:37:29.366154",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",

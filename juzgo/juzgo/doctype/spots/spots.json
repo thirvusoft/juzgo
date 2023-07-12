@@ -34,7 +34,7 @@
   "inclusion",
   "exclusion",
   "best_season",
-  "budget",
+  "budgets",
   "section_break_15",
   "image_details",
   "img_preview",
@@ -105,9 +105,9 @@
   },
   {
    "fieldname": "holiday_list",
-   "fieldtype": "Select",
+   "fieldtype": "Table MultiSelect",
    "label": "Holiday List",
-   "options": "\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday"
+   "options": "Holidays list table"
   },
   {
    "fieldname": "column_break_12",
@@ -147,12 +147,6 @@
    "fieldtype": "Table MultiSelect",
    "label": "Best Season",
    "options": "Best Season"
-  },
-  {
-   "fieldname": "budget",
-   "fieldtype": "Link",
-   "label": "Budget",
-   "options": "Budget"
   },
   {
    "fieldname": "best_time_to_visit",
@@ -233,12 +227,17 @@
    "fieldtype": "Table",
    "label": "Reference Table",
    "options": "Reference Table"
+  },
+  {
+   "fieldname": "budgets",
+   "fieldtype": "Float",
+   "label": "Budget"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 09:59:16.087649",
  "make_attachments_public": 1,
+ "modified": "2023-07-12 11:15:40.814184",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",
