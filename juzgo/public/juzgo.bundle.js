@@ -16,7 +16,7 @@ $(document).on('app_ready', function () {
             log.method = "notif.subject"        
             log.error = notif.email_content
             frappe.call({method:"frappe.client.save", args:{doc:log}})
-            var clicks = new Notification(strip_html(notif.subject), { body: strip_html(notif.email_content)});
+            var clicks = new Notification(strip_html(notif.subject), { body: strip_html(notif.email_content), icon: "https://app.juzgoholidays.com/files/juzgo%20length%20logo.jpg"});
             clicks.addEventListener('click', function(){
                 frappe.set_route("Form", notif.document_type, notif.document_name);
             });       
