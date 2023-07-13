@@ -83,6 +83,9 @@ doc_events = {
 	},
     "Contact":{
         "validate" : "juzgo.juzgo.custom.py.contact.add_phone_and_contact" 
+	},
+    "Notification Log" : {
+        "after_insert": "juzgo.custom.py.notification_log.after_insert"
 	}
 
 }
