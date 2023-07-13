@@ -1,0 +1,200 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2023-07-12 17:52:43.936904",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "flight_time_preferences",
+  "from_time",
+  "to_time",
+  "from_destination",
+  "to_destination",
+  "column_break_z3suc",
+  "airline_preferences",
+  "ticket_class",
+  "flight_budget",
+  "column_break_ho0tu",
+  "carrier_type",
+  "ticket_vendors",
+  "flight_connections",
+  "stop_list",
+  "column_break_zqmax",
+  "layover_preferences",
+  "meal_preferences",
+  "duration",
+  "is_web_checkin_required",
+  "section_break_floaj",
+  "baggage_preferences",
+  "section_break_u4eng",
+  "special_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "flight_time_preferences",
+   "fieldtype": "Select",
+   "label": "Flight time preferences",
+   "options": "\nMorning\nEvening\nTime Specific"
+  },
+  {
+   "depends_on": "eval:doc.flight_time_preferences == \"Time Specific\"",
+   "fieldname": "from_time",
+   "fieldtype": "Time",
+   "label": "From Time"
+  },
+  {
+   "depends_on": "eval:doc.flight_time_preferences == \"Time Specific\"",
+   "fieldname": "to_time",
+   "fieldtype": "Time",
+   "label": "To Time"
+  },
+  {
+   "fieldname": "from_destination",
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "to_destination",
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "airline_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Airline preferences",
+   "options": "Airline preferences Table"
+  },
+  {
+   "fieldname": "ticket_class",
+   "fieldtype": "Table MultiSelect",
+   "label": "Ticket Class",
+   "options": "Ticket Class Table"
+  },
+  {
+   "fieldname": "flight_budget",
+   "fieldtype": "Int",
+   "label": "Flight Budget"
+  },
+  {
+   "fieldname": "carrier_type",
+   "fieldtype": "Select",
+   "label": "Carrier Type",
+   "options": "\nLow Cost\nRegular"
+  },
+  {
+   "fieldname": "ticket_vendors",
+   "fieldtype": "Table MultiSelect",
+   "label": "Ticket Vendors",
+   "options": "Ticket Vendors Table"
+  },
+  {
+   "fieldname": "flight_connections",
+   "fieldtype": "Select",
+   "label": "Flight connections",
+   "options": "\nOnly Direct\n1 or more stops"
+  },
+  {
+   "depends_on": "eval:doc.flight_connections == \"1 or more stops\"",
+   "fieldname": "stop_list",
+   "fieldtype": "Table MultiSelect",
+   "label": "Stop List",
+   "options": "Stop List Table"
+  },
+  {
+   "fieldname": "layover_preferences",
+   "fieldtype": "Link",
+   "label": "Layover preferences",
+   "options": "Country"
+  },
+  {
+   "fieldname": "meal_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Meal preferences",
+   "options": "Meal preferences Table"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_web_checkin_required",
+   "fieldtype": "Check",
+   "label": "Is web checkin required ?"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Duration",
+   "label": "Duration"
+  },
+  {
+   "fieldname": "baggage_preferences",
+   "fieldtype": "Table",
+   "label": "Baggage preferences",
+   "options": "Baggage preferences Table"
+  },
+  {
+   "fieldname": "section_break_floaj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_u4eng",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "special_notes",
+   "fieldtype": "Text Editor",
+   "label": "Special Notes"
+  },
+  {
+   "fieldname": "column_break_z3suc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ho0tu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zqmax",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-12 18:57:07.679721",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Air Tickets",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

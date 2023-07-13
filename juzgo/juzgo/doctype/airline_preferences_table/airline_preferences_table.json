@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-12 17:57:47.801309",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "airline_preferences"
+ ],
+ "fields": [
+  {
+   "fieldname": "airline_preferences",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Airline preferences",
+   "options": "Airline preferences"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-12 18:00:08.611779",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Airline preferences Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
