@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-12 19:13:28.633894",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "days",
+  "in_open",
+  "out_close",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "days",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Days",
+   "options": "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday"
+  },
+  {
+   "fieldname": "in_open",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "In / Open"
+  },
+  {
+   "fieldname": "out_close",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Out / Close"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-13 10:06:42.404952",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Working days Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
