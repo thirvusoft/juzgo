@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-12 17:58:46.540871",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "places",
+  "distance",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "places",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Places"
+  },
+  {
+   "fieldname": "distance",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Distance"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-12 17:58:46.540871",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Nearby Place Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

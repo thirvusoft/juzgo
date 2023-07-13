@@ -36,6 +36,7 @@
   "best_season",
   "budgets",
   "section_break_15",
+  "working_days",
   "image_details",
   "img_preview",
   "reference_table",
@@ -104,15 +105,12 @@
    "label": "Duration of the Tour"
   },
   {
-<<<<<<< HEAD
-=======
    "fieldname": "holiday_list",
    "fieldtype": "Table MultiSelect",
    "label": "Holiday List",
    "options": "Holidays list table"
   },
   {
->>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
   },
@@ -232,26 +230,20 @@
    "options": "Reference Table"
   },
   {
-<<<<<<< HEAD
-   "fieldname": "holiday_list",
-   "fieldtype": "Table MultiSelect",
-   "label": "Holiday List",
-   "options": "Holidays list table"
-=======
    "fieldname": "budgets",
    "fieldtype": "Float",
    "label": "Budget"
->>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
+  },
+  {
+   "fieldname": "working_days",
+   "fieldtype": "Table",
+   "options": "Working days Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
-<<<<<<< HEAD
- "modified": "2023-07-11 16:30:25.065053",
-=======
- "modified": "2023-07-12 11:15:40.814184",
->>>>>>> 172aa58420fff9e727cff9f32e91e97fbc25cc62
+ "modified": "2023-07-13 10:08:33.170911",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",
