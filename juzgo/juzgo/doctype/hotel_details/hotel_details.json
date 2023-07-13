@@ -41,6 +41,7 @@
   "room_details_section",
   "room_details_table",
   "nearby_places",
+  "nearby_place_table",
   "nearby_indian_restaurants",
   "bank_details_section",
   "bank_account",
@@ -161,6 +162,7 @@
   {
    "fieldname": "address",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Primary Address",
    "options": "Address",
    "read_only": 1
@@ -251,7 +253,8 @@
    "fieldname": "nearby_places",
    "fieldtype": "Table MultiSelect",
    "label": "Nearby Places",
-   "options": "Spots in Hotal"
+   "options": "Spots in Hotal",
+   "read_only": 1
   },
   {
    "fieldname": "nearby_indian_restaurants",
@@ -313,6 +316,7 @@
   {
    "fieldname": "contact_html",
    "fieldtype": "HTML",
+   "hidden": 1,
    "label": "Contact HTML"
   },
   {
@@ -340,12 +344,18 @@
    "fieldname": "budget_to_",
    "fieldtype": "Float",
    "label": "Budget To"
+  },
+  {
+   "fieldname": "nearby_place_table",
+   "fieldtype": "Table",
+   "label": "Nearby Places",
+   "options": "Nearby Place Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-11 18:37:29.366154",
+ "modified": "2023-07-12 19:08:23.430299",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",
