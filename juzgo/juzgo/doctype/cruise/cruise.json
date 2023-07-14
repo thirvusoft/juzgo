@@ -62,6 +62,8 @@
    "allow_in_quick_entry": 1,
    "fieldname": "no_of_nights",
    "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "No of Nights"
   },
   {
@@ -121,6 +123,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -134,7 +137,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 15:14:32.585381",
+ "modified": "2023-07-14 18:52:42.319155",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise",
