@@ -51,6 +51,8 @@
   {
    "fieldname": "destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Destination",
    "options": "Destination"
   },
@@ -70,6 +72,8 @@
   {
    "fieldname": "area",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Area",
    "options": "Area"
   },
@@ -156,6 +160,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "description": "Country Style",
    "fieldname": "type",
    "fieldtype": "Link",
    "label": "Type",
@@ -225,9 +230,18 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
+ "links": [
+  {
+   "hidden": 1,
+   "is_child_table": 1,
+   "link_doctype": "Restaurant in Hotal",
+   "link_fieldname": "restaurant_name",
+   "parent_doctype": "Hotel Details",
+   "table_fieldname": "nearby_indian_restaurants"
+  }
+ ],
  "make_attachments_public": 1,
- "modified": "2023-07-10 19:19:33.035671",
+ "modified": "2023-07-14 11:56:00.092946",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",

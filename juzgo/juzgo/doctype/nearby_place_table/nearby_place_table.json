@@ -13,9 +13,10 @@
  "fields": [
   {
    "fieldname": "places",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Places"
+   "label": "Places",
+   "options": "Spots"
   },
   {
    "fieldname": "distance",
@@ -33,7 +34,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-12 17:58:46.540871",
+ "modified": "2023-07-13 10:43:32.181511",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Nearby Place Table",

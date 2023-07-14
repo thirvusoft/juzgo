@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-13 11:50:20.032664",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "first_name",
+  "last_name",
+  "column_break_u0ccp",
+  "lead_source",
+  "e_mail",
+  "mobile",
+  "column_break_r8ffx",
+  "whatsapp_number",
+  "industry",
+  "lead_live_status",
+  "column_break_ekdi1",
+  "quality_of_lead",
+  "preferred_service",
+  "section_break_6kw8d",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First name",
+   "unique": 1
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last name"
+  },
+  {
+   "fieldname": "lead_source",
+   "fieldtype": "Data",
+   "label": "Lead Source"
+  },
+  {
+   "fieldname": "e_mail",
+   "fieldtype": "Data",
+   "label": "E mail"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "whatsapp_number",
+   "fieldtype": "Data",
+   "label": "Whatsapp Number"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry"
+  },
+  {
+   "fieldname": "lead_live_status",
+   "fieldtype": "Select",
+   "label": "Lead Live Status",
+   "options": "\nNew\nfollowup\nTentatives satisfied\nTentatives rejected\nQuotation in progress\nQuoted\nRequote required\nConfirmed\nOn tour\nCompleted\nCompleted - With accounts details\nCompleted Reviews\nCompleted Accounts/Reviews\nCancelled\nPostponed"
+  },
+  {
+   "fieldname": "quality_of_lead",
+   "fieldtype": "Select",
+   "label": "Quality of lead",
+   "options": "\nJust for an idea\nVery highly interested\nInterested\nFake lead\nFake travel agent lead"
+  },
+  {
+   "fieldname": "preferred_service",
+   "fieldtype": "Link",
+   "label": "Preferred service",
+   "options": "Preferred service"
+  },
+  {
+   "fieldname": "section_break_6kw8d",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_u0ccp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_r8ffx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ekdi1",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-13 21:03:26.396728",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "CA Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

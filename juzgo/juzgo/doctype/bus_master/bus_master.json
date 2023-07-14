@@ -1,0 +1,144 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2023-07-13 09:44:53.900910",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bus_type",
+  "departure_time",
+  "seating_capacity",
+  "column_break_gas97",
+  "ac_availability",
+  "make",
+  "comfort",
+  "column_break_obojm",
+  "no_of_seats_in_lowerdeck",
+  "no_of_seats_in_upper_deck",
+  "section_break_jw3o5",
+  "bus_images",
+  "img_preview",
+  "section_break_km7z9",
+  "special_notes_for_bus"
+ ],
+ "fields": [
+  {
+   "fieldname": "bus_type",
+   "fieldtype": "Select",
+   "label": "Bus Type",
+   "options": "\nSleeper\nSemi Sleeper\nSitting"
+  },
+  {
+   "fieldname": "departure_time",
+   "fieldtype": "Select",
+   "label": "Departure Time",
+   "options": "\nEarly morning 12AM-6AM\nMorning 6AM -12PM\nNoon 12PM - 6PM\nNight 6PM - 12AM"
+  },
+  {
+   "fieldname": "seating_capacity",
+   "fieldtype": "Data",
+   "label": "Seating Capacity"
+  },
+  {
+   "fieldname": "ac_availability",
+   "fieldtype": "Select",
+   "label": "A/C Availability",
+   "options": "\nA/C\nNon A/C"
+  },
+  {
+   "fieldname": "make",
+   "fieldtype": "Link",
+   "label": "Make",
+   "options": "Bus Make"
+  },
+  {
+   "fieldname": "comfort",
+   "fieldtype": "Link",
+   "label": "comfort",
+   "options": "Comfort"
+  },
+  {
+   "fieldname": "bus_images",
+   "fieldtype": "Table",
+   "label": "Bus Images",
+   "options": "Bus images"
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
+  },
+  {
+   "fieldname": "no_of_seats_in_lowerdeck",
+   "fieldtype": "Data",
+   "label": "No of seats in LowerDeck"
+  },
+  {
+   "fieldname": "no_of_seats_in_upper_deck",
+   "fieldtype": "Data",
+   "label": "No of seats in Upper Deck"
+  },
+  {
+   "fieldname": "section_break_km7z9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "special_notes_for_bus",
+   "fieldtype": "Text Editor",
+   "label": "Special notes for Bus"
+  },
+  {
+   "fieldname": "column_break_gas97",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_obojm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_jw3o5",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-13 10:40:44.060141",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Bus Master",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

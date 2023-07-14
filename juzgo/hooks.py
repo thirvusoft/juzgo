@@ -213,7 +213,6 @@ override_whitelisted_methods = {
 # along with any modifications made in other Frappe apps
 override_doctype_dashboards = {
 	"Interview": "juzgo.custom.py.dashboards.interview.get_data",
-    "Destination": "juzgo.juzgo.doctype.destination.destination_dashboads.get_data"
 }
 
 # exempt linked doctypes from being automatically cancelled

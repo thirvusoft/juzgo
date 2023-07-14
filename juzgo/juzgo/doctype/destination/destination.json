@@ -132,12 +132,11 @@
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   },
   {
-  "modified": "2023-07-12 13:37:26.325607",
-  "fieldname": "currency",
-  "fieldtype": "Link",
-  "label": "Currency",
-  "options": "Currency"
- },
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
   {
    "fieldname": "tab_break_18",
    "fieldtype": "Tab Break",
@@ -145,25 +144,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "link_doctype": "Hotel Details",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Restaurant",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Spots",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Operator",
-   "link_fieldname": "destination"
-  }
- ],
- "modified": "2023-07-11 12:00:12.975822",
+ "links": [],
+ "modified": "2023-07-14 16:24:02.736605",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",
