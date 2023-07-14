@@ -17,6 +17,14 @@ frappe.ui.form.on('Project', {
                 }
             })
         }
+        frm.set_query("task_name","attachments", function () {
+            return {
+                filters: {
+                    project: frm.doc.name,
+                    assigned_to: frappe.session.user
+                },
+            };
+        });
     },
     phone_number:function(frm){
         if(frm.doc.phone_number){
@@ -749,3 +757,17 @@ function check_list(frm){
         
     }
 }
+
+frappe.ui.form.on('Task Attachments', {
+    file:function (frm,cdt,cdn) {
+        let row = locals[cdt][cdn]
+        console.log(row.file)
+        var currentdate = new Date(); 
+        frappe.db.get_value('File', {"file_url":row.file}, 'name').then((data)=>{
+            frappe.model.set_value(row.doctype,row.name,"ref_id",data.message.name)
+            frappe.model.set_value(row.doctype,row.name,"attached_by",frappe.session.user)
+            frappe.model.set_value(row.doctype,row.name,"attached_date",frappe.datetime.get_today())
+            frappe.model.set_value(row.doctype,row.name,"attached_time",currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds())
+        })
+    }
+})

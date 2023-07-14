@@ -243,6 +243,7 @@
   {
    "fieldname": "working_days",
    "fieldtype": "Table",
+   "label": "Working days",
    "options": "Working days Table"
   }
  ],

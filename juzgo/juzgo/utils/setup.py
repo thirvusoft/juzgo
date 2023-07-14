@@ -1,9 +1,13 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
 def setup():
     setup_fields()
     role_creation()
+    property_setter()
+def property_setter():
+    make_property_setter("Task", "status", "options", "Open\nWorking\nPending Review\nReviewed\nOverdue\nTemplate\nCompleted\nCancelled", "Long Text")
 def setup_fields():
     custom_fields = {
         'HR Settings':[

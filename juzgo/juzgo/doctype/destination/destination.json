@@ -150,32 +150,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "link_doctype": "Hotel Details",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Restaurant",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Spots",
-   "link_fieldname": "destination"
-  },
-  {
-   "link_doctype": "Operator",
-   "link_fieldname": "destination"
-  },
-  {
-   "is_child_table": 1,
-   "link_doctype": "Destination Table",
-   "link_fieldname": "destination",
-   "parent_doctype": "Check List",
-   "table_fieldname": "destination_name"
-  }
- ],
- "modified": "2023-07-14 18:53:45.250955",
+ "links": [],
+ "modified": "2023-07-14 16:24:02.736605",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

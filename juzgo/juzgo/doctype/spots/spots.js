@@ -37,6 +37,9 @@ frappe.ui.form.on('Spots', {
                frm.set_df_property("img_preview","options",r.message)
             },
         })
+        if(frm.is_new()){
+            frm.set_value("working_days",[{"days":"Monday"},{"days":"Thursday"},{"days":"Wednesday"},{"days":"Thursday"},{"days":"Friday"},{"days":"Saturday"},{"days":"Sunday"}])
+        }
     },
     spot_name:function(frm){
         if (frm.doc.spot_name.length >= 3){
