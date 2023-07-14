@@ -26,21 +26,9 @@ def user_todo(doc, actions):
             doc.doctype,
             "Description")
     if doc.assigned_to and (actions == "after_insert" or not doc.is_new()):
-        doc_ = frappe.new_doc("ToDo")        
-        if frappe.db.exists("ToDo", {'reference_name': doc.name}):
-            doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name})
-        user = frappe.db.get_value("User", doc.owner, "username")
-        doc_.update({
-            'date': frappe.utils.nowdate(),
-            'allocated_to': doc.assigned_to,
-            'description': f'Assignment for {doc.doctype} {doc.name}',
-            'reference_type': doc.doctype,
-            'reference_name': doc.name,
-            'assigned_by': user,
-        })
-        doc_.flags.ignore_permissions = True
-        doc_.flags.ignore_links = True
-        doc_.save()
+        assigned_to(doc,"assigned_to")
+    if doc.task_lead and (actions == "after_insert" or not doc.is_new()):
+        assigned_to(doc,"task_lead")
         
         if(doc.depends_on):
             for i in doc.depends_on:
@@ -97,7 +85,23 @@ def user_todo(doc, actions):
                     parent_task.save()
     if(actions == "after_insert"):
         doc.save()
-
+def assigned_to(doc,field_name):
+    doc_ = frappe.new_doc("ToDo")        
+    if frappe.db.exists("ToDo", {'reference_name': doc.name, 'field_name':field_name}):
+        doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name, 'field_name':field_name})
+    user = frappe.db.get_value("User", doc.owner, "username")
+    doc_.update({
+        'date': frappe.utils.nowdate(),
+        'allocated_to': doc.get(field_name),
+        'description': f'Assignment for {doc.doctype} {doc.name}',
+        'reference_type': doc.doctype,
+        'reference_name': doc.name,
+        'assigned_by': user,
+        'field_name': field_name
+    })
+    doc_.flags.ignore_permissions = True
+    doc_.flags.ignore_links = True
+    doc_.save()
               
 
 def update_number(doc, actions):
@@ -117,17 +121,16 @@ def update_number(doc, actions):
             for m in doc.task_approval:
                 # if frappe.session.user == m.user:
                 if m.status != "Approved":
-                    if doc.status == "Completed":
+                    if doc.status == "Completed" or doc.status == "Reviewed":
                         frappe.throw("Task Approval Status is Pending")
-            # stat = 0
-            # for n in doc.task_approval:
-            #     if n.status != "Approved":
-            #         stat = 1
+            stat = 0
+            for n in doc.task_approval:
+                if n.status != "Approved":
+                    stat = 1
 
-            # if stat == 0:
-                # doc.status = "Completed"
-                # else:
-                #     doc.status = "Working"
+            if stat == 0:
+                if doc.status != "Completed":
+                    doc.status = "Reviewed"
 
 
 @frappe.whitelist()

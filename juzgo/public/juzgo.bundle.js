@@ -5,7 +5,6 @@ import "../templates/web_form/interview/not_opened_or_closed.html";
 import "../templates/web_form/interview/not_opened_or_closed.html";
 
 $(document).on('app_ready', function () {
-    console.log("Hii Test")
     frappe.realtime.off("show_notification")
     frappe.realtime.on("show_notification", (args)=>{
         var log = frappe.model.get_new_doc('Error Log')
