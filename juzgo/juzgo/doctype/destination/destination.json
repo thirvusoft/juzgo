@@ -132,12 +132,11 @@
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
   },
   {
-  "modified": "2023-07-12 13:37:26.325607",
-  "fieldname": "currency",
-  "fieldtype": "Link",
-  "label": "Currency",
-  "options": "Currency"
- },
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
   {
    "fieldname": "tab_break_18",
    "fieldtype": "Tab Break",
@@ -161,9 +160,16 @@
   {
    "link_doctype": "Operator",
    "link_fieldname": "destination"
+  },
+  {
+   "is_child_table": 1,
+   "link_doctype": "Destination Table",
+   "link_fieldname": "destination",
+   "parent_doctype": "Check List",
+   "table_fieldname": "destination_name"
   }
  ],
- "modified": "2023-07-11 12:00:12.975822",
+ "modified": "2023-07-14 12:31:33.253054",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

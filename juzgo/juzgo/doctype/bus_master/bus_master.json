@@ -11,13 +11,16 @@
   "bus_type",
   "departure_time",
   "seating_capacity",
+  "column_break_gas97",
   "ac_availability",
   "make",
   "comfort",
-  "bus_images",
-  "img_preview",
+  "column_break_obojm",
   "no_of_seats_in_lowerdeck",
   "no_of_seats_in_upper_deck",
+  "section_break_jw3o5",
+  "bus_images",
+  "img_preview",
   "section_break_km7z9",
   "special_notes_for_bus"
  ],
@@ -86,11 +89,23 @@
    "fieldname": "special_notes_for_bus",
    "fieldtype": "Text Editor",
    "label": "Special notes for Bus"
+  },
+  {
+   "fieldname": "column_break_gas97",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_obojm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_jw3o5",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-13 10:11:21.375229",
+ "modified": "2023-07-13 10:40:44.060141",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Bus Master",
