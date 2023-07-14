@@ -47,6 +47,8 @@
   {
    "fieldname": "country",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Country",
    "options": "Country"
   },
@@ -80,6 +82,8 @@
   {
    "fieldname": "visa_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Visa Type",
    "options": "Visa Type"
   },
@@ -127,6 +131,8 @@
    "description": "Juzgo Admins will Update this Status",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -169,7 +175,7 @@
    "table_fieldname": "destination_name"
   }
  ],
- "modified": "2023-07-14 12:31:33.253054",
+ "modified": "2023-07-14 18:53:45.250955",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

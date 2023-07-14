@@ -2,30 +2,30 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:preferred_service",
- "creation": "2023-07-13 20:57:30.328734",
+ "autoname": "field:quality_of_lead_name",
+ "creation": "2023-07-14 18:44:20.135811",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "preferred_service"
+  "quality_of_lead_name"
  ],
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "preferred_service",
+   "fieldname": "quality_of_lead_name",
    "fieldtype": "Data",
-   "label": "Preferred service",
+   "label": "Quality of lead Name",
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 18:48:59.829354",
+ "modified": "2023-07-14 18:48:06.434816",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Preferred service",
+ "name": "Quality of lead List",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

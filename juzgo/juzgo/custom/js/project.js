@@ -44,14 +44,10 @@ frappe.ui.form.on('Project', {
             $("[data-doctype='Stock Entry']").hide();
             $("[data-doctype='Sales Order']").hide();
             $("[data-doctype='Delivery Note']").hide();
-            $("[data-doctype='Sales Invoice']").hide();
             $("[data-doctype='Purchase Order']").hide();
             $("[data-doctype='Purchase Receipt']").hide();
-            $("[data-doctype='Purchase Invoice']").hide();
             $("[data-doctype='Project Update']").hide();
             $("[data-doclabel='Material']").hide();
-            $("[data-doclabel='Purchase']").hide();
-            $("[data-doclabel='Sales']").hide();
             $("[data-doclabel='Claims']").hide();
         }, 10);
     },

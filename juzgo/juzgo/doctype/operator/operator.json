@@ -84,6 +84,8 @@
    "allow_in_quick_entry": 1,
    "fieldname": "mode_of_transport",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Mode of Transport",
    "options": "Mode of Transport"
   },
@@ -397,6 +399,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Not Reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -404,7 +407,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 15:12:24.021587",
+ "modified": "2023-07-14 18:51:22.830924",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Operator",

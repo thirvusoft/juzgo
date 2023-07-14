@@ -27,6 +27,8 @@
    "allow_in_quick_entry": 1,
    "fieldname": "mode_of_transport",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Mode Of Transport",
    "options": "\nRoad\nAir\nTrain\nBus\nCar"
   },
@@ -41,6 +43,7 @@
    "fieldname": "vehicle_model",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Vehicle Model"
   },
   {
@@ -102,6 +105,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Not reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
@@ -109,7 +113,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 15:10:00.177941",
+ "modified": "2023-07-14 18:50:12.229241",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Vehicle Detail",

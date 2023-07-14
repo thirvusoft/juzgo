@@ -6,11 +6,11 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "meal_preferences"
+  "meal_preferences_name"
  ],
  "fields": [
   {
-   "fieldname": "meal_preferences",
+   "fieldname": "meal_preferences_name",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Meal preferences",
@@ -20,7 +20,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-12 18:19:12.676502",
+ "modified": "2023-07-14 18:42:40.725713",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Meal preferences Table",

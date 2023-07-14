@@ -8,8 +8,10 @@
  "engine": "InnoDB",
  "field_order": [
   "company",
+  "party_type",
   "first_name",
   "last_name",
+  "customer",
   "column_break_u0ccp",
   "lead_source",
   "e_mail",
@@ -22,22 +24,24 @@
   "quality_of_lead",
   "preferred_service",
   "section_break_6kw8d",
-  "notes"
+  "notes",
+  "users_details_section"
  ],
  "fields": [
   {
    "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company"
+   "fieldtype": "Data",
+   "label": "Company"
   },
   {
+   "depends_on": "eval:doc.party_type == \"Lead\"",
    "fieldname": "first_name",
    "fieldtype": "Data",
    "label": "First name",
    "unique": 1
   },
   {
+   "depends_on": "eval:doc.party_type == \"Lead\"",
    "fieldname": "last_name",
    "fieldtype": "Data",
    "label": "Last name"
@@ -75,9 +79,9 @@
   },
   {
    "fieldname": "quality_of_lead",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Quality of lead",
-   "options": "\nJust for an idea\nVery highly interested\nInterested\nFake lead\nFake travel agent lead"
+   "options": "Quality of lead List"
   },
   {
    "fieldname": "preferred_service",
@@ -105,11 +109,29 @@
   {
    "fieldname": "column_break_ekdi1",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "users_details_section",
+   "fieldtype": "Section Break",
+   "label": "Users Details"
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "\nLead\nCustomer"
+  },
+  {
+   "depends_on": "eval:doc.party_type == \"Customer\"",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-13 21:03:26.396728",
+ "modified": "2023-07-14 18:53:10.841198",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
