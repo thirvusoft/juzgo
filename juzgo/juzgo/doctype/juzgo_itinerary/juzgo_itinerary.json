@@ -8,12 +8,13 @@
  "field_order": [
   "no_of_nights",
   "days",
-  "desc_destination_detials"
+  "desc_destination_detials",
+  "itinerary_file"
  ],
  "fields": [
   {
    "fieldname": "no_of_nights",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Number of Nights"
   },
@@ -21,19 +22,25 @@
    "fieldname": "days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Days"
+   "label": "Number of Days"
   },
   {
    "fieldname": "desc_destination_detials",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Description with destination details"
+  },
+  {
+   "fieldname": "itinerary_file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Itinerary file"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-15 12:48:02.911428",
+ "modified": "2023-07-15 17:33:06.634485",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Juzgo Itinerary",
