@@ -228,11 +228,6 @@ frappe.ui.form.on('Task Approval', {
                     
                 } 
             }
-        })
-        
-     
-
-           
-        
+        })  
 	},
 })

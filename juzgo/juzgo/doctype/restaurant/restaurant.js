@@ -69,6 +69,7 @@ frappe.ui.form.on('Restaurant', {
                frm.set_df_property("menu_preview","options",r.message)
             },
         })
+
     },
 });
 frappe.ui.form.on('Reference Table', {

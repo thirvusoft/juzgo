@@ -4,7 +4,7 @@ var form_destination
 var remainder_group
 var remainder_group_details = {}
 frappe.ui.form.on('Project', {
-    refresh:function (frm,cdt,cdn) {
+    refresh:function (frm,cdt,cdn) {     
         if(!frm.is_new()){
             check_list(frm)
             frappe.call({
@@ -17,14 +17,17 @@ frappe.ui.form.on('Project', {
                 }
             })
         }
-        frm.set_query("task_name","attachments", function () {
-            return {
-                filters: {
-                    project: frm.doc.name,
-                    assigned_to: frappe.session.user
-                },
-            };
-        });
+        if(!frappe.user.has_role('Juzgo Admin')){
+            frm.set_query("task_name","attachments", function () {
+                return {
+                    filters: {
+                        project: frm.doc.name,
+                        assigned_to: frappe.session.user
+                    },
+                };
+            });
+        }
+
     },
     phone_number:function(frm){
         if(frm.doc.phone_number){
@@ -40,6 +43,7 @@ frappe.ui.form.on('Project', {
             }
         }
     },
+   
     update_data:function (frm) {
         multi_customer(frm)
         frm.save()
@@ -112,7 +116,8 @@ frappe.ui.form.on('Project', {
     },
     destination: function(frm){
         add_destination_details(frm)
-    }
+    },
+    
 })
 
 frappe.ui.form.on('Quotation Copy', {
@@ -134,6 +139,7 @@ function auto_end_date(frm){
     }
     
 }
+
 
 function add_destination_details(frm,event=''){
         let destination_list = []
@@ -769,5 +775,48 @@ frappe.ui.form.on('Task Attachments', {
             frappe.model.set_value(row.doctype,row.name,"attached_date",frappe.datetime.get_today())
             frappe.model.set_value(row.doctype,row.name,"attached_time",currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds())
         })
+    },
+    final_copy:function (frm,cdt,cdn) {
+        remove_add_fc(frm,cdt,cdn)
+    },
+    before_attachments_remove:function(frm,cdt,cdn){
+        frappe.model.set_value(cdt,cdn,"final_copy",0)
+        remove_add_fc(frm,cdt,cdn)
+
     }
 })
+
+function remove_add_fc(frm,cdt,cdn){
+    let row = locals[cdt][cdn]
+        var row_found = 0, row_to_update = undefined
+        for(let i=0;i<frm.doc.final_copy.length;i++){
+            if(row.name == frm.doc.final_copy[i].table_name && row_found == 0){
+                row_found = 1
+                row_to_update = frm.doc.final_copy[i]
+            }
+        }
+        if(row.final_copy){
+            if(!row_to_update){
+                row_to_update = frm.add_child("final_copy")
+            }
+            row_to_update.task_name = row.task_name
+            row_to_update.file_type = row.file_type
+            row_to_update.file = row.file
+            row_to_update.notes = row.notes
+            row_to_update.ref_id = row.ref_id
+            row_to_update.attached_by = row.attached_by
+            row_to_update.attached_date = row.attached_date
+            row_to_update.attached_time = row.attached_time
+            row_to_update.table_name = row.name
+            
+        }
+        else{
+
+            if(row_to_update){
+                frm.fields_dict.final_copy.grid.grid_rows_by_docname[row_to_update.name].remove()
+            }
+            
+        }
+        
+        frm.save()
+}
