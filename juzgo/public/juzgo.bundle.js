@@ -15,10 +15,16 @@ $(document).on('app_ready', function () {
            
         }
             if(args.doc.for_user==frappe.session.user){
-                Notification.requestPermission((res) => {
-                    if(res == "granted")
-                    show_notifications(args.doc)
-                    });
+                frappe.db.get_value("User", {"name": args.doc.for_user}, "notify", (r) => {
+                    if(r.notify == 1){
+                        Notification.requestPermission((res) => {
+                            if(res == "granted")
+                            show_notifications(args.doc)
+                            });
+                    }
+
+                });
+            
             }
 
   

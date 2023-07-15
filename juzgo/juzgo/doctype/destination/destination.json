@@ -20,6 +20,9 @@
   "visa_type",
   "seasonal_preferences_section",
   "seasonal",
+  "itinerary_section",
+  "juzgo_itinerary",
+  "juzgo_other_itinerary",
   "section_break_10",
   "terms_conditions",
   "terms",
@@ -47,7 +50,6 @@
   {
    "fieldname": "country",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Country",
    "options": "Country"
@@ -147,11 +149,28 @@
    "fieldname": "tab_break_18",
    "fieldtype": "Tab Break",
    "show_dashboard": 1
+  },
+  {
+   "fieldname": "itinerary_section",
+   "fieldtype": "Section Break",
+   "label": "Itinerary"
+  },
+  {
+   "fieldname": "juzgo_itinerary",
+   "fieldtype": "Table",
+   "label": "Juzgo Itinerary",
+   "options": "Juzgo Itinerary"
+  },
+  {
+   "fieldname": "juzgo_other_itinerary",
+   "fieldtype": "Table",
+   "label": "Juzgo Other Itinerary",
+   "options": "Juzgo Other Itinerary"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 16:24:02.736605",
+ "modified": "2023-07-15 12:45:40.868765",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

@@ -29,6 +29,7 @@
   "seating_capacity",
   "hall_availability",
   "flexibility_of_services",
+  "suggestions",
   "contact_no",
   "mobile_no",
   "section_break_16",
@@ -80,6 +81,8 @@
   {
    "fieldname": "budget",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Budget"
   },
   {
@@ -229,6 +232,12 @@
    "fieldtype": "Data",
    "label": "Mobile No",
    "read_only": 1
+  },
+  {
+   "fieldname": "suggestions",
+   "fieldtype": "Link",
+   "label": "Suggestions",
+   "options": "Suggestions"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -243,7 +252,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2023-07-14 18:53:25.346453",
+ "modified": "2023-07-15 12:11:20.116216",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",

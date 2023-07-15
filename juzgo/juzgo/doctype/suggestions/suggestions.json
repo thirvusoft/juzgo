@@ -1,29 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:airline_preferences",
- "creation": "2023-07-12 17:57:23.782813",
+ "autoname": "field:suggestions_name",
+ "creation": "2023-07-15 11:56:06.014103",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "airline_preferences"
+  "suggestions_name"
  ],
  "fields": [
   {
-   "fieldname": "airline_preferences",
+   "fieldname": "suggestions_name",
    "fieldtype": "Data",
-   "label": "Airline preferences",
+   "label": "Suggestions Name",
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 19:29:32.183412",
+ "modified": "2023-07-15 11:57:45.937385",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Airline preferences",
+ "name": "Suggestions",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -47,7 +47,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Juzgo Admin",
+   "role": "Operational Executive",
    "select": 1,
    "share": 1,
    "write": 1
@@ -60,7 +60,8 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Operational Executive",
+   "role": "Juzgo Admin",
+   "select": 1,
    "share": 1,
    "write": 1
   }
