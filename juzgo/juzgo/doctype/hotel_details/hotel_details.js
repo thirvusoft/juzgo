@@ -26,6 +26,7 @@ frappe.ui.form.on('Hotel Details', {
                frm.set_df_property("img_preview","options",r.message)
             },
         })
+        
 	},
 	open_website: function(frm){
         if(!frm.doc.website_link){
