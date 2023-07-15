@@ -4,12 +4,7 @@ var form_destination
 var remainder_group
 var remainder_group_details = {}
 frappe.ui.form.on('Project', {
-    refresh:function (frm,cdt,cdn) {
-        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-add-row')[0].style.display = 'none'
-        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-rows')[0].style.display = 'none'
-        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-all-rows')[0].style.display = 'none'
-        
-        
+    refresh:function (frm,cdt,cdn) {     
         if(!frm.is_new()){
             check_list(frm)
             frappe.call({
