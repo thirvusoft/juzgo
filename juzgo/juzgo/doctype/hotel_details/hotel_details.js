@@ -28,6 +28,23 @@ frappe.ui.form.on('Hotel Details', {
         })
         
 	},
+    is_jtt: function(frm){
+        if(frm.doc.is_jtt == 1){
+            frappe.call({
+                method: "juzgo.juzgo.doctype.hotel_details.hotel_details.jtt_creation",
+                args: {
+                    "name": frm.doc.name,
+                    "doctype": frm.doc.doctype,
+                    "user": frappe.session.user
+                },
+                callback: function (r) {
+                    if(r.message){
+                        frm.set_value("jtt_id",r.message)
+                    }
+                },
+            })
+        }
+    },
 	open_website: function(frm){
         if(!frm.doc.website_link){
             cur_frm.scroll_to_field('website_link')
