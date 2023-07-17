@@ -40,6 +40,7 @@ frappe.ui.form.on('Hotel Details', {
                 callback: function (r) {
                     if(r.message){
                         frm.set_value("jtt_id",r.message)
+                        frm.save()
                     }
                 },
             })

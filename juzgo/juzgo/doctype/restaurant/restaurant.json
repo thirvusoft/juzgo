@@ -9,6 +9,8 @@
  "engine": "InnoDB",
  "field_order": [
   "status",
+  "is_jtt",
+  "jtt_id",
   "restaurant_name",
   "destination",
   "country",
@@ -242,6 +244,22 @@
    "fieldtype": "Link",
    "label": "Suggestions",
    "options": "Suggestions"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:!doc.__islocal",
+   "fieldname": "is_jtt",
+   "fieldtype": "Check",
+   "label": "Is JTT",
+   "read_only_depends_on": "eval:doc.jtt_id"
+  },
+  {
+   "depends_on": "eval:doc.is_jtt",
+   "fieldname": "jtt_id",
+   "fieldtype": "Link",
+   "label": "JTT ID",
+   "options": "JTT",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -256,7 +274,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2023-07-16 11:44:03.908472",
+ "modified": "2023-07-17 15:54:15.331243",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",
