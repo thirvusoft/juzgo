@@ -41,6 +41,24 @@ frappe.ui.form.on('Spots', {
             frm.set_value("working_days",[{"days":"Monday"},{"days":"Thursday"},{"days":"Wednesday"},{"days":"Thursday"},{"days":"Friday"},{"days":"Saturday"},{"days":"Sunday"}])
         }
     },
+    is_jtt: function(frm){
+        if(frm.doc.is_jtt == 1){
+            frappe.call({
+                method: "juzgo.juzgo.doctype.hotel_details.hotel_details.jtt_creation",
+                args: {
+                    "name": frm.doc.name,
+                    "doctype": frm.doc.doctype,
+                    "user": frappe.session.user
+                },
+                callback: function (r) {
+                    if(r.message){
+                        frm.set_value("jtt_id",r.message)
+                        frm.save()
+                    }
+                },
+            })
+        }
+    },
     spot_name:function(frm){
         if (frm.doc.spot_name.length >= 3){
             frappe.call({
