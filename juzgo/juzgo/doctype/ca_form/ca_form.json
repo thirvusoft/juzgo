@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:CA-{MM}{YY}-{####}",
  "creation": "2023-07-13 11:50:20.032664",
  "default_view": "List",
  "doctype": "DocType",
@@ -25,7 +26,61 @@
   "preferred_service",
   "section_break_6kw8d",
   "notes",
-  "users_details_section"
+  "users_details_section",
+  "address_line_1",
+  "street",
+  "city",
+  "column_break_sxy9n",
+  "state",
+  "zip_code",
+  "country",
+  "service_request_form_tab",
+  "party",
+  "customer_",
+  "service_type_requested",
+  "travel_from",
+  "travel_to",
+  "no_of_days",
+  "column_break_fnusz",
+  "travel_dates",
+  "tour_type",
+  "travel_type",
+  "column_break_qifbp",
+  "interested_destination",
+  "destination_travelled",
+  "travellers_age_group",
+  "column_break_afzxr",
+  "interested_flavour",
+  "suggested_spots",
+  "preferred_schedule",
+  "section_break_vu0nh",
+  "no_of_family",
+  "no_of_children",
+  "no_of_pax",
+  "column_break_6qoz2",
+  "no_of_infants",
+  "no_of_adults",
+  "family_details_tab",
+  "family_details_table",
+  "no_of_rooms",
+  "room_preferences",
+  "section_break_qoqmv",
+  "hotel_category",
+  "expected_budget_range_per_person",
+  "accomodation_type",
+  "column_break_pzbi4",
+  "departure_from_city",
+  "transfers",
+  "arrival_at",
+  "column_break_hqavh",
+  "preferred_vehicle_type",
+  "meal_plan",
+  "section_break_cq9df",
+  "guide_specifications",
+  "passengers_passport_",
+  "column_break_s93ki",
+  "passport_validity_issue",
+  "special_requests_notes"
  ],
  "fields": [
   {
@@ -48,8 +103,9 @@
   },
   {
    "fieldname": "lead_source",
-   "fieldtype": "Data",
-   "label": "Lead Source"
+   "fieldtype": "Link",
+   "label": "Lead Source",
+   "options": "Lead Source"
   },
   {
    "fieldname": "e_mail",
@@ -127,14 +183,306 @@
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "fieldname": "street",
+   "fieldtype": "Data",
+   "label": " Address Line 2 (or) Street "
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "City",
+   "options": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Country",
+   "options": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_request_form_tab",
+   "fieldtype": "Tab Break",
+   "label": "Service Request Form"
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Party",
+   "options": "\nLead\nCustomer"
+  },
+  {
+   "fieldname": "customer_",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "service_type_requested",
+   "fieldtype": "Table MultiSelect",
+   "label": "Service Type Requested",
+   "options": "Service Type Table"
+  },
+  {
+   "fieldname": "travel_from",
+   "fieldtype": "Link",
+   "label": "Travel From",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "travel_to",
+   "fieldtype": "Link",
+   "label": "Travel To",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "no_of_days",
+   "fieldtype": "Data",
+   "label": "No. of Days"
+  },
+  {
+   "fieldname": "travel_dates",
+   "fieldtype": "Select",
+   "label": "Travel Dates",
+   "options": "\nFixed\nFlexible"
+  },
+  {
+   "fieldname": "tour_type",
+   "fieldtype": "Select",
+   "label": "Tour Type",
+   "options": "\nFIT\nGIT\nPrivate Group"
+  },
+  {
+   "fieldname": "travel_type",
+   "fieldtype": "Select",
+   "label": "Travel Type",
+   "options": "\nDomestic\nInternational"
+  },
+  {
+   "fieldname": "interested_destination",
+   "fieldtype": "Table MultiSelect",
+   "label": "Interested Destination",
+   "options": "CA Interested Destination"
+  },
+  {
+   "fieldname": "destination_travelled",
+   "fieldtype": "Data",
+   "label": "Destination Travelled and Not-Interested"
+  },
+  {
+   "fieldname": "travellers_age_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Travellers Age Group",
+   "options": "CA Age Group"
+  },
+  {
+   "fieldname": "interested_flavour",
+   "fieldtype": "Table MultiSelect",
+   "label": "Interested Flavour",
+   "options": "Flavour CA"
+  },
+  {
+   "fieldname": "preferred_schedule",
+   "fieldtype": "Select",
+   "label": "Preferred Schedule",
+   "options": "leisure\nPacked"
+  },
+  {
+   "fieldname": "no_of_children",
+   "fieldtype": "Data",
+   "label": "No. of Children"
+  },
+  {
+   "fieldname": "no_of_pax",
+   "fieldtype": "Data",
+   "label": "No. of PAX"
+  },
+  {
+   "description": "Less then 24 months babies",
+   "fieldname": "no_of_infants",
+   "fieldtype": "Data",
+   "label": "No. of Infants"
+  },
+  {
+   "fieldname": "no_of_adults",
+   "fieldtype": "Data",
+   "label": "No. of Adults"
+  },
+  {
+   "fieldname": "no_of_family",
+   "fieldtype": "Data",
+   "label": "No. of Family"
+  },
+  {
+   "fieldname": "family_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Family Details"
+  },
+  {
+   "fieldname": "hotel_category",
+   "fieldtype": "Select",
+   "label": "Hotel Category",
+   "options": "\n1\n2\n3\n4\n5\n6\n7"
+  },
+  {
+   "fieldname": "expected_budget_range_per_person",
+   "fieldtype": "Data",
+   "label": "Expected Budget Range per Person"
+  },
+  {
+   "fieldname": "family_details_table",
+   "fieldtype": "Table",
+   "label": "Family Details Table",
+   "options": "Family Details Table"
+  },
+  {
+   "fieldname": "room_preferences",
+   "fieldtype": "Table",
+   "label": "Room Preferences",
+   "options": "Room Preferences"
+  },
+  {
+   "fieldname": "no_of_rooms",
+   "fieldtype": "Int",
+   "label": "No. of Rooms"
+  },
+  {
+   "fieldname": "accomodation_type",
+   "fieldtype": "Table MultiSelect",
+   "label": "Accomodation Type",
+   "options": "CA Accomodation Type"
+  },
+  {
+   "fieldname": "departure_from_city",
+   "fieldtype": "Link",
+   "label": "Departure From City",
+   "options": "City"
+  },
+  {
+   "fieldname": "transfers",
+   "fieldtype": "Table MultiSelect",
+   "label": "Transfers",
+   "options": "CA Transfers"
+  },
+  {
+   "fieldname": "arrival_at",
+   "fieldtype": "Link",
+   "label": "Arrival at",
+   "options": "City"
+  },
+  {
+   "fieldname": "preferred_vehicle_type",
+   "fieldtype": "Table MultiSelect",
+   "label": "Preferred Vehicle Type ",
+   "options": "Preferred Vehicle Type"
+  },
+  {
+   "fieldname": "meal_plan",
+   "fieldtype": "Link",
+   "label": "Meal plan",
+   "options": "Meal Plan"
+  },
+  {
+   "fieldname": "guide_specifications",
+   "fieldtype": "Small Text",
+   "label": "Guide specifications"
+  },
+  {
+   "fieldname": "passengers_passport_",
+   "fieldtype": "Small Text",
+   "label": "Passengers Passport ?"
+  },
+  {
+   "fieldname": "passport_validity_issue",
+   "fieldtype": "Small Text",
+   "label": "Passport Validity Issue?"
+  },
+  {
+   "fieldname": "special_requests_notes",
+   "fieldtype": "Long Text",
+   "label": "Special Requests /Notes"
+  },
+  {
+   "fieldname": "column_break_sxy9n",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "suggested_spots",
+   "fieldtype": "Table MultiSelect",
+   "label": "Suggested Spots",
+   "options": "CA Suggested Spots"
+  },
+  {
+   "fieldname": "column_break_fnusz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qifbp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_afzxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vu0nh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_6qoz2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qoqmv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_cq9df",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_s93ki",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pzbi4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hqavh",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 18:53:10.841198",
+ "make_attachments_public": 1,
+ "modified": "2023-07-17 11:45:46.537088",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

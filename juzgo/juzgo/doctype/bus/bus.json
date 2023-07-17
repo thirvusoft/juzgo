@@ -2,20 +2,22 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
+ "autoname": "field:bus_name",
  "creation": "2023-07-13 09:44:53.900910",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "bus_type",
-  "departure_time",
-  "seating_capacity",
-  "column_break_gas97",
-  "ac_availability",
+  "bus_name",
   "make",
+  "bus_type",
+  "column_break_gas97",
+  "departure_time",
+  "ac_availability",
   "comfort",
   "column_break_obojm",
+  "seating_capacity",
   "no_of_seats_in_lowerdeck",
   "no_of_seats_in_upper_deck",
   "section_break_jw3o5",
@@ -26,38 +28,52 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "bus_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Bus Type",
    "options": "\nSleeper\nSemi Sleeper\nSitting"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "departure_time",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Departure Time",
    "options": "\nEarly morning 12AM-6AM\nMorning 6AM -12PM\nNoon 12PM - 6PM\nNight 6PM - 12AM"
   },
   {
    "fieldname": "seating_capacity",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Seating Capacity"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "ac_availability",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "A/C Availability",
    "options": "\nA/C\nNon A/C"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "make",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Make",
    "options": "Bus Make"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "comfort",
    "fieldtype": "Link",
-   "label": "comfort",
+   "label": "Comfort",
    "options": "Comfort"
   },
   {
@@ -74,12 +90,12 @@
   {
    "fieldname": "no_of_seats_in_lowerdeck",
    "fieldtype": "Data",
-   "label": "No of seats in LowerDeck"
+   "label": "No of Seats in Lower Deck"
   },
   {
    "fieldname": "no_of_seats_in_upper_deck",
    "fieldtype": "Data",
-   "label": "No of seats in Upper Deck"
+   "label": "No of Seats in Upper Deck"
   },
   {
    "fieldname": "section_break_km7z9",
@@ -91,6 +107,7 @@
    "label": "Special notes for Bus"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "column_break_gas97",
    "fieldtype": "Column Break"
   },
@@ -101,14 +118,23 @@
   {
    "fieldname": "section_break_jw3o5",
    "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "bus_name",
+   "fieldtype": "Data",
+   "label": "Bus Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-13 10:40:44.060141",
+ "make_attachments_public": 1,
+ "modified": "2023-07-16 15:42:13.628527",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Bus Master",
+ "name": "Bus",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -138,6 +164,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

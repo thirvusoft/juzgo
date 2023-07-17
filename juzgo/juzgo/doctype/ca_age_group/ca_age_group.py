@@ -4,5 +4,5 @@
 # import frappe
 from frappe.model.document import Document
 
-class BusMaster(Document):
+class CAAgeGroup(Document):
 	pass

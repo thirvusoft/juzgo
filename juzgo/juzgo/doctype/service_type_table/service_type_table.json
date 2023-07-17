@@ -1,0 +1,34 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-16 16:19:15.146311",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "service_type_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "service_type_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Service Type",
+   "options": "Service Type Requested"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2023-07-16 16:34:37.045496",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Service Type Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
