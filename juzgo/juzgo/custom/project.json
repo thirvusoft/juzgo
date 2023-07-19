@@ -2324,7 +2324,7 @@
    "name": "Project-attachments",
    "no_copy": 0,
    "non_negative": 0,
-   "options": "Task Attachments",
+   "options": "Project Task Attachments",
    "owner": "prithivraj@thirvusoft.in",
    "permlevel": 0,
    "precision": "",

@@ -125,7 +125,7 @@ async function filter(frm){
         if(frm.doc.project){
             var d = await frappe.db
             .get_list("ToDo", {
-                filters: { reference_type: "Project", reference_name: frm.doc.project},
+                filters: { reference_type: "Project", reference_name: frm.doc.project,status:["!=","Cancelled"]},
                 fields: ["allocated_to"],
             })
             .then((l) => {

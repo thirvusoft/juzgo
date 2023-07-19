@@ -448,9 +448,9 @@ def add_family_details(name):
     return frappe.get_all('Family Members Details', filters={'name':name}, fields=['date_of_birth','gender','age','relationship','members_name','member_row_id'])
 def project_head(doc,actions):
     if doc.project_head and (actions == "after_insert" or not doc.is_new()):
-        doc_ = frappe.new_doc("ToDo")        
-        if frappe.db.exists("ToDo", {'reference_name': doc.name}):
-            doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name})
+        doc_ = frappe.new_doc("ToDo")    
+        if frappe.db.exists("ToDo", {'reference_name': doc.name , 'field_name':'project_head'}):
+            doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name , 'field_name':'project_head'})
         user = frappe.db.get_value("User", doc.owner, "username")
         doc_.update({
             'date': frappe.utils.nowdate(),
@@ -459,6 +459,8 @@ def project_head(doc,actions):
             'reference_type': doc.doctype,
             'reference_name': doc.name,
             'assigned_by': user,
+            'field_name':'project_head',
+            'status':"Open",
         })
         doc_.flags.ignore_permissions = True
         doc_.flags.ignore_links = True

@@ -168,6 +168,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "description": "Country Style",
    "fieldname": "type",
    "fieldtype": "Link",
@@ -274,7 +275,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2023-07-17 15:54:15.331243",
+ "modified": "2023-07-18 18:10:53.840692",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",
