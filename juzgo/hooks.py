@@ -159,7 +159,8 @@ after_migrate = "juzgo.juzgo.utils.setup.setup"
 # Override standard doctype classes
 
 override_doctype_class = {
-	"Timesheet": "juzgo.juzgo.custom.py.timesheet.time_sheet"
+	"Timesheet": "juzgo.juzgo.custom.py.timesheet.time_sheet",
+    "ToDo": "juzgo.juzgo.custom.py.todo.toDo"
 }
 
 # Document Events

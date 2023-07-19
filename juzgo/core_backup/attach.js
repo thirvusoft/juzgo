@@ -89,7 +89,7 @@ frappe.ui.form.ControlAttach = class ControlAttach extends frappe.ui.form.Contro
 		this.upload_options = options;
 	}
 
-	set_input(value, dataurl) {
+	async set_input(value, dataurl) {
 		this.last_value = this.value;
 		this.value = value;
 		if (this.value) {
@@ -102,8 +102,13 @@ frappe.ui.form.ControlAttach = class ControlAttach extends frappe.ui.form.Contro
 				filename = file_url_parts[1];
 				dataurl = file_url_parts[2] + ":" + file_url_parts[3];
 			}
+			//thirvu change
 			let file_url_split = this.value.split("/");
 			filename = file_url_split[file_url_split.length - 1]
+			await frappe.db.get_value("File", {"file_url": "/files/"+filename}, "file_url", (r) => {
+				this.value = r.file_url
+			});
+			//end 
 			this.$value
 				.toggle(true)
 				.find(".attached-file-link")
