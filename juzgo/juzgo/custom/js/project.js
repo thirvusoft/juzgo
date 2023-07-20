@@ -147,7 +147,7 @@ function auto_end_date(frm){
 function add_destination_details(frm,event=''){
         let destination_list = []
         for(let i=0;i<frm.doc.destination.length;i++){
-            destination_list.push(frm.doc.destination[i].destination)
+            destination_list.push(frm.doc.destination[i].destination_name)
         }
         frappe.call({
             method:'juzgo.juzgo.custom.py.project.add_destination_details',
