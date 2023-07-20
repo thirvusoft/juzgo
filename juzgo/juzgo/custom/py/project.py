@@ -141,7 +141,6 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                     "check":i.check,
                     "receive_or_send":i.receive_or_send,
                 })
-        print(members_attachment_project)
     return family_members_attachment,members_attachment_project
 
 
@@ -151,6 +150,7 @@ def add_destination_details(name,destination):
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
     old_destination_check_list = doc.destination_check_list
+    print(destination)
     if(destination):
         for des in destination:
             for row in doc.family_member_details:

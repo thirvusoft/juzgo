@@ -105,10 +105,10 @@ def assigned_to(doc,field_name):
               
 
 def update_number(doc, actions):
-        user(doc, doc.assigned_to)
-        assigned = frappe.db.get_value("Task",doc.name,"assigned_to")
-        if doc.assigned_to != assigned:
-            user(doc, assigned)
+        # user(doc, doc.assigned_to)
+        # assigned = frappe.db.get_value("Task",doc.name,"assigned_to")
+        # if doc.assigned_to != assigned:
+        #     user(doc, assigned)
         for i in doc.depends_on:
             if i.task:
                 task_ = frappe.get_doc("Task",i.task)
@@ -178,11 +178,12 @@ def user(doc, user):
             idx+=1
 
 def trash_task(doc, actions):
-    priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue","Pending Review"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
-    idx =1 
-    for n in priority_rearrange:
-        frappe.db.set_value("Task",n,"priority_number",idx)
-        idx+=1
+    pass
+    # priority_rearrange = frappe.get_all("Task", filters={"status": ["in", ["Open", "Working","Overdue","Pending Review"]], 'assigned_to': doc.assigned_to,'name':['not in',doc.name]}, pluck='name',order_by = "priority_number")
+    # idx =1 
+    # for n in priority_rearrange:
+    #     frappe.db.set_value("Task",n,"priority_number",idx)
+    #     idx+=1
 
 
 def validate_minutes_to_hours(doc, actions):
