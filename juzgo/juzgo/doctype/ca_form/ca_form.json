@@ -35,6 +35,9 @@
   "party",
   "customer_",
   "service_type_requested",
+  "insurance",
+  "specific_request",
+  "land_package_tab",
   "travel_from",
   "travel_to",
   "no_of_days",
@@ -75,10 +78,29 @@
   "section_break_cq9df",
   "guide_specifications",
   "passengers_passport_",
-  "column_break_s93ki",
   "passport_validity_issue",
+  "column_break_s93ki",
   "special_requests_notes",
-  "notes"
+  "notes",
+  "forex_tab",
+  "currency",
+  "quantity",
+  "exchange_price",
+  "juzgo_price",
+  "eligible",
+  "denomination_possibility",
+  "terms_and_conditions",
+  "notes_in_forex",
+  "dharshanarti_tickets_tab",
+  "destination",
+  "city_in_dharshan",
+  "temple",
+  "temple_notes",
+  "date",
+  "from_time",
+  "to_time",
+  "duration",
+  "notes_in_dharshan"
  ],
  "fields": [
   {
@@ -325,7 +347,7 @@
   },
   {
    "fieldname": "family_details_tab",
-   "fieldtype": "Tab Break",
+   "fieldtype": "Section Break",
    "label": "Family Details"
   },
   {
@@ -461,12 +483,130 @@
   {
    "fieldname": "column_break_hqavh",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance",
+   "fieldtype": "Select",
+   "label": "Insurance",
+   "options": "\nYes\nNo\nSpecific Request"
+  },
+  {
+   "depends_on": "eval:doc.insurance == \"Specific Request\"",
+   "fieldname": "specific_request",
+   "fieldtype": "Small Text",
+   "label": "Specific Request"
+  },
+  {
+   "fieldname": "land_package_tab",
+   "fieldtype": "Tab Break",
+   "label": "Land Package"
+  },
+  {
+   "fieldname": "forex_tab",
+   "fieldtype": "Tab Break",
+   "label": "Forex"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity(in Amount)"
+  },
+  {
+   "fieldname": "exchange_price",
+   "fieldtype": "Data",
+   "label": "Exchange Price"
+  },
+  {
+   "fieldname": "juzgo_price",
+   "fieldtype": "Data",
+   "label": "Juzgo Price"
+  },
+  {
+   "fieldname": "eligible",
+   "fieldtype": "Select",
+   "label": "Eligible",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "denomination_possibility",
+   "fieldtype": "Small Text",
+   "label": "Denomination Possibility"
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Link",
+   "label": "Terms and Conditions",
+   "options": "Terms Conditions"
+  },
+  {
+   "fieldname": "notes_in_forex",
+   "fieldtype": "Long Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "dharshanarti_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Dharshan/Arti Tickets"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "city_in_dharshan",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Spots"
+  },
+  {
+   "fieldname": "temple_notes",
+   "fieldtype": "HTML",
+   "label": "Temple Notes"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Data",
+   "label": "Date"
+  },
+  {
+   "fieldname": "from_time",
+   "fieldtype": "Data",
+   "label": "From time"
+  },
+  {
+   "fieldname": "to_time",
+   "fieldtype": "Data",
+   "label": "To time"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration"
+  },
+  {
+   "fieldname": "notes_in_dharshan",
+   "fieldtype": "Long Text",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-19 16:30:06.098030",
+ "modified": "2023-07-24 15:08:25.480575",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

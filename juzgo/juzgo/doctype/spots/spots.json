@@ -25,6 +25,7 @@
   "duration_of_the_tour",
   "holiday_list",
   "best_time_to_visit",
+  "is_temple",
   "column_break_12",
   "pin_location",
   "open_url",
@@ -36,6 +37,7 @@
   "best_season",
   "budgets",
   "section_break_15",
+  "dharsan_arthi",
   "working_days",
   "image_details",
   "img_preview",
@@ -252,12 +254,25 @@
    "fieldtype": "Table",
    "label": "Working days",
    "options": "Working days Table"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_temple",
+   "fieldtype": "Check",
+   "label": "Is Temple"
+  },
+  {
+   "depends_on": "eval:doc.is_temple == 1",
+   "fieldname": "dharsan_arthi",
+   "fieldtype": "Table",
+   "label": "Dharsan/Arthi",
+   "options": "Spots Dharsan Arthi Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-17 15:57:09.456774",
+ "modified": "2023-07-24 16:04:43.747308",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Spots",

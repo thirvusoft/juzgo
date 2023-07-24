@@ -1,51 +1,31 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
- "autoname": "field:type_name",
- "creation": "2023-06-28 12:12:54.229196",
+ "autoname": "field:dharsan_arthi_name",
+ "creation": "2023-07-24 16:00:33.132801",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "type_name",
-  "source",
-  "terms_and_conditions"
+  "dharsan_arthi_name"
  ],
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "type_name",
+   "fieldname": "dharsan_arthi_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Type Name",
-   "reqd": 1,
+   "in_standard_filter": 1,
+   "label": "Dharsan Arthi Name",
    "unique": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "terms_and_conditions",
-   "fieldtype": "Text Editor",
-   "in_list_view": 1,
-   "label": "Terms and Conditions",
-   "reqd": 1
-  },
-  {
-   "fieldname": "source",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Source",
-   "options": "DocType",
-   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-24 14:50:45.577618",
+ "modified": "2023-07-24 16:08:29.174532",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Terms Conditions",
+ "name": "Dharsan Arthi",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -66,17 +46,16 @@
    "delete": 1,
    "email": 1,
    "export": 1,
-   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Juzgo Admin",
-   "select": 1,
    "share": 1,
    "write": 1
   },
   {
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -88,13 +67,13 @@
   },
   {
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Operational Executive",
-   "select": 1,
    "share": 1,
    "write": 1
   }
