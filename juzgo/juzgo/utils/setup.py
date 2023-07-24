@@ -6,6 +6,7 @@ def setup():
     setup_fields()
     role_creation()
     property_setter()
+    service_type_table()
 def property_setter():
     make_property_setter("Task", "status", "options", "Open\nWorking\nPending Review\nReviewed\nOverdue\nTemplate\nCompleted\nCancelled", "Long Text")
 def setup_fields():
@@ -93,3 +94,11 @@ def role_creation():
         role = frappe.new_doc("Role")
         role.role_name = "Juzgo Admin"
         role.save()
+def service_type_table():
+    list=["Land Package","Air Tickets","Bus Tickets","Train Tickets","Dharshan/Arti Tickets","Forex","Passport","Visa","Hotel Reservation","Cruise Booking"]
+    for i in list:
+        if not frappe.db.exists("Service Type Requested", i):
+            new = frappe.new_doc("Service Type Requested")
+            new.service_type = i
+            new.save()
+            

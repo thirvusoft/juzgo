@@ -85,6 +85,15 @@ def user_todo(doc, actions):
                     parent_task.save()
     if(actions == "after_insert"):
         doc.save()
+
+@frappe.whitelist()
+def rename_task(name,abbr,subject):
+    if abbr != name.split('-')[0]:
+        # if frappe.db.exists("Task", doc.abbr + "-" + doc.subject):
+            frappe.rename_doc("Task",name, abbr + "-" + subject, force=True)
+            frappe.reload_doc("projects", "task", abbr + "-" + subject)
+        # else:
+        #     doc.name = make_autoname(doc.abbr + "-" + doc.subject)
 def assigned_to(doc,field_name):
     doc_ = frappe.new_doc("ToDo")        
     if frappe.db.exists("ToDo", {'reference_name': doc.name, 'field_name':field_name}):

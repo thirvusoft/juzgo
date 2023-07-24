@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-24 15:56:53.306028",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "dharsan_arthi_name",
+  "day",
+  "time",
+  "duration",
+  "ticket_price",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "dharsan_arthi_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Dharsan/Arthi Name",
+   "options": "Dharsan Arthi"
+  },
+  {
+   "fieldname": "day",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Day",
+   "options": "\nMonday\nThursday\nWednesday\nThursday\nFriday\nSaturday\nSunday"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Time"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Duration"
+  },
+  {
+   "fieldname": "ticket_price",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket Price"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-24 16:01:41.177474",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Spots Dharsan Arthi Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
