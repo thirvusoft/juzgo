@@ -14,5 +14,13 @@ frappe.ui.form.on('CA Form', {
 				},
 			};
 		});
-	}
+		if(!frm.is_new()){
+			frappe.call({
+				method: "juzgo.juzgo.doctype.ca_form.ca_form.table_preview",
+				callback: function (r) {
+				   frm.set_df_property("passport_doc","options",r.message)
+				},
+			})
+		}
+	},
 });

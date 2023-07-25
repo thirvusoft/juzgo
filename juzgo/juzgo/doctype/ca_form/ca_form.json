@@ -100,7 +100,12 @@
   "from_time",
   "to_time",
   "duration",
-  "notes_in_dharshan"
+  "notes_in_dharshan",
+  "passport_tab",
+  "type",
+  "family_member",
+  "passport_type",
+  "passport_doc"
  ],
  "fields": [
   {
@@ -601,12 +606,39 @@
    "fieldname": "notes_in_dharshan",
    "fieldtype": "Long Text",
    "label": "Notes"
+  },
+  {
+   "fieldname": "passport_tab",
+   "fieldtype": "Tab Break",
+   "label": "Passport"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nNew Passport\nRenewal"
+  },
+  {
+   "fieldname": "family_member",
+   "fieldtype": "Data",
+   "label": "Family Member"
+  },
+  {
+   "fieldname": "passport_type",
+   "fieldtype": "Select",
+   "label": "Passport Type",
+   "options": "\nNormal\nTatkaal"
+  },
+  {
+   "fieldname": "passport_doc",
+   "fieldtype": "HTML",
+   "label": "Passport doc"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-24 15:08:25.480575",
+ "modified": "2023-07-25 15:16:49.738844",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
