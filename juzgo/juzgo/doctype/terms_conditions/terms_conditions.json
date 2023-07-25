@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "type_name",
+  "source",
   "terms_and_conditions"
  ],
  "fields": [
@@ -16,19 +17,32 @@
    "allow_in_quick_entry": 1,
    "fieldname": "type_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Type Name",
+   "reqd": 1,
    "unique": 1
   },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "terms_and_conditions",
    "fieldtype": "Text Editor",
-   "label": "Terms and Conditions"
+   "in_list_view": 1,
+   "label": "Terms and Conditions",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source",
+   "options": "DocType",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 11:09:51.057312",
+ "make_attachments_public": 1,
+ "modified": "2023-07-24 14:50:45.577618",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Terms Conditions",

@@ -1,0 +1,35 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-17 10:49:44.167890",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "accomodation_type_name"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "accomodation_type_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Accomodation Type",
+   "options": "Accomodation Type",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-17 10:49:44.167890",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "CA Accomodation Type",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

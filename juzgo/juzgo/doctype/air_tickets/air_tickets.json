@@ -8,15 +8,15 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "from_destination",
+  "to_destination",
   "flight_time_preferences",
   "from_time",
   "to_time",
-  "from_destination",
-  "to_destination",
   "column_break_z3suc",
-  "airline_preferences",
   "ticket_class",
   "flight_budget",
+  "airline_preferences",
   "column_break_ho0tu",
   "carrier_type",
   "ticket_vendors",
@@ -34,53 +34,72 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "flight_time_preferences",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Flight time preferences",
    "options": "\nMorning\nEvening\nTime Specific"
   },
   {
+   "allow_in_quick_entry": 1,
    "depends_on": "eval:doc.flight_time_preferences == \"Time Specific\"",
    "fieldname": "from_time",
    "fieldtype": "Time",
+   "in_list_view": 1,
    "label": "From Time"
   },
   {
+   "allow_in_quick_entry": 1,
    "depends_on": "eval:doc.flight_time_preferences == \"Time Specific\"",
    "fieldname": "to_time",
    "fieldtype": "Time",
+   "in_list_view": 1,
    "label": "To Time"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "from_destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "From Destination",
    "options": "Destination"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "to_destination",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "To Destination",
    "options": "Destination"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "airline_preferences",
    "fieldtype": "Table MultiSelect",
    "label": "Airline preferences",
    "options": "Airline preferences Table"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "ticket_class",
    "fieldtype": "Table MultiSelect",
+   "in_standard_filter": 1,
    "label": "Ticket Class",
    "options": "Ticket Class Table"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "flight_budget",
    "fieldtype": "Int",
+   "in_standard_filter": 1,
    "label": "Flight Budget"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "carrier_type",
    "fieldtype": "Select",
    "label": "Carrier Type",
@@ -148,6 +167,7 @@
    "label": "Special Notes"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "column_break_z3suc",
    "fieldtype": "Column Break"
   },
@@ -162,7 +182,8 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 19:28:59.010015",
+ "make_attachments_public": 1,
+ "modified": "2023-07-16 15:53:00.402949",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Air Tickets",
@@ -207,6 +228,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

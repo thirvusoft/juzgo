@@ -1,18 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:CA-{MM}{YY}-{####}",
  "creation": "2023-07-13 11:50:20.032664",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "company",
   "party_type",
   "first_name",
   "last_name",
   "customer",
   "column_break_u0ccp",
+  "company",
   "lead_source",
   "e_mail",
   "mobile",
@@ -22,10 +23,84 @@
   "lead_live_status",
   "column_break_ekdi1",
   "quality_of_lead",
-  "preferred_service",
-  "section_break_6kw8d",
+  "users_details_section",
+  "address_line_1",
+  "street",
+  "city",
+  "column_break_sxy9n",
+  "state",
+  "zip_code",
+  "country",
+  "service_request_form_tab",
+  "party",
+  "customer_",
+  "service_type_requested",
+  "insurance",
+  "specific_request",
+  "land_package_tab",
+  "travel_from",
+  "travel_to",
+  "no_of_days",
+  "column_break_fnusz",
+  "travel_dates",
+  "tour_type",
+  "travel_type",
+  "column_break_qifbp",
+  "interested_destination",
+  "destination_travelled",
+  "travellers_age_group",
+  "column_break_afzxr",
+  "interested_flavour",
+  "suggested_spots",
+  "preferred_schedule",
+  "section_break_vu0nh",
+  "no_of_family",
+  "no_of_children",
+  "no_of_pax",
+  "column_break_6qoz2",
+  "no_of_infants",
+  "no_of_adults",
+  "family_details_tab",
+  "family_details_table",
+  "no_of_rooms",
+  "room_preferences",
+  "section_break_qoqmv",
+  "hotel_category",
+  "expected_budget_range_per_person",
+  "accomodation_type",
+  "column_break_pzbi4",
+  "departure_from_city",
+  "transfers",
+  "arrival_at",
+  "column_break_hqavh",
+  "preferred_vehicle_type",
+  "meal_plan",
+  "section_break_cq9df",
+  "guide_specifications",
+  "passengers_passport_",
+  "passport_validity_issue",
+  "column_break_s93ki",
+  "special_requests_notes",
   "notes",
-  "users_details_section"
+  "forex_tab",
+  "currency",
+  "quantity",
+  "exchange_price",
+  "juzgo_price",
+  "eligible",
+  "denomination_possibility",
+  "terms_and_conditions",
+  "notes_in_forex",
+  "dharshanarti_tickets_tab",
+  "destination",
+  "city_in_dharshan",
+  "temple",
+  "temple_notes",
+  "date",
+  "from_time",
+  "to_time",
+  "duration",
+  "notes_in_dharshan"
  ],
  "fields": [
   {
@@ -48,8 +123,9 @@
   },
   {
    "fieldname": "lead_source",
-   "fieldtype": "Data",
-   "label": "Lead Source"
+   "fieldtype": "Link",
+   "label": "Lead Source",
+   "options": "Lead Source"
   },
   {
    "fieldname": "e_mail",
@@ -84,16 +160,6 @@
    "options": "Quality of lead List"
   },
   {
-   "fieldname": "preferred_service",
-   "fieldtype": "Link",
-   "label": "Preferred service",
-   "options": "Preferred service"
-  },
-  {
-   "fieldname": "section_break_6kw8d",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "notes",
    "fieldtype": "Text Editor",
    "label": "Notes"
@@ -113,7 +179,7 @@
   {
    "fieldname": "users_details_section",
    "fieldtype": "Section Break",
-   "label": "Users Details"
+   "label": "Address Details"
   },
   {
    "fieldname": "party_type",
@@ -127,14 +193,424 @@
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "fieldname": "street",
+   "fieldtype": "Data",
+   "label": " Address Line 2 (or) Street "
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "City",
+   "options": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Country",
+   "options": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_request_form_tab",
+   "fieldtype": "Tab Break",
+   "label": "Service Request Form"
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Party",
+   "options": "\nLead\nCustomer"
+  },
+  {
+   "fieldname": "customer_",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "service_type_requested",
+   "fieldtype": "Table MultiSelect",
+   "label": "Service Type Requested",
+   "options": "Service Type Table"
+  },
+  {
+   "fieldname": "travel_from",
+   "fieldtype": "Link",
+   "label": "Travel From",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "travel_to",
+   "fieldtype": "Link",
+   "label": "Travel To",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "no_of_days",
+   "fieldtype": "Data",
+   "label": "No. of Days"
+  },
+  {
+   "fieldname": "travel_dates",
+   "fieldtype": "Select",
+   "label": "Travel Dates",
+   "options": "\nFixed\nFlexible"
+  },
+  {
+   "fieldname": "tour_type",
+   "fieldtype": "Select",
+   "label": "Tour Type",
+   "options": "\nFIT\nGIT\nPrivate Group"
+  },
+  {
+   "fieldname": "travel_type",
+   "fieldtype": "Select",
+   "label": "Travel Type",
+   "options": "\nDomestic\nInternational"
+  },
+  {
+   "fieldname": "interested_destination",
+   "fieldtype": "Table MultiSelect",
+   "label": "Interested Destination",
+   "options": "CA Interested Destination"
+  },
+  {
+   "fieldname": "destination_travelled",
+   "fieldtype": "Data",
+   "label": "Destination Travelled and Not-Interested"
+  },
+  {
+   "fieldname": "travellers_age_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Travellers Age Group",
+   "options": "CA Age Group"
+  },
+  {
+   "fieldname": "interested_flavour",
+   "fieldtype": "Table MultiSelect",
+   "label": "Interested Flavour",
+   "options": "Flavour CA"
+  },
+  {
+   "fieldname": "preferred_schedule",
+   "fieldtype": "Select",
+   "label": "Preferred Schedule",
+   "options": "leisure\nPacked"
+  },
+  {
+   "fieldname": "no_of_children",
+   "fieldtype": "Data",
+   "label": "No. of Children"
+  },
+  {
+   "fieldname": "no_of_pax",
+   "fieldtype": "Data",
+   "label": "No. of PAX"
+  },
+  {
+   "description": "Less then 24 months babies",
+   "fieldname": "no_of_infants",
+   "fieldtype": "Data",
+   "label": "No. of Infants"
+  },
+  {
+   "fieldname": "no_of_adults",
+   "fieldtype": "Data",
+   "label": "No. of Adults"
+  },
+  {
+   "fieldname": "no_of_family",
+   "fieldtype": "Data",
+   "label": "No. of Family"
+  },
+  {
+   "fieldname": "family_details_tab",
+   "fieldtype": "Section Break",
+   "label": "Family Details"
+  },
+  {
+   "fieldname": "hotel_category",
+   "fieldtype": "Select",
+   "label": "Hotel Category",
+   "options": "\n1\n2\n3\n4\n5\n6\n7"
+  },
+  {
+   "fieldname": "expected_budget_range_per_person",
+   "fieldtype": "Data",
+   "label": "Expected Budget Range per Person"
+  },
+  {
+   "fieldname": "family_details_table",
+   "fieldtype": "Table",
+   "label": "Family Details Table",
+   "options": "Family Details Table"
+  },
+  {
+   "fieldname": "room_preferences",
+   "fieldtype": "Table",
+   "label": "Room Preferences",
+   "options": "Room Preferences"
+  },
+  {
+   "fieldname": "no_of_rooms",
+   "fieldtype": "Int",
+   "label": "No. of Rooms"
+  },
+  {
+   "fieldname": "accomodation_type",
+   "fieldtype": "Table MultiSelect",
+   "label": "Accomodation Type",
+   "options": "CA Accomodation Type"
+  },
+  {
+   "fieldname": "departure_from_city",
+   "fieldtype": "Link",
+   "label": "Departure From City",
+   "options": "City"
+  },
+  {
+   "fieldname": "transfers",
+   "fieldtype": "Table MultiSelect",
+   "label": "Transfers",
+   "options": "CA Transfers"
+  },
+  {
+   "fieldname": "arrival_at",
+   "fieldtype": "Link",
+   "label": "Arrival at",
+   "options": "City"
+  },
+  {
+   "fieldname": "preferred_vehicle_type",
+   "fieldtype": "Table MultiSelect",
+   "label": "Preferred Vehicle Type ",
+   "options": "Preferred Vehicle Type"
+  },
+  {
+   "fieldname": "meal_plan",
+   "fieldtype": "Link",
+   "label": "Meal plan",
+   "options": "Meal Plan"
+  },
+  {
+   "fieldname": "guide_specifications",
+   "fieldtype": "Small Text",
+   "label": "Guide specifications"
+  },
+  {
+   "fieldname": "passengers_passport_",
+   "fieldtype": "Small Text",
+   "label": "Passengers Passport ?"
+  },
+  {
+   "fieldname": "passport_validity_issue",
+   "fieldtype": "Small Text",
+   "label": "Passport Validity Issue?"
+  },
+  {
+   "fieldname": "special_requests_notes",
+   "fieldtype": "Long Text",
+   "label": "Special Requests /Notes"
+  },
+  {
+   "fieldname": "column_break_sxy9n",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "suggested_spots",
+   "fieldtype": "Table MultiSelect",
+   "label": "Suggested Spots",
+   "options": "CA Suggested Spots"
+  },
+  {
+   "fieldname": "column_break_fnusz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qifbp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_afzxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vu0nh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_6qoz2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qoqmv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_cq9df",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_s93ki",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pzbi4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hqavh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance",
+   "fieldtype": "Select",
+   "label": "Insurance",
+   "options": "\nYes\nNo\nSpecific Request"
+  },
+  {
+   "depends_on": "eval:doc.insurance == \"Specific Request\"",
+   "fieldname": "specific_request",
+   "fieldtype": "Small Text",
+   "label": "Specific Request"
+  },
+  {
+   "fieldname": "land_package_tab",
+   "fieldtype": "Tab Break",
+   "label": "Land Package"
+  },
+  {
+   "fieldname": "forex_tab",
+   "fieldtype": "Tab Break",
+   "label": "Forex"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity(in Amount)"
+  },
+  {
+   "fieldname": "exchange_price",
+   "fieldtype": "Data",
+   "label": "Exchange Price"
+  },
+  {
+   "fieldname": "juzgo_price",
+   "fieldtype": "Data",
+   "label": "Juzgo Price"
+  },
+  {
+   "fieldname": "eligible",
+   "fieldtype": "Select",
+   "label": "Eligible",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "denomination_possibility",
+   "fieldtype": "Small Text",
+   "label": "Denomination Possibility"
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Link",
+   "label": "Terms and Conditions",
+   "options": "Terms Conditions"
+  },
+  {
+   "fieldname": "notes_in_forex",
+   "fieldtype": "Long Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "dharshanarti_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Dharshan/Arti Tickets"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "city_in_dharshan",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Spots"
+  },
+  {
+   "fieldname": "temple_notes",
+   "fieldtype": "HTML",
+   "label": "Temple Notes"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Data",
+   "label": "Date"
+  },
+  {
+   "fieldname": "from_time",
+   "fieldtype": "Data",
+   "label": "From time"
+  },
+  {
+   "fieldname": "to_time",
+   "fieldtype": "Data",
+   "label": "To time"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration"
+  },
+  {
+   "fieldname": "notes_in_dharshan",
+   "fieldtype": "Long Text",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-14 18:53:10.841198",
+ "make_attachments_public": 1,
+ "modified": "2023-07-24 15:08:25.480575",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

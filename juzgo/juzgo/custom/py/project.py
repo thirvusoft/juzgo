@@ -12,7 +12,7 @@ def validate(doc,action):
 @frappe.whitelist()
 def get_project_abbr(project_name):
     m = project_name
-    x = slice(3)
+    x = slice(5)
     return m[x].upper()
 
 @frappe.whitelist()
@@ -141,7 +141,6 @@ def get_family_member_attachment(family_members_attachment,custom_list):
                     "check":i.check,
                     "receive_or_send":i.receive_or_send,
                 })
-        print(members_attachment_project)
     return family_members_attachment,members_attachment_project
 
 
@@ -151,6 +150,7 @@ def add_destination_details(name,destination):
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
     old_destination_check_list = doc.destination_check_list
+    print(destination)
     if(destination):
         for des in destination:
             for row in doc.family_member_details:
@@ -448,9 +448,9 @@ def add_family_details(name):
     return frappe.get_all('Family Members Details', filters={'name':name}, fields=['date_of_birth','gender','age','relationship','members_name','member_row_id'])
 def project_head(doc,actions):
     if doc.project_head and (actions == "after_insert" or not doc.is_new()):
-        doc_ = frappe.new_doc("ToDo")        
-        if frappe.db.exists("ToDo", {'reference_name': doc.name}):
-            doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name})
+        doc_ = frappe.new_doc("ToDo")    
+        if frappe.db.exists("ToDo", {'reference_name': doc.name , 'field_name':'project_head'}):
+            doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name , 'field_name':'project_head'})
         user = frappe.db.get_value("User", doc.owner, "username")
         doc_.update({
             'date': frappe.utils.nowdate(),
@@ -459,6 +459,8 @@ def project_head(doc,actions):
             'reference_type': doc.doctype,
             'reference_name': doc.name,
             'assigned_by': user,
+            'field_name':'project_head',
+            'status':"Open",
         })
         doc_.flags.ignore_permissions = True
         doc_.flags.ignore_links = True

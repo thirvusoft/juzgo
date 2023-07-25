@@ -1,4 +1,29 @@
 frappe.ui.form.on('Task', {
+    after_save:function(frm){
+        var doctype = frm.doc.doctype
+        var docname = frm.doc.name
+        var new_name = frm.doc.abbr+'-'+frm.doc.subject
+        frappe.call({
+            method: "juzgo.juzgo.custom.py.task.rename_task",
+            args: {
+                "name":frm.doc.name,
+                "abbr":frm.doc.abbr,
+                "subject": frm.doc.subject
+            },
+            callback: function (r, rt) {
+                if (!r.exc) {
+                    $(document).trigger("rename", [
+                        doctype,
+                        docname,
+                        r.message || new_name,
+                    ]);
+                    if (locals[doctype] && locals[doctype][docname])
+                        delete locals[doctype][docname];
+                    if (callback) callback(r.message);
+                }
+            },
+        })
+    },
     subject:function(frm){
         if (frm.doc.subject.length >= 3){
             frappe.call({
@@ -125,7 +150,7 @@ async function filter(frm){
         if(frm.doc.project){
             var d = await frappe.db
             .get_list("ToDo", {
-                filters: { reference_type: "Project", reference_name: frm.doc.project},
+                filters: { reference_type: "Project", reference_name: frm.doc.project,status:["!=","Cancelled"]},
                 fields: ["allocated_to"],
             })
             .then((l) => {

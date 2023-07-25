@@ -4,7 +4,10 @@ var form_destination
 var remainder_group
 var remainder_group_details = {}
 frappe.ui.form.on('Project', {
-    refresh:function (frm,cdt,cdn) {     
+    refresh:function (frm,cdt,cdn) {   
+        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-add-row')[0].style.display = 'none'
+        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-rows')[0].style.display = 'none'
+        cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-all-rows')[0].style.display = 'none'  
         if(!frm.is_new()){
             check_list(frm)
             frappe.call({
@@ -144,7 +147,7 @@ function auto_end_date(frm){
 function add_destination_details(frm,event=''){
         let destination_list = []
         for(let i=0;i<frm.doc.destination.length;i++){
-            destination_list.push(frm.doc.destination[i].destination)
+            destination_list.push(frm.doc.destination[i].destination_name)
         }
         frappe.call({
             method:'juzgo.juzgo.custom.py.project.add_destination_details',
@@ -764,17 +767,18 @@ function check_list(frm){
     }
 }
 
-frappe.ui.form.on('Task Attachments', {
-    file:function (frm,cdt,cdn) {
+frappe.ui.form.on('Project Task Attachments', {
+    file: function (frm,cdt,cdn) {
         let row = locals[cdt][cdn]
-        console.log(row.file)
         var currentdate = new Date(); 
-        frappe.db.get_value('File', {"file_url":row.file}, 'name').then((data)=>{
-            frappe.model.set_value(row.doctype,row.name,"ref_id",data.message.name)
-            frappe.model.set_value(row.doctype,row.name,"attached_by",frappe.session.user)
-            frappe.model.set_value(row.doctype,row.name,"attached_date",frappe.datetime.get_today())
-            frappe.model.set_value(row.doctype,row.name,"attached_time",currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds())
-        })
+        setTimeout(() => {
+            frappe.db.get_value('File', {"file_url":row.file}, 'name').then((data)=>{
+                frappe.model.set_value(row.doctype,row.name,"ref_id",data.message.name)
+                frappe.model.set_value(row.doctype,row.name,"attached_by",frappe.session.user)
+                frappe.model.set_value(row.doctype,row.name,"attached_date",frappe.datetime.get_today())
+                frappe.model.set_value(row.doctype,row.name,"attached_time",currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds())
+            })
+        }, 4000);
     },
     final_copy:function (frm,cdt,cdn) {
         remove_add_fc(frm,cdt,cdn)

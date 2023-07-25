@@ -11,7 +11,8 @@
   "cost",
   "desc_destination_detials",
   "no_of_nights",
-  "days"
+  "days",
+  "itinerary_file"
  ],
  "fields": [
   {
@@ -21,6 +22,7 @@
    "label": "Company name"
   },
   {
+   "columns": 1,
    "fieldname": "cost",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -33,22 +35,30 @@
    "label": "Description with destination details"
   },
   {
+   "columns": 1,
    "fieldname": "no_of_nights",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "No of nights"
+   "label": "No. of Nights"
   },
   {
+   "columns": 1,
    "fieldname": "days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Days"
+   "label": "No. of Days"
+  },
+  {
+   "fieldname": "itinerary_file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Itinerary file"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-15 12:47:53.751688",
+ "modified": "2023-07-16 11:40:49.327395",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Juzgo Other Itinerary",
