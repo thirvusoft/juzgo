@@ -133,3 +133,73 @@ def table_preview():
     '''
 
     return html
+
+@frappe.whitelist()
+def temple_notes(temple):
+    temple = json.loads(temple)
+    temple_list = []
+    for i in temple:temple_list.append(frappe.get_doc("Spots",i.get("temple_name")).dharsan_arthi)
+    print(temple_list)
+    html = '''
+            <style>
+                th,td{
+                     border:1px solid black;
+                     padding:2px;
+                     text-align:center;
+                }
+            </style>
+            <table>
+                <tr style="background-color:#74bec1;color:#516091">
+                    <th>
+                        Dharsan/Arthi Name
+                    </th>
+                    <th>
+                        Day
+                    </th>
+                    <th>
+                       Time
+                    </th>
+                    <th>
+                        Duration
+                    </th>
+                    <th>
+                        Ticket Price
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                </tr>
+                '''
+    for i in temple_list:
+        html =html + f'''
+            <tr style="background-color:#adebbe;color:#364968;">
+                <td colspan="5"><b>{i[0].parent}</b></td>
+                <td>{frappe.get_value("Spots",i[0].parent,"notes") or ""}</td>
+            </tr>
+       '''
+        for j in i:
+            html =html + f'''       
+                    <tr style="background-color:#eef3ad;color:#364968">
+                        <td style="width:15%;">
+                            {j.dharsan_arthi_name or ""}
+                        </td>
+                        <td style="width:10%;">
+                            {j.day or ""}
+                        </td>
+                        <td style="width:15%;">
+                            {j.time or ""}
+                        </td>
+                        <td style="width:10%;">
+                            {j.duration or ""}
+                        </td>
+                        <td style="width:10%;">
+                            {j.ticket_price or ""}
+                        </td>
+                        <td style="text-align:left;width:40%;">
+                            {j.notes or ""}
+                        </td>
+                    </tr>'''
+    html =html + f'''   
+            </table>
+            '''
+    return html
