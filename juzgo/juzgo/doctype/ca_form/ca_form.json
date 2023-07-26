@@ -110,7 +110,40 @@
   "type",
   "family_member",
   "passport_type",
-  "passport_doc"
+  "passport_doc",
+  "air_tickets_tab",
+  "onward",
+  "section_break_fzwug",
+  "from_destination_onwards",
+  "to_destination_onwards",
+  "column_break_fuz7h",
+  "from_date",
+  "to_date",
+  "section_break_6j7k9",
+  "return",
+  "section_break_encca",
+  "from_destination_return",
+  "column_break_5ehnh",
+  "to_destination_return",
+  "section_break_vw2mv",
+  "departure_city_preferences",
+  "flight_connection_preferences",
+  "stop_list_preferences",
+  "column_break_bivag",
+  "airline_preferences",
+  "ticket_class",
+  "flight_budget",
+  "section_break_ztwjr",
+  "carrier_type",
+  "layover_preferences",
+  "column_break_q5el6",
+  "meal_preference",
+  "is_web_checkin_service_required",
+  "section_break_n1xsn",
+  "baggage_preferences",
+  "section_break_hnhta",
+  "special_notes",
+  "get_available_flights"
  ],
  "fields": [
   {
@@ -659,12 +692,181 @@
   {
    "fieldname": "section_break_86",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "air_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Air Tickets"
+  },
+  {
+   "fieldname": "onward",
+   "fieldtype": "Heading",
+   "label": "Onward"
+  },
+  {
+   "fieldname": "from_destination_onwards",
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "to_destination_onwards",
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "column_break_fuz7h",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "section_break_6j7k9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "return",
+   "fieldtype": "Heading",
+   "label": "Return"
+  },
+  {
+   "fieldname": "from_destination_return",
+   "fieldtype": "Link",
+   "label": "From Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "to_destination_return",
+   "fieldtype": "Link",
+   "label": "To Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "departure_city_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Departure City Preferences",
+   "options": "City Multiselect"
+  },
+  {
+   "fieldname": "flight_connection_preferences",
+   "fieldtype": "Select",
+   "label": "Flight Connection Preferences",
+   "options": "\nDirect\nOne Stop\nMore"
+  },
+  {
+   "fieldname": "stop_list_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Stop List Preferences",
+   "options": "City Multiselect"
+  },
+  {
+   "fieldname": "airline_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Airline Preferences",
+   "options": "Airline Preference Table"
+  },
+  {
+   "fieldname": "ticket_class",
+   "fieldtype": "Table MultiSelect",
+   "label": "Ticket Class",
+   "options": "Ticket Class Table"
+  },
+  {
+   "fieldname": "flight_budget",
+   "fieldtype": "Int",
+   "label": "Flight Budget"
+  },
+  {
+   "fieldname": "carrier_type",
+   "fieldtype": "Select",
+   "label": "Carrier Type",
+   "options": "\nLow Cost\nRegular"
+  },
+  {
+   "fieldname": "layover_preferences",
+   "fieldtype": "Link",
+   "label": "Layover Preferences",
+   "options": "Country"
+  },
+  {
+   "fieldname": "meal_preference",
+   "fieldtype": "Table MultiSelect",
+   "label": "Meal Preference",
+   "options": "Meal preferences Table"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_web_checkin_service_required",
+   "fieldtype": "Check",
+   "label": "Is web checkin Service required"
+  },
+  {
+   "fieldname": "section_break_vw2mv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_5ehnh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_n1xsn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "baggage_preferences",
+   "fieldtype": "Table",
+   "label": "Baggage Preferences",
+   "options": "Baggage preferences Table"
+  },
+  {
+   "fieldname": "section_break_hnhta",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "special_notes",
+   "fieldtype": "Text Editor",
+   "label": "Special Notes"
+  },
+  {
+   "fieldname": "column_break_bivag",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ztwjr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_q5el6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_fzwug",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_encca",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "get_available_flights",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Get available flights"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-26 13:03:49.285106",
+ "modified": "2023-07-26 16:22:43.453270",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
