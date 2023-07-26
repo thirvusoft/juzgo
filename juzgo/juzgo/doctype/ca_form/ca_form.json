@@ -95,12 +95,17 @@
   "destination",
   "city_in_dharshan",
   "temple",
-  "temple_notes",
-  "date",
+  "column_break_93",
+  "from_date_1",
+  "to_date_1",
+  "column_break_94",
   "from_time",
   "to_time",
   "duration",
+  "column_break_95",
   "notes_in_dharshan",
+  "section_break_86",
+  "temple_notes",
   "passport_tab",
   "type",
   "family_member",
@@ -573,9 +578,9 @@
   },
   {
    "fieldname": "temple",
-   "fieldtype": "Link",
+   "fieldtype": "Table MultiSelect",
    "label": "Temple",
-   "options": "Spots"
+   "options": "Temple Spots"
   },
   {
    "fieldname": "temple_notes",
@@ -583,18 +588,13 @@
    "label": "Temple Notes"
   },
   {
-   "fieldname": "date",
-   "fieldtype": "Data",
-   "label": "Date"
-  },
-  {
    "fieldname": "from_time",
-   "fieldtype": "Data",
-   "label": "From time"
+   "fieldtype": "Time",
+   "label": "From Time"
   },
   {
    "fieldname": "to_time",
-   "fieldtype": "Data",
+   "fieldtype": "Time",
    "label": "To time"
   },
   {
@@ -633,12 +633,38 @@
    "fieldname": "passport_doc",
    "fieldtype": "HTML",
    "label": "Passport doc"
+  },
+  {
+   "fieldname": "column_break_93",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date_1",
+   "fieldtype": "Date",
+   "label": "From Date "
+  },
+  {
+   "fieldname": "to_date_1",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "column_break_94",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_95",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_86",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-25 15:16:49.738844",
+ "modified": "2023-07-26 13:03:49.285106",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
