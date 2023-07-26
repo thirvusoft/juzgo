@@ -85,9 +85,11 @@
   "forex_tab",
   "currency",
   "quantity",
+  "column_break_78",
   "exchange_price",
   "juzgo_price",
   "eligible",
+  "section_break_82",
   "denomination_possibility",
   "terms_and_conditions",
   "notes_in_forex",
@@ -143,7 +145,17 @@
   "baggage_preferences",
   "section_break_hnhta",
   "special_notes",
-  "get_available_flights"
+  "get_available_flights",
+  "bus_tickets_tab",
+  "bus_types",
+  "from_place",
+  "to_place",
+  "column_break_141",
+  "boarding_point",
+  "dropping_point",
+  "column_break_144",
+  "arrival_time",
+  "amenities"
  ],
  "fields": [
   {
@@ -861,12 +873,74 @@
    "fieldtype": "Button",
    "hidden": 1,
    "label": "Get available flights"
+  },
+  {
+   "fieldname": "bus_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Bus Tickets"
+  },
+  {
+   "fieldname": "bus_types",
+   "fieldtype": "Select",
+   "label": "Bus Types",
+   "options": "\nSEATER\nSLEEPER\nAC\nNON-AC"
+  },
+  {
+   "fieldname": "from_place",
+   "fieldtype": "Link",
+   "label": "From Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "to_place",
+   "fieldtype": "Link",
+   "label": "To Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "boarding_point",
+   "fieldtype": "Link",
+   "label": "Boarding Point",
+   "options": "Area"
+  },
+  {
+   "fieldname": "dropping_point",
+   "fieldtype": "Link",
+   "label": "Dropping Point",
+   "options": "Area"
+  },
+  {
+   "fieldname": "arrival_time",
+   "fieldtype": "Time",
+   "label": "Arrival Time"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Amenities",
+   "options": "Amenities Table"
+  },
+  {
+   "fieldname": "column_break_141",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_144",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_78",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_82",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-26 16:22:43.453270",
+ "modified": "2023-07-26 17:02:17.993597",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
