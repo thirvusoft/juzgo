@@ -17,7 +17,7 @@ frappe.ui.form.on('Timesheet', {
 			frappe.call({
 				method: "juzgo.juzgo.custom.py.timesheet.existing_draft_timesheet",
 				args:{
-					owner: frm.doc.owner,
+					owner: frm.doc.employee,
 					doc_name : frm.doc.name
 				},
 				error: function(r){
@@ -55,6 +55,7 @@ frappe.ui.form.on('Timesheet', {
 		frappe.call({
 			method:"juzgo.juzgo.custom.py.timesheet.get_assigned_tasks",
 			args:{
+				emp: frm.doc.employee,
 				tasks: []
 			},
 			callback: function(r){

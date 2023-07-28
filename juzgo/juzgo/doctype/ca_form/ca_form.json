@@ -40,41 +40,54 @@
   "land_package_tab",
   "travel_from",
   "travel_to",
-  "no_of_days",
+  "travel_start_date",
+  "nos_of_days",
+  "no_of_nights",
+  "travel_end_date",
   "column_break_fnusz",
   "travel_dates",
   "tour_type",
   "travel_type",
-  "column_break_qifbp",
   "interested_destination",
   "destination_travelled",
+  "column_break_qifbp",
   "travellers_age_group",
-  "column_break_afzxr",
   "interested_flavour",
   "suggested_spots",
   "preferred_schedule",
   "section_break_vu0nh",
   "no_of_family",
   "no_of_children",
-  "no_of_pax",
-  "column_break_6qoz2",
-  "no_of_infants",
+  "child_without_bed",
+  "column_break_afzxr",
   "no_of_adults",
+  "no_of_infants",
+  "no_of_pax",
+  "column_break_eqm4u",
+  "diff_in_family",
+  "diff_in_cwb",
+  "diff_in_cnb",
+  "column_break_6qoz2",
+  "diff_in_adult",
+  "diff_in_infants",
+  "diff_in_pax",
   "family_details_tab",
   "family_details_table",
+  "section_break_bxxxu",
   "no_of_rooms",
+  "column_break_ctsou",
+  "total_rooms",
+  "section_break_3b47k",
   "room_preferences",
   "section_break_qoqmv",
   "hotel_category",
-  "expected_budget_range_per_person",
   "accomodation_type",
   "column_break_pzbi4",
-  "departure_from_city",
   "transfers",
-  "arrival_at",
-  "column_break_hqavh",
   "preferred_vehicle_type",
+  "column_break_hqavh",
   "meal_plan",
+  "expected_budget_range_per_person",
   "section_break_cq9df",
   "guide_specifications",
   "passengers_passport_",
@@ -82,14 +95,57 @@
   "column_break_s93ki",
   "special_requests_notes",
   "notes",
+  "air_tickets_tab",
+  "airline_preferences",
+  "column_break_580mw",
+  "ticket_class",
+  "column_break_hoecz",
+  "flight_connection_preferences",
+  "section_break_fzwug",
+  "onward",
+  "section_break_x5gum",
+  "from_destination_onwards",
+  "to_destination_onwards",
+  "column_break_fuz7h",
+  "from_date",
+  "to_date",
+  "column_break_eu2sr",
+  "onward_stop",
+  "section_break_6j7k9",
+  "return",
+  "section_break_encca",
+  "from_destination_return",
+  "to_destination_return",
+  "column_break_5ehnh",
+  "return_start_date",
+  "return_end_date",
+  "column_break_xnadp",
+  "stop_list_preferences",
+  "section_break_vw2mv",
+  "departure_city_preferences",
+  "column_break_bivag",
+  "special_requests",
+  "section_break_imisa",
+  "flight_budget",
+  "column_break_9vgoh",
+  "max_flight_budget",
+  "section_break_ztwjr",
+  "carrier_type",
+  "layover_preferences",
+  "column_break_q5el6",
+  "meal_preference",
+  "is_web_checkin_service_required",
+  "section_break_n1xsn",
+  "baggage_preferences",
+  "section_break_hnhta",
+  "special_notes",
+  "get_available_flights",
   "forex_tab",
   "currency",
   "quantity",
   "exchange_price",
-  "column_break_rz8xz",
   "juzgo_price",
   "eligible",
-  "section_break_abcfl",
   "denomination_possibility",
   "terms_and_conditions",
   "notes_in_forex",
@@ -109,43 +165,9 @@
   "section_break_86",
   "temple_notes",
   "passport_tab",
-  "type",
-  "family_member",
-  "passport_type",
-  "passport_doc",
-  "air_tickets_tab",
-  "onward",
-  "section_break_fzwug",
-  "from_destination_onwards",
-  "to_destination_onwards",
-  "column_break_fuz7h",
-  "from_date",
-  "to_date",
-  "section_break_6j7k9",
-  "return",
-  "section_break_encca",
-  "from_destination_return",
-  "column_break_5ehnh",
-  "to_destination_return",
-  "section_break_vw2mv",
-  "departure_city_preferences",
-  "flight_connection_preferences",
-  "stop_list_preferences",
-  "column_break_bivag",
-  "airline_preferences",
-  "ticket_class",
-  "flight_budget",
-  "section_break_ztwjr",
-  "carrier_type",
-  "layover_preferences",
-  "column_break_q5el6",
-  "meal_preference",
-  "is_web_checkin_service_required",
-  "section_break_n1xsn",
-  "baggage_preferences",
-  "section_break_hnhta",
-  "special_notes",
-  "get_available_flights"
+  "passport_to_issue",
+  "family_member_table",
+  "passport_doc"
  ],
  "fields": [
   {
@@ -313,11 +335,6 @@
    "options": "Destination"
   },
   {
-   "fieldname": "no_of_days",
-   "fieldtype": "Data",
-   "label": "No. of Days"
-  },
-  {
    "fieldname": "travel_dates",
    "fieldtype": "Select",
    "label": "Travel Dates",
@@ -367,23 +384,22 @@
   {
    "fieldname": "no_of_children",
    "fieldtype": "Data",
-   "label": "No. of Children"
+   "label": "Child With Bed (CWB)"
   },
   {
    "fieldname": "no_of_pax",
    "fieldtype": "Data",
-   "label": "No. of PAX"
+   "label": "No of PAX"
   },
   {
-   "description": "Less then 24 months babies",
    "fieldname": "no_of_infants",
    "fieldtype": "Data",
-   "label": "No. of Infants"
+   "label": "No of Infants (Below 24 month)"
   },
   {
    "fieldname": "no_of_adults",
    "fieldtype": "Data",
-   "label": "No. of Adults"
+   "label": "No of Adults"
   },
   {
    "fieldname": "no_of_family",
@@ -397,9 +413,9 @@
   },
   {
    "fieldname": "hotel_category",
-   "fieldtype": "Select",
+   "fieldtype": "Table MultiSelect",
    "label": "Hotel Category",
-   "options": "\n1\n2\n3\n4\n5\n6\n7"
+   "options": "Hotel Category table"
   },
   {
    "fieldname": "expected_budget_range_per_person",
@@ -421,7 +437,7 @@
   {
    "fieldname": "no_of_rooms",
    "fieldtype": "Int",
-   "label": "No. of Rooms"
+   "label": "No of Rooms to add"
   },
   {
    "fieldname": "accomodation_type",
@@ -430,22 +446,10 @@
    "options": "CA Accomodation Type"
   },
   {
-   "fieldname": "departure_from_city",
-   "fieldtype": "Link",
-   "label": "Departure From City",
-   "options": "City"
-  },
-  {
    "fieldname": "transfers",
    "fieldtype": "Table MultiSelect",
    "label": "Transfers",
    "options": "CA Transfers"
-  },
-  {
-   "fieldname": "arrival_at",
-   "fieldtype": "Link",
-   "label": "Arrival at",
-   "options": "City"
   },
   {
    "fieldname": "preferred_vehicle_type",
@@ -455,9 +459,9 @@
   },
   {
    "fieldname": "meal_plan",
-   "fieldtype": "Link",
+   "fieldtype": "Table MultiSelect",
    "label": "Meal plan",
-   "options": "Meal Plan"
+   "options": "Meal preferences Table"
   },
   {
    "fieldname": "guide_specifications",
@@ -648,23 +652,6 @@
    "label": "Passport"
   },
   {
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "label": "Type",
-   "options": "\nNew Passport\nRenewal"
-  },
-  {
-   "fieldname": "family_member",
-   "fieldtype": "Data",
-   "label": "Family Member"
-  },
-  {
-   "fieldname": "passport_type",
-   "fieldtype": "Select",
-   "label": "Passport Type",
-   "options": "\nNormal\nTatkaal"
-  },
-  {
    "fieldname": "passport_doc",
    "fieldtype": "HTML",
    "label": "Passport doc"
@@ -785,7 +772,7 @@
   {
    "fieldname": "flight_budget",
    "fieldtype": "Int",
-   "label": "Flight Budget"
+   "label": "Minimum Flight Budget"
   },
   {
    "fieldname": "carrier_type",
@@ -863,12 +850,160 @@
    "fieldtype": "Button",
    "hidden": 1,
    "label": "Get available flights"
+  },
+  {
+   "fieldname": "travel_start_date",
+   "fieldtype": "Date",
+   "label": "Travel Start date"
+  },
+  {
+   "fieldname": "travel_end_date",
+   "fieldtype": "Date",
+   "label": "Travel End date"
+  },
+  {
+   "fieldname": "no_of_nights",
+   "fieldtype": "Int",
+   "label": "No. of Nights"
+  },
+  {
+   "fieldname": "nos_of_days",
+   "fieldtype": "Int",
+   "label": "No. of Days"
+  },
+  {
+   "fieldname": "child_without_bed",
+   "fieldtype": "Int",
+   "label": "Child No Bed (CNB)"
+  },
+  {
+   "fieldname": "section_break_bxxxu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_rooms",
+   "fieldtype": "Data",
+   "label": "Total Rooms"
+  },
+  {
+   "fieldname": "column_break_ctsou",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_3b47k",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_eu2sr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "onward_stop",
+   "fieldtype": "Table MultiSelect",
+   "label": "Stop List Preferences",
+   "options": "City Multiselect"
+  },
+  {
+   "fieldname": "return_start_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "return_end_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "column_break_580mw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xnadp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_x5gum",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_imisa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_9vgoh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max_flight_budget",
+   "fieldtype": "Int",
+   "label": "Maximum Filght Budget"
+  },
+  {
+   "fieldname": "special_requests",
+   "fieldtype": "Table MultiSelect",
+   "label": "Special Requests",
+   "options": "Special Request Table"
+  },
+  {
+   "fieldname": "column_break_hoecz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eqm4u",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "diff_in_family",
+   "fieldtype": "Int",
+   "label": "Difference in family",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diff_in_cwb",
+   "fieldtype": "Int",
+   "label": "Difference in CWB",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diff_in_cnb",
+   "fieldtype": "Int",
+   "label": "Difference in CNB",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diff_in_adult",
+   "fieldtype": "Int",
+   "label": "Difference in Adult",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diff_in_infants",
+   "fieldtype": "Int",
+   "label": "Difference in Infants",
+   "read_only": 1
+  },
+  {
+   "fieldname": "diff_in_pax",
+   "fieldtype": "Int",
+   "label": "Difference in PAX",
+   "read_only": 1
+  },
+  {
+   "fieldname": "passport_to_issue",
+   "fieldtype": "Int",
+   "label": "No of Passport To issue"
+  },
+  {
+   "fieldname": "family_member_table",
+   "fieldtype": "Table",
+   "label": "Family member table",
+   "options": "Passport Family Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-26 16:22:43.453270",
+ "modified": "2023-07-28 03:26:41.981563",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

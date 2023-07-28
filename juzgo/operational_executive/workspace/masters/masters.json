@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}},{\"id\":\"vYhCVMTGdo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Spots\",\"col\":3}},{\"id\":\"MTVFBely2t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Detail\",\"col\":3}},{\"id\":\"8VvRVpcFRQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Operator\",\"col\":3}},{\"id\":\"xoakTM4SpS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cruise\",\"col\":3}},{\"id\":\"4eV3COIzEe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Air Tickets\",\"col\":3}},{\"id\":\"TGdIQfjaa4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bus\",\"col\":3}},{\"id\":\"mlco5oyBuk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CA Form\",\"col\":3}},{\"id\":\"mghDRUeCBq\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gfN-s_YDUA\",\"type\":\"card\",\"data\":{\"card_name\":\"Import Tool\",\"col\":4}}]",
+ "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}},{\"id\":\"vYhCVMTGdo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Spots\",\"col\":3}},{\"id\":\"MTVFBely2t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Detail\",\"col\":3}},{\"id\":\"8VvRVpcFRQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Operator\",\"col\":3}},{\"id\":\"xoakTM4SpS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cruise\",\"col\":3}},{\"id\":\"4eV3COIzEe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Air Tickets\",\"col\":3}},{\"id\":\"TGdIQfjaa4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bus\",\"col\":3}},{\"id\":\"mlco5oyBuk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CA Form\",\"col\":3}},{\"id\":\"mghDRUeCBq\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
  "creation": "2023-06-28 14:12:25.335044",
  "custom_blocks": [],
  "docstatus": 0,
@@ -11,28 +11,9 @@
  "idx": 0,
  "is_hidden": 0,
  "label": "Masters",
- "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Import Tool",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Data Import",
-   "link_count": 0,
-   "link_to": "Data Import",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  }
- ],
- "modified": "2023-07-24 22:11:50.244780",
- "modified_by": "sibi.kumar@thirvusoft.in",
+ "links": [],
+ "modified": "2023-07-27 11:53:02.564945",
+ "modified_by": "prithivraj@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Masters",
  "number_cards": [],

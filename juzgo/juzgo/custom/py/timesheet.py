@@ -5,9 +5,9 @@ from frappe.utils import (
     today
     )
 @frappe.whitelist()
-def get_assigned_tasks(tasks=[]):
+def get_assigned_tasks(emp=None,tasks=[]):
     tasks = eval(tasks)
-    user = frappe.session.user
+    user = frappe.get_value("Employee",{'name':emp},'user_id')
     assigned_tasks = frappe.get_all('Task', filters={'assigned_to':user, 'status':['in', ['Open', 'Working', 'Overdue','Pending Review']]}, pluck='name')
     # filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Review']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'],order_by = "priority_number")
     filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Review']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'])
@@ -24,7 +24,7 @@ def get_assigned_tasks(tasks=[]):
     return filtered_tasks
 
 def status_updated(doc,actions):
-    existing_draft_timesheet(doc.owner, doc.name)
+    existing_draft_timesheet(doc.employee, doc.name)
     for i in doc.time_logs:
         if i.task:
             if i.completed == 1:
@@ -49,9 +49,13 @@ def status_updated(doc,actions):
 
 
 @frappe.whitelist()               
-def existing_draft_timesheet(owner,doc_name):
-    user = frappe.db.get_value("User", owner, "name")
-    timesheets = frappe.get_all("Timesheet", filters={'owner': user,'name':['!=',doc_name], 'status': ['not in', ['Cancelled', 'Submitted']]},fields=['name','status'])
+def existing_draft_timesheet(owner=None,doc_name=None):
+    if not owner:
+        own = frappe.session.user
+        owner = frappe.get_value("Employee",{'user_id':own},'name')
+        timesheets = frappe.get_all("Timesheet", filters={'employee': owner,'name':['!=',doc_name], 'status': ['not in', ['Cancelled', 'Submitted']]},fields=['name','status'])
+    else:
+        timesheets = frappe.get_all("Timesheet", filters={'employee': owner,'name':['!=',doc_name], 'status': ['not in', ['Cancelled', 'Submitted']]},fields=['name','status'])
     for timesheet in timesheets:
         if timesheet.status != "Submitted" or timesheet.status != "Cancelled" :
             return frappe.throw(f"Submit your Existing Timesheet {timesheet.name} to create new timesheet")

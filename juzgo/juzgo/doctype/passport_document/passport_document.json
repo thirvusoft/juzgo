@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "passport_budget",
   "passport_document_table",
   "passport_image_doc_table",
   "img_preview"
@@ -28,12 +29,18 @@
    "fieldname": "img_preview",
    "fieldtype": "HTML",
    "label": "Image Preview"
+  },
+  {
+   "fieldname": "passport_budget",
+   "fieldtype": "Table",
+   "label": "Passport Budget",
+   "options": "Passport Budget"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-25 11:04:38.267360",
+ "modified": "2023-07-28 03:45:44.049629",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Passport Document",

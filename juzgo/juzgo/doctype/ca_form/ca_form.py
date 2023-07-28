@@ -172,12 +172,13 @@ def temple_notes(temple = None):
                     </tr>
                     '''
         for i in temple_list:
-            html =html + f'''
-                <tr style="background-color:#adebbe;color:#364968;">
-                    <td colspan="5"><b>{i[0].parent}</b></td>
-                    <td>{frappe.get_value("Spots",i[0].parent,"notes") or ""}</td>
-                </tr>
-        '''
+            if(len(i) > 0):
+                html =html + f'''
+                    <tr style="background-color:#adebbe;color:#364968;">
+                        <td colspan="5"><b>{i[0].parent}</b></td>
+                        <td>{frappe.get_value("Spots",i[0].parent,"notes") or ""}</td>
+                    </tr>
+            '''
             for j in i:
                 html =html + f'''       
                         <tr style="background-color:#eef3ad;color:#364968">
