@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-12 16:53:14.782616",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "emergency_name",
+  "emergency_phone",
+  "relation"
+ ],
+ "fields": [
+  {
+   "fieldname": "emergency_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Emergency Contact Name"
+  },
+  {
+   "fieldname": "emergency_phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Emergency Phone"
+  },
+  {
+   "fieldname": "relation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Relation"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-29 11:53:01.077450",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Emergency Contact",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-28 02:27:42.471993",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "secial_request"
+ ],
+ "fields": [
+  {
+   "fieldname": "secial_request",
+   "fieldtype": "Link",
+   "label": "Special Request",
+   "options": "Special Request"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-29 11:52:35.657020",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Special Request Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
