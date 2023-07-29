@@ -8,6 +8,8 @@ from frappe.utils import (
 def get_assigned_tasks(emp=None,tasks=[]):
     tasks = eval(tasks)
     user = frappe.get_value("Employee",{'name':emp},'user_id')
+    if not emp:
+        user = frappe.session.user
     assigned_tasks = frappe.get_all('Task', filters={'assigned_to':user, 'status':['in', ['Open', 'Working', 'Overdue','Pending Review']]}, pluck='name')
     # filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Review']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'],order_by = "priority_number")
     filtered_tasks = frappe.get_all('Task', filters={'name':['in', assigned_tasks], 'exp_start_date':['<=', today()], 'status':['in', ['Open', 'Working', 'Overdue', 'Pending Review']]}, fields=['name as task', 'project', 'description', 'priority', '(expected_time) as expected_hours', 'issue','priority_number as priority_order','expected_min','subject as task_name','notes'])
