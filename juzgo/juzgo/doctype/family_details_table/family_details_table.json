@@ -23,24 +23,28 @@
    "label": "Family"
   },
   {
+   "columns": 1,
    "fieldname": "adult",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Adult"
   },
   {
+   "columns": 1,
    "fieldname": "child_no_bed",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CNB"
   },
   {
+   "columns": 1,
    "fieldname": "child_with_bed",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CWB"
   },
   {
+   "columns": 1,
    "fieldname": "room_type",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -48,6 +52,7 @@
    "options": "\nSuite\nDeluxe\ninterconnected"
   },
   {
+   "columns": 2,
    "fieldname": "sharing_preferences",
    "fieldtype": "Select",
    "in_list_view": 1,
