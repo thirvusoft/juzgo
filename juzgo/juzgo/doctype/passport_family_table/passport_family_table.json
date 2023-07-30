@@ -10,8 +10,12 @@
   "member_name",
   "enq_type",
   "date_of_birth",
+  "column_break_kiygn",
   "age",
-  "passport_type"
+  "age_category",
+  "passport_type",
+  "section_break_ulezr",
+  "description"
  ],
  "fields": [
   {
@@ -24,7 +28,7 @@
    "fieldname": "enq_type",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Enq Type",
+   "label": "Application Type",
    "options": "\nNew\nRenewal"
   },
   {
@@ -34,6 +38,7 @@
    "label": "Date of Birth"
   },
   {
+   "columns": 1,
    "fieldname": "age",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -42,15 +47,37 @@
   {
    "fieldname": "passport_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Passport Type",
-   "options": "\nNormal\nTatkkaal",
-   "read_only": 1
+   "options": "\nNormal\nTatkkaal"
+  },
+  {
+   "columns": 1,
+   "fieldname": "age_category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Age Category",
+   "options": "\nMinor\nMajor"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_kiygn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ulezr",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-29 11:52:27.146518",
+ "modified": "2023-07-30 17:50:45.364503",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Passport Family Table",

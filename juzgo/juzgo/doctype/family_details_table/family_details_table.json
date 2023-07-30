@@ -23,24 +23,28 @@
    "label": "Family"
   },
   {
+   "columns": 1,
    "fieldname": "adult",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Adult"
   },
   {
+   "columns": 1,
    "fieldname": "child_no_bed",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CNB"
   },
   {
+   "columns": 1,
    "fieldname": "child_with_bed",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CWB"
   },
   {
+   "columns": 1,
    "fieldname": "room_type",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -48,6 +52,7 @@
    "options": "\nSuite\nDeluxe\ninterconnected"
   },
   {
+   "columns": 2,
    "fieldname": "sharing_preferences",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -68,7 +73,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-28 03:00:43.516189",
+ "modified": "2023-07-29 13:46:46.502485",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Family Details Table",

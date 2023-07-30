@@ -56,21 +56,21 @@
   "suggested_spots",
   "preferred_schedule",
   "section_break_vu0nh",
-  "no_of_family",
-  "no_of_children",
-  "child_without_bed",
+  "no_of_paxs",
+  "no_of_familys",
+  "no_of_adult",
   "column_break_afzxr",
-  "no_of_adults",
-  "no_of_infants",
-  "no_of_pax",
+  "no_of_childrens",
+  "child_without_bed",
+  "no_of_infant",
   "column_break_eqm4u",
+  "diff_in_pax",
   "diff_in_family",
+  "diff_in_adult",
+  "column_break_6qoz2",
   "diff_in_cwb",
   "diff_in_cnb",
-  "column_break_6qoz2",
-  "diff_in_adult",
   "diff_in_infants",
-  "diff_in_pax",
   "family_details_tab",
   "family_details_table",
   "section_break_bxxxu",
@@ -78,6 +78,7 @@
   "column_break_ctsou",
   "total_rooms",
   "section_break_3b47k",
+  "room_preferences_remaining",
   "room_preferences",
   "section_break_qoqmv",
   "hotel_category",
@@ -143,9 +144,11 @@
   "forex_tab",
   "currency",
   "quantity",
+  "column_break_78",
   "exchange_price",
   "juzgo_price",
   "eligible",
+  "section_break_82",
   "denomination_possibility",
   "terms_and_conditions",
   "notes_in_forex",
@@ -166,8 +169,36 @@
   "temple_notes",
   "passport_tab",
   "passport_to_issue",
+  "passport_budget_html",
   "family_member_table",
-  "passport_doc"
+  "passport_doc",
+  "bus_tickets_tab",
+  "bus_types",
+  "bus_departure_time",
+  "bus_arrival_time",
+  "amenities",
+  "column_break_psdbd",
+  "from_place",
+  "boarding_point",
+  "column_break_y1qw6",
+  "to_place",
+  "dropping_point",
+  "train_tickets_tab",
+  "train_from_place",
+  "train_to_place",
+  "travel_date",
+  "column_break_b4tvw",
+  "general",
+  "classes",
+  "column_break_u4ft0",
+  "train_departure_time",
+  "train_arrival_time",
+  "cruise_tab",
+  "cruise_from_destination",
+  "cruise_to_destination",
+  "column_break_zplcd",
+  "cruise_no_of_nights",
+  "no_of_person"
  ],
  "fields": [
   {
@@ -202,12 +233,14 @@
   {
    "fieldname": "mobile",
    "fieldtype": "Data",
-   "label": "Mobile"
+   "label": "Mobile",
+   "options": "Phone"
   },
   {
    "fieldname": "whatsapp_number",
    "fieldtype": "Data",
-   "label": "Whatsapp Number"
+   "label": "Whatsapp Number",
+   "options": "Phone"
   },
   {
    "fieldname": "industry",
@@ -281,8 +314,9 @@
   },
   {
    "fieldname": "state",
-   "fieldtype": "Data",
-   "label": "State"
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
   },
   {
    "fieldname": "zip_code",
@@ -380,31 +414,6 @@
    "fieldtype": "Select",
    "label": "Preferred Schedule",
    "options": "leisure\nPacked"
-  },
-  {
-   "fieldname": "no_of_children",
-   "fieldtype": "Data",
-   "label": "Child With Bed (CWB)"
-  },
-  {
-   "fieldname": "no_of_pax",
-   "fieldtype": "Data",
-   "label": "No of PAX"
-  },
-  {
-   "fieldname": "no_of_infants",
-   "fieldtype": "Data",
-   "label": "No of Infants (Below 24 month)"
-  },
-  {
-   "fieldname": "no_of_adults",
-   "fieldtype": "Data",
-   "label": "No of Adults"
-  },
-  {
-   "fieldname": "no_of_family",
-   "fieldtype": "Data",
-   "label": "No. of Family"
   },
   {
    "fieldname": "family_details_tab",
@@ -854,12 +863,12 @@
   {
    "fieldname": "travel_start_date",
    "fieldtype": "Date",
-   "label": "Travel Start date"
+   "label": "Travel Start Date"
   },
   {
    "fieldname": "travel_end_date",
    "fieldtype": "Date",
-   "label": "Travel End date"
+   "label": "Travel End Date"
   },
   {
    "fieldname": "no_of_nights",
@@ -998,12 +1007,193 @@
    "fieldtype": "Table",
    "label": "Family member table",
    "options": "Passport Family Table"
+  },
+  {
+   "fieldname": "no_of_familys",
+   "fieldtype": "Int",
+   "label": "No. of Family"
+  },
+  {
+   "fieldname": "no_of_childrens",
+   "fieldtype": "Int",
+   "label": "Child With Bed (CWB)"
+  },
+  {
+   "fieldname": "no_of_adult",
+   "fieldtype": "Int",
+   "label": "No of Adults"
+  },
+  {
+   "fieldname": "no_of_infant",
+   "fieldtype": "Int",
+   "label": "No of Infants (Below 24 month)"
+  },
+  {
+   "fieldname": "no_of_paxs",
+   "fieldtype": "Int",
+   "label": "No of PAX"
+  },
+  {
+   "fieldname": "room_preferences_remaining",
+   "fieldtype": "HTML",
+   "label": "Room Preferences Remaining"
+  },
+  {
+   "fieldname": "passport_budget_html",
+   "fieldtype": "HTML",
+   "label": "Passport Budget"
+  },
+  {
+   "fieldname": "bus_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Bus Tickets"
+  },
+  {
+   "fieldname": "bus_types",
+   "fieldtype": "Table MultiSelect",
+   "label": "Bus Types",
+   "options": "CA Bus Type"
+  },
+  {
+   "fieldname": "from_place",
+   "fieldtype": "Link",
+   "label": "From Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "boarding_point",
+   "fieldtype": "Link",
+   "label": "Boarding Point",
+   "options": "Area"
+  },
+  {
+   "fieldname": "to_place",
+   "fieldtype": "Link",
+   "label": "To Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "dropping_point",
+   "fieldtype": "Link",
+   "label": "Dropping Point",
+   "options": "Area"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Amenities",
+   "options": "CA Amenities"
+  },
+  {
+   "fieldname": "column_break_psdbd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_y1qw6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bus_departure_time",
+   "fieldtype": "Select",
+   "label": "bus Departure Time",
+   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+  },
+  {
+   "fieldname": "bus_arrival_time",
+   "fieldtype": "Select",
+   "label": "Arrival Time",
+   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+  },
+  {
+   "fieldname": "train_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Train Tickets"
+  },
+  {
+   "fieldname": "train_from_place",
+   "fieldtype": "Link",
+   "label": "From Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "train_to_place",
+   "fieldtype": "Link",
+   "label": "To Place",
+   "options": "City"
+  },
+  {
+   "fieldname": "general",
+   "fieldtype": "Select",
+   "label": "General",
+   "options": "LADIES\nLOWER BERTH/SR.CITIZEN\nPERSON WITH DISABILITY\nTATKAL\nPREMIUM TATKAL"
+  },
+  {
+   "fieldname": "classes",
+   "fieldtype": "Select",
+   "label": "Classes",
+   "options": "All Classes\nAnubhuti Class (EA)\nAC First Class (1A)\nVistadome AC (EV)\nExec. Chair Car (EC)\nAC 2 Tier (2A)"
+  },
+  {
+   "fieldname": "travel_date",
+   "fieldtype": "Date",
+   "label": "Travel Date"
+  },
+  {
+   "fieldname": "train_departure_time",
+   "fieldtype": "Select",
+   "label": "Departure Time",
+   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+  },
+  {
+   "fieldname": "train_arrival_time",
+   "fieldtype": "Select",
+   "label": "Arrival Time",
+   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+  },
+  {
+   "fieldname": "column_break_b4tvw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_u4ft0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cruise_tab",
+   "fieldtype": "Tab Break",
+   "label": "Cruise"
+  },
+  {
+   "fieldname": "cruise_from_destination",
+   "fieldtype": "Link",
+   "label": "From Destination ",
+   "options": "City"
+  },
+  {
+   "fieldname": "cruise_to_destination",
+   "fieldtype": "Link",
+   "label": "To Destination ",
+   "options": "City"
+  },
+  {
+   "fieldname": "column_break_zplcd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cruise_no_of_nights",
+   "fieldtype": "Int",
+   "label": "No of Nights "
+  },
+  {
+   "fieldname": "no_of_person",
+   "fieldtype": "Int",
+   "label": "No of Person"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-28 03:26:41.981563",
+ "modified": "2023-07-30 18:01:55.245632",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

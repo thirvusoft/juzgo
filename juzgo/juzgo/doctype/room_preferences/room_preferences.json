@@ -18,26 +18,20 @@
  ],
  "fields": [
   {
-   "fieldname": "family",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Family"
-  },
-  {
    "fieldname": "adult",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Adult"
   },
   {
    "fieldname": "child_nb",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CNB"
   },
   {
    "fieldname": "child_wbed",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "CWB"
   },
@@ -67,12 +61,18 @@
   {
    "fieldname": "column_break_yltnz",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "family",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Family"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-28 02:59:39.544972",
+ "modified": "2023-07-30 10:47:07.037066",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Room Preferences",
