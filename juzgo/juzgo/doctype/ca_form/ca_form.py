@@ -7,7 +7,93 @@ from frappe.model.document import Document
 
 class CAForm(Document):
 	pass
-
+@frappe.whitelist()
+def room_preferences_remaining(room_preferences = None,family_details_table = None):
+    if family_details_table == None:return
+    if room_preferences:
+        room_preferences = json.loads(room_preferences)
+    family_details_table = json.loads(family_details_table)
+    room_preferences_list = []
+    family_list=[]
+    if room_preferences:
+        for i in range (0,len(room_preferences),1):
+            if room_preferences[i].get('family') not in family_list:
+                family_list.append(room_preferences[i].get('family'))
+                adult = (room_preferences[i].get("adult") or 0)
+                child_nb = (room_preferences[i].get("child_nb") or 0)
+                child_wbed = (room_preferences[i].get("child_wbed") or 0)
+                infants = (room_preferences[i].get("infants") or 0)
+                for j in range(i+1,len(room_preferences),1):
+                    if(room_preferences[i].get("family") == room_preferences[j].get("family")):
+                        adult = (room_preferences[j].get("adult") or 0 ) + adult
+                        child_nb = (room_preferences[j].get("child_nb") or 0) + child_nb
+                        child_wbed = (room_preferences[j].get("child_wbed") or 0) + child_wbed
+                        infants = (room_preferences[j].get("infants") or 0) + infants
+                room_preferences_list.append({'family':room_preferences[i].get('family'),"adult":adult,"child_nb":child_nb,"child_wbed":child_wbed,"infants":infants})
+    remainding_list = []
+    for i in family_details_table:
+        for j in room_preferences_list:
+            if i['family'] == j['family']:
+                remainding_list.append({'family':(i.get('family') or 0) ,"adult":(i.get('adult') or 0) - (j.get('adult') or 0),"child_nb":(i.get('child_no_bed') or 0) - (j.get('child_nb') or 0),"child_wbed":(i.get('child_with_bed') or 0) - (j.get('child_wbed') or 0),"infants":(i.get('no_of_infants') or 0) - (j.get('infants') or 0)})
+        if i.get('family') not in family_list:
+            remainding_list.append({'family':(i.get('family') or 0) ,"adult":(i.get('adult') or 0),"child_nb":(i.get('child_no_bed') or 0),"child_wbed":(i.get('child_with_bed') or 0),"infants":(i.get('no_of_infants') or 0)})
+    html = '''
+                <style>
+                    th,td{
+                        border:1px solid black;
+                        padding:2px;
+                        text-align:center;
+                    }
+                    tr:nth-child(even){
+                        background-color:#eef3ad;
+                    }
+                    tr:nth-child(odd) {
+                        background-color:#adebbe;
+                    }
+                </style>
+                <h6>Family Members Remainding</h6>
+                <table>
+                    <tr style="background-color:#74bec1;color:#516091">
+                        <th>
+                            Family
+                        </th>
+                        <th>
+                            Adult
+                        </th>
+                        <th>
+                            CWB
+                        </th>
+                        <th>
+                            CNB
+                        </th>
+                        <th>
+                            Infants
+                        </th>
+                    </tr>
+                    '''
+    for j in remainding_list:
+        html =html + f'''       
+                <tr style="color:#364968">
+                    <td style="width:30%;">
+                        {j.get('family')}
+                    </td>
+                    <td style="width:20%;">
+                        {j.get('adult')}
+                    </td>
+                    <td style="width:20%;">
+                        {j.get('child_wbed')}
+                    </td>
+                    <td style="width:20%;">
+                        {j.get('child_nb')}
+                    </td>
+                    <td style="width:10%;">
+                        {j.get('infants')}
+                    </td>
+                </tr>'''
+    html =html + f'''   
+        </table>
+        '''
+    return html
 @frappe.whitelist()
 def table_preview():
     table_pre = frappe.get_doc("Passport Document", "Passport Document")
@@ -86,7 +172,8 @@ def table_preview():
             <div class="responsive1">
                 <div class="gallery1">
                     <table style = "width: 80%">
-                        <tr>
+                        <tr style="background-color:#74bec1;color:#516091">
+                            <th style = "width: 3%">S.No</th>
                             <th style = "width: 40%">Passport Document</th>
                             <th>Reference URL</th>
                         </tr>
@@ -95,6 +182,7 @@ def table_preview():
         # Use <td> for table data, not <div>
         html += f''' 
             <tr>
+                <td> {i.idx} </td>
                 <td>{i.document_details}</td>
                 <td style = "color:blue"><a href ="{i.notes}" target="_blank">{i.notes}  </a></td>
             </tr>
@@ -132,7 +220,81 @@ def table_preview():
         </html>
     '''
 
-    return html
+    html1 = '''
+        <style>
+            th,td{
+                border:1px solid black;
+                padding:2px;
+                text-align:center;
+            }
+        </style>
+        <table style="width:100%;">
+            <tr style="background-color:#74bec1;color:#516091">
+                <th>
+                    S.No
+                </th>
+                <th>
+                    Issue Type
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Reissue Reason
+                </th>
+                <th>
+                    Books Page
+                </th>
+                <th>
+                    Scheme
+                </th>
+                <th>
+                    Gov. Fee
+                </th>
+                 <th>
+                    Service Fee Total
+                </th>
+                 <th>
+                    Other Company Fee
+                </th>
+            </tr>
+    '''
+     
+    for j in table_pre.passport_budget:
+        html1 =html1 + f'''       
+                <tr style="background-color:#eef3ad;color:#364968">
+                    <td style="width:3%;">
+                        {j.idx}
+                    </td>
+                    <td style="width:17%;">
+                        {j.issue_type or ""}
+                    </td>
+                    <td style="width:10%;">
+                        {j.age or ""}
+                    </td>
+                    <td style="width:28%;">
+                        {j.reissue_reason or ""}
+                    </td>
+                    <td style="width:5%;">
+                        {j.books_page or ""}
+                    </td>
+                    <td style="width:7%;">
+                        {j.scheme or ""}
+                    </td>
+                    <td style="text-align:left;width:10%;">
+                        {j.gov_fee or ""}
+                    </td>
+                    <td style="text-align:left;width:10%;">
+                        {j.service_fee_total or ""}
+                    </td>
+                    <td style="text-align:left;width:10%;">
+                        {j.other_company_fee or ""}
+                    </td>
+                </tr>'''
+    html1 =html1 + f'''   
+            </table>
+            '''
+    return html,html1
 
 @frappe.whitelist()
 def temple_notes(temple = None):
@@ -140,7 +302,6 @@ def temple_notes(temple = None):
         temple = json.loads(temple)
         temple_list = []
         for i in temple:temple_list.append(frappe.get_doc("Spots",i.get("temple_name")).dharsan_arthi)
-        print(temple_list)
         html = '''
                 <style>
                     th,td{
@@ -149,7 +310,7 @@ def temple_notes(temple = None):
                         text-align:center;
                     }
                 </style>
-                <table>
+                <table style="width:100%;">
                     <tr style="background-color:#74bec1;color:#516091">
                         <th>
                             Dharsan/Arthi Name
