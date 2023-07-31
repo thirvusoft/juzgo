@@ -23,7 +23,7 @@ frappe.ui.form.on('CA Form', {
 			frappe.throw("Kindly Check CNB")
 		}
 		if(frm.doc.diff_in_adult<0){
-			frappe.throw("Kindly Check Adult")
+			frappe.throw("Kindly Check adults")
 		}
 		if(frm.doc.diff_in_infants<0){
 			frappe.throw("Kindly Check Infants")
@@ -35,7 +35,7 @@ frappe.ui.form.on('CA Form', {
 					total_rooms+=1
 				}
 			}
-			frm.set_value("total_rooms",total_rooms)
+			// frm.set_value("total_rooms",total_rooms)
 		}
 		room_preferences_remaining(frm)
 	},
@@ -140,13 +140,13 @@ function option_for_room_preferences(frm){
 }
 frappe.ui.form.on('Room Preferences', {
 	room_preferences_remove:function(frm){
-		frm.set_value("total_rooms",frm.doc.room_preferences.length)
+		// frm.set_value("total_rooms",frm.doc.room_preferences.length)
 	},
 	room_preferences_add:function(frm){
 		option_for_room_preferences(frm)
 	},
 	family:function(frm){
-		frm.set_value("total_rooms",frm.doc.room_preferences.length)
+		// frm.set_value("total_rooms",frm.doc.room_preferences.length)
 		room_preferences_remaining(frm)
 	},
 })
@@ -183,26 +183,26 @@ frappe.ui.form.on('Family Details Table', {
 			}
 		}
 	},
-	child_with_bed:function(frm){
+	child_with_beds:function(frm){
 		diff_family(frm)
 	},
-	child_no_bed:function(frm){
+	child_no_beds:function(frm){
 		diff_family(frm)
 	},
-	adult:function(frm){
+	adults:function(frm){
 		diff_family(frm)
 	},
-	no_of_infants:function(frm){
+	no_of_infant:function(frm){
 		diff_family(frm)
 	},
 	sharing_preferences:function(frm,cdt,cdn){
 		let row = locals[cdt][cdn]
 		if(row.sharing_preferences == "Not ready to share"){
-			add_room_preferences(frm,row.family,row.adult,row.child_with_bed,row.child_no_bed,row.no_of_infants)
+			add_room_preferences(frm,row.family,row.adults,row.child_with_beds,row.child_no_beds,row.no_of_infant)
 		}
 	},
 })
-function add_room_preferences(frm,family,adult,child_with_bed,child_no_bed,no_of_infants,no_of_rooms=0){
+function add_room_preferences(frm,family,adults,child_with_beds,child_no_beds,no_of_infant,no_of_rooms=0){
 	let not_fill = 1
 	if(!frm.doc.room_preferences)return;
 	for (let i=0;i<frm.doc.room_preferences.length;i++){
@@ -213,18 +213,18 @@ function add_room_preferences(frm,family,adult,child_with_bed,child_no_bed,no_of
 	if(not_fill == 1 && no_of_rooms==0){
 		var new_row = frm.add_child('room_preferences')
 		new_row.family = family
-		new_row.adult = adult
-		new_row.child_nb = child_no_bed
-		new_row.child_wbed = child_with_bed
-		new_row.infants = no_of_infants
+		new_row.adults = adults
+		new_row.child_nbs = child_no_beds
+		new_row.child_wbeds = child_with_beds
+		new_row.infant = no_of_infant
 	}
 	for (let i=0;i<no_of_rooms;i++){
 		var new_row = frm.add_child('room_preferences')
 		new_row.family = family
-		new_row.adult = adult
-		new_row.child_nb = child_no_bed
-		new_row.child_wbed = child_with_bed
-		new_row.infants = no_of_infants
+		new_row.adults = adults
+		new_row.child_nbs = child_no_beds
+		new_row.child_wbeds = child_with_beds
+		new_row.infant = no_of_infant
 	}
 	frm.refresh_field('room_preferences');
 }
@@ -239,16 +239,18 @@ function add_pax(frm){
 	frm.set_value("no_of_paxs",(frm.doc.no_of_childrens || 0) + (frm.doc.child_without_bed || 0) + (frm.doc.no_of_adult || 0) + (frm.doc.no_of_infant || 0))
 }
 function diff_family(frm){
-	frm.set_value("diff_in_family",(frm.doc.no_of_familys || 0) - (frm.doc.family_details_table.length || 0))
 	var diff_in_cwb = 0
 	var diff_in_cnb = 0
 	var diff_in_adult = 0
 	var diff_in_infants = 0
-	for (let i=0;i<frm.doc.family_details_table.length;i++){
-		diff_in_cwb += frm.doc.family_details_table[i].child_with_bed || 0
-		diff_in_cnb += frm.doc.family_details_table[i].child_no_bed || 0
-		diff_in_adult += frm.doc.family_details_table[i].adult || 0
-		diff_in_infants += frm.doc.family_details_table[i].no_of_infants || 0
+	if(frm.doc.family_details_table){
+		frm.set_value("diff_in_family",(frm.doc.no_of_familys || 0) - (frm.doc.family_details_table.length || frm.doc.no_of_familys))
+		for (let i=0;i<frm.doc.family_details_table.length;i++){
+			diff_in_cwb += frm.doc.family_details_table[i].child_with_beds || 0
+			diff_in_cnb += frm.doc.family_details_table[i].child_no_beds || 0
+			diff_in_adult += frm.doc.family_details_table[i].adults || 0
+			diff_in_infants += frm.doc.family_details_table[i].no_of_infant || 0
+		}
 	}
 	frm.set_value("diff_in_cwb",(frm.doc.no_of_childrens || 0) - (diff_in_cwb || 0))
 	frm.set_value("diff_in_cnb",(frm.doc.child_without_bed || 0) - (diff_in_cnb || 0))
@@ -262,7 +264,7 @@ function diff_family(frm){
 		frappe.msgprint("Kindly Check CNB")
 	}
 	if(frm.doc.diff_in_adult<0){
-		frappe.msgprint("Kindly Check Adult")
+		frappe.msgprint("Kindly Check adults")
 	}
 	if(frm.doc.diff_in_infants<0){
 		frappe.msgprint("Kindly Check Infants")

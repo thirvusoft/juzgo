@@ -40,7 +40,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-28 03:45:44.049629",
+ "modified": "2023-07-31 01:14:09.198121",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Passport Document",
@@ -53,6 +53,14 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Juzgo Admin",
    "share": 1,
    "write": 1
   }
