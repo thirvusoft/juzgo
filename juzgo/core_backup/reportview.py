@@ -63,7 +63,7 @@ def get_count():
 # thirvu change
 def execute(doctype, *args, **kwargs):
 	try:
-		if(doctype == 'Task' or doctype == "Project"):
+		if(doctype == 'Task' or doctype == "Project" or doctype == "Lead" or doctype == "CA Form"):
 			if("Juzgo Admin" not in frappe.get_roles() and "Thirvu Admin" not in frappe.get_roles()):
 				task = get_task_userwise(doctype)
 				if('filters' in kwargs):

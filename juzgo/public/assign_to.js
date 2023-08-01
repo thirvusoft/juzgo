@@ -31,6 +31,11 @@ class AssignTo extends frappe.ui.form.AssignTo {
 				frappe.throw(__('You can assign Lead only in "Assign To" or "Lead Owner".'));
 				return;
 			}
+			if (this.frm.doctype == "CA Form"){
+				this.frm.scroll_to_field('assigned_to')
+				frappe.throw(__('You can assign CA Form only in "Assigned To" or "CA Owner".'));
+				return;
+			}
 			new frappe.ui.form.AssignmentDialog({
 				assignments: assigned_users,
 				frm: this.frm,
@@ -48,6 +53,11 @@ class AssignTo extends frappe.ui.form.AssignTo {
         if (this.frm.doctype == "Lead"){
 			this.frm.scroll_to_field('assign_to')
 			frappe.throw(__('You can assign task only in "Assign To" or "Lead Owner".'));
+			return;
+		}
+		if (this.frm.doctype == "CA Form"){
+			this.frm.scroll_to_field('assigned_to')
+			frappe.throw(__('You can assign CA Form only in "Assigned To" or "CA Owner".'));
 			return;
 		}
 		if (this.frm.is_new()) {
