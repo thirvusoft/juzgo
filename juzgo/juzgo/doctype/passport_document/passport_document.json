@@ -10,7 +10,8 @@
   "passport_budget",
   "passport_document_table",
   "passport_image_doc_table",
-  "img_preview"
+  "img_preview",
+  "forex_ref_link"
  ],
  "fields": [
   {
@@ -35,12 +36,19 @@
    "fieldtype": "Table",
    "label": "Passport Budget",
    "options": "Passport Budget"
+  },
+  {
+   "fieldname": "forex_ref_link",
+   "fieldtype": "Data",
+   "label": "Forex Ref link",
+   "length": 1000,
+   "options": "URL"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-28 03:45:44.049629",
+ "modified": "2023-08-01 12:06:10.433631",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Passport Document",
@@ -53,6 +61,26 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Juzgo Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Juzgo Accounts",
    "share": 1,
    "write": 1
   }

@@ -39,7 +39,7 @@ frappe.ui.form.AssignTo = class AssignTo {
 		assignments_wrapper.append(avatar_group);
 		avatar_group.click(() => {
 			//thirvu change
-			if (this.frm.doctype == "Task"){
+			if (this.frm.doctype == "Task" || this.frm.doctype == "Lead"){
 				this.frm.scroll_to_field('assigned_to')
 				frappe.throw(__('You can assign task only in "Assigned To" to do the work. If you want to share with others, Assign in Task lead. Not allowed to assign task More then 2 persons'));
 				return;
@@ -53,7 +53,7 @@ frappe.ui.form.AssignTo = class AssignTo {
 	add() {
 		var me = this;
 		//thirvu change
-		if (this.frm.doctype == "Task"){
+		if (this.frm.doctype == "Task" || this.frm.doctype == "Lead"){
 			this.frm.scroll_to_field('assigned_to')
 			frappe.throw(__('You can assign task only in "Assigned To" to do the work. If you want to share with others, Assign in Task lead. Not allowed to assign task More then 2 persons'));
 			return;

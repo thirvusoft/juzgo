@@ -4,7 +4,7 @@
 import json
 import frappe
 from frappe.model.document import Document
-
+from frappe.model.mapper import get_mapped_doc
 class CAForm(Document):
 	pass
 @frappe.whitelist()
@@ -294,7 +294,7 @@ def table_preview():
     html1 =html1 + f'''   
             </table>
             '''
-    return html,html1
+    return html,html1,table_pre.forex_ref_link
 
 @frappe.whitelist()
 def temple_notes(temple = None):
@@ -366,3 +366,17 @@ def temple_notes(temple = None):
                 </table>
                 '''
         return html
+@frappe.whitelist()
+def make_project(source_name, target_doc=None):
+	def set_missing_values(source, target):
+		pass
+
+	target_doc = get_mapped_doc(
+		"CA Form",
+		source_name,
+		{"CA Form": {"doctype": "Project", "field_map": {"phone_number": "whatsapp_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date"}}},
+		target_doc,
+		set_missing_values,
+	)
+
+	return target_doc

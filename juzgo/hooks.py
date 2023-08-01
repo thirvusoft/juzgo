@@ -37,7 +37,7 @@ doctype_js = {
         "Task" : "/juzgo/custom/js/task.js",
 		"Job Opening" : "/juzgo/custom/js/jobopening.js",
         "Project" : "/juzgo/custom/js/project.js",
-  
+		"Lead" : "/juzgo/custom/js/lead.js",
     "Employee" : "/juzgo/custom/js/employee.js",
 
 
@@ -57,6 +57,10 @@ doc_events = {
         "on_trash" : "juzgo.juzgo.custom.py.task.trash_task",
         "autoname": "juzgo.juzgo.custom.py.task.autoname",
         "on_trash": "juzgo.juzgo.custom.py.task.on_trash"
+	},
+    "Lead": {
+        "validate": "juzgo.juzgo.custom.py.lead.validate",
+        "after_insert": "juzgo.juzgo.custom.py.lead.validate"
 	},
     "Interview Feedback":{
         "validate" : "juzgo.custom.py.interview_feedback.validate",
@@ -214,6 +218,7 @@ override_whitelisted_methods = {
 # along with any modifications made in other Frappe apps
 override_doctype_dashboards = {
 	"Interview": "juzgo.custom.py.dashboards.interview.get_data",
+    "Lead": "juzgo.custom.py.dashboards.lead.get_data",
 }
 
 # exempt linked doctypes from being automatically cancelled
