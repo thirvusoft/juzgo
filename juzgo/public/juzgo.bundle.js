@@ -1,4 +1,5 @@
 import "./attach_formatter";
+import "./assign_to";
 import "../templates/web_form/interview/error.html";
 import "../templates/web_form/interview/already_responded.html";
 import "../templates/web_form/interview/not_opened_or_closed.html";

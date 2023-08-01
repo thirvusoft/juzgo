@@ -13,6 +13,33 @@ frappe.ui.form.on('CA Form', {
 			},
 		})
 	},
+	first_name:function(frm){
+        if (frm.doc.first_name.length >= 3){
+            frappe.call({
+                method: "juzgo.juzgo.doctype.spots.spots.exist_list",
+                args: {
+                    "name": frm.doc.first_name,
+                    "doctype": frm.doc.doctype,
+                    "field": "first_name"
+                },
+                callback: function (r) {
+                    if (r && r.message) {
+                        frm.set_df_property(
+                            "first_name",
+                            "description",
+                            ('This Spots Name already exists: {0}', [r.message.map(function (d) {
+                                return repl('<a href="/app/ca-form/%(name)s">%(or_name)s</a>', { name: d['name'], or_name: d['first_name'] })
+                            }).join(', ')]));
+                    }
+                },
+            })
+        } else {
+            frm.set_df_property(
+                "first_name",
+                "description",
+                "");
+        }
+    },
 	validate: function(frm){
 		add_pax(frm)
 		diff_family(frm)
@@ -40,6 +67,12 @@ frappe.ui.form.on('CA Form', {
 		room_preferences_remaining(frm)
 	},
 	refresh: function(frm) {
+		frm.add_custom_button(__('Project'), function() {
+			frappe.model.open_mapped_doc({
+				method: "juzgo.juzgo.doctype.ca_form.ca_form.make_project",
+				frm: cur_frm
+			})
+		}, "Create");
 		frm.set_query("suggested_spots", function () {
 			var list = []
 			frm.doc.interested_destination.forEach(e => {
@@ -72,6 +105,7 @@ frappe.ui.form.on('CA Form', {
 			callback: function (r) {
 				frm.set_df_property("passport_doc","options",r.message[0])
 				frm.set_df_property("passport_budget_html","options",r.message[1])
+				frm.set_value("currency_ref_link",r.message[2])
 			},
 		})
 		option_for_room_preferences(frm)
@@ -87,6 +121,14 @@ frappe.ui.form.on('CA Form', {
     },
     travel_start_date: function(frm){
         auto_end_date(frm)
+		if(frm.doc.travel_start_date){
+			frm.set_value("from_date",frm.doc.travel_start_date)
+		}
+    },
+	travel_end_date: function(frm){
+		if(frm.doc.travel_end_date){
+			frm.set_value("return_end_date",frm.doc.travel_end_date)
+		}
     },
 	no_of_childrens: function(frm){
         add_pax(frm)
@@ -231,8 +273,10 @@ function add_room_preferences(frm,family,adults,child_with_beds,child_no_beds,no
 function auto_end_date(frm){
     if(frm.doc.travel_start_date && frm.doc.no_of_nights){
         frm.set_value("travel_end_date",frappe.datetime.add_days(frm.doc.travel_start_date, frm.doc.no_of_nights))
+		frm.set_value("return_end_date",frappe.datetime.add_days(frm.doc.travel_start_date, frm.doc.no_of_nights))
     } else {
         frm.set_value("travel_end_date","")
+		frm.set_value("return_end_date","")
     } 
 }
 function add_pax(frm){
@@ -256,7 +300,7 @@ function diff_family(frm){
 	frm.set_value("diff_in_cnb",(frm.doc.child_without_bed || 0) - (diff_in_cnb || 0))
 	frm.set_value("diff_in_adult",(frm.doc.no_of_adult || 0) - (diff_in_adult || 0))
 	frm.set_value("diff_in_infants",(frm.doc.no_of_infant || 0) - (diff_in_infants || 0))
-	frm.set_value("diff_in_pax",((frm.doc.diff_in_cwb || 0) + (frm.doc.diff_in_cnb || 0) + (frm.doc.diff_in_adult || 0) + (frm.doc.diff_in_infants || 0)))
+	frm.set_value("diff_in_pax",((frm.doc.diff_in_cwb || 0) + (frm.doc.diff_in_cnb || 0) + (frm.doc.diff_in_adult || 0)))
 	if(frm.doc.diff_in_cwb<0){
 		frappe.msgprint("Kindly Check CWB")
 	}
