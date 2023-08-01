@@ -6,7 +6,16 @@ import frappe
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 class CAForm(Document):
-	pass
+    def validate(doc):
+        if doc.ca_owner and (not doc.is_new()):
+            assigned_to(doc,"ca_owner")
+        if doc.assigned_to and (not doc.is_new()):
+            assigned_to(doc,"assigned_to")
+    def after_insert(doc):
+        if doc.ca_owner:
+            assigned_to(doc,"ca_owner")
+        if doc.assigned_to:
+            assigned_to(doc,"assigned_to")
 @frappe.whitelist()
 def room_preferences_remaining(room_preferences = None,family_details_table = None):
     if family_details_table == None:return
@@ -380,3 +389,21 @@ def make_project(source_name, target_doc=None):
 	)
 
 	return target_doc
+
+def assigned_to(doc,field_name):
+	doc_ = frappe.new_doc("ToDo")        
+	if frappe.db.exists("ToDo", {'reference_name': doc.name, 'field_name':field_name}):
+		doc_ = frappe.get_doc("ToDo", {'reference_name': doc.name, 'field_name':field_name})
+	user = frappe.db.get_value("User", doc.owner, "username")
+	doc_.update({
+		'date': frappe.utils.nowdate(),
+		'allocated_to': doc.get(field_name),
+		'description': f'Assignment for {doc.doctype} {doc.name}',
+		'reference_type': doc.doctype,
+		'reference_name': doc.name,
+		'assigned_by': user,
+		'field_name': field_name
+	})
+	doc_.flags.ignore_permissions = True
+	doc_.flags.ignore_links = True
+	doc_.save()
