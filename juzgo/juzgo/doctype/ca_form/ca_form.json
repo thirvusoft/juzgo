@@ -170,8 +170,10 @@
   "temple_notes",
   "passport_tab",
   "passport_to_issue",
-  "passport_budget_html",
   "family_member_table",
+  "section_break_6h928",
+  "passport_budget_html",
+  "passport_document_section",
   "passport_doc",
   "bus_tickets_tab",
   "bus_types",
@@ -1032,6 +1034,7 @@
    "label": "No of Infants (Below 24 month)"
   },
   {
+   "description": "Auto calculate (Adult+CWB+CNB+Infant) or You can enter manually",
    "fieldname": "no_of_paxs",
    "fieldtype": "Int",
    "label": "No of PAX"
@@ -1099,13 +1102,13 @@
    "fieldname": "bus_departure_time",
    "fieldtype": "Select",
    "label": "bus Departure Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "bus_arrival_time",
    "fieldtype": "Select",
    "label": "Arrival Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "train_tickets_tab",
@@ -1128,13 +1131,13 @@
    "fieldname": "general",
    "fieldtype": "Select",
    "label": "General",
-   "options": "LADIES\nLOWER BERTH/SR.CITIZEN\nPERSON WITH DISABILITY\nTATKAL\nPREMIUM TATKAL"
+   "options": "\nLADIES\nLOWER BERTH/SR.CITIZEN\nPERSON WITH DISABILITY\nTATKAL\nPREMIUM TATKAL"
   },
   {
    "fieldname": "classes",
    "fieldtype": "Select",
    "label": "Classes",
-   "options": "All Classes\nAnubhuti Class (EA)\nAC First Class (1A)\nVistadome AC (EV)\nExec. Chair Car (EC)\nAC 2 Tier (2A)"
+   "options": "\nAll Classes\nAnubhuti Class (EA)\nAC First Class (1A)\nVistadome AC (EV)\nExec. Chair Car (EC)\nAC 2 Tier (2A)"
   },
   {
    "fieldname": "travel_date",
@@ -1145,13 +1148,13 @@
    "fieldname": "train_departure_time",
    "fieldtype": "Select",
    "label": "Departure Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "train_arrival_time",
    "fieldtype": "Select",
    "label": "Arrival Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "column_break_b4tvw",
@@ -1221,6 +1224,16 @@
    "fieldtype": "Link",
    "label": "Lead",
    "options": "Lead"
+  },
+  {
+   "fieldname": "passport_document_section",
+   "fieldtype": "Section Break",
+   "label": "Passport Document"
+  },
+  {
+   "fieldname": "section_break_6h928",
+   "fieldtype": "Section Break",
+   "label": "Passport Budget"
   }
  ],
  "index_web_pages_for_search": 1,
