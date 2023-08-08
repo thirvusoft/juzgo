@@ -784,6 +784,7 @@
    "options": "Ticket Class Table"
   },
   {
+   "description": "(Inc air ticket cost)",
    "fieldname": "flight_budget",
    "fieldtype": "Int",
    "label": "Minimum Flight Budget"
@@ -948,6 +949,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "(Inc air ticket cost)",
    "fieldname": "max_flight_budget",
    "fieldtype": "Int",
    "label": "Maximum Filght Budget"
@@ -1100,14 +1102,14 @@
   {
    "fieldname": "bus_departure_time",
    "fieldtype": "Select",
-   "label": "bus Departure Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "label": "Bus Departure Time",
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "bus_arrival_time",
    "fieldtype": "Select",
    "label": "Arrival Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "train_tickets_tab",
@@ -1129,14 +1131,14 @@
   {
    "fieldname": "general",
    "fieldtype": "Select",
-   "label": "General",
+   "label": "Quota",
    "options": "LADIES\nLOWER BERTH/SR.CITIZEN\nPERSON WITH DISABILITY\nTATKAL\nPREMIUM TATKAL"
   },
   {
    "fieldname": "classes",
    "fieldtype": "Select",
    "label": "Classes",
-   "options": "All Classes\nAnubhuti Class (EA)\nAC First Class (1A)\nVistadome AC (EV)\nExec. Chair Car (EC)\nAC 2 Tier (2A)"
+   "options": "\nAll Classes\nAnubhuti Class (EA)\nAC First Class (1A)\nVistadome AC (EV)\nExec. Chair Car (EC)\nAC 2 Tier (2A)\n2nd Sitting(Non AC)\nSleeper(Non AC)\n1 Tier (Sleeper)\n2 Tier(Sleeper)\n3 Tier(Sleeper)\nChair Car(AC)"
   },
   {
    "fieldname": "travel_date",
@@ -1147,13 +1149,13 @@
    "fieldname": "train_departure_time",
    "fieldtype": "Select",
    "label": "Departure Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "train_arrival_time",
    "fieldtype": "Select",
    "label": "Arrival Time",
-   "options": "Early Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
+   "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
    "fieldname": "column_break_b4tvw",
@@ -1241,7 +1243,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-01 19:19:23.247815",
+ "modified": "2023-08-04 11:14:14.045331",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
