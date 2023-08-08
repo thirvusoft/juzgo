@@ -215,7 +215,8 @@
    "depends_on": "eval:doc.party_type == \"Lead\"",
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First name"
+   "label": "First name",
+   "mandatory_depends_on": "eval:doc.party_type == \"Lead\""
   },
   {
    "depends_on": "eval:doc.party_type == \"Lead\"",
@@ -297,6 +298,7 @@
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
+   "mandatory_depends_on": "eval:doc.party_type == \"Customer\"",
    "options": "Customer"
   },
   {
@@ -1243,7 +1245,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-04 11:14:14.045331",
+ "modified": "2023-08-08 19:34:10.555449",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
