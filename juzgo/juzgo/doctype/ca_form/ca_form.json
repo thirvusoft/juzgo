@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:CA-{MM}{YY}-{####}",
+ "autoname": "format:CA-{party_name}-{whatsapp_number}",
  "creation": "2023-07-13 11:50:20.032664",
  "default_view": "List",
  "doctype": "DocType",
@@ -12,6 +12,7 @@
   "first_name",
   "last_name",
   "customer",
+  "party_name",
   "column_break_u0ccp",
   "company",
   "lead_source",
@@ -246,6 +247,7 @@
    "fieldtype": "Data",
    "label": "Whatsapp Number",
    "options": "Phone",
+   "reqd": 1,
    "unique": 1
   },
   {
@@ -1238,12 +1240,17 @@
    "fieldtype": "Link",
    "label": "Assigned To",
    "options": "User"
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "label": "Party Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-08 19:34:10.555449",
+ "modified": "2023-08-10 19:09:44.056504",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
