@@ -48,7 +48,10 @@
   "op5_no_of_nights",
   "op5_room_category",
   "op5_meal_preference",
-  "op5_supplier"
+  "op5_supplier",
+  "section_break_ctf2e",
+  "hotel_html",
+  "hotel_table"
  ],
  "fields": [
   {
@@ -102,32 +105,38 @@
   {
    "fieldname": "option_1_column",
    "fieldtype": "Heading",
+   "hidden": 1,
    "label": "Option 1"
   },
   {
    "fieldname": "op1_hotel_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Hotel Name",
    "options": "Hotel Details"
   },
   {
    "bold": 1,
    "fieldname": "option_2_column",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "bold": 1,
    "fieldname": "option_3_column",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "option_4_column",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "bold": 1,
    "fieldname": "option_5_column",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "fieldname": "details",
@@ -139,74 +148,87 @@
   {
    "fieldname": "op1_no_of_nights",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Nights"
   },
   {
    "fetch_from": "op1_hotel_name.star_rating",
    "fieldname": "op1_room_category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Room Category",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
   {
    "fieldname": "op1_meal_preference",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Meal Preference"
   },
   {
    "fieldname": "op1_supplier",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
   {
    "fieldname": "op2_hotel_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Hotel Name",
    "options": "Hotel Details"
   },
   {
    "fieldname": "op3_hotel_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Hotel Name",
    "options": "Hotel Details"
   },
   {
    "fieldname": "op4_hotel_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Hotel Name",
    "options": "Hotel Details"
   },
   {
    "fieldname": "op5_hotel_name",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Hotel Name",
    "options": "Hotel Details"
   },
   {
    "fieldname": "op2_no_of_nights",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Nights"
   },
   {
    "fieldname": "op3_no_of_nights",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Nights"
   },
   {
    "fieldname": "op4_no_of_nights",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Nights"
   },
   {
    "fieldname": "op5_no_of_nights",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Nights"
   },
   {
    "fetch_from": "op2_hotel_name.star_rating",
    "fieldname": "op2_room_category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Room Category",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
@@ -214,6 +236,7 @@
    "fetch_from": "op3_hotel_name.star_rating",
    "fieldname": "op3_room_category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Room Category",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
@@ -221,6 +244,7 @@
    "fetch_from": "op4_hotel_name.star_rating",
    "fieldname": "op4_room_category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Room Category",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
@@ -228,78 +252,106 @@
    "fetch_from": "op5_hotel_name.star_rating",
    "fieldname": "op5_room_category",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Room Category",
    "options": "\n1\n2\n3\n4\n5\n6\n7"
   },
   {
    "fieldname": "op2_meal_preference",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Meal Preference"
   },
   {
    "fieldname": "op3_meal_preference",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Meal Preference"
   },
   {
    "fieldname": "op4_meal_preference",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Meal Preference"
   },
   {
    "fieldname": "op5_meal_preference",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Meal Preference"
   },
   {
    "fieldname": "op2_supplier",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
   {
    "fieldname": "op3_supplier",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
   {
    "fieldname": "op4_supplier",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
   {
    "fieldname": "op5_supplier",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
   {
    "fieldname": "option_2",
    "fieldtype": "Heading",
+   "hidden": 1,
    "label": "Option 2"
   },
   {
    "fieldname": "option_3",
    "fieldtype": "Heading",
+   "hidden": 1,
    "label": "Option 3"
   },
   {
    "fieldname": "option_4",
    "fieldtype": "Heading",
+   "hidden": 1,
    "label": "Option 4"
   },
   {
    "fieldname": "option_5",
    "fieldtype": "Heading",
+   "hidden": 1,
    "label": "option 5"
+  },
+  {
+   "fieldname": "hotel_table",
+   "fieldtype": "Table",
+   "label": "Hotel Table",
+   "options": "Demo cc child table"
+  },
+  {
+   "fieldname": "section_break_ctf2e",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hotel_html",
+   "fieldtype": "HTML",
+   "label": "Hotel "
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-16 11:44:09.868055",
+ "modified": "2023-08-10 17:16:13.309298",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing",
