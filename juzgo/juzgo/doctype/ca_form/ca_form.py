@@ -11,6 +11,11 @@ class CAForm(Document):
 			assigned_to(doc,"ca_owner")
 		if doc.assigned_to and (not doc.is_new()):
 			assigned_to(doc,"assigned_to")
+	def autoname(doc):
+		if doc.party_type == "Lead":
+			doc.party_name = doc.first_name + " "+(doc.last_name or "")
+		elif doc.party_type == "Customer":
+			doc.party_name = doc.customer
 	def after_insert(doc):
 		if doc.ca_owner:
 			assigned_to(doc,"ca_owner")
@@ -378,14 +383,11 @@ def temple_notes(temple = None):
 @frappe.whitelist()
 def make_project(source_name, target_doc=None):
 	def set_missing_values(source, target):
-		if source.party_type == "Lead":
-			target.project_name = source.first_name + (source.last_name or "")
-		elif source.party_type == "Customer":
-			target.project_name = source.customer
+		target.project_name = source.party_name+"-"+source.whatsapp_number
 	target_doc = get_mapped_doc(
 		"CA Form",
 		source_name,
-		{"CA Form": {"doctype": "Project", "field_map": {"phone_number": "whatsapp_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
+		{"CA Form": {"doctype": "Project", "field_map": {"whatsapp_number": "phone_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
 		target_doc,
 		set_missing_values,
 	)
