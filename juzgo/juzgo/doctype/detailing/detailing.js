@@ -426,7 +426,7 @@ async function html(frm){
 			fieldtype: 'Section Break',
 			fieldname: 's_sb',
 			collapsible: 1,
-			label:"Hotel Details"
+			label:"Spots Details"
 		})
 		p.push({
 			fieldtype: 'HTML',
