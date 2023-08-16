@@ -81,8 +81,23 @@ def get_task_userwise(doctype):
 	assigned_to = []
 	# if(doctype == "Project"):
 	assigned_to = frappe.get_all("ToDo", filters= { 'reference_type': doctype, 'allocated_to': user}, pluck="reference_name")
+	shared = frappe.db.sql(f"""
+		SELECT
+			docshare.share_name as name
+		FROM `tabDocShare` docshare
+		WHERE
+			docshare.share_doctype = "{doctype}" AND
+			(
+				docshare.everyone = 1 OR
+				docshare.user = "{user}"
+			) AND
+			(
+				docshare.read = 1
+			)
+	""", as_dict=True)
 	# assigned_to = frappe.get_all(doctype,filters={'assigned_to':user})
 	for i in created_by:task.append(i.name)
+	for i in shared:task.append(i.name)
 	for i in assigned_to:task.append(i)
 	return task
 
