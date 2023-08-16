@@ -10,7 +10,7 @@ import frappe
 import frappe.permissions
 from frappe import _
 from frappe.core.doctype.access_log.access_log import make_access_log
-from frappe.model import child_table_fields, default_fields, optional_fields
+from frappe.model import child_table_fields, default_fields, get_permitted_fields, optional_fields
 from frappe.model.base_document import get_controller
 from frappe.model.db_query import DatabaseQuery
 from frappe.model.utils import is_virtual_doctype
@@ -60,7 +60,7 @@ def get_count():
 
 	return data
 
-# thirvu change
+
 def execute(doctype, *args, **kwargs):
 	try:
 		if(doctype == 'Task' or doctype == "Project" or doctype == "Lead" or doctype == "CA Form"):
@@ -85,7 +85,7 @@ def get_task_userwise(doctype):
 	for i in created_by:task.append(i.name)
 	for i in assigned_to:task.append(i)
 	return task
-#end
+
 def get_form_params():
 	"""Stringify GET request parameters."""
 	data = frappe._dict(frappe.local.form_dict)
@@ -112,7 +112,7 @@ def validate_args(data):
 def validate_fields(data):
 	wildcard = update_wildcard_field_param(data)
 
-	for field in data.fields or []:
+	for field in list(data.fields or []):
 		fieldname = extract_fieldname(field)
 		if is_standard(fieldname):
 			continue
@@ -173,12 +173,8 @@ def setup_group_by(data):
 
 		if frappe.db.has_column(data.aggregate_on_doctype, data.aggregate_on_field):
 			data.fields.append(
-				"{aggregate_function}(`tab{aggregate_on_doctype}`.`{aggregate_on_field}`) AS _aggregate_column".format(
-					**data
-				)
+				f"{data.aggregate_function}(`tab{data.aggregate_on_doctype}`.`{data.aggregate_on_field}`) AS _aggregate_column"
 			)
-			if data.aggregate_on_field:
-				data.fields.append(f"`tab{data.aggregate_on_doctype}`.`{data.aggregate_on_field}`")
 		else:
 			raise_invalid_field(data.aggregate_on_field)
 
@@ -207,7 +203,7 @@ def extract_fieldname(field):
 	fieldname = field
 	for sep in (" as ", " AS "):
 		if sep in fieldname:
-			fieldname = fieldname.split(sep)[0]
+			fieldname = fieldname.split(sep, 1)[0]
 
 	# certain functions allowed, extract the fieldname from the function
 	if fieldname.startswith("count(") or fieldname.startswith("sum(") or fieldname.startswith("avg("):
@@ -229,7 +225,10 @@ def update_wildcard_field_param(data):
 	if (isinstance(data.fields, str) and data.fields == "*") or (
 		isinstance(data.fields, (list, tuple)) and len(data.fields) == 1 and data.fields[0] == "*"
 	):
-		data.fields = frappe.db.get_table_columns(data.doctype)
+		if frappe.get_system_settings("apply_perm_level_on_api_calls"):
+			data.fields = get_permitted_fields(data.doctype, parenttype=data.parenttype)
+		else:
+			data.fields = frappe.db.get_table_columns(data.doctype)
 		return True
 
 	return False
@@ -316,7 +315,7 @@ def save_report(name, doctype, report_settings):
 		if report.report_type != "Report Builder":
 			frappe.throw(_("Only reports of type Report Builder can be edited"))
 
-		if report.owner != frappe.session.user and not frappe.has_permission("Report", "write"):
+		if report.owner != frappe.session.user and not report.has_permission("write"):
 			frappe.throw(_("Insufficient Permissions for editing Report"), frappe.PermissionError)
 	else:
 		report = frappe.new_doc("Report")
@@ -345,7 +344,7 @@ def delete_report(name):
 	if report.report_type != "Report Builder":
 		frappe.throw(_("Only reports of type Report Builder can be deleted"))
 
-	if report.owner != frappe.session.user and not frappe.has_permission("Report", "delete"):
+	if report.owner != frappe.session.user and not report.has_permission("delete"):
 		frappe.throw(_("Insufficient Permissions for deleting Report"), frappe.PermissionError)
 
 	report.delete(ignore_permissions=True)
@@ -722,7 +721,8 @@ def get_filters_cond(
 			for f in filters:
 				if isinstance(f[1], str) and f[1][0] == "!":
 					flt.append([doctype, f[0], "!=", f[1][1:]])
-				elif isinstance(f[1], (list, tuple)) and f[1][0] in (
+				elif isinstance(f[1], (list, tuple)) and f[1][0].lower() in (
+					"=",
 					">",
 					"<",
 					">=",
@@ -733,6 +733,7 @@ def get_filters_cond(
 					"in",
 					"not in",
 					"between",
+					"is",
 				):
 
 					flt.append([doctype, f[0], f[1][0], f[1][1]])
