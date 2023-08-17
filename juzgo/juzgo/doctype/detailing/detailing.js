@@ -6,7 +6,10 @@ frappe.ui.form.on('Detailing', {
 	refresh: function(frm) {
 		if(!frm.is_new()){
             html(frm)
-        }
+        }else{
+			let html = frm.$wrapper.find('div[data-fieldname="hotel_html"]')[0]
+    		html.innerHTML=''
+		}
 	}
 });
 function contentchild(ele){
@@ -149,11 +152,15 @@ function remove_spot(spots_id){
 	cur_frm.doc.basic_spots.forEach(ele => {
 		if(ele.spots_id == spots_id)
 			row_to_det.push(ele.name)
+			// row_to_det.push(ele.idx -1)
 	})
+	console.log(row_to_det)
 	if(row_to_det){
 		for(let i=row_to_det.length;i>0;i--){
 			cur_frm.fields_dict.basic_spots.grid.grid_rows_by_docname[row_to_det[i-1]].remove()
+			// cur_frm.doc.basic_spots.splice(row_to_det[i-1], 1);
 		}
+		// refresh_field("basic_spots");
 	}
 	cur_frm.save()
 }
