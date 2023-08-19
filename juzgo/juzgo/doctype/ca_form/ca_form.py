@@ -308,7 +308,7 @@ def table_preview():
 	html1 =html1 + f'''   
 			</table>
 			'''
-	return html,html1,table_pre.forex_ref_link
+	return html,html1,table_pre.forex_ref_link,table_pre.train_info
 
 @frappe.whitelist()
 def temple_notes(temple = None):

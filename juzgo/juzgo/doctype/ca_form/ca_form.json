@@ -111,21 +111,25 @@
   "section_break_x5gum",
   "from_destination_onwards",
   "to_destination_onwards",
+  "onward_stop",
   "column_break_fuz7h",
   "from_date",
   "to_date",
   "column_break_eu2sr",
-  "onward_stop",
+  "preferred_departure_time_onward",
+  "preferred_landing_time_onward",
   "section_break_6j7k9",
   "return",
   "section_break_encca",
   "from_destination_return",
   "to_destination_return",
+  "stop_list_preferences",
   "column_break_5ehnh",
   "return_start_date",
   "return_end_date",
   "column_break_xnadp",
-  "stop_list_preferences",
+  "preferred_departure_time",
+  "preferred_landing_time",
   "section_break_vw2mv",
   "departure_city_preferences",
   "column_break_bivag",
@@ -194,6 +198,7 @@
   "column_break_b4tvw",
   "general",
   "classes",
+  "train_info",
   "column_break_u4ft0",
   "train_departure_time",
   "train_arrival_time",
@@ -961,7 +966,7 @@
   {
    "fieldname": "special_requests",
    "fieldtype": "Table MultiSelect",
-   "label": "Special Requests",
+   "label": "Add on needed",
    "options": "Special Request Table"
   },
   {
@@ -1247,12 +1252,40 @@
    "fieldname": "party_name",
    "fieldtype": "Data",
    "label": "Party Name"
+  },
+  {
+   "fieldname": "preferred_departure_time",
+   "fieldtype": "Data",
+   "label": "Preferred Departure Time"
+  },
+  {
+   "fieldname": "preferred_landing_time",
+   "fieldtype": "Data",
+   "label": "Preferred Landing Time"
+  },
+  {
+   "fieldname": "preferred_departure_time_onward",
+   "fieldtype": "Data",
+   "label": "Preferred Departure Time"
+  },
+  {
+   "fieldname": "preferred_landing_time_onward",
+   "fieldtype": "Data",
+   "label": "Preferred Landing Time"
+  },
+  {
+   "fieldname": "train_info",
+   "fieldtype": "Data",
+   "label": "Train Info",
+   "length": 1000,
+   "options": "URL",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-10 19:09:44.056504",
+ "modified": "2023-08-19 10:03:26.673986",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

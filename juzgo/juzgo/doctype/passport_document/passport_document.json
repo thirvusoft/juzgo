@@ -11,7 +11,8 @@
   "passport_document_table",
   "passport_image_doc_table",
   "img_preview",
-  "forex_ref_link"
+  "forex_ref_link",
+  "train_info"
  ],
  "fields": [
   {
@@ -43,12 +44,19 @@
    "label": "Forex Ref link",
    "length": 1000,
    "options": "URL"
+  },
+  {
+   "fieldname": "train_info",
+   "fieldtype": "Data",
+   "label": "Train Info",
+   "length": 1000,
+   "options": "URL"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-08-01 12:06:10.433631",
+ "modified": "2023-08-19 10:07:35.922082",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Passport Document",
