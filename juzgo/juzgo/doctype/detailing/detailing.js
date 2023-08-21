@@ -61,16 +61,18 @@ function add_hotel(){
 	cur_frm.save()
 } 
 function remove_hotel(hotel_id){
-	var row_to_det = []
-	cur_frm.doc.hotel_table.forEach(ele => {
-		if(ele.hotel_id == hotel_id)
-			row_to_det.push(ele.name)
-	})
-	if(row_to_det){
-		for(let i=row_to_det.length;i>0;i--){
-			cur_frm.fields_dict.hotel_table.grid.grid_rows_by_docname[row_to_det[i-1]].remove()
-		}
+	var hotel_table = cur_frm.doc.hotel_table
+	cur_frm.doc.hotel_table = []
+	for (let i = 0; i < hotel_table.length; i++) {
+		if(hotel_table[i].hotel_id !== hotel_id)
+			cur_frm.doc.hotel_table.push(hotel_table[i])
 	}
+	if(cur_frm.doc.delete_rows == 1){
+		cur_frm.set_value("delete_rows",0)
+	} else {
+		cur_frm.set_value("delete_rows",1)
+	}
+	cur_frm.refresh_field('hotel_table');
 	cur_frm.save()
 }
 function copy_hotel(hotel_id){
@@ -148,20 +150,19 @@ function add_spot(){
 	cur_frm.save()
 } 
 function remove_spot(spots_id){
-	var row_to_det = []
-	cur_frm.doc.basic_spots.forEach(ele => {
-		if(ele.spots_id == spots_id)
-			row_to_det.push(ele.name)
-			// row_to_det.push(ele.idx -1)
-	})
-	console.log(row_to_det)
-	if(row_to_det){
-		for(let i=row_to_det.length;i>0;i--){
-			cur_frm.fields_dict.basic_spots.grid.grid_rows_by_docname[row_to_det[i-1]].remove()
-			// cur_frm.doc.basic_spots.splice(row_to_det[i-1], 1);
-		}
-		// refresh_field("basic_spots");
+	var basic_spots = cur_frm.doc.basic_spots
+	cur_frm.doc.basic_spots = []
+	for (let i = 0; i < basic_spots.length; i++) {
+		if(basic_spots[i].spots_id !== spots_id)
+			cur_frm.doc.basic_spots.push(basic_spots[i])
 	}
+	if(cur_frm.doc.delete_rows == 1){
+		cur_frm.set_value("delete_rows",0)
+	} else {
+		cur_frm.set_value("delete_rows",1)
+
+	}
+	cur_frm.refresh_field('basic_spots');
 	cur_frm.save()
 }
 function copy_spot(spots_id){
@@ -230,132 +231,223 @@ async function html(frm){
 
 		var h_html = `
 		<html>
+			<style>
+				.tablediv{
+					float:left;
+					width:90%;
+				}
+				.sidebut{
+					float:right;
+					width:10%;
+					margin-top:10px;
+				}
+				.addbut{
+					clear: both;
+					margin:5px;
+					text-align: center;  
+					width:90%;
+				}
+				.rows{
+					width:100%;
+					margin-top:10px;
+					border-radius: 5px;
+				}
+				.trclass{
+					border:1px solid black;
+				}
+				.tdclass{
+					border:1px solid black;
+				}
+				.thclass{
+					border:1px solid black;
+					background-color:#b3b3b3;
+					color:#ffffff;
+				}
+				.thclass a{
+					color:#ffffff;
+					padding-right:5px;
+				}
+				.inputclass{
+					width:100%;
+				}
+				.addbutton{
+					background-color: Green;
+					color: white;
+					font-size: 12px;
+					padding: 6px 12px;
+					border: none;
+					cursor: pointer;
+					border-radius: 5px;
+					text-align: center;
+					margin: 5px;
+					width:70%;
+				}
+				.rebutton{
+					background-color: red;
+					color: white;
+					font-size: 12px;
+					padding: 6px 12px;
+					border: none;
+					cursor: pointer;
+					border-radius: 5px;
+					text-align: center;
+					margin:2px;
+				}
+				.copybutton{
+					background-color: #b3b300;
+					color: white;
+					font-size: 12px;
+					padding: 6px 12px;
+					border: none;
+					cursor: pointer;
+					border-radius: 5px;
+					text-align: center;
+					margin:2px;
+				}
+				.addbutton:hover {
+					box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+				}
+				.rebutton:hover {
+					box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+				}
+				.copybutton:hover {
+					box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+				}
+			</style>
 			`
 		hotel_id_list.forEach(hotel_id=>{
 		h_html +=`
-				<table>
-					<tr>
-						<th>
-							Options
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-									<td>
-										<div style="text-align:center">
-										${frm.doc.hotel_table[i].option != "Option 1"?frm.doc.hotel_table[i].copy == 1?'<input type="checkbox" value='+frm.doc.hotel_table[i].hotel_id+' id='+frm.doc.hotel_table[i].name+' name="copy" onchange="frappe.content(this)" checked >':'<input type="checkbox" value='+frm.doc.hotel_table[i].hotel_id+' id='+frm.doc.hotel_table[i].name+' name="copy" onchange="frappe.content(this)" >':''}
-										${frm.doc.hotel_table[i].option}</div>
-									</td>
-									`
-								}
-							}
-						h_html += `	
-					</tr>
-					<tr>
-						<th>
-							Hotel Name
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-										<td>
-											<input type="text" list="hotellist" value="${frm.doc.hotel_table[i].hotel_name || ''}" id=${frm.doc.hotel_table[i].name} name="hotel_name" onchange="frappe.content(this)"><a href='/app/hotel-details/new-hotel-details-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
-											<datalist id="hotellist">
-												<option> </option>
-												`
-												for (var h = 0; h < lists.length; h++) {
-													h_html += '<option value="' + lists[h] + '"> '+lists[h]+' </option>';
-												}
-												h_html+=`
-											</datalist> 
-										</td>
-									`
-								}
-							}
-						h_html += `	
-					</tr>
-					<tr>
-						<th>
-							No of Nights
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-										<td>
-											<input type="text" value="${frm.doc.hotel_table[i].no_of_nights || ''}" id=${frm.doc.hotel_table[i].name} name="no_of_nights" onchange="frappe.content(this)">
-										</td>
-									`
-								}
-							}
-						h_html += `	
-					</tr>
-					<tr>
-						<th>
-							Room Category 
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-										<td>
-											<input type="text" value="${frm.doc.hotel_table[i].room_category || ''}" id=${frm.doc.hotel_table[i].name} name="room_category" onchange="frappe.content(this)">
-										</td>
-									`
-								}
-		
-							}
-						h_html += `	
-					</tr>
-					<tr>
-						<th>
-							Meal Preference 
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-										<td>
-											<input type="text" value="${frm.doc.hotel_table[i].meal_preference || ''}" id=${frm.doc.hotel_table[i].name} name="meal_preference" onchange="frappe.content(this)">
-										</td>
-									`
-								}
-							}
-						h_html += `	
-					</tr>
-					<tr>
-						<th>
-							Supplier
-						</th>
-						`
-						for(let i=0;i<frm.doc.hotel_table.length;i++){
-							if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
-								h_html += `		
-										<td>
-											<input type="text" list="supplierlist" value="${frm.doc.hotel_table[i].supplier || ''}" id=${frm.doc.hotel_table[i].name} name="supplier" onchange="frappe.content(this)"> <a href='/app/supplier/new-supplier-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
-											<datalist id="supplierlist">
-												<option> </option>
-												`
-												for (var h = 0; h < supplierlist.length; h++) {
-													h_html += '<option value="' + supplierlist[h] + '"> </option>';
-												}
-												h_html+=`
-											</datalist> 
-										</td>
-									`
-								}
-							}
-						h_html += `	
-					</tr>
-				<table>
-				<button type="button" onclick="frappe.remove_hotel('${hotel_id}')">Remove Hotel</button>
-				<button type="button" onclick="frappe.copy_hotel('${hotel_id}')">Copy All</button>
+				<div style="width:100%;">
+					<div class="tablediv">
+						<table class="rows">
+							<tr class="trclass">
+								<th class="thclass">
+									Options
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+											<td class="thclass">
+												<div style="text-align:center;">
+												${frm.doc.hotel_table[i].option != "Option 1"?frm.doc.hotel_table[i].copy == 1?'<input style="background-color:#ffff" type="checkbox" value='+frm.doc.hotel_table[i].hotel_id+' id='+frm.doc.hotel_table[i].name+' name="copy" onchange="frappe.content(this)" checked >':'<input style="background-color:#ffff" type="checkbox" value='+frm.doc.hotel_table[i].hotel_id+' id='+frm.doc.hotel_table[i].name+' name="copy" onchange="frappe.content(this)" >':''}
+												${frm.doc.hotel_table[i].option}</div>
+											</td>
+											`
+										}
+									}
+								h_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+									<a href='/app/hotel-details/' target='_blank'>Hotel Name</a><a href='/app/hotel-details/new-hotel-details-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" list="hotellist" value="${frm.doc.hotel_table[i].hotel_name || ''}" id=${frm.doc.hotel_table[i].name} name="hotel_name" onchange="frappe.content(this)">
+													<datalist id="hotellist">
+														<option> </option>
+														`
+														for (var h = 0; h < lists.length; h++) {
+															h_html += '<option value="' + lists[h] + '"> '+lists[h]+' </option>';
+														}
+														h_html+=`
+													</datalist> 
+												</td>
+											`
+										}
+									}
+								h_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+									No of Nights
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" value="${frm.doc.hotel_table[i].no_of_nights || ''}" id=${frm.doc.hotel_table[i].name} name="no_of_nights" onchange="frappe.content(this)">
+												</td>
+											`
+										}
+									}
+								h_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+									Room Category 
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" value="${frm.doc.hotel_table[i].room_category || ''}" id=${frm.doc.hotel_table[i].name} name="room_category" onchange="frappe.content(this)">
+												</td>
+											`
+										}
+				
+									}
+								h_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+									Meal Preference 
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" value="${frm.doc.hotel_table[i].meal_preference || ''}" id=${frm.doc.hotel_table[i].name} name="meal_preference" onchange="frappe.content(this)">
+												</td>
+											`
+										}
+									}
+								h_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+									<a href='/app/supplier/' target='_blank'>Supplier</a><a href='/app/supplier/new-supplier-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
+								</th>
+								`
+								for(let i=0;i<frm.doc.hotel_table.length;i++){
+									if(frm.doc.hotel_table[i].hotel_id ==  hotel_id){
+										h_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" list="supplierlist" value="${frm.doc.hotel_table[i].supplier || ''}" id=${frm.doc.hotel_table[i].name} name="supplier" onchange="frappe.content(this)"> 
+													<datalist id="supplierlist">
+														<option> </option>
+														`
+														for (var h = 0; h < supplierlist.length; h++) {
+															h_html += '<option value="' + supplierlist[h] + '"> </option>';
+														}
+														h_html+=`
+													</datalist> 
+												</td>
+											`
+										}
+									}
+								h_html += `	
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="sidebut">
+					<button class="copybutton" type="button" onclick="frappe.copy_hotel('${hotel_id}')">Copy All</button>
+					<button class="rebutton" type="button" onclick="frappe.remove_hotel('${hotel_id}')">Remove Hotel</button>
+				</div>
 				`
 			})
 			h_html+=`
-			<button type="button" onclick="frappe.add_hotel()">Add Hotel</button>
+			<div class="addbut">
+				<button class="addbutton" type="button" onclick="frappe.add_hotel()">Add Hotel</button>
+			</div>
 		</html>
 		`
 		p.push({
@@ -376,56 +468,64 @@ async function html(frm){
 			`
 		spots_id_list.forEach(spots_id=>{
 		s_html +=`
-				<table>
-					<tr>
-						<th>
-							Options
-						</th>
-						`
-						for(let i=0;i<frm.doc.basic_spots.length;i++){
-							if(frm.doc.basic_spots[i].spots_id ==  spots_id){
-								s_html += `		
-									<td>
-										<div style="text-align:center">
-										${frm.doc.basic_spots[i].option != "Option 1"?frm.doc.basic_spots[i].copy == 1?'<input type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" checked >':'<input type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" >':''}
-										${frm.doc.basic_spots[i].option}</div>
-									</td>
-									`
-								}
-							}
-						s_html += `	
-					</tr>
-					<tr>
-						<th>
-							Spots
-						</th>
-						`
-						for(let i=0;i<frm.doc.basic_spots.length;i++){
-							if(frm.doc.basic_spots[i].spots_id ==  spots_id){
-								s_html += `		
-										<td>
-											<input type="text" list="spotlist" value="${frm.doc.basic_spots[i].basic_spots || ''}" id=${frm.doc.basic_spots[i].name} name="basic_spots" onchange="frappe.spotchild(this)"><a href='/app/spots/new-spots-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
-											<datalist id="spotlist">
-												<option> </option>
-												`
-												for (var h = 0; h < spots_lists.length; h++) {
-													s_html += '<option value="' + spots_lists[h] + '"> '+spots_lists[h]+' </option>';
-												}
-												s_html+=`
-											</datalist> 
-										</td>
-									`
-								}
-							}
-						s_html += `	
-					</tr>
-				<table>
-				<button type="button" onclick="frappe.remove_spots('${spots_id}')">Remove Spots</button>
-				<button type="button" onclick="frappe.copy_spots('${spots_id}')">Copy All</button>
+				<div style="width:100%;">
+					<div class="tablediv">
+						<table class="rows">
+							<tr class="trclass">
+								<th class="thclass">
+									Options
+								</th>
+								`
+								for(let i=0;i<frm.doc.basic_spots.length;i++){
+									if(frm.doc.basic_spots[i].spots_id ==  spots_id){
+										s_html += `		
+											<td class="thclass">
+												<div style="text-align:center">
+												${frm.doc.basic_spots[i].option != "Option 1"?frm.doc.basic_spots[i].copy == 1?'<input type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" checked >':'<input style="background-color:#ffff" type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" >':''}
+												${frm.doc.basic_spots[i].option}</div>
+											</td>
+											`
+										}
+									}
+								s_html += `	
+							</tr>
+							<tr class="trclass">
+								<th class="thclass">
+								<a href='/app/spots/' target='_blank'>Spots</a><a href='/app/spots/new-spots-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
+								</th>
+								`
+								for(let i=0;i<frm.doc.basic_spots.length;i++){
+									if(frm.doc.basic_spots[i].spots_id ==  spots_id){
+										s_html += `		
+												<td class="tdclass">
+													<input class="inputclass" type="text" list="spotlist" value="${frm.doc.basic_spots[i].basic_spots || ''}" id=${frm.doc.basic_spots[i].name} name="basic_spots" onchange="frappe.spotchild(this)">
+													<datalist id="spotlist">
+														<option> </option>
+														`
+														for (var h = 0; h < spots_lists.length; h++) {
+															s_html += '<option value="' + spots_lists[h] + '"> '+spots_lists[h]+' </option>';
+														}
+														s_html+=`
+													</datalist> 
+												</td>
+											`
+										}
+									}
+								s_html += `	
+							</tr>
+						</table>
+					</div>
+					<div class="sidebut">
+						<button class="copybutton"  type="button" onclick="frappe.copy_spots('${spots_id}')">Copy All</button>
+						<button class="rebutton" type="button" onclick="frappe.remove_spots('${spots_id}')">Remove Spots</button>
+					</div>
+				</div>
 				`
 			})
 			s_html+=`
-			<button type="button" onclick="frappe.add_spots()">Add Spots</button>
+			<div class="addbut">
+				<button class="addbutton" type="button" onclick="frappe.add_spots()">Add Spots</button>
+			</div>
 		</html>
 		`
 
