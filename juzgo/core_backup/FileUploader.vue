@@ -517,19 +517,34 @@ export default {
 				xhr.setRequestHeader('X-Frappe-CSRF-Token', frappe.csrf_token);
 
 				let form_data = new FormData();
-				if (file.file_obj) {
-					form_data.append('file', file.file_obj, file.name);
+				// thirvu change
+				let system_file_name
+				if(file.name){
+					system_file_name= file.system_file_name_+'.'+file.name.split('.')[1]
 				}
+				if (file.file_obj) {
+					if (file.system_file_name_) {
+						form_data.append('file', file.file_obj, system_file_name);
+						form_data.append('name', system_file_name);
+					} else {
+						form_data.append('file', file.file_obj, file.name);
+					}
+				}
+				//end
 				form_data.append('is_private', +file.private);
 				form_data.append('folder', this.folder);
 
 				if (file.file_url) {
 					form_data.append('file_url', file.file_url);
 				}
-
-				if (file.file_name) {
+				//thirvu change
+				if (file.system_file_name_) {
+					form_data.append('file_name', system_file_name);
+				}
+				else if (file.file_name) {
 					form_data.append('file_name', file.file_name);
 				}
+				//end
 
 				if (this.doctype && this.docname) {
 					form_data.append('doctype', this.doctype);

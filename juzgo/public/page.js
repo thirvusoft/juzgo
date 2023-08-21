@@ -9,6 +9,16 @@ class Page extends frappe.ui.Page {
 				working_label: working_label,
 			});
 			return this.btn_primary;
+		} else {
+			if(frappe.user.has_role("Juzgo Admin") || frappe.user.has_role("Thirvu Admin")){
+				this.set_action(this.btn_primary, {
+					label: label,
+					click: click,
+					icon: icon,
+					working_label: working_label,
+				});
+				return this.btn_primary;
+			}
 		}
 	}
 }

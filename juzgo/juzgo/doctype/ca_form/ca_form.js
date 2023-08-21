@@ -106,6 +106,7 @@ frappe.ui.form.on('CA Form', {
 				frm.set_df_property("passport_doc","options",r.message[0])
 				frm.set_df_property("passport_budget_html","options",r.message[1])
 				frm.set_value("currency_ref_link",r.message[2])
+				frm.set_value("train_info",r.message[3])
 			},
 		})
 		option_for_room_preferences(frm)
@@ -280,7 +281,7 @@ function auto_end_date(frm){
     } 
 }
 function add_pax(frm){
-	frm.set_value("no_of_paxs",(frm.doc.no_of_childrens || 0) + (frm.doc.child_without_bed || 0) + (frm.doc.no_of_adult || 0) + (frm.doc.no_of_infant || 0))
+	frm.set_value("no_of_paxs",(frm.doc.no_of_childrens || 0) + (frm.doc.child_without_bed || 0) + (frm.doc.no_of_adult || 0))
 }
 function diff_family(frm){
 	var diff_in_cwb = 0

@@ -308,7 +308,7 @@ def table_preview():
 	html1 =html1 + f'''   
 			</table>
 			'''
-	return html,html1,table_pre.forex_ref_link
+	return html,html1,table_pre.forex_ref_link,table_pre.train_info
 
 @frappe.whitelist()
 def temple_notes(temple = None):
@@ -387,7 +387,7 @@ def make_project(source_name, target_doc=None):
 	target_doc = get_mapped_doc(
 		"CA Form",
 		source_name,
-		{"CA Form": {"doctype": "Project", "field_map": {"phone_number": "whatsapp_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
+		{"CA Form": {"doctype": "Project", "field_map": {"whatsapp_number": "phone_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
 		target_doc,
 		set_missing_values,
 	)
