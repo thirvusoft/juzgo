@@ -1,50 +1,51 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-08-13 19:06:41.109132",
+ "creation": "2023-08-22 17:00:38.489265",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "option",
-  "basic_spots",
-  "copy",
-  "spots_id"
+  "bus",
+  "bus_id",
+  "copy"
  ],
  "fields": [
   {
-   "fieldname": "basic_spots",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Basic Spots ",
-   "options": "Spots"
-  },
-  {
    "fieldname": "option",
    "fieldtype": "Data",
+   "label": "Option"
+  },
+  {
+   "fieldname": "bus",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Option "
+   "label": "Bus",
+   "options": "Bus"
+  },
+  {
+   "fieldname": "bus_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bus id"
   },
   {
    "default": "0",
    "fieldname": "copy",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Copy"
-  },
-  {
-   "fieldname": "spots_id",
-   "fieldtype": "Data",
-   "label": "Spots id"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-08-22 15:43:18.838162",
+ "modified": "2023-08-22 17:00:38.489265",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Detailing Basic Spots",
+ "name": "Bus in Detailing",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

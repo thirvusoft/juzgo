@@ -1,50 +1,51 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-08-13 19:06:41.109132",
+ "creation": "2023-08-22 17:09:16.929033",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "option",
-  "basic_spots",
-  "copy",
-  "spots_id"
+  "cruise",
+  "cruise_id",
+  "copy"
  ],
  "fields": [
   {
-   "fieldname": "basic_spots",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Basic Spots ",
-   "options": "Spots"
-  },
-  {
    "fieldname": "option",
    "fieldtype": "Data",
+   "label": "Option"
+  },
+  {
+   "fieldname": "cruise",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Option "
+   "label": "Cruise",
+   "options": "Cruise"
+  },
+  {
+   "fieldname": "cruise_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cruise id"
   },
   {
    "default": "0",
    "fieldname": "copy",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Copy"
-  },
-  {
-   "fieldname": "spots_id",
-   "fieldtype": "Data",
-   "label": "Spots id"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-08-22 15:43:18.838162",
+ "modified": "2023-08-22 17:09:16.929033",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Detailing Basic Spots",
+ "name": "Cruise in Detailing",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
