@@ -1,50 +1,50 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-08-13 19:06:41.109132",
- "default_view": "List",
+ "creation": "2023-08-22 12:58:13.643642",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "option",
-  "basic_spots",
-  "copy",
-  "spots_id"
+  "vehicle",
+  "vehicle_id",
+  "copy"
  ],
  "fields": [
   {
-   "fieldname": "basic_spots",
+   "fieldname": "vehicle",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Basic Spots ",
-   "options": "Spots"
+   "label": "Vehicle",
+   "options": "Vehicle"
   },
   {
-   "fieldname": "option",
+   "fieldname": "vehicle_id",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Option "
+   "label": "Vehicle id"
   },
   {
    "default": "0",
    "fieldname": "copy",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Copy"
   },
   {
-   "fieldname": "spots_id",
+   "fieldname": "option",
    "fieldtype": "Data",
-   "label": "Spots id"
+   "label": "Option"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-08-22 15:43:18.838162",
+ "modified": "2023-08-22 15:43:04.785082",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Detailing Basic Spots",
+ "name": "Vehicle in Detailing",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

@@ -53,7 +53,12 @@
   "hotel_html",
   "hotel_table",
   "basic_spots",
-  "delete_rows"
+  "vehicle",
+  "restaurant",
+  "delete_rows",
+  "bus",
+  "cruise",
+  "notes"
  ],
  "fields": [
   {
@@ -363,12 +368,45 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "delete rows"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Vehicle",
+   "options": "Vehicle in Detailing"
+  },
+  {
+   "fieldname": "restaurant",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Restaurant",
+   "options": "Restaurant in Detailing"
+  },
+  {
+   "fieldname": "bus",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Bus",
+   "options": "Bus in Detailing"
+  },
+  {
+   "fieldname": "cruise",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Cruise",
+   "options": "Cruise in Detailing"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-18 17:18:10.061231",
+ "modified": "2023-08-22 17:21:15.453242",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing",
