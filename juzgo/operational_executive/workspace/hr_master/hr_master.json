@@ -1,0 +1,66 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"8KXUCmsjdI\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">HR Master</span>\",\"col\":12}},{\"id\":\"FK0ciIM1mv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"XHuXuqoB78\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Application\",\"col\":3}},{\"id\":\"xb-8zbGpfl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Holiday List\",\"col\":3}}]",
+ "creation": "2023-08-09 19:42:21.277373",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "hr",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "HR Master",
+ "links": [],
+ "modified": "2023-08-09 19:46:42.355653",
+ "modified_by": "sibi.kumar@thirvusoft.in",
+ "module": "Operational Executive",
+ "name": "HR Master",
+ "number_cards": [],
+ "owner": "sibi.kumar@thirvusoft.in",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Operational Executive"
+  },
+  {
+   "role": "Juzgo HR"
+  },
+  {
+   "role": "Juzgo PA"
+  },
+  {
+   "role": "Juzgo Admin"
+  },
+  {
+   "role": "Juzgo Accounts"
+  }
+ ],
+ "sequence_id": 41.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee",
+   "link_to": "Employee",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Leave Application",
+   "link_to": "Leave Application",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Holiday List",
+   "link_to": "Holiday List",
+   "type": "DocType"
+  }
+ ],
+ "title": "HR Master"
+}

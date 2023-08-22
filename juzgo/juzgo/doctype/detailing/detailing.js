@@ -6,7 +6,10 @@ frappe.ui.form.on('Detailing', {
 	refresh: function(frm) {
 		if(!frm.is_new()){
             html(frm)
-        }
+        }else{
+			let html = frm.$wrapper.find('div[data-fieldname="hotel_html"]')[0]
+    		html.innerHTML=''
+		}
 	}
 });
 function contentchild(ele){
@@ -157,6 +160,7 @@ function remove_spot(spots_id){
 		cur_frm.set_value("delete_rows",0)
 	} else {
 		cur_frm.set_value("delete_rows",1)
+
 	}
 	cur_frm.refresh_field('basic_spots');
 	cur_frm.save()
