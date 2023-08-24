@@ -45,7 +45,8 @@ function contentchild(ele){
 			frappe.model.set_value("Demo cc child table", ele.id, 'supplier', '');
 			frappe.model.set_value("Demo cc child table", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		html(cur_frm)
+		// cur_frm.save()
 	}else{
 		frappe.model.set_value("Demo cc child table", ele.id, ele.name, ele.value);
 	}
@@ -58,7 +59,8 @@ function add_hotel(){
 		row.hotel_id = h_id;
 	}
 	refresh_field('hotel_table')
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 } 
 function remove_hotel(hotel_id){
 	var hotel_table = cur_frm.doc.hotel_table
@@ -73,7 +75,8 @@ function remove_hotel(hotel_id){
 		cur_frm.set_value("delete_rows",1)
 	}
 	cur_frm.refresh_field('hotel_table');
-	cur_frm.save()
+	// cur_frm.save()
+	html(cur_frm)
 }
 function copy_hotel(hotel_id){
 	let hotel_name,no_of_nights,room_category,meal_preference,supplier
@@ -104,7 +107,8 @@ function copy_hotel(hotel_id){
 			})
 		}
 	})
-	cur_frm.save()
+	// cur_frm.save()
+	html(cur_frm)
 }
 frappe.content = contentchild
 frappe.add_hotel = add_hotel
@@ -134,7 +138,8 @@ function spotchild(ele){
 			frappe.model.set_value("Detailing Basic Spots", ele.id, 'basic_spots', '');
 			frappe.model.set_value("Detailing Basic Spots", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		html(cur_frm)
+	// cur_frm.save()
 	}else{
 		frappe.model.set_value("Detailing Basic Spots", ele.id, ele.name, ele.value);
 	}
@@ -147,7 +152,8 @@ function add_spot(){
 		row.spots_id = h_id;
 	}
 	refresh_field('basic_spots')
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 } 
 function remove_spot(spots_id){
 	var basic_spots = cur_frm.doc.basic_spots
@@ -163,7 +169,8 @@ function remove_spot(spots_id){
 
 	}
 	cur_frm.refresh_field('basic_spots');
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 }
 function copy_spot(spots_id){
 	let basic_spots
@@ -186,7 +193,8 @@ function copy_spot(spots_id){
 			})
 		}
 	})
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 }
 frappe.spotchild = spotchild
 frappe.add_spots = add_spot
@@ -215,7 +223,8 @@ function vehiclechild(ele){
 			frappe.model.set_value("Vehicle in Detailing", ele.id, 'vehicle', '');
 			frappe.model.set_value("Vehicle in Detailing", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		html(cur_frm)
+	// cur_frm.save()
 	}else{
 		frappe.model.set_value("Vehicle in Detailing", ele.id, ele.name, ele.value);
 	}
@@ -228,7 +237,8 @@ function add_vehicle(){
 		row.vehicle_id = h_id;
 	}
 	refresh_field('vehicle')
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 } 
 function remove_vehicle(vehicle_id){
 	var vehicle = cur_frm.doc.vehicle
@@ -243,7 +253,8 @@ function remove_vehicle(vehicle_id){
 		cur_frm.set_value("delete_rows",1)
 	}
 	cur_frm.refresh_field('vehicle');
-	cur_frm.save()
+	html(cur_frm)
+	// cur_frm.save()
 }
 function copy_vehicle(vehicle_id){
 	let vehicle
@@ -266,7 +277,8 @@ function copy_vehicle(vehicle_id){
 			})
 		}
 	})
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 frappe.vehiclechild = vehiclechild
 frappe.add_vehicle = add_vehicle
@@ -294,7 +306,8 @@ function restaurantchild(ele){
 			frappe.model.set_value("Restaurant in Detailing", ele.id, 'restaurant', '');
 			frappe.model.set_value("Restaurant in Detailing", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		html(cur_frm)
+// cur_frm.save()
 	}else{
 		frappe.model.set_value("Restaurant in Detailing", ele.id, ele.name, ele.value);
 	}
@@ -307,7 +320,8 @@ function add_restaurant(){
 		row.restaurant_id = h_id;
 	}
 	refresh_field('restaurant')
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 } 
 function remove_restaurant(restaurant_id){
 	var restaurant = cur_frm.doc.restaurant
@@ -322,7 +336,8 @@ function remove_restaurant(restaurant_id){
 		cur_frm.set_value("delete_rows",1)
 	}
 	cur_frm.refresh_field('restaurant');
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 function copy_restaurant(restaurant_id){
 	let restaurant
@@ -345,7 +360,8 @@ function copy_restaurant(restaurant_id){
 			})
 		}
 	})
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 frappe.restaurantchild = restaurantchild
 frappe.add_restaurant = add_restaurant
@@ -360,7 +376,7 @@ function buschild(ele){
 			cur_frm.doc.bus.forEach(e => {
 				if(e.bus_id == ele.value){
 					cur_frm.doc.bus.forEach(copy =>{
-						if(copy.option == "opt 1"){
+						if(copy.option == "Opt 1"){
 							bus = copy.bus
 						}
 					})
@@ -373,7 +389,8 @@ function buschild(ele){
 			frappe.model.set_value("Bus in Detailing", ele.id, 'bus', '');
 			frappe.model.set_value("Bus in Detailing", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		html(cur_frm)
+// cur_frm.save()
 	}else{
 		frappe.model.set_value("Bus in Detailing", ele.id, ele.name, ele.value);
 	}
@@ -382,11 +399,12 @@ function add_bus(){
 	var h_id = Math.random().toString(36).substring(2,7);
 	for (let i =1; i<6; i++){
 		var row = cur_frm.add_child('bus');
-		row.option = "Option "+i.toString();
+		row.option = "Opt "+i.toString();
 		row.bus_id = h_id;
 	}
-	refresh_field('bus')
-	cur_frm.save()
+	cur_frm.refresh_field('bus');
+	html(cur_frm)
+// cur_frm.save()
 } 
 function remove_bus(bus_id){
 	var bus = cur_frm.doc.bus
@@ -401,14 +419,15 @@ function remove_bus(bus_id){
 		cur_frm.set_value("delete_rows",1)
 	}
 	cur_frm.refresh_field('bus');
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 function copy_bus(bus_id){
 	let bus
 	cur_frm.doc.bus.forEach(ele => {
 		if(ele.bus_id == bus_id){
 			cur_frm.doc.bus.forEach(copy =>{
-				if(copy.option == "opt 1"){
+				if(copy.option == "Opt 1"){
 					bus = copy.bus
 				}
 			})
@@ -417,14 +436,16 @@ function copy_bus(bus_id){
 	cur_frm.doc.bus.forEach(ele => {
 		if(ele.bus_id == bus_id){
 			cur_frm.doc.hotel_table.forEach(copy =>{
-				if(copy.option != "opt 1"){
+				if(copy.option != "Opt 1"){
 					frappe.model.set_value(ele.doctype, ele.name, 'bus', bus);
 					frappe.model.set_value(ele.doctype, ele.name, 'copy', 1);
 				}
 			})
 		}
 	})
-	cur_frm.save()
+	cur_frm.refresh_field('bus');
+	html(cur_frm)
+// cur_frm.save()
 }
 frappe.buschild = buschild
 frappe.add_bus = add_bus
@@ -437,14 +458,16 @@ function cruisechild(ele){
 		if(ele.checked){
 			let cruise
 			cur_frm.doc.cruise.forEach(e => {
+				console.log(ele.value,)
 				if(e.cruise_id == ele.value){
 					cur_frm.doc.cruise.forEach(copy =>{
-						if(copy.option == "opt 1"){
+						if(copy.option == "Opt 1"){
 							cruise = copy.cruise
 						}
 					})
 				}
 			})
+			console.log(cruise)
 			frappe.model.set_value("Cruise in Detailing", ele.id, 'cruise', cruise);
 			frappe.model.set_value("Cruise in Detailing", ele.id, ele.name, 1);
 		}
@@ -452,7 +475,9 @@ function cruisechild(ele){
 			frappe.model.set_value("Cruise in Detailing", ele.id, 'cruise', '');
 			frappe.model.set_value("Cruise in Detailing", ele.id, ele.name, 0);
 		}
-		cur_frm.save()
+		refresh_field('cruise')
+		html(cur_frm)
+// cur_frm.save()
 	}else{
 		frappe.model.set_value("Cruise in Detailing", ele.id, ele.name, ele.value);
 	}
@@ -465,7 +490,8 @@ function add_cruise(){
 		row.cruise_id = h_id;
 	}
 	refresh_field('cruise')
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 } 
 function remove_cruise(cruise_id){
 	var cruise = cur_frm.doc.cruise
@@ -480,7 +506,8 @@ function remove_cruise(cruise_id){
 		cur_frm.set_value("delete_rows",1)
 	}
 	cur_frm.refresh_field('cruise');
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 function copy_cruise(cruise_id){
 	let cruise
@@ -503,7 +530,8 @@ function copy_cruise(cruise_id){
 			})
 		}
 	})
-	cur_frm.save()
+	html(cur_frm)
+// cur_frm.save()
 }
 frappe.cruisechild = cruisechild
 frappe.add_cruise = add_cruise
