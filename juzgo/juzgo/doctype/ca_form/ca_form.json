@@ -38,14 +38,22 @@
   "party",
   "customer_",
   "service_type_requested",
+  "land_package",
+  "air_tickets",
+  "forex",
+  "dharshanarti_tickets",
+  "passport",
+  "bus_tickets",
+  "train_tickets",
+  "cruise",
   "insurance",
   "specific_request",
   "land_package_tab",
   "travel_from",
   "travel_to",
   "travel_start_date",
-  "nos_of_days",
   "no_of_nights",
+  "nos_of_days",
   "travel_end_date",
   "column_break_fnusz",
   "travel_dates",
@@ -367,6 +375,7 @@
   {
    "fieldname": "service_type_requested",
    "fieldtype": "Table MultiSelect",
+   "hidden": 1,
    "label": "Service Type Requested",
    "options": "Service Type Table"
   },
@@ -569,11 +578,13 @@
    "label": "Specific Request"
   },
   {
+   "depends_on": "eval:doc.land_package == 1",
    "fieldname": "land_package_tab",
    "fieldtype": "Tab Break",
    "label": "Land Package"
   },
   {
+   "depends_on": "eval:doc.forex == 1",
    "fieldname": "forex_tab",
    "fieldtype": "Tab Break",
    "label": "Forex"
@@ -622,6 +633,7 @@
    "label": "Notes"
   },
   {
+   "depends_on": "eval:doc.dharshanarti_tickets == 1",
    "fieldname": "dharshanarti_tickets_tab",
    "fieldtype": "Tab Break",
    "label": "Dharshan/Arti Tickets"
@@ -670,6 +682,7 @@
    "label": "Notes"
   },
   {
+   "depends_on": "eval:doc.passport == 1",
    "fieldname": "passport_tab",
    "fieldtype": "Tab Break",
    "label": "Passport"
@@ -706,6 +719,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:doc.air_tickets == 1",
    "fieldname": "air_tickets_tab",
    "fieldtype": "Tab Break",
    "label": "Air Tickets"
@@ -1060,6 +1074,7 @@
    "label": "Passport Budget"
   },
   {
+   "depends_on": "eval:doc.bus_tickets == 1",
    "fieldname": "bus_tickets_tab",
    "fieldtype": "Tab Break",
    "label": "Bus Tickets"
@@ -1121,6 +1136,7 @@
    "options": "\nEarly Morning (00:00 - 06:00)\nMorning (06:00 - 12:00)\nMid Day (12:00 - 18:00\nNight (18:00 - 24:00)"
   },
   {
+   "depends_on": "eval:doc.train_tickets == 1",
    "fieldname": "train_tickets_tab",
    "fieldtype": "Tab Break",
    "label": "Train Tickets"
@@ -1175,6 +1191,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.cruise == 1",
    "fieldname": "cruise_tab",
    "fieldtype": "Tab Break",
    "label": "Cruise"
@@ -1280,12 +1297,60 @@
    "length": 1000,
    "options": "URL",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "land_package",
+   "fieldtype": "Check",
+   "label": "Land Package"
+  },
+  {
+   "default": "0",
+   "fieldname": "air_tickets",
+   "fieldtype": "Check",
+   "label": "Air Tickets"
+  },
+  {
+   "default": "0",
+   "fieldname": "forex",
+   "fieldtype": "Check",
+   "label": "Forex"
+  },
+  {
+   "default": "0",
+   "fieldname": "dharshanarti_tickets",
+   "fieldtype": "Check",
+   "label": "Dharshan/Arti Tickets"
+  },
+  {
+   "default": "0",
+   "fieldname": "passport",
+   "fieldtype": "Check",
+   "label": "Passport"
+  },
+  {
+   "default": "0",
+   "fieldname": "bus_tickets",
+   "fieldtype": "Check",
+   "label": " Bus Tickets"
+  },
+  {
+   "default": "0",
+   "fieldname": "train_tickets",
+   "fieldtype": "Check",
+   "label": "Train Tickets"
+  },
+  {
+   "default": "0",
+   "fieldname": "cruise",
+   "fieldtype": "Check",
+   "label": " Cruise"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-19 10:03:26.673986",
+ "modified": "2023-08-24 16:45:39.150591",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

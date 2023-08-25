@@ -10,7 +10,7 @@ class CheckList(Document):
 		for i in self.destination_name:
 			destination += frappe.get_value('Destination',i.destination,"destination_abbr") or i.destination
 			destination += "-"
-		check_list_for = "CUS-" if self.check_list_for == "Customer" else destination
+		check_list_for = "CUS-" if self.check_list_for == "Customer" else "PP-" if self.check_list_for == "Passport" else destination
 		gender = "M" if self.gender=="Male" else "F" if self.gender=="Female" else "B"
 		self.name = check_list_for + gender + "-" + str(self.age_limit_from) + "-" + str(self.age_limit_to)
 	def validate(self):
@@ -23,6 +23,8 @@ def validate_if_new(self):
 	for i in all_doc:
 		doc = frappe.get_doc("Check List",i.name)
 		if doc.check_list_for == "Customer" and self.check_list_for == "Customer":
+			validate_overlap(doc,self)
+		if doc.check_list_for == "Passport" and self.check_list_for == "Passport":
 			validate_overlap(doc,self)
 		if doc.check_list_for == "Destination" and self.check_list_for == "Destination":
 			# Multi select of Destination

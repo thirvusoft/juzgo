@@ -656,7 +656,7 @@ var cruise_id_list = [...new Set(cruise_list)]
 					border:1px solid black;
 					background-color:#b3b3b3;
 					color:#ffffff;
-					font-size:14px;
+					font-size:12px;
 				}
 				.thclass a{
 					color:#ffffff;
