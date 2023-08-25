@@ -146,20 +146,23 @@ def get_family_member_attachment(family_members_attachment,custom_list):
 
 @frappe.whitelist()
 def add_destination_details(name,destination):
-    list = []
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
     old_destination_check_list = doc.destination_check_list
+    return add_visa_des(destination,doc,old_destination_check_list,"Destination"), add_visa_des(destination,doc,old_destination_check_list,"Visa")
+
+def add_visa_des(destination,doc,old_destination_check_list,check_list_for):
+    list = []
     if(destination):
         for des in destination:
             for row in doc.family_member_details:
                 destination_list = frappe.get_all("Destination Table",{"Destination":des,"parentfield":"destination_name"},pluck="parent") 
                 table_doc = []
                 for i in destination_list:
-                    table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
-                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
+                    table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':check_list_for,'name':i}) 
+                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':check_list_for,"name":i}) 
                     if table_doc:break
-                if not table_doc:frappe.msgprint("In Destination Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
+                if not table_doc:frappe.msgprint("In "+check_list_for+" Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:
