@@ -146,21 +146,23 @@ def get_family_member_attachment(family_members_attachment,custom_list):
 
 @frappe.whitelist()
 def add_destination_details(name,destination):
-    list = []
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
     old_destination_check_list = doc.destination_check_list
-    print(destination)
+    return add_visa_des(destination,doc,old_destination_check_list,"Destination"), add_visa_des(destination,doc,old_destination_check_list,"Visa")
+
+def add_visa_des(destination,doc,old_destination_check_list,check_list_for):
+    list = []
     if(destination):
         for des in destination:
             for row in doc.family_member_details:
                 destination_list = frappe.get_all("Destination Table",{"Destination":des,"parentfield":"destination_name"},pluck="parent") 
                 table_doc = []
                 for i in destination_list:
-                    table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination",'name':i}) 
-                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Destination","name":i}) 
+                    table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':check_list_for,'name':i}) 
+                    if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':check_list_for,"name":i}) 
                     if table_doc:break
-                if not table_doc:frappe.msgprint("In Destination Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
+                if not table_doc:frappe.msgprint("In "+check_list_for+" Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
                 else:
                     check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
                     for i in check_list_items:
@@ -168,6 +170,27 @@ def add_destination_details(name,destination):
     for i in list:
         for j in old_destination_check_list:
             if ((i['members_name'] == j.members_name) and (str(i['age']) == str(j.age)) and (i['gender'] == j.gender) and (i['check_list_name'] == j.check_list_name) and (i['family_member_details_name'] == j.family_member_details_name) and (i['customer_id'] == j.customer_id) and (i['destination'] == j.destination)):
+                i['check'] = j.check
+    
+    return(list)
+
+@frappe.whitelist()
+def add_passport_details(name):
+    list = []
+    doc = frappe.get_doc("Project",name)
+    old_passport_check_list = doc.passport_check_list
+    for row in doc.family_member_details:
+        table_doc = []
+        table_doc = frappe.get_all("Check List",{'gender':row.get('gender') or "Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Passport"}) 
+        if not table_doc:table_doc = frappe.get_all("Check List",{'gender':"Both",'age_limit_from':['<=', row.get('age')],'age_limit_to':['>=', row.get('age')],'disable':0,'check_list_for':"Passport"}) 
+        if not table_doc:frappe.msgprint("In Passport Check List Not Found for Gender "+row.get('gender')+" and age "+str(row.get('age'))+" for "+row.get('members_name'))
+        else:
+            check_list_items = frappe.get_doc("Check List",table_doc[0].name).check_list_items
+            for i in check_list_items:
+                list.append({'members_name':row.get('members_name'),'age':row.get('age'),'gender':row.get('gender'),'check_list_name':i.check_list_name,'family_member_details_name':row.get('member_row_id'),'check':0,'destination':'','customer_id':row.get('customer_id'),"receive_or_send":i.receive_or_send})
+    for i in list:
+        for j in old_passport_check_list:
+            if ((i['members_name'] == j.members_name) and (str(i['age']) == str(j.age)) and (i['gender'] == j.gender) and (i['check_list_name'] == j.check_list_name) and (i['family_member_details_name'] == j.family_member_details_name) and (i['customer_id'] == j.customer_id)):
                 i['check'] = j.check
     
     return(list)

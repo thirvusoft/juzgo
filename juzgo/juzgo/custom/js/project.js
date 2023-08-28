@@ -3,6 +3,7 @@ var form_destination_details = {}
 var form_destination
 var remainder_group
 var remainder_group_details = {}
+var pass_form,visa_form
 frappe.ui.form.on('Project', {
     refresh:function (frm,cdt,cdn) {   
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-add-row')[0].style.display = 'none'
@@ -10,6 +11,8 @@ frappe.ui.form.on('Project', {
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-all-rows')[0].style.display = 'none'  
         if(!frm.is_new()){
             check_list(frm)
+            passport_list(frm)
+            visa_list(frm)
             frappe.call({
                 method:'juzgo.juzgo.custom.py.project.family_member_details_seprate',
                 args:{
@@ -120,6 +123,11 @@ frappe.ui.form.on('Project', {
     destination: function(frm){
         add_destination_details(frm)
     },
+    update_passport_check_list: function(frm){
+        add_passport_details(frm)
+        visa_list(frm)
+        frm.save()
+    },
     
 })
 
@@ -158,7 +166,7 @@ function add_destination_details(frm,event=''){
             callback(r1){
                 if(r1.message){
                     frm.doc.destination_check_list = []
-                    r1.message.forEach(row => {
+                    r1.message[0].forEach(row => {
                         let child = cur_frm.add_child("destination_check_list")
                         frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
                         frappe.model.set_value(child.doctype, child.name, "age", row.age)
@@ -171,12 +179,317 @@ function add_destination_details(frm,event=''){
                         frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
                     });
                     refresh_field("destination_check_list");
+                    frm.doc.visa_check_list = []
+                    r1.message[1].forEach(row => {
+                        let child = cur_frm.add_child("visa_check_list")
+                        frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
+                        frappe.model.set_value(child.doctype, child.name, "age", row.age)
+                        frappe.model.set_value(child.doctype, child.name, "gender", row.gender)
+                        frappe.model.set_value(child.doctype, child.name, "check_list_name", row.check_list_name)
+                        frappe.model.set_value(child.doctype, child.name, "family_member_details_name", row.family_member_details_name)
+                        frappe.model.set_value(child.doctype, child.name, "check", row.check)
+                        frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
+                        frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+                        frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
+                    });
+                    refresh_field("visa_check_list");
                     // frm.save()
                 }
             }
         })
         check_list(frm)
+        visa_list(frm)
 }
+
+
+function add_passport_details(frm,event=''){
+    frappe.call({
+        method:'juzgo.juzgo.custom.py.project.add_passport_details',
+        args:{
+            name:frm.doc.name,
+        },
+        callback(r1){
+            if(r1.message){
+                frm.doc.passport_check_list = []
+                r1.message.forEach(row => {
+                    let child = cur_frm.add_child("passport_check_list")
+                    frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
+                    frappe.model.set_value(child.doctype, child.name, "age", row.age)
+                    frappe.model.set_value(child.doctype, child.name, "gender", row.gender)
+                    frappe.model.set_value(child.doctype, child.name, "check_list_name", row.check_list_name)
+                    frappe.model.set_value(child.doctype, child.name, "family_member_details_name", row.family_member_details_name)
+                    frappe.model.set_value(child.doctype, child.name, "check", row.check)
+                    frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
+                    frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+                    frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
+                });
+                refresh_field("passport_check_list");
+                // frm.save()
+            }
+        }
+    })
+    passport_list(frm)
+}
+
+frappe.ui.form.on('Customer Passport Check List', {
+    check:function (frm,cdt,cdn) {
+        let row = locals[cdt][cdn]
+        let c = 1
+        if(row.check == 1){
+            if (frm.doc.family_members_passport_attachment.length == 0){
+                c = 0
+            }
+            for(let i=0; i<frm.doc.family_members_passport_attachment.length; i++){
+                if((frm.doc.family_members_passport_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_passport_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_passport_attachment[i].destination == row.destination) ){
+                    c = 1
+                    break
+                }else{
+                    c =0
+                }
+            }
+        } else {
+            for(let i=0; i<frm.doc.family_members_passport_attachment.length; i++){
+                if((frm.doc.family_members_passport_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_passport_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_passport_attachment[i].destination == row.destination)){
+                    frm.doc.family_members_passport_attachment.splice(i, 1);
+                    refresh_field("family_members_passport_attachment");
+                    passport_list(frm)
+                }
+            }
+        }
+        if(c == 0){
+            let child = cur_frm.add_child("family_members_passport_attachment")
+            frappe.model.set_value(child.doctype, child.name, "file_type", row.check_list_name)
+            frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
+            frappe.model.set_value(child.doctype, child.name, "family_members_documents_name", row.family_member_details_name)
+            frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+            frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
+            frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
+            refresh_field("family_members_passport_attachment");
+            passport_list(frm)
+        }
+
+    }
+})
+
+function passport_list(frm){
+    let fields=[
+        {
+            fieldtype: 'Data',
+            fieldname: 'members_name',
+            label: __('Members Name'),
+            read_only:1
+        }, 
+        {
+            fieldtype: 'Data',
+            fieldname: 'file_type',
+            label: __('File Type'),
+            in_list_view: 1,
+            read_only:1,
+            columns:1
+        },
+        {
+            fieldtype: 'Attach',
+            fieldname: 'file',
+            label: __('File'),
+            in_list_view: 1,
+            columns:2,
+            reqd:1
+        },
+        {
+            fieldtype: 'Check',
+            fieldname: 'checkfile',
+            label: __('Attached'),
+            in_list_view: 1,
+            columns:1,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = pass_form.get_field(table).get_value()[index]
+                frm.doc.family_members_passport_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
+                        frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
+                        frm.save().then(()=>{
+                            frm.reload_doc()
+                          })
+                        
+                    }
+                });
+            }
+        },
+        {
+            fieldtype: 'Date',
+            fieldname: 'next_remainder_or_expiry_on',
+            label: __('Next remainder or expiry on'),
+            in_list_view: 1,
+            columns:2,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = pass_form.get_field(table).get_value()[index]
+                frm.doc.family_members_passport_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        frappe.model.set_value(el.doctype, el.name, 'next_remainder_or_expiry_on', htmlrow.next_remainder_or_expiry_on)
+                    }
+                    
+                });
+            }
+        },
+        {
+            fieldtype: 'Small Text',
+            fieldname: 'description',
+            label: __('Description'),
+            in_list_view: 1,
+            columns:2,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = pass_form.get_field(table).get_value()[index]
+                frm.doc.family_members_passport_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        console.log("kkk")
+                        frappe.model.set_value(el.doctype, el.name, 'description', event.target.value)
+                    }
+                });
+            }
+        },
+        {
+            fieldtype: 'Data',
+            fieldname: 'receive_or_send',
+            label: __('Receive Or Send'),
+            in_list_view: 1,
+            read_only:1,
+            columns:2,
+        },
+        {
+            fieldtype: 'Read Only',
+            fieldname: 'parent_name1',
+            label: __('Parent Name'),
+        },
+    ]
+    let user = {}
+    let file_table ={}
+    if(frm.doc.family_member_details){
+        for(let i=0;i<frm.doc.family_member_details.length;i++){
+            user[frm.doc.family_member_details[i].members_name]=[]
+            file_table[frm.doc.family_member_details[i].members_name]=[]
+        }
+    }
+    for(let resend=0;resend<2;resend++){
+        if(frm.doc.passport_check_list)
+            for(let i=0;i<frm.doc.passport_check_list.length;i++){
+                if(resend == 0){
+                    if(frm.doc.passport_check_list[i].receive_or_send=="To Receive"){
+                        if(user[frm.doc.passport_check_list[i].members_name ]){
+                            user[frm.doc.passport_check_list[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.passport_check_list[i].members_name+frm.doc.passport_check_list[i].check_list_name,
+                                    label:(frm.doc.passport_check_list[i].check_list_name)+(frm.doc.passport_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.passport_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.passport_check_list[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.passport_check_list[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                } else {
+                    if(frm.doc.passport_check_list[i].receive_or_send=="To Send"){
+                        if(user[frm.doc.passport_check_list[i].members_name ]){
+                            user[frm.doc.passport_check_list[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.passport_check_list[i].members_name+frm.doc.passport_check_list[i].check_list_name,
+                                    label:(frm.doc.passport_check_list[i].check_list_name)+(frm.doc.passport_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.passport_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.passport_check_list[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.passport_check_list[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+    }
+    if(frm.doc.family_members_passport_attachment)
+        for(let i=0;i<frm.doc.family_members_passport_attachment.length;i++){
+            if(file_table[frm.doc.family_members_passport_attachment[i].members_name]){
+                file_table[frm.doc.family_members_passport_attachment[i].members_name].push(
+                    {
+                        members_name:frm.doc.family_members_passport_attachment[i].members_name,
+                        file_type:frm.doc.family_members_passport_attachment[i].file_type,
+                        file:frm.doc.family_members_passport_attachment[i].file,
+                        next_remainder_or_expiry_on:frm.doc.family_members_passport_attachment[i].next_remainder_or_expiry_on,
+                        description:frm.doc.family_members_passport_attachment[i].description,
+                        parent_name1:frm.doc.family_members_passport_attachment[i].name,
+                        checkfile:frm.doc.family_members_passport_attachment[i].file?1:0,
+                        receive_or_send:frm.doc.family_members_passport_attachment[i].receive_or_send,
+                    }
+                )
+            }
+        }
+    let p=[]
+    let keys=Object.keys(user);
+    let checkboxFields = {}
+    for(let i=0;i<keys.length;i++){
+        checkboxFields[keys[i]] = []
+        p.push({
+            fieldtype: 'Section Break',
+            fieldname:keys[i],
+            label:keys[i],
+            collapsible:1
+        })
+        let check_len = user[keys[i]].length/4
+        for(let j=0;j<user[keys[i]].length;j++){
+            checkboxFields[keys[i]].push(user[keys[i]][j])
+            if(((j+1) % Math.ceil(check_len)) == 0){
+                if(j+1 != user[keys[i]].length)
+                    checkboxFields[keys[i]].push({
+                        fieldtype: 'Column Break',
+                        fieldname:'cb_'+keys[i]+j,
+                    })
+            }
+        }
+        p.push({
+            fieldtype: 'HTML',
+            fieldname:`${keys[i]}_checkbox_html`,
+            label:keys[i],
+        })
+    
+        if(file_table[keys[i]].length != 0){
+            p.push({
+                fieldname: 'table'+keys[i],
+                fieldtype: 'Table',
+                label: keys[i]+" Attachment Table",
+                cannot_add_rows: true,
+                in_editable_grid: true,
+                cannot_delete_rows:true,
+                fields: fields,
+                data: file_table[keys[i]]
+            })
+        }
+        
+    }
+    let attr_html = frm.$wrapper.find('div[data-fieldname="passport_html"]')[0]
+    attr_html.innerHTML=''
+    pass_form = new frappe.ui.FieldGroup({
+        fields: p,
+        body: attr_html
+    });
+    pass_form.make()
+
+    for(let i=0;i<keys.length;i++){
+        new frappe.ui.FieldGroup({
+            fields: checkboxFields[keys[i]],
+            body: pass_form.get_field(`${keys[i]}_checkbox_html`).wrapper
+        }).make();
+    }
+}
+
 
 frappe.ui.form.on('Customer Destination Check List', {
     check:function (frm,cdt,cdn) {
@@ -217,6 +530,265 @@ frappe.ui.form.on('Customer Destination Check List', {
 
     }
 })
+
+frappe.ui.form.on('Customer Visa Check List', {
+    check:function (frm,cdt,cdn) {
+        let row = locals[cdt][cdn]
+        let c = 1
+        if(row.check == 1){
+            if (frm.doc.family_members_visa_attachment.length == 0){
+                c = 0
+            }
+            for(let i=0; i<frm.doc.family_members_visa_attachment.length; i++){
+                if((frm.doc.family_members_visa_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_visa_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_visa_attachment[i].destination == row.destination) ){
+                    c = 1
+                    break
+                }else{
+                    c =0
+                }
+            }
+        } else {
+            for(let i=0; i<frm.doc.family_members_visa_attachment.length; i++){
+                if((frm.doc.family_members_visa_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_visa_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_visa_attachment[i].destination == row.destination)){
+                    frm.doc.family_members_visa_attachment.splice(i, 1);
+                    refresh_field("family_members_visa_attachment");
+                    passport_list(frm)
+                }
+            }
+        }
+        if(c == 0){
+            let child = cur_frm.add_child("family_members_visa_attachment")
+            frappe.model.set_value(child.doctype, child.name, "file_type", row.check_list_name)
+            frappe.model.set_value(child.doctype, child.name, "members_name", row.members_name)
+            frappe.model.set_value(child.doctype, child.name, "family_members_documents_name", row.family_member_details_name)
+            frappe.model.set_value(child.doctype, child.name, "customer_id", row.customer_id)
+            frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
+            frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
+            refresh_field("family_members_visa_attachment");
+            passport_list(frm)
+        }
+
+    }
+})
+
+function visa_list(frm){
+    let fields=[
+        {
+            fieldtype: 'Data',
+            fieldname: 'members_name',
+            label: __('Members Name'),
+            read_only:1
+        }, 
+        {
+            fieldtype: 'Data',
+            fieldname: 'file_type',
+            label: __('File Type'),
+            in_list_view: 1,
+            read_only:1,
+            columns:1
+        },
+        {
+            fieldtype: 'Attach',
+            fieldname: 'file',
+            label: __('File'),
+            in_list_view: 1,
+            columns:2,
+            reqd:1
+        },
+        {
+            fieldtype: 'Check',
+            fieldname: 'checkfile',
+            label: __('Attached'),
+            in_list_view: 1,
+            columns:1,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = visa_form.get_field(table).get_value()[index]
+                frm.doc.family_members_visa_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        frappe.model.set_value(el.doctype, el.name, 'attached_by', frappe.session.user)
+                        frappe.model.set_value(el.doctype, el.name, 'file', htmlrow.file)
+                        frm.save().then(()=>{
+                            frm.reload_doc()
+                          })
+                        
+                    }
+                });
+            }
+        },
+        {
+            fieldtype: 'Date',
+            fieldname: 'next_remainder_or_expiry_on',
+            label: __('Next remainder or expiry on'),
+            in_list_view: 1,
+            columns:2,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = visa_form.get_field(table).get_value()[index]
+                frm.doc.family_members_visa_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        frappe.model.set_value(el.doctype, el.name, 'next_remainder_or_expiry_on', htmlrow.next_remainder_or_expiry_on)
+                    }
+                    
+                });
+            }
+        },
+        {
+            fieldtype: 'Small Text',
+            fieldname: 'description',
+            label: __('Description'),
+            in_list_view: 1,
+            columns:2,
+            onchange: function(event) {
+                let table = event.target.closest('[data-fieldtype="Table"]').getAttribute('data-fieldname');
+                let index = parseInt(event.target.closest('.grid-row').getAttribute('data-idx'))-1
+                let htmlrow = visa_form.get_field(table).get_value()[index]
+                frm.doc.family_members_visa_attachment.forEach((el) => {
+                    if(htmlrow.parent_name1 == el.name){
+                        console.log("kkk")
+                        frappe.model.set_value(el.doctype, el.name, 'description', event.target.value)
+                    }
+                });
+            }
+        },
+        {
+            fieldtype: 'Data',
+            fieldname: 'receive_or_send',
+            label: __('Receive Or Send'),
+            in_list_view: 1,
+            read_only:1,
+            columns:2,
+        },
+        {
+            fieldtype: 'Read Only',
+            fieldname: 'parent_name1',
+            label: __('Parent Name'),
+        },
+    ]
+    let user = {}
+    let file_table ={}
+    if(frm.doc.family_member_details){
+        for(let i=0;i<frm.doc.family_member_details.length;i++){
+            user[frm.doc.family_member_details[i].members_name]=[]
+            file_table[frm.doc.family_member_details[i].members_name]=[]
+        }
+    }
+    for(let resend=0;resend<2;resend++){
+        if(frm.doc.visa_check_list)
+            for(let i=0;i<frm.doc.visa_check_list.length;i++){
+                if(resend == 0){
+                    if(frm.doc.visa_check_list[i].receive_or_send=="To Receive"){
+                        if(user[frm.doc.visa_check_list[i].members_name ]){
+                            user[frm.doc.visa_check_list[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.visa_check_list[i].members_name+frm.doc.visa_check_list[i].check_list_name,
+                                    label:(frm.doc.visa_check_list[i].check_list_name)+(frm.doc.visa_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.visa_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.visa_check_list[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.visa_check_list[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                } else {
+                    if(frm.doc.visa_check_list[i].receive_or_send=="To Send"){
+                        if(user[frm.doc.visa_check_list[i].members_name ]){
+                            user[frm.doc.visa_check_list[i].members_name ].push(
+                                {
+                                    fieldtype: 'Check',
+                                    fieldname:frm.doc.visa_check_list[i].members_name+frm.doc.visa_check_list[i].check_list_name,
+                                    label:(frm.doc.visa_check_list[i].check_list_name)+(frm.doc.visa_check_list[i].receive_or_send=="To Send"?"(s)":frm.doc.visa_check_list[i].receive_or_send=="To Receive"?"(R)":""),
+                                    default:frm.doc.visa_check_list[i].check,
+                                    onchange: function(event) {
+                                        let row = frm.doc.visa_check_list[i]
+                                        frappe.model.set_value(row.doctype, row.name, 'check', event.target.checked)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+    }
+    if(frm.doc.family_members_visa_attachment)
+        for(let i=0;i<frm.doc.family_members_visa_attachment.length;i++){
+            if(file_table[frm.doc.family_members_visa_attachment[i].members_name]){
+                file_table[frm.doc.family_members_visa_attachment[i].members_name].push(
+                    {
+                        members_name:frm.doc.family_members_visa_attachment[i].members_name,
+                        file_type:frm.doc.family_members_visa_attachment[i].file_type,
+                        file:frm.doc.family_members_visa_attachment[i].file,
+                        next_remainder_or_expiry_on:frm.doc.family_members_visa_attachment[i].next_remainder_or_expiry_on,
+                        description:frm.doc.family_members_visa_attachment[i].description,
+                        parent_name1:frm.doc.family_members_visa_attachment[i].name,
+                        checkfile:frm.doc.family_members_visa_attachment[i].file?1:0,
+                        receive_or_send:frm.doc.family_members_visa_attachment[i].receive_or_send,
+                    }
+                )
+            }
+        }
+    let p=[]
+    let keys=Object.keys(user);
+    let checkboxFields = {}
+    for(let i=0;i<keys.length;i++){
+        checkboxFields[keys[i]] = []
+        p.push({
+            fieldtype: 'Section Break',
+            fieldname:keys[i],
+            label:keys[i],
+            collapsible:1
+        })
+        let check_len = user[keys[i]].length/4
+        for(let j=0;j<user[keys[i]].length;j++){
+            checkboxFields[keys[i]].push(user[keys[i]][j])
+            if(((j+1) % Math.ceil(check_len)) == 0){
+                if(j+1 != user[keys[i]].length)
+                    checkboxFields[keys[i]].push({
+                        fieldtype: 'Column Break',
+                        fieldname:'cb_'+keys[i]+j,
+                    })
+            }
+        }
+        p.push({
+            fieldtype: 'HTML',
+            fieldname:`${keys[i]}_checkbox_html`,
+            label:keys[i],
+        })
+    
+        if(file_table[keys[i]].length != 0){
+            p.push({
+                fieldname: 'table'+keys[i],
+                fieldtype: 'Table',
+                label: keys[i]+" Attachment Table",
+                cannot_add_rows: true,
+                in_editable_grid: true,
+                cannot_delete_rows:true,
+                fields: fields,
+                data: file_table[keys[i]]
+            })
+        }
+        
+    }
+    let attr_html = frm.$wrapper.find('div[data-fieldname="visa_html"]')[0]
+    attr_html.innerHTML=''
+    visa_form = new frappe.ui.FieldGroup({
+        fields: p,
+        body: attr_html
+    });
+    visa_form.make()
+
+    for(let i=0;i<keys.length;i++){
+        new frappe.ui.FieldGroup({
+            fields: checkboxFields[keys[i]],
+            body: visa_form.get_field(`${keys[i]}_checkbox_html`).wrapper
+        }).make();
+    }
+}
 
 function multi_customer(frm,event=''){
     if(frm.is_new()){
@@ -307,6 +879,7 @@ function multi_customer(frm,event=''){
             }
         })
         add_destination_details(frm,event)
+        add_passport_details(frm)
 }
 
 function check_list(frm){
