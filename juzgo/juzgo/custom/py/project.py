@@ -149,7 +149,7 @@ def add_destination_details(name,destination):
     destination = json.loads(destination)
     doc = frappe.get_doc("Project",name)
     old_destination_check_list = doc.destination_check_list
-    return add_visa_des(destination,doc,old_destination_check_list,"Destination"), add_visa_des(destination,doc,old_destination_check_list,"Visa")
+    return add_visa_des(destination,doc,doc.destination_check_list,"Destination"), add_visa_des(destination,doc,doc.visa_check_list,"Visa")
 
 def add_visa_des(destination,doc,old_destination_check_list,check_list_for):
     list = []
