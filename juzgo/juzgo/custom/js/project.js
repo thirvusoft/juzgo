@@ -52,6 +52,8 @@ frappe.ui.form.on('Project', {
    
     update_data:function (frm) {
         multi_customer(frm)
+        add_passport_details(frm)
+        visa_list(frm)
         frm.save()
     },
     onload:function (frm) {
@@ -347,7 +349,6 @@ function passport_list(frm){
                 let htmlrow = pass_form.get_field(table).get_value()[index]
                 frm.doc.family_members_passport_attachment.forEach((el) => {
                     if(htmlrow.parent_name1 == el.name){
-                        console.log("kkk")
                         frappe.model.set_value(el.doctype, el.name, 'description', event.target.value)
                     }
                 });
@@ -552,7 +553,7 @@ frappe.ui.form.on('Customer Visa Check List', {
                 if((frm.doc.family_members_visa_attachment[i].family_members_documents_name == row.family_member_details_name)&&(frm.doc.family_members_visa_attachment[i].file_type == row.check_list_name) &&(frm.doc.family_members_visa_attachment[i].destination == row.destination)){
                     frm.doc.family_members_visa_attachment.splice(i, 1);
                     refresh_field("family_members_visa_attachment");
-                    passport_list(frm)
+                    visa_list(frm)
                 }
             }
         }
@@ -565,7 +566,7 @@ frappe.ui.form.on('Customer Visa Check List', {
             frappe.model.set_value(child.doctype, child.name, "destination", row.destination)
             frappe.model.set_value(child.doctype, child.name, "receive_or_send", row.receive_or_send)
             refresh_field("family_members_visa_attachment");
-            passport_list(frm)
+            visa_list(frm)
         }
 
     }
@@ -647,7 +648,6 @@ function visa_list(frm){
                 let htmlrow = visa_form.get_field(table).get_value()[index]
                 frm.doc.family_members_visa_attachment.forEach((el) => {
                     if(htmlrow.parent_name1 == el.name){
-                        console.log("kkk")
                         frappe.model.set_value(el.doctype, el.name, 'description', event.target.value)
                     }
                 });

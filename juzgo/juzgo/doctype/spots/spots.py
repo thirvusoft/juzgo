@@ -6,7 +6,18 @@ import frappe
 from frappe.model.document import Document
 
 class Spots(Document):
-	pass
+	def validate(doc):
+		if doc.jtt_id:
+			jtt_doc = frappe.get_doc("JTT",doc.jtt_id)
+			if doc.disable_jtt:
+				if jtt_doc.disable == 0:
+					jtt_doc.disable = 1
+					jtt_doc.save()
+			else:
+				if jtt_doc.disable == 1:
+					jtt_doc.disable = 0
+					jtt_doc.save()
+
 @frappe.whitelist()
 def img_preview(table=None,image=None,des=None,menu=None):
 	if table:
