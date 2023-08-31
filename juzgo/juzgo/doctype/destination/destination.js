@@ -29,4 +29,9 @@ frappe.ui.form.on('Destination', {
                 "");
         }
     },
+    refresh:function(frm){
+        frm.set_query("default_spots", function () {
+			return { filters:{destination: frm.doc.name }};
+		});
+    }
 });

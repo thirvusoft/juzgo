@@ -123,6 +123,7 @@
   "column_break_fuz7h",
   "from_date",
   "to_date",
+  "onward_departure_preferences",
   "column_break_eu2sr",
   "preferred_departure_time_onward",
   "preferred_landing_time_onward",
@@ -135,6 +136,7 @@
   "column_break_5ehnh",
   "return_start_date",
   "return_end_date",
+  "return_departure_preferences",
   "column_break_xnadp",
   "preferred_departure_time",
   "preferred_landing_time",
@@ -1351,12 +1353,24 @@
    "fieldname": "cruise",
    "fieldtype": "Check",
    "label": " Cruise"
+  },
+  {
+   "fieldname": "onward_departure_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Departure Preferences",
+   "options": "City Multiselect"
+  },
+  {
+   "fieldname": "return_departure_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Departure Preferences",
+   "options": "City Multiselect"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-30 11:12:30.895994",
+ "modified": "2023-08-31 08:23:28.888781",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
