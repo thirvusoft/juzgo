@@ -12,12 +12,21 @@
   "vehicle_name",
   "vehicle_model",
   "vehicle_make",
-  "destination",
+  "vehicle_type",
+  "company_name",
   "column_break_5",
   "mode_of_transport",
   "bus_suspension",
   "passenger_capacity",
   "luggage_capacity",
+  "destination",
+  "state",
+  "column_break_ywrkx",
+  "ac_nonac",
+  "day_rent",
+  "kms_tariff",
+  "bata",
+  "toll_and_parking",
   "section_break_10",
   "tariff__details",
   "notes"
@@ -109,12 +118,58 @@
    "label": "Status",
    "options": "Not reviewed\nApproved\nRejected\nRework",
    "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "fieldname": "column_break_ywrkx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Data",
+   "label": "Vehicle Type"
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+  },
+  {
+   "fieldname": "ac_nonac",
+   "fieldtype": "Select",
+   "label": "AC NonAC",
+   "options": "AC\nNon AC"
+  },
+  {
+   "fieldname": "day_rent",
+   "fieldtype": "Currency",
+   "label": "Day rent"
+  },
+  {
+   "fieldname": "kms_tariff",
+   "fieldtype": "Float",
+   "label": "Kms Tariff"
+  },
+  {
+   "fieldname": "bata",
+   "fieldtype": "Currency",
+   "label": "Bata"
+  },
+  {
+   "fieldname": "toll_and_parking",
+   "fieldtype": "Currency",
+   "label": "Toll and Parking"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-07-16 11:44:05.535868",
+ "modified": "2023-09-04 15:47:05.679503",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Vehicle Detail",

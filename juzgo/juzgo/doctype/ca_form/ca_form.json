@@ -386,13 +386,15 @@
    "fieldname": "travel_from",
    "fieldtype": "Link",
    "label": "Travel From City",
-   "options": "Destination"
+   "options": "Destination",
+   "reqd": 1
   },
   {
    "fieldname": "travel_to",
    "fieldtype": "Link",
    "label": "Travel To City",
-   "options": "Destination"
+   "options": "Destination",
+   "reqd": 1
   },
   {
    "fieldname": "travel_dates",
@@ -433,7 +435,8 @@
    "fieldname": "interested_flavour",
    "fieldtype": "Table MultiSelect",
    "label": "Interested Flavour",
-   "options": "Flavour CA"
+   "options": "Flavour CA",
+   "reqd": 1
   },
   {
    "fieldname": "preferred_schedule",
@@ -450,12 +453,14 @@
    "fieldname": "hotel_category",
    "fieldtype": "Table MultiSelect",
    "label": "Hotel Category",
-   "options": "Hotel Category table"
+   "options": "Hotel Category table",
+   "reqd": 1
   },
   {
    "fieldname": "expected_budget_range_per_person",
    "fieldtype": "Data",
-   "label": "Expected Budget Range per Person"
+   "label": "Expected Budget Range per Person",
+   "reqd": 1
   },
   {
    "fieldname": "family_details_table",
@@ -1044,7 +1049,8 @@
   {
    "fieldname": "no_of_familys",
    "fieldtype": "Int",
-   "label": "No. of Family"
+   "label": "No. of Family",
+   "reqd": 1
   },
   {
    "fieldname": "no_of_childrens",
@@ -1064,7 +1070,8 @@
   {
    "fieldname": "no_of_paxs",
    "fieldtype": "Int",
-   "label": "No of PAX"
+   "label": "No of PAX",
+   "reqd": 1
   },
   {
    "fieldname": "room_preferences_remaining",
@@ -1268,7 +1275,8 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Assigned To",
-   "options": "User"
+   "options": "User",
+   "reqd": 1
   },
   {
    "fieldname": "party_name",
@@ -1370,7 +1378,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-31 08:23:28.888781",
+ "modified": "2023-09-04 16:07:15.791470",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

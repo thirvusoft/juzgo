@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-04 15:00:47.157273",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "guidance",
+  "website_url",
+  "open_url",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "guidance",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Guidance"
+  },
+  {
+   "fieldname": "website_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Website URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "open_url",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Open"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-04 15:27:25.484161",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Immigration Docs",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

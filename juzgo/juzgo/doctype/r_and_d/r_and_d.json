@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:destination_name",
+ "creation": "2023-09-02 18:35:21.341754",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_break_18",
+  "section_break_pqgoo",
+  "status",
+  "destination_name",
+  "destination_abbr",
+  "country",
+  "currency",
+  "air_package_budget",
+  "default_spots",
+  "column_break_4",
+  "suitable_age_group",
+  "flavour",
+  "visa_type",
+  "budget_range_from",
+  "budget_range_to",
+  "seasonal_preferences_section",
+  "seasonal",
+  "itinerary_section",
+  "juzgo_itinerary",
+  "juzgo_other_itinerary",
+  "tentative_itinerary",
+  "section_break_10",
+  "terms_conditions",
+  "terms",
+  "notes",
+  "column_break_12",
+  "cancellation_policy",
+  "policy"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_break_18",
+   "fieldtype": "Tab Break",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "section_break_pqgoo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Not Reviewed",
+   "description": "Juzgo Admins will Update this Status",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Not Reviewed\nApproved\nRejected\nRework",
+   "read_only_depends_on": "eval:!in_list(frappe.user_roles ,\"Juzgo Admin\")"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "destination_name",
+   "fieldtype": "Data",
+   "label": "Destination Name",
+   "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "destination_abbr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination Abbr",
+   "reqd": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "air_package_budget",
+   "fieldtype": "Data",
+   "label": "Air Package Budget"
+  },
+  {
+   "fieldname": "default_spots",
+   "fieldtype": "Table MultiSelect",
+   "label": "Default spots",
+   "options": "Default spots in Destination"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "suitable_age_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Suitable Age group ",
+   "options": "Age Group"
+  },
+  {
+   "fieldname": "flavour",
+   "fieldtype": "Table MultiSelect",
+   "label": "Flavour",
+   "options": "Flavour"
+  },
+  {
+   "fieldname": "visa_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Visa Type",
+   "options": "Visa Type"
+  },
+  {
+   "fieldname": "budget_range_from",
+   "fieldtype": "Data",
+   "label": "Budget Range From (Land Package)"
+  },
+  {
+   "fieldname": "budget_range_to",
+   "fieldtype": "Data",
+   "label": "Budget Range To (Land Package)"
+  },
+  {
+   "fieldname": "seasonal_preferences_section",
+   "fieldtype": "Section Break",
+   "label": "Seasonal Preferences "
+  },
+  {
+   "fieldname": "seasonal",
+   "fieldtype": "Table",
+   "label": "Seasonal",
+   "options": "Seasonal Preferences"
+  },
+  {
+   "fieldname": "itinerary_section",
+   "fieldtype": "Section Break",
+   "label": "Itinerary"
+  },
+  {
+   "fieldname": "juzgo_itinerary",
+   "fieldtype": "Table",
+   "label": "Juzgo Itinerary",
+   "options": "Juzgo Itinerary"
+  },
+  {
+   "fieldname": "juzgo_other_itinerary",
+   "fieldtype": "Table",
+   "label": "Juzgo Other Itinerary",
+   "options": "Juzgo Other Itinerary"
+  },
+  {
+   "fieldname": "tentative_itinerary",
+   "fieldtype": "Table",
+   "label": "Tentative itinerary",
+   "options": "Tentative itinerary"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "terms_conditions",
+   "fieldtype": "Link",
+   "label": "Terms Conditions",
+   "options": "Terms Conditions"
+  },
+  {
+   "fetch_from": "terms_conditions.terms_and_conditions",
+   "fieldname": "terms",
+   "fieldtype": "Text Editor",
+   "label": "Terms",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancellation_policy",
+   "fieldtype": "Link",
+   "label": "Cancellation policy",
+   "options": "Cancellation policy"
+  },
+  {
+   "fetch_from": "cancellation_policy.cancellation_policy",
+   "fieldname": "policy",
+   "fieldtype": "Text Editor",
+   "label": "Policy",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2023-09-02 18:50:50.909110",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "R and D",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}

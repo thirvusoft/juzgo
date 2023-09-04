@@ -9,6 +9,13 @@
  "engine": "InnoDB",
  "field_order": [
   "tab_break_18",
+  "jtt_connection_section",
+  "spot",
+  "column_break_1hpzv",
+  "hotel_details",
+  "column_break_5rgsq",
+  "restaurant",
+  "section_break_pqgoo",
   "status",
   "destination_name",
   "destination_abbr",
@@ -16,10 +23,15 @@
   "currency",
   "air_package_budget",
   "default_spots",
+  "usp",
   "column_break_4",
   "suitable_age_group",
   "flavour",
   "visa_type",
+  "visa_type_mul",
+  "no_of_days",
+  "cost_price",
+  "selling_price",
   "budget_range_from",
   "budget_range_to",
   "seasonal_preferences_section",
@@ -28,6 +40,12 @@
   "juzgo_itinerary",
   "juzgo_other_itinerary",
   "tentative_itinerary",
+  "dress_code_section",
+  "dress_code",
+  "img_preview",
+  "sim_card",
+  "immigration_docs",
+  "budget_table",
   "section_break_10",
   "terms_conditions",
   "terms",
@@ -88,7 +106,7 @@
   },
   {
    "fieldname": "visa_type",
-   "fieldtype": "Link",
+   "fieldtype": "Read Only",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Visa Type",
@@ -169,7 +187,7 @@
   {
    "fieldname": "juzgo_other_itinerary",
    "fieldtype": "Table",
-   "label": "Juzgo Other Itinerary",
+   "label": "Other Company Itineraries",
    "options": "Juzgo Other Itinerary"
   },
   {
@@ -198,12 +216,104 @@
    "fieldtype": "Table MultiSelect",
    "label": "Default spots",
    "options": "Default spots in Destination"
+  },
+  {
+   "fieldname": "spot",
+   "fieldtype": "Button",
+   "label": "Spots"
+  },
+  {
+   "fieldname": "column_break_1hpzv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_5rgsq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "restaurant",
+   "fieldtype": "Button",
+   "label": "Restaurant"
+  },
+  {
+   "fieldname": "section_break_pqgoo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hotel_details",
+   "fieldtype": "Button",
+   "label": "Hotel Details"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "jtt_connection_section",
+   "fieldtype": "Section Break",
+   "label": "JTT Connections"
+  },
+  {
+   "fieldname": "visa_type_mul",
+   "fieldtype": "Table MultiSelect",
+   "label": "Visa Type",
+   "options": "Destination in Visa"
+  },
+  {
+   "fieldname": "no_of_days",
+   "fieldtype": "Data",
+   "label": "No. of Days"
+  },
+  {
+   "fieldname": "cost_price",
+   "fieldtype": "Data",
+   "label": "Cost Price"
+  },
+  {
+   "fieldname": "selling_price",
+   "fieldtype": "Data",
+   "label": "Selling Price"
+  },
+  {
+   "fieldname": "usp",
+   "fieldtype": "Data",
+   "label": "USP"
+  },
+  {
+   "fieldname": "dress_code_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "dress_code",
+   "fieldtype": "Table",
+   "label": "Dress Code",
+   "options": "Destination Dress Code"
+  },
+  {
+   "fieldname": "img_preview",
+   "fieldtype": "HTML",
+   "label": "Img Preview"
+  },
+  {
+   "fieldname": "sim_card",
+   "fieldtype": "Table",
+   "label": "SIM Card",
+   "options": "SIM Card"
+  },
+  {
+   "fieldname": "immigration_docs",
+   "fieldtype": "Table",
+   "label": "Immigration Docs",
+   "options": "Immigration Docs"
+  },
+  {
+   "fieldname": "budget_table",
+   "fieldtype": "Table",
+   "label": "Budget table",
+   "options": "Budget Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-30 18:04:23.536582",
+ "modified": "2023-09-04 17:06:48.362511",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Destination",

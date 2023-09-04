@@ -29,9 +29,56 @@ frappe.ui.form.on('Destination', {
                 "");
         }
     },
+    spot:function(frm){
+        window.open('/app/spots?is_jtt=1&destination='+frm.doc.name, '_blank')
+    },
+    hotel_details:function(frm){
+        window.open('/app/hotel-details?is_jtt=1&destination='+frm.doc.name, '_blank')
+    },
+    restaurant:function(frm){
+        window.open('/app/restaurant?is_jtt=1&destination='+frm.doc.name, '_blank')
+    },
     refresh:function(frm){
+        frappe.call({
+            method: "juzgo.juzgo.doctype.spots.spots.img_preview",
+            args: {
+                "table": frm.doc.dress_code,
+                "image":"image",
+                "des":"description",
+            },
+            callback: function (r) {
+               frm.set_df_property("img_preview","options",r.message)
+            },
+        })
+
         frm.set_query("default_spots", function () {
 			return { filters:{destination: frm.doc.name }};
 		});
+        frappe.call({
+            method: "juzgo.juzgo.doctype.destination.destination.connection",
+            args: {
+                "name": frm.doc.name,
+            },
+            callback: function (r) {
+                console.log(r.message)
+                if (r.message) {
+                    frm.set_df_property("spot","label",r.message[0] > 0 ?`<span style="font-size: var(--text-xs);background-color: var(--gray-500);border-radius: var(--border-radius-sm);color: var(--gray-50);padding: 0 var(--padding-xs);margin-right: var(--margin-xs);">${r.message[0]}</span>`+" Spots":"Spots");
+                    frm.set_df_property("hotel_details","label",r.message[1] > 0 ?`<span style="font-size: var(--text-xs);background-color: var(--gray-500);border-radius: var(--border-radius-sm);color: var(--gray-50);padding: 0 var(--padding-xs);margin-right: var(--margin-xs);">${r.message[1]}</span>`+" Hotel Details":"Hotel Details");
+                    frm.set_df_property("restaurant","label",r.message[2] > 0 ?`<span style="font-size: var(--text-xs);background-color: var(--gray-500);border-radius: var(--border-radius-sm);color: var(--gray-50);padding: 0 var(--padding-xs);margin-right: var(--margin-xs);">${r.message[2]}</span>`+" Restaurant":"Restaurant");
+                }
+            },
+        })
     }
+    
 });
+frappe.ui.form.on('Immigration Docs', {
+	open_url: function(frm,cdt,cdn){
+        let row = locals[cdt][cdn]
+        if(!row.website_url){
+            frappe.throw('Enter URL in Row '+row.idx+' .')
+        }
+        else{
+        window.open(row.website_url, '_blank')
+        }
+    },
+})
