@@ -24,6 +24,8 @@
   "visa_type",
   "budget_range_from",
   "budget_range_to",
+  "reference_url_section",
+  "reference_table",
   "seasonal_preferences_section",
   "seasonal",
   "itinerary_section",
@@ -135,12 +137,12 @@
   {
    "fieldname": "seasonal_preferences_section",
    "fieldtype": "Section Break",
-   "label": "Seasonal Preferences "
+   "label": "Seasonal"
   },
   {
    "fieldname": "seasonal",
    "fieldtype": "Table",
-   "label": "Seasonal",
+   "label": "Seasonal Preferences ",
    "options": "Seasonal Preferences"
   },
   {
@@ -157,7 +159,7 @@
   {
    "fieldname": "juzgo_other_itinerary",
    "fieldtype": "Table",
-   "label": "Juzgo Other Itinerary",
+   "label": " Other Company Itineraries ",
    "options": "Juzgo Other Itinerary"
   },
   {
@@ -204,12 +206,23 @@
    "fieldtype": "Text Editor",
    "label": "Policy",
    "read_only": 1
+  },
+  {
+   "fieldname": "reference_table",
+   "fieldtype": "Table",
+   "label": "Reference URL",
+   "options": "Reference Table"
+  },
+  {
+   "fieldname": "reference_url_section",
+   "fieldtype": "Section Break",
+   "label": "References"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-09-02 18:50:50.909110",
+ "modified": "2023-09-08 15:02:09.923240",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "R and D",
