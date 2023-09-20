@@ -8,4 +8,4 @@ class Destination(Document):
 	pass
 @frappe.whitelist()
 def connection(name):
-	return len(frappe.get_all("Spots",{"destination":name})),len(frappe.get_all("Hotel Details",{"destination":name})),len(frappe.get_all("Restaurant",{"destination":name}))
+	return len(frappe.get_all("Spots",{"destination":name,"is_jtt":1})),len(frappe.get_all("Hotel Details",{"destination":name,"is_jtt":1})),len(frappe.get_all("Restaurant",{"destination":name,"is_jtt":1}))

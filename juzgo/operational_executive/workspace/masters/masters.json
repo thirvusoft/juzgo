@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}},{\"id\":\"vYhCVMTGdo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Spots\",\"col\":3}},{\"id\":\"MTVFBely2t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Detail\",\"col\":3}},{\"id\":\"8VvRVpcFRQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Operator\",\"col\":3}},{\"id\":\"xoakTM4SpS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cruise\",\"col\":3}},{\"id\":\"4eV3COIzEe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Air Tickets\",\"col\":3}},{\"id\":\"TGdIQfjaa4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bus\",\"col\":3}}]",
+ "content": "[{\"id\":\"wOO-RkITDo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Masters</span>\",\"col\":12}},{\"id\":\"5T1NeP6EeG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hotel Details\",\"col\":3}},{\"id\":\"DfrWrPkjPi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant\",\"col\":3}},{\"id\":\"27IoqIXZtF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Destination\",\"col\":3}},{\"id\":\"vYhCVMTGdo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Spots\",\"col\":3}},{\"id\":\"MTVFBely2t\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Detail\",\"col\":3}},{\"id\":\"8VvRVpcFRQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Operator\",\"col\":3}},{\"id\":\"xoakTM4SpS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cruise\",\"col\":3}},{\"id\":\"4eV3COIzEe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Air Tickets\",\"col\":3}},{\"id\":\"TGdIQfjaa4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bus\",\"col\":3}},{\"id\":\"oXJUrz_u1S\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"R And D\",\"col\":3}}]",
  "creation": "2023-06-28 14:12:25.335044",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,8 +12,8 @@
  "is_hidden": 0,
  "label": "Masters",
  "links": [],
- "modified": "2023-08-01 18:07:13.998450",
- "modified_by": "prithivraj@thirvusoft.in",
+ "modified": "2023-09-02 18:44:50.722825",
+ "modified_by": "sibi.kumar@thirvusoft.in",
  "module": "Operational Executive",
  "name": "Masters",
  "number_cards": [],
@@ -63,6 +63,13 @@
    "doc_view": "List",
    "label": "Restaurant",
    "link_to": "Restaurant",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "R And D",
+   "link_to": "R and D",
    "type": "DocType"
   },
   {

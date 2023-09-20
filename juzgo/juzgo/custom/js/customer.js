@@ -69,7 +69,7 @@ frappe.ui.form.on('Customer', {
                             "customer_name",
                             "description",
                             ('This Customer Name already exists: {0}', [r.message.map(function (d) {
-                                return repl('<a href="/app/customer/%(name)s">%(or_name)s %(mobile_no)s</a>', { name: d['name'], or_name: d['customer_name'], mobile_no:d['mobile_no'] })
+                                return repl('<a href="/app/customer/%(name)s">%(or_name)s %(mobile_no)s</a>', { name: d['name'], or_name: d['customer_name'], mobile_no:d['mobile_no'] ||"" })
                             }).join(', ')]));
                     }
                 },

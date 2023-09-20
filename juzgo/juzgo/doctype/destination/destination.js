@@ -40,6 +40,21 @@ frappe.ui.form.on('Destination', {
     },
     refresh:function(frm){
         frappe.call({
+            method: "juzgo.juzgo.doctype.spots.spots.img_preview",
+            args: {
+                "table": frm.doc.dress_code,
+                "image":"image",
+                "des":"description",
+            },
+            callback: function (r) {
+               frm.set_df_property("img_preview","options",r.message)
+            },
+        })
+
+        frm.set_query("default_spots", function () {
+			return { filters:{destination: frm.doc.name }};
+		});
+        frappe.call({
             method: "juzgo.juzgo.doctype.destination.destination.connection",
             args: {
                 "name": frm.doc.name,
@@ -56,3 +71,14 @@ frappe.ui.form.on('Destination', {
     }
     
 });
+frappe.ui.form.on('Immigration Docs', {
+	open_url: function(frm,cdt,cdn){
+        let row = locals[cdt][cdn]
+        if(!row.website_url){
+            frappe.throw('Enter URL in Row '+row.idx+' .')
+        }
+        else{
+        window.open(row.website_url, '_blank')
+        }
+    },
+})

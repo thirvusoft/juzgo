@@ -123,6 +123,7 @@
   "column_break_fuz7h",
   "from_date",
   "to_date",
+  "onward_departure_preferences",
   "column_break_eu2sr",
   "preferred_departure_time_onward",
   "preferred_landing_time_onward",
@@ -135,6 +136,7 @@
   "column_break_5ehnh",
   "return_start_date",
   "return_end_date",
+  "return_departure_preferences",
   "column_break_xnadp",
   "preferred_departure_time",
   "preferred_landing_time",
@@ -384,12 +386,14 @@
    "fieldname": "travel_from",
    "fieldtype": "Link",
    "label": "Travel From City",
+   "mandatory_depends_on": "eval:doc.land_package == 1",
    "options": "Destination"
   },
   {
    "fieldname": "travel_to",
    "fieldtype": "Link",
    "label": "Travel To City",
+   "mandatory_depends_on": "eval:doc.land_package == 1",
    "options": "Destination"
   },
   {
@@ -431,6 +435,7 @@
    "fieldname": "interested_flavour",
    "fieldtype": "Table MultiSelect",
    "label": "Interested Flavour",
+   "mandatory_depends_on": "eval:doc.land_package == 1",
    "options": "Flavour CA"
   },
   {
@@ -448,12 +453,14 @@
    "fieldname": "hotel_category",
    "fieldtype": "Table MultiSelect",
    "label": "Hotel Category",
+   "mandatory_depends_on": "eval:doc.land_package == 1",
    "options": "Hotel Category table"
   },
   {
    "fieldname": "expected_budget_range_per_person",
    "fieldtype": "Data",
-   "label": "Expected Budget Range per Person"
+   "label": "Expected Budget Range per Person",
+   "mandatory_depends_on": "eval:doc.land_package == 1"
   },
   {
    "fieldname": "family_details_table",
@@ -1042,7 +1049,8 @@
   {
    "fieldname": "no_of_familys",
    "fieldtype": "Int",
-   "label": "No. of Family"
+   "label": "No. of Family",
+   "mandatory_depends_on": "eval:doc.land_package == 1"
   },
   {
    "fieldname": "no_of_childrens",
@@ -1062,7 +1070,8 @@
   {
    "fieldname": "no_of_paxs",
    "fieldtype": "Int",
-   "label": "No of PAX"
+   "label": "No of PAX",
+   "mandatory_depends_on": "eval:doc.land_package == 1"
   },
   {
    "fieldname": "room_preferences_remaining",
@@ -1266,7 +1275,8 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Assigned To",
-   "options": "User"
+   "options": "User",
+   "reqd": 1
   },
   {
    "fieldname": "party_name",
@@ -1351,12 +1361,24 @@
    "fieldname": "cruise",
    "fieldtype": "Check",
    "label": " Cruise"
+  },
+  {
+   "fieldname": "onward_departure_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Departure Preferences",
+   "options": "City Multiselect"
+  },
+  {
+   "fieldname": "return_departure_preferences",
+   "fieldtype": "Table MultiSelect",
+   "label": "Departure Preferences",
+   "options": "City Multiselect"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-08-30 11:12:30.895994",
+ "modified": "2023-09-13 14:27:41.677526",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",
@@ -1384,6 +1406,30 @@
    "read": 1,
    "report": 1,
    "role": "Juzgo Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo PA",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Operational Executive",
    "share": 1,
    "write": 1
   }
