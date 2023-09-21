@@ -62,35 +62,35 @@ frappe.query_reports["Project-Wise Payment Report"] = {
 		// 	"hidden": 1
 		// },
 		
-		// {
-		// 	"fieldname":"purchase_invoice",
-		// 	"label": __("Purchase Invoice"),
-		// 	"fieldtype": "Check",
-		// 	"default":1,
-		// },
-		// {
-		// 	"fieldname":"sales_invoice",
-		// 	"label": __("Sales Invoice"),
-		// 	"fieldtype": "Check",
-		// 	"default":1,
-		// },
-		// {
-		// 	"fieldname":"sales_payment_entry",
-		// 	"label": __("Sales Payment Entry"),
-		// 	"fieldtype": "Check",
-		// 	"default":1,
-		// },
-		// {
-		// 	"fieldname":"purchase_payment_entry",
-		// 	"label": __("Purchase Payment Entry"),
-		// 	"fieldtype": "Check",
-		// 	"default":1,
-		// },
-		// {
-		// 	"fieldname":"delivery_note",
-		// 	"label": __("Delivery Note"),
-		// 	"fieldtype": "Check",
-		// 	"default":1,
-		// },
+		{
+			"fieldname":"purchase_invoice",
+			"label": __("Purchase Invoice"),
+			"fieldtype": "Check",
+			"default":1,
+		},
+		{
+			"fieldname":"sales_invoice",
+			"label": __("Sales Invoice"),
+			"fieldtype": "Check",
+			"default":1,
+		},
+		{
+			"fieldname":"sales_payment_entry",
+			"label": __("Sales Payment Entry"),
+			"fieldtype": "Check",
+			"default":1,
+		},
+		{
+			"fieldname":"purchase_payment_entry",
+			"label": __("Purchase Payment Entry"),
+			"fieldtype": "Check",
+			"default":1,
+		},
+		{
+			"fieldname":"delivery_note",
+			"label": __("Delivery Note"),
+			"fieldtype": "Check",
+			"default":1,
+		},
 	]
 }

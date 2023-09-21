@@ -1,6 +1,9 @@
 # Copyright (c) 2023, Thirvusoft Pvt Limited and contributors
 # For license information, please see license.txt
 
+from datetime import datetime
+from frappe.utils import cint, date_diff, flt, getdate
+from frappe.utils import today
 import frappe
 from frappe import _, _dict
 from frappe.utils import cstr, getdate
@@ -9,12 +12,12 @@ def execute(filters=None):
 	columns, data  = get_columns(filters), get_data(filters)
 
 	return columns, data
-def assign_row(row, is_payment=0):
+def assign_row(row, is_payment=None):
 	rows=[]
 	totals=[]
-	if is_payment == 1:
-		for i in ["Supplier","Customer"]:
-			rows.append({'project_id':frappe.bold(i+" Payment Entry")})
+	if is_payment and row:
+		for i in is_payment:
+			rows.append({'voucher_no':frappe.bold(i+" Advance Amount")})
 			total = {'party':frappe.bold("Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 			for j in row:
 				if i == j.party_type:
@@ -23,24 +26,27 @@ def assign_row(row, is_payment=0):
 					total['total_amount'] = total['total_amount'] + (j.total_amount or 0)
 					total['paid'] = total['paid'] + (j.get('paid') or 0)
 					total['outstanding_amount'] = total['outstanding_amount'] + (j.get('outstanding_amount') or 0)
-					rows.append(j)
-					total.update({"voucher_no":frappe.bold(i+" "+j.voucher_type)})
+					if j.get('paid'):
+						rows.append(j)
+					total.update({"party":frappe.bold(i+" Advance Amount")})
 			if rows:
 				rows.append(total)
 				totals.append(total)
 	else:
-		total = {'party':frappe.bold("Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		for j in row:
-			total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
-			total['tax'] = total['tax'] + (j.get('tax') or 0)
-			total['total_amount'] = total['total_amount'] + (j.total_amount or 0)
-			total['paid'] = total['paid'] + (j.get('paid') or 0)
-			total['outstanding_amount'] = total['outstanding_amount'] + (j.get('outstanding_amount') or 0)
-			rows.append(j)
-			total.update({"voucher_no":frappe.bold(j.voucher_type)})
-		if rows:
-			rows.append(total)
-			totals.append(total)
+		if row:
+			rows.append({'voucher_no':frappe.bold(row[0].voucher_type)})
+			total = {'party':frappe.bold("Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+			for j in row:
+				total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
+				total['tax'] = total['tax'] + (j.get('tax') or 0)
+				total['total_amount'] = total['total_amount'] + (j.total_amount or 0)
+				total['paid'] = total['paid'] + (j.get('paid') or 0)
+				total['outstanding_amount'] = total['outstanding_amount'] + (j.get('outstanding_amount') or 0)
+				rows.append(j)
+				total.update({"party":frappe.bold(j.voucher_type+" Total")})
+			if rows:
+				rows.append(total)
+				totals.append(total)
 	return rows, totals
 def get_profit(total):
 		profit = {'party':frappe.bold("Profit"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
@@ -48,19 +54,19 @@ def get_profit(total):
 		pp = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 		dd = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 		for tot in total:
-			if tot.get('voucher_no') == "<strong>Sales Invoice</strong>":
+			if tot.get('party') == "<strong>Sales Invoice Total</strong>":
 				sp['net_total'] = (tot.get('net_total') or 0)
 				sp['tax'] = (tot.get('tax') or 0)
 				sp['total_amount'] = (tot.get('total_amount') or 0)
 				sp['paid'] = (tot.get('paid') or 0)
 				sp['outstanding_amount'] = (tot.get('outstanding_amount') or 0)
-			if tot.get('voucher_no') == '<strong>Purchase Invoice</strong>':
+			if tot.get('party') == '<strong>Purchase Invoice Total</strong>':
 				pp['net_total'] = (tot.get('net_total') or 0)
 				pp['tax'] = (tot.get('tax') or 0)
 				pp['total_amount'] = (tot.get('total_amount') or 0)
 				pp['paid'] = (tot.get('paid') or 0)
 				pp['outstanding_amount'] = (tot.get('outstanding_amount') or 0)
-			if tot.get('voucher_no') == '<strong>Delivery Note</strong>':
+			if tot.get('party') == '<strong>Delivery Note Total</strong>':
 				dd['net_total'] = (tot.get('net_total') or 0)
 				dd['tax'] = (tot.get('tax') or 0)
 				dd['total_amount'] = (tot.get('total_amount') or 0)
@@ -76,27 +82,34 @@ def get_data(filters):
 	if filters.get("project"):
 		row = []
 		total =[]
-		gpi = get_purchase_invoice(filters)
-		one_row,one_total = assign_row(gpi)
-		row = row+ one_row
-		total = total+one_total
-
-		gsi = get_sales_invoice(filters)
-		one_row,one_total = assign_row(gsi)
-		row = row+ one_row
-		total = total+one_total
-
-		gdn = get_delivery_note(filters)
-		one_row,one_total = assign_row(gdn)
-		row = row+ one_row
-		total = total+one_total
-		total.append(get_profit(total))
+		if filters.get("purchase_invoice"):
+			gpi = get_purchase_invoice(filters)
+			one_row,one_total = assign_row(gpi)
+			row = row+ one_row
+			total = total+one_total
+		if filters.get("sales_invoice"):
+			gsi = get_sales_invoice(filters)
+			one_row,one_total = assign_row(gsi)
+			row = row+ one_row
+			total = total+one_total
+		if filters.get("delivery_note"):
+			gdn = get_delivery_note(filters)
+			one_row,one_total = assign_row(gdn)
+			row = row+ one_row
+			total = total+one_total
+		if total:
+			total.append(get_profit(total))
 		
-		gpe = get_payment_entry(filters)
-		one_row,one_total = assign_row(gpe,is_payment=1)
-		row = row+ one_row
-		total = total+one_total
-		
+		is_payment = []
+		if filters.get("purchase_payment_entry"):
+			is_payment.append("Supplier")
+		if filters.get("sales_payment_entry"):
+			is_payment.append("Customer")
+		if filters.get("sales_payment_entry") or filters.get("purchase_payment_entry"):
+			gpe = get_payment_entry(filters)
+			one_row,one_total = assign_row(gpe,is_payment)
+			row = row+ one_row
+			total = total+one_total
 		row.append({})
 		
 		for tot in total:
@@ -109,27 +122,37 @@ def get_data(filters):
 			total =[]
 			row.append({'project_id':frappe.bold("Project Name :-"),'project_name':frappe.bold(i.project_name)})
 
-			gpi = get_purchase_invoice(filters,i.name)
-			one_row,one_total = assign_row(gpi)
-			row = row+ one_row
-			total = total+one_total
+			if filters.get("purchase_invoice"):
+				gpi = get_purchase_invoice(filters,i.name)
+				one_row,one_total = assign_row(gpi)
+				row = row+ one_row
+				total = total+one_total
 
-			gsi = get_sales_invoice(filters,i.name)
-			one_row,one_total = assign_row(gsi)
-			row = row+ one_row
-			total = total+one_total
-			
-			gdn = get_delivery_note(filters,i.name)
-			one_row,one_total = assign_row(gdn)
-			row = row+ one_row
-			total = total+one_total
-			total.append(get_profit(total))
-			
-			gpe = get_payment_entry(filters,i.name)
-			one_row,one_total = assign_row(gpe,is_payment=1)
-			row = row+ one_row
-			total = total+one_total
-			
+			if filters.get("sales_invoice"):
+				gsi = get_sales_invoice(filters,i.name)
+				one_row,one_total = assign_row(gsi)
+				row = row+ one_row
+				total = total+one_total
+
+			if filters.get("delivery_note"):
+				gdn = get_delivery_note(filters,i.name)
+				one_row,one_total = assign_row(gdn)
+				row = row+ one_row
+				total = total+one_total
+			if total:
+				total.append(get_profit(total))
+
+			is_payment = []
+			if filters.get("purchase_payment_entry"):
+				is_payment.append("Supplier")
+			if filters.get("sales_payment_entry"):
+				is_payment.append("Customer")
+			if filters.get("sales_payment_entry") or filters.get("purchase_payment_entry"):
+				gpe = get_payment_entry(filters,i.name)
+				one_row,one_total = assign_row(gpe,is_payment)
+				row = row+ one_row
+				total = total+one_total
+				
 			row.append({})
 			for tot in total:
 				row.append(tot)
@@ -140,6 +163,7 @@ def get_conditions(filters):
 	conditions = "docstatus = 1 and "
 	if filters.get("project"):
 		conditions = conditions+"project = '{0}'".format(filters.get("project"))
+
 	return conditions
 
 def get_payment_entry(filters,project=None):
@@ -168,7 +192,7 @@ def get_sales_invoice(filters,project=None):
 	sales_invoice = frappe.db.sql(
 		"""
 			select
-				project as project_id, project_name, posting_date, customer as party,
+				project as project_id, project_name, posting_date, customer as party, remarks,
 				name as voucher_no, net_total, total_taxes_and_charges as tax, grand_total as total_amount, grand_total - outstanding_amount as paid, outstanding_amount, due_date	
 			from `tabSales Invoice`
 			where {conditions}
@@ -178,6 +202,7 @@ def get_sales_invoice(filters,project=None):
 	)
 	for i in sales_invoice:
 		i.voucher_type = "Sales Invoice"
+		i.due_days = date_diff(i.due_date, datetime.strptime(today(), '%Y-%m-%d').date())
 	return sales_invoice
 
 def get_purchase_invoice(filters,project=None):
@@ -187,7 +212,7 @@ def get_purchase_invoice(filters,project=None):
 	purchase_invoice = frappe.db.sql(
 		"""
 			select
-				project as project_id, project_name, posting_date, supplier as party,
+				project as project_id, project_name, posting_date, supplier as party, remarks,
 				name as voucher_no, net_total, total_taxes_and_charges as tax, grand_total as total_amount, grand_total - outstanding_amount as paid, outstanding_amount, due_date	
 			from `tabPurchase Invoice`
 			where {conditions}
@@ -197,6 +222,7 @@ def get_purchase_invoice(filters,project=None):
 	)
 	for i in purchase_invoice:
 		i.voucher_type = "Purchase Invoice"
+		i.due_days = date_diff(i.due_date, datetime.strptime(today(), '%Y-%m-%d').date())
 	return purchase_invoice
 
 def get_delivery_note(filters,project=None):
@@ -249,7 +275,7 @@ def get_columns(filters):
 			"label": _("Party"),
 			"fieldname": "party",
 			"fieldtype": "Data",
-			"width": 130,
+			"width": 200,
 		},
 		{
 			"label": _("Net Total"),
