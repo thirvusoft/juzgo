@@ -18,7 +18,7 @@ def assign_row(row, is_payment=None):
 	if is_payment and row:
 		for i in is_payment:
 			rows.append({'voucher_no':frappe.bold(i+" Advance Amount")})
-			total = {'party':frappe.bold("Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+			total = {'party':frappe.bold(i+" Advance Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 			for j in row:
 				if i == j.party_type:
 					total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
@@ -28,14 +28,14 @@ def assign_row(row, is_payment=None):
 					total['outstanding_amount'] = total['outstanding_amount'] + (j.get('outstanding_amount') or 0)
 					if j.get('paid'):
 						rows.append(j)
-					total.update({"party":frappe.bold(i+" Advance Amount")})
+					total.update({"party":frappe.bold(i+" Advance Total")})
 			if rows:
 				rows.append(total)
 				totals.append(total)
 	else:
 		if row:
 			rows.append({'voucher_no':frappe.bold(row[0].voucher_type)})
-			total = {'party':frappe.bold("Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+			total = {'party':frappe.bold(row[0].voucher_type+" Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 			for j in row:
 				total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
 				total['tax'] = total['tax'] + (j.get('tax') or 0)
