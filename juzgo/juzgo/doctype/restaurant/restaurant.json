@@ -252,6 +252,7 @@
    "depends_on": "eval:!doc.__islocal",
    "fieldname": "is_jtt",
    "fieldtype": "Check",
+   "in_standard_filter": 1,
    "label": "Is JTT",
    "read_only_depends_on": "eval:doc.jtt_id"
   },
@@ -259,6 +260,7 @@
    "depends_on": "eval:doc.is_jtt",
    "fieldname": "jtt_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "JTT ID",
    "options": "JTT",
    "read_only": 1
@@ -283,7 +285,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2023-08-30 11:49:43.527980",
+ "modified": "2023-09-27 12:07:02.285059",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Restaurant",

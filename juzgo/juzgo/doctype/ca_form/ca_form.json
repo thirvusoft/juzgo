@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:CA-{party_name}-{whatsapp_number}",
+ "autoname": "format:CA-{party_name}-{mobile}",
  "creation": "2023-07-13 11:50:20.032664",
  "default_view": "List",
  "doctype": "DocType",
@@ -198,6 +198,7 @@
   "column_break_psdbd",
   "from_place",
   "boarding_point",
+  "bus_classes",
   "column_break_y1qw6",
   "to_place",
   "dropping_point",
@@ -255,7 +256,8 @@
    "fieldname": "mobile",
    "fieldtype": "Data",
    "label": "Mobile",
-   "options": "Phone"
+   "options": "Phone",
+   "reqd": 1
   },
   {
    "fieldname": "whatsapp_number",
@@ -263,7 +265,6 @@
    "in_standard_filter": 1,
    "label": "Whatsapp Number",
    "options": "Phone",
-   "reqd": 1,
    "unique": 1
   },
   {
@@ -1373,12 +1374,18 @@
    "fieldtype": "Table MultiSelect",
    "label": "Departure Preferences",
    "options": "City Multiselect"
+  },
+  {
+   "fieldname": "bus_classes",
+   "fieldtype": "Select",
+   "label": "Classes",
+   "options": "2nd Sitting(Non AC)\nSleeper(Non AC)\n1 Tier (Sleeper)\n2 Tier(Sleeper)\n3 Tier(Sleeper)\nChair Car(AC)"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-09-13 14:27:41.677526",
+ "modified": "2023-09-27 11:54:17.679329",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "CA Form",

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"MHpJkARwQy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Accounts</span>\",\"col\":12}},{\"id\":\"ktL9PWUj-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"d7XOVigz1S\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"SpV7T2ZHcf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"qnOhC8y2uF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":3}},{\"id\":\"A5I7px7yU6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"YM4JGjqLPf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"ZUXL3nBkGM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Chart of Accounts\",\"col\":3}},{\"id\":\"GTFTmfnTVu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":3}},{\"id\":\"3Qyzvrt7KL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":3}},{\"id\":\"ttnrHpR5dF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bank Reconciliation Tool\",\"col\":3}},{\"id\":\"ZP5vNu28Rb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Billing Summary\",\"col\":3}},{\"id\":\"CTwMKke7yV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ynVVj1y0jD\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounts reports\",\"col\":4}},{\"id\":\"C7-5HUra-D\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales GST Reports\",\"col\":4}},{\"id\":\"gOGZhunYL1\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase GST Reports\",\"col\":4}},{\"id\":\"212ZVNzJY-\",\"type\":\"card\",\"data\":{\"card_name\":\"Import\",\"col\":4}}]",
+ "content": "[{\"id\":\"MHpJkARwQy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Accounts</span>\",\"col\":12}},{\"id\":\"ktL9PWUj-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"d7XOVigz1S\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"SpV7T2ZHcf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"qnOhC8y2uF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":3}},{\"id\":\"A5I7px7yU6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"YM4JGjqLPf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"ZUXL3nBkGM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Chart of Accounts\",\"col\":3}},{\"id\":\"GTFTmfnTVu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":3}},{\"id\":\"3Qyzvrt7KL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":3}},{\"id\":\"ttnrHpR5dF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bank Reconciliation Tool\",\"col\":3}},{\"id\":\"ZP5vNu28Rb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project-Wise Payment\",\"col\":3}},{\"id\":\"CTwMKke7yV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ynVVj1y0jD\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounts reports\",\"col\":4}},{\"id\":\"C7-5HUra-D\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales GST Reports\",\"col\":4}},{\"id\":\"gOGZhunYL1\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase GST Reports\",\"col\":4}},{\"id\":\"212ZVNzJY-\",\"type\":\"card\",\"data\":{\"card_name\":\"Import\",\"col\":4}}]",
  "creation": "2023-06-23 16:48:04.044722",
  "custom_blocks": [],
  "docstatus": 0,
@@ -115,7 +115,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-09-12 18:04:46.310478",
+ "modified": "2023-09-20 19:23:17.110191",
  "modified_by": "sibi.kumar@thirvusoft.in",
  "module": "Juzgo Accounts",
  "name": "Accounts",
@@ -161,13 +161,6 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Project Billing Summary",
-   "link_to": "Project Billing Summary",
-   "type": "Report"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
    "label": "Bank Reconciliation Tool",
    "link_to": "Bank Reconciliation Tool",
    "type": "DocType"
@@ -184,6 +177,13 @@
    "doc_view": "List",
    "label": "General Ledger",
    "link_to": "General Ledger",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Project-Wise Payment",
+   "link_to": "Project-Wise Payment Report",
    "type": "Report"
   },
   {
