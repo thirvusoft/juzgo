@@ -53,24 +53,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Purchase GST Reports",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "GST Purchase Register",
-   "link_count": 0,
-   "link_to": "GST Purchase Register",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Accounts reports",
    "link_count": 2,
    "onboard": 0,
@@ -113,10 +95,38 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase GST Reports",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "GST Purchase Register",
+   "link_count": 0,
+   "link_to": "GST Purchase Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "GSTR 3B Report",
+   "link_count": 0,
+   "link_to": "GSTR 3B Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-09-20 19:23:17.110191",
- "modified_by": "sibi.kumar@thirvusoft.in",
+ "modified": "2023-09-27 17:50:40.463370",
+ "modified_by": "prithivraj@thirvusoft.in",
  "module": "Juzgo Accounts",
  "name": "Accounts",
  "number_cards": [],
