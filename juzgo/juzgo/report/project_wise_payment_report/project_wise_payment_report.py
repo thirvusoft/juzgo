@@ -79,7 +79,7 @@ def get_profit(total):
 		profit['outstanding_amount'] = sp['outstanding_amount'] - pp['outstanding_amount'] - dd['outstanding_amount'] 
 		return profit
 def get_data(filters):
-	if filters.get("project"):
+	if filters.get("project") and filters.get("group_by") == "Group by Voucher":
 		row = []
 		total =[]
 		if filters.get("purchase_invoice"):
@@ -114,6 +114,118 @@ def get_data(filters):
 		
 		for tot in total:
 			row.append(tot)
+	
+	elif filters.get("project") and (filters.get("group_by") == "Group by Voucher (Consolidated)"):
+		row = []
+		total =[]
+		row.append({'project_id':frappe.bold(filters.get("project"))})
+		if filters.get("purchase_invoice"):
+			gpi = get_purchase_invoice(filters)
+			one_row,one_total = assign_row(gpi)
+			total = total+one_total
+		if filters.get("sales_invoice"):
+			gsi = get_sales_invoice(filters)
+			one_row,one_total = assign_row(gsi)
+			total = total+one_total
+		if filters.get("delivery_note"):
+			gdn = get_delivery_note(filters)
+			one_row,one_total = assign_row(gdn)
+			total = total+one_total
+		if total:
+			total.append(get_profit(total))
+		
+		is_payment = []
+		if filters.get("purchase_payment_entry"):
+			is_payment.append("Supplier")
+		if filters.get("sales_payment_entry"):
+			is_payment.append("Customer")
+		if filters.get("sales_payment_entry") or filters.get("purchase_payment_entry"):
+			gpe = get_payment_entry(filters)
+			one_row,one_total = assign_row(gpe,is_payment)
+			total = total+one_total
+		row.append({})
+		
+		for tot in total:
+			row.append(tot)
+
+	elif (filters.get("group_by") == "Group by Voucher (Consolidated)") and not filters.get("project"):
+		get_project = frappe.get_all("Project",fields=["project_name","name"])
+		row = []
+		for i in get_project:
+			total =[]
+			row.append({'project_id':frappe.bold("Project Name :-"),'project_name':frappe.bold(i.project_name)})
+
+			if filters.get("purchase_invoice"):
+				gpi = get_purchase_invoice(filters,i.name)
+				one_row,one_total = assign_row(gpi)
+				total = total+one_total
+
+			if filters.get("sales_invoice"):
+				gsi = get_sales_invoice(filters,i.name)
+				one_row,one_total = assign_row(gsi)
+				total = total+one_total
+
+			if filters.get("delivery_note"):
+				gdn = get_delivery_note(filters,i.name)
+				one_row,one_total = assign_row(gdn)
+				total = total+one_total
+			if total:
+				total.append(get_profit(total))
+
+			is_payment = []
+			if filters.get("purchase_payment_entry"):
+				is_payment.append("Supplier")
+			if filters.get("sales_payment_entry"):
+				is_payment.append("Customer")
+			if filters.get("sales_payment_entry") or filters.get("purchase_payment_entry"):
+				gpe = get_payment_entry(filters,i.name)
+				one_row,one_total = assign_row(gpe,is_payment)
+				total = total+one_total
+				
+			row.append({})
+			for tot in total:
+				row.append(tot)
+	elif (filters.get("group_by") == "Group by Voucher") and not filters.get("project"):
+		get_project = frappe.get_all("Project",fields=["project_name","name"])
+		row = []
+		for i in get_project:
+			total =[]
+			row.append({'project_id':frappe.bold("Project Name :-"),'project_name':frappe.bold(i.project_name)})
+
+			if filters.get("purchase_invoice"):
+				gpi = get_purchase_invoice(filters,i.name)
+				one_row,one_total = assign_row(gpi)
+				row = row+ one_row
+				total = total+one_total
+
+			if filters.get("sales_invoice"):
+				gsi = get_sales_invoice(filters,i.name)
+				one_row,one_total = assign_row(gsi)
+				row = row+ one_row
+				total = total+one_total
+
+			if filters.get("delivery_note"):
+				gdn = get_delivery_note(filters,i.name)
+				one_row,one_total = assign_row(gdn)
+				row = row+ one_row
+				total = total+one_total
+			if total:
+				total.append(get_profit(total))
+
+			is_payment = []
+			if filters.get("purchase_payment_entry"):
+				is_payment.append("Supplier")
+			if filters.get("sales_payment_entry"):
+				is_payment.append("Customer")
+			if filters.get("sales_payment_entry") or filters.get("purchase_payment_entry"):
+				gpe = get_payment_entry(filters,i.name)
+				one_row,one_total = assign_row(gpe,is_payment)
+				row = row+ one_row
+				total = total+one_total
+				
+			row.append({})
+			for tot in total:
+				row.append(tot)
 
 	else:
 		get_project = frappe.get_all("Project",fields=["project_name","name"])
@@ -156,7 +268,6 @@ def get_data(filters):
 			row.append({})
 			for tot in total:
 				row.append(tot)
-		
 
 	return row
 def get_conditions(filters):
@@ -327,3 +438,4 @@ def get_columns(filters):
 		},
 	]
 	return columns
+
