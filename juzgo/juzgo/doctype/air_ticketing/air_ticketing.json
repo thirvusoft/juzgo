@@ -18,7 +18,8 @@
   "meal",
   "attach_by",
   "column_break_zj8bn",
-  "description"
+  "description",
+  "final_copy"
  ],
  "fields": [
   {
@@ -90,12 +91,19 @@
   {
    "fieldname": "column_break_zj8bn",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "final_copy",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Final Copy"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-07 12:31:44.803129",
+ "modified": "2023-10-04 14:25:41.783161",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Air Ticketing",

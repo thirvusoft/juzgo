@@ -11,7 +11,9 @@
   "data",
   "description",
   "printables",
-  "attached_by"
+  "attached_by",
+  "file",
+  "date"
  ],
  "fields": [
   {
@@ -47,12 +49,22 @@
    "fieldtype": "Link",
    "label": "Attached By",
    "options": "User"
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "File"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-04 15:08:33.602302",
+ "modified": "2023-10-04 18:28:46.776221",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "FC Copy",
