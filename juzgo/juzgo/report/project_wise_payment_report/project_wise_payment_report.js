@@ -18,22 +18,6 @@ frappe.query_reports["Project-Wise Payment Report"] = {
 			"fieldtype": "Link",
 			"options": "Project",
 		},
-		{
-			"fieldname":"group_by",
-			"label": __("Group by"),
-			"fieldtype": "Select",
-			"options": [
-				{
-					label: __("Group by Voucher"),
-					value: "Group by Voucher",
-				},
-				{
-					label: __("Group by Voucher (Consolidated)"),
-					value: "Group by Voucher (Consolidated)",
-				},
-			],
-			"default": "Group by Voucher (Consolidated)"
-		},
 		// {
 		// 	"fieldname":"party_type",
 		// 	"label": __("Party Type"),
@@ -77,7 +61,12 @@ frappe.query_reports["Project-Wise Payment Report"] = {
 		// 	"fieldtype": "Data",
 		// 	"hidden": 1
 		// },
-		
+		{
+			"fieldname":"branch",
+			"label": __("Branch"),
+			"fieldtype": "Link",
+			"options": "Branch"
+		},
 		{
 			"fieldname":"purchase_invoice",
 			"label": __("Purchase Invoice"),
