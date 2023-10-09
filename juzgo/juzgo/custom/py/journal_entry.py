@@ -18,6 +18,10 @@ def validate(doc,action):
         update_value.append("project")
     if doc.cost_center:
         update_value.append("cost_center")
+<<<<<<< HEAD
+    print(update_value)
+=======
+>>>>>>> 19aeb121a87c90685cabd3594e735fc00b9bf926
     if update_value:
         for i in doc.accounts:
             for update_field in update_value:
