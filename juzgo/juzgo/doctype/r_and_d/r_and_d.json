@@ -24,14 +24,17 @@
   "visa_type",
   "budget_range_from",
   "budget_range_to",
-  "reference_url_section",
-  "reference_table",
   "seasonal_preferences_section",
   "seasonal",
+  "itinerary_tab",
   "itinerary_section",
   "juzgo_itinerary",
   "juzgo_other_itinerary",
   "tentative_itinerary",
+  "terms_notes__ref_tab",
+  "reference_url_section",
+  "attachments",
+  "reference_table",
   "section_break_10",
   "terms_conditions",
   "terms",
@@ -44,6 +47,7 @@
   {
    "fieldname": "tab_break_18",
    "fieldtype": "Tab Break",
+   "label": "Details",
    "show_dashboard": 1
   },
   {
@@ -217,12 +221,28 @@
    "fieldname": "reference_url_section",
    "fieldtype": "Section Break",
    "label": "References"
+  },
+  {
+   "fieldname": "terms_notes__ref_tab",
+   "fieldtype": "Tab Break",
+   "label": "Terms, Notes & Ref"
+  },
+  {
+   "fieldname": "itinerary_tab",
+   "fieldtype": "Tab Break",
+   "label": "Itinerary"
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Table",
+   "label": "Attachments",
+   "options": "R and D Attachment"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-09-08 15:02:09.923240",
+ "modified": "2023-09-28 13:34:23.387660",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "R and D",

@@ -1,18 +1,19 @@
 {
  "actions": [],
  "autoname": "autoincrement",
- "creation": "2023-09-30 16:25:56.813284",
+ "creation": "2023-09-30 16:46:07.284400",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "supplier_mail",
   "data",
-  "worksheet",
-  "client_copy",
   "description",
   "printables",
-  "attached_by"
+  "attached_by",
+  "file",
+  "date"
  ],
  "fields": [
   {
@@ -28,18 +29,6 @@
    "label": "Date"
   },
   {
-   "fieldname": "worksheet",
-   "fieldtype": "Attach",
-   "in_list_view": 1,
-   "label": "Worksheet"
-  },
-  {
-   "fieldname": "client_copy",
-   "fieldtype": "Attach",
-   "in_list_view": 1,
-   "label": "Client copy"
-  },
-  {
    "fieldname": "description",
    "fieldtype": "Long Text",
    "in_list_view": 1,
@@ -51,6 +40,7 @@
    "default": "0",
    "fieldname": "printables",
    "fieldtype": "Check",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Printables"
   },
@@ -59,12 +49,22 @@
    "fieldtype": "Link",
    "label": "Attached By",
    "options": "User"
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "File"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-09-30 16:25:56.813284",
+ "modified": "2023-10-04 18:28:46.776221",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "FC Copy",
