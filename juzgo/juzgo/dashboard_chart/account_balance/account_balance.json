@@ -1,0 +1,33 @@
+{
+ "chart_name": "Account Balance",
+ "chart_type": "Report",
+ "creation": "2023-10-10 15:56:11.942517",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "dynamic_filters_json": "{\"company\":\"frappe.defaults.get_user_default(\\\"Company\\\")\"}",
+ "filters_json": "{\"root_type\":\"Asset\",\"account_type\":\"Bank\",\"report_date\":\"2023-10-10\"}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "modified": "2023-10-10 16:18:24.317534",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Account Balance",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "Account Balance",
+ "roles": [],
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Donut",
+ "use_report_chart": 0,
+ "x_field": "account",
+ "y_axis": [
+  {
+   "color": "#29CD42",
+   "y_field": "balance"
+  }
+ ]
+}
