@@ -15,44 +15,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Sales GST Reports",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "GSTR-1",
-   "link_count": 0,
-   "link_to": "GSTR-1",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "GST Sales Register",
-   "link_count": 0,
-   "link_to": "GST Sales Register",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "HSN-wise-summary of outward supplies",
-   "link_count": 0,
-   "link_to": "HSN-wise-summary of outward supplies",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Accounts reports",
    "link_count": 2,
    "onboard": 0,
@@ -123,10 +85,58 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales GST Reports",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "GSTR-1",
+   "link_count": 0,
+   "link_to": "GSTR-1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "GST Sales Register",
+   "link_count": 0,
+   "link_to": "GST Sales Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "HSN-wise-summary of outward supplies",
+   "link_count": 0,
+   "link_to": "HSN-wise-summary of outward supplies",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Item-wise Sales Register",
+   "link_count": 0,
+   "link_to": "Item-wise Sales Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-10-04 12:12:58.227226",
- "modified_by": "sibi.kumar@thirvusoft.in",
+ "modified": "2023-10-05 10:05:41.718846",
+ "modified_by": "prithivraj@thirvusoft.in",
  "module": "Juzgo Accounts",
  "name": "Accounts",
  "number_cards": [],
