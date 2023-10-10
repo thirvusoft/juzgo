@@ -135,8 +135,8 @@
    "type": "Link"
   }
  ],
- "modified": "2023-10-05 10:05:41.718846",
- "modified_by": "prithivraj@thirvusoft.in",
+ "modified": "2023-10-10 16:58:12.355568",
+ "modified_by": "sibi.kumar@thirvusoft.in",
  "module": "Juzgo Accounts",
  "name": "Accounts",
  "number_cards": [],
@@ -195,16 +195,16 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Accounts Dashboard",
-   "link_to": "Accounts",
-   "type": "Dashboard"
+   "label": "General Ledger",
+   "link_to": "General Ledger",
+   "type": "Report"
   },
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "General Ledger",
-   "link_to": "General Ledger",
-   "type": "Report"
+   "label": "Accounts Dashboard",
+   "link_to": "Accounts Dashboard",
+   "type": "Dashboard"
   },
   {
    "color": "Grey",
