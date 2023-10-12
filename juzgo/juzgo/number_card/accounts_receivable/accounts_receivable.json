@@ -1,0 +1,23 @@
+{
+ "creation": "2023-10-10 15:36:59.087904",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{\"company\":\"Sri Kamadenu Tours And Travels\",\"report_date\":\"2023-10-10\",\"ageing_based_on\":\"Due Date\",\"range1\":\"30\",\"range2\":\"60\",\"range3\":\"90\",\"range4\":\"120\"}",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "Accounts Receivable",
+ "modified": "2023-10-10 15:42:35.197279",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Accounts Receivable",
+ "owner": "Administrator",
+ "report_field": "invoiced",
+ "report_function": "Sum",
+ "report_name": "Accounts Payable",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Report"
+}

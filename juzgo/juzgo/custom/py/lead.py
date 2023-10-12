@@ -32,7 +32,7 @@ def make_ca_form(source_name, target_doc=None):
 	target_doc = get_mapped_doc(
 		"Lead",
 		source_name,
-		{"Lead": {"doctype": "CA Form", "field_map": {"whatsapp_no": "whatsapp_number", "email_id":"e_mail","mobile":"mobile_no"}}},
+		{"Lead": {"doctype": "CA Form", "field_map": {"mobile_no": "mobile","whatsapp_no": "whatsapp_number", "email_id":"e_mail","mobile":"mobile_no"}}},
 		target_doc,
 		set_missing_values,
 	)

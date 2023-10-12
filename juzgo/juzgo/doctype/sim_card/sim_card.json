@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-04 14:52:33.951776",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sim_company",
+  "call_tariff_in_inr_domestic_international",
+  "data_tariff"
+ ],
+ "fields": [
+  {
+   "fieldname": "sim_company",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SIM Company"
+  },
+  {
+   "fieldname": "call_tariff_in_inr_domestic_international",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Call Tariff in iNR - Domestic /International"
+  },
+  {
+   "fieldname": "data_tariff",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Data Tariff"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-20 12:07:19.114103",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "SIM Card",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

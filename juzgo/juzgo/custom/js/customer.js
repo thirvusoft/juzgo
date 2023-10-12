@@ -54,6 +54,32 @@ frappe.ui.form.on('Customer', {
             frappe.model.set_value(child.doctype, child.name, "member_row_id", Math.random().toString(36).substring(2,7))
             refresh_field("family_members_details");
         }
+        if (frm.doc.customer_name.length >= 3){
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.customer.exist_list",
+                args: {
+                    "name": frm.doc.customer_name,
+                    "doctype": frm.doc.doctype,
+                    "field_name": "customer_name",
+                    "field": ["name","customer_name","mobile_no"]
+                },
+                callback: function (r) {
+                    if (r && r.message) {
+                        frm.set_df_property(
+                            "customer_name",
+                            "description",
+                            ('This Customer Name already exists: {0}', [r.message.map(function (d) {
+                                return repl('<a href="/app/customer/%(name)s">%(or_name)s %(mobile_no)s</a>', { name: d['name'], or_name: d['customer_name'], mobile_no:d['mobile_no'] ||"" })
+                            }).join(', ')]));
+                    }
+                },
+            })
+        } else {
+            frm.set_df_property(
+                "customer_name",
+                "description",
+                "");
+        }
     }
 })
 function option_in_members(frm){

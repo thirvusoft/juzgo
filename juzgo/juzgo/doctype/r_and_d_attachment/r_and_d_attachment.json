@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-09-28 13:33:15.263712",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "url",
+  "description",
+  "open_url",
+  "file_attach"
+ ],
+ "fields": [
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "URL",
+   "length": 1000
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "open_url",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Open URL"
+  },
+  {
+   "fieldname": "file_attach",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "File Attach"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-09-28 13:33:48.541635",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "R and D Attachment",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -9,6 +9,9 @@ def validate(doc,action):
             "address":frappe.get_value("Customer",i.customer_id,'customer_primary_address'),
             "contact":frappe.get_value("Customer",i.customer_id,'customer_primary_contact')
         })
+    
+
+
 @frappe.whitelist()
 def get_project_abbr(project_name):
     m = project_name
@@ -526,6 +529,30 @@ def validate_check(doc,even):
                 member_name=i['members_name'],
                 customer_id = i["customer_id"]
             ))
+    new_fc_list=[]
+    for i in doc.quotation_copy_items:
+        if i.final_copy==1:
+            new_fc_list.append(i)
+    for j in doc.supplier_final_copies:
+        if j.final_copy ==1:
+            new_fc_list.append(j)
+    for k in doc.air_ticketing:
+        if k.final_copy ==1 :
+            new_fc_list.append(k)
+    doc.fc_copy=[]
+    for h in new_fc_list:
+        doc.append("fc_copy",{
+                "supplier_mail":h.get("supplier_mail") ,
+                "attached_by":h.get("attached_by"),
+                "description":h.get("description"),
+                "file":h.get("file"),
+                "data":h.get("data")
+                
+            })
+
+
+
+
 
 @frappe.whitelist()
 def project_exist_list(project_name):

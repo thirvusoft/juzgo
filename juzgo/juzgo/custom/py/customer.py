@@ -113,3 +113,8 @@ def check_members_alive(doc,field,id_field):
     for i in reversed(remove_idx):
         table_field.pop(i)
     return table_field
+
+@frappe.whitelist()
+def exist_list(name,doctype,field_name,field):
+    master_name=frappe.db.get_all(doctype, filters={field_name:["Like", "%"+name+"%"]}, fields=field)
+    return master_name

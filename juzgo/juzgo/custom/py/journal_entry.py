@@ -11,6 +11,18 @@ def autoname(self,action):
         self.name = make_autoname(series, doc=self)
         self.naming_series = parse_naming_series(series, doc=self)
 def validate(doc,action):
+    update_value =[]
     if doc.branch:
+        update_value.append("branch")
+    if doc.project:
+        update_value.append("project")
+    if doc.cost_center:
+        update_value.append("cost_center")
+<<<<<<< HEAD
+    print(update_value)
+=======
+>>>>>>> 19aeb121a87c90685cabd3594e735fc00b9bf926
+    if update_value:
         for i in doc.accounts:
-            i.branch = doc.branch
+            for update_field in update_value:
+                i.update({update_field: doc.get(update_field)})

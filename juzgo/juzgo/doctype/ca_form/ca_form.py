@@ -11,6 +11,11 @@ class CAForm(Document):
 			assigned_to(doc,"ca_owner")
 		if doc.assigned_to and (not doc.is_new()):
 			assigned_to(doc,"assigned_to")
+		if not doc.is_new():
+			if doc.party_type == "Lead":
+				doc.party_name = doc.first_name + " "+(doc.last_name or "")
+			elif doc.party_type == "Customer":
+				doc.party_name = doc.customer
 	def autoname(doc):
 		if doc.party_type == "Lead":
 			doc.party_name = doc.first_name + " "+(doc.last_name or "")
@@ -387,7 +392,7 @@ def make_project(source_name, target_doc=None):
 	target_doc = get_mapped_doc(
 		"CA Form",
 		source_name,
-		{"CA Form": {"doctype": "Project", "field_map": {"whatsapp_number": "phone_number", "expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
+		{"CA Form": {"doctype": "Project", "field_map": {"whatsapp_number": "phone_number", "travel_from":"_travel_from_city","travel_to":"_travel_to_city","nos_of_days":"no_of_days","no_of_nights":"no_of_nights","expected_start_date ":"travel_start_date ","expected_end_date":"travel_end_date","ca_owner":"project_head"}}},
 		target_doc,
 		set_missing_values,
 	)

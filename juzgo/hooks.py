@@ -38,8 +38,8 @@ doctype_js = {
 		"Job Opening" : "/juzgo/custom/js/jobopening.js",
         "Project" : "/juzgo/custom/js/project.js",
 		"Lead" : "/juzgo/custom/js/lead.js",
-    "Employee" : "/juzgo/custom/js/employee.js",
-
+    	"Employee" : "/juzgo/custom/js/employee.js",
+		"Journal Entry" : "/juzgo/custom/js/journal_entry.js",
 
 		"Customer" : "/juzgo/custom/js/customer.js"
 
