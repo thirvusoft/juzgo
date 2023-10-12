@@ -558,3 +558,199 @@ def validate_check(doc,even):
 def project_exist_list(project_name):
     task_name=frappe.db.get_all("Project", filters={"project_name":["Like", "%"+project_name+"%"]}, fields=["name","project_name"])
     return task_name
+
+@frappe.whitelist()
+def ca_form_details(ca_form):
+    ca_doc = frappe.get_doc("CA Form",ca_form)
+    html = f'''<button><a target="_blank" href="/app/ca-form/{ca_form}">GO TO CA Form({ca_form})</a></button>'''
+    html += '''
+        <style>
+            th,td{
+                border:1px solid black;
+                padding:2px;
+                text-align:center;
+            }
+            tr:nth-child(even){
+                background-color:#eef3ad;
+            }
+            tr:nth-child(odd) {
+                background-color:#adebbe;
+            }
+        </style>
+    '''
+    html += f'''
+            <div style="margin-top:15px">
+                <table>
+                    <tr style="background-color:#ADD8E6;">
+                        <td>
+                            No of PAX :- {ca_doc.no_of_paxs or 0}
+                        </td>
+                        <td>
+                            No. of Family :- {ca_doc.no_of_familys or 0}
+                        </td>
+                        <td>
+                            No of Adults :- {ca_doc.no_of_adults or 0}
+                        </td>
+                        <td>
+                            Child With Bed (CWB) :- {ca_doc.no_of_childrens or 0}
+                        </td>
+                        <td>
+                            Child No Bed (CNB) :- {ca_doc.child_without_bed or 0}
+                        </td>
+                         <td>
+                            No of Infants (Below 24 month) :- {ca_doc.no_of_infant or 0}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-top:15px">
+                <h5>Family Details</h5>
+                <table>
+                    <tr style="background-color:#74bec1;color:#516091">
+                        <th>
+                            Family
+                        </th>
+                        <th>
+                            Adult
+                        </th>
+                        <th>
+                            CWB
+                        </th>
+                        <th>
+                            CNB
+                        </th>
+                        <th>
+                            No of Infants
+                        </th>
+                        <th>
+                            Room Type 
+                        </th>
+                        <th>
+                            Sharing preferences
+                        </th>
+                    </tr>'''
+    for i in ca_doc.family_details_table:
+        html += f'''
+                        
+                        <tr>
+                            <td>
+                                {i.family}
+                            </td>
+                            <td>
+                                {i.adults}
+                            </td>
+                            <td>
+                                {i.child_with_beds}
+                            </td>
+                            <td>
+                                {i.child_no_beds}
+                            </td>
+                            <td>
+                                {i.no_of_infant}
+                            </td>
+                            <td>
+                                {i.room_type}
+                            </td>
+                            <td>
+                                {i.sharing_preferences}
+                            </td>
+                        </tr>'''
+    html += f'''
+                </table>
+            </div>
+    '''
+    html += f'''
+        <div style="margin-top:15px">
+            <h5>Room Preferences</h5>
+            <table>
+                <tr style="background-color:#74bec1;color:#516091">
+                    <th>
+                        Family
+                    </th>
+                    <th>
+                        Adult
+                    </th>
+                    <th>
+                        CWB
+                    </th>
+                    <th>
+                        CNB
+                    </th>
+                    <th>
+                        No of Infants
+                    </th>
+                    <th>
+                        Allocated Room
+                    </th>
+                    <th>
+                        Room Type
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                </tr>'''
+    for i in ca_doc.room_preferences:
+        html += f'''
+                        
+                <tr>
+                    <td>
+                        {i.family}
+                    </td>
+                    <td>
+                        {i.adults}
+                    </td>
+                    <td>
+                        {i.child_wbeds}
+                    </td>
+                    <td>
+                        {i.child_nbs}
+                    </td>
+                    <td>
+                        {i.infant}
+                    </td>
+                    <td>
+                        {i.allocated_room}
+                    </td>
+                    <td>
+                        {i.room_type}
+                    </td>
+                    <td>
+                        {i.description}
+                    </td>
+                </tr>'''
+    html += f'''
+            </table>
+        </div>
+    '''
+    html += f'''
+        <div style="margin-top:15px">
+            <table>
+                <tr style="background-color:#ADD8E6;">
+                    <td>
+                        Total Rooms :- {ca_doc.total_rooms or 0}
+                    </td>
+                    <td>
+                        Hotel Category :- {frappe.utils.comma_and([i.hotel_category_name for i in ca_doc.hotel_category],False)}
+                    </td>
+                    <td colspan="2">
+                        Meal plan :- {frappe.utils.comma_and([i.meal_preferences_name for i in ca_doc.meal_plan],False)}
+                    </td>
+                </tr>
+                <tr style="background-color:#ADD8E6;">
+                    <td>
+                        Expected Budget Range per Person :- {ca_doc.expected_budget_range_per_person or 0}
+                    </td>
+                    <td>
+                        Accomodation Type :- {frappe.utils.comma_and([i.accomodation_type_name for i in ca_doc.accomodation_type],False)}
+                    </td>
+                    <td>
+                        Transfers :- {frappe.utils.comma_and([i.transfers_name for i in ca_doc.transfers],False)}
+                    </td>
+                    <td>
+                        Preferred Vehicle Type  :- {frappe.utils.comma_and([i.preferred_vehicle_name for i in ca_doc.preferred_vehicle_type],False)}
+                    </td>  
+                </tr>
+            </table>
+        </div>
+    '''
+    return html
