@@ -225,6 +225,7 @@ frappe.ui.form.on('Family Details Table', {
 				}
 			}
 		}
+		option_for_room_preferences(frm)
 	},
 	child_with_beds:function(frm){
 		diff_family(frm)
