@@ -118,24 +118,41 @@ frappe.copy_hotel = copy_hotel
 // -------------------------------------------
 
 function spotchild(ele){
-	console.log(ele.name,ele.id)
 	if(ele.name == "copy"){
 		if(ele.checked){
-			let basic_spots
-			cur_frm.doc.basic_spots.forEach(e => {
-				if(e.spots_id == ele.value){
+			// let basic_spots
+			// cur_frm.doc.basic_spots.forEach(e => {
+			// 	if(e.spots_id == ele.value){
+			// 		cur_frm.doc.basic_spots.forEach(copy =>{
+			// 			if(copy.option == "Opt 1"){
+			// 				basic_spots = copy.basic_spots
+			// 			}
+			// 		})
+			// 	}
+			// })
+			// frappe.model.set_value("Detailing Basic Spots", ele.id, 'basic_spots', basic_spots);
+			// frappe.model.set_value("Detailing Basic Spots", ele.id, ele.name, 1);
+			cur_frm.doc.basic_spots.forEach(e => {	
+				if(e.option == ele.value){
 					cur_frm.doc.basic_spots.forEach(copy =>{
-						if(copy.option == "Opt 1"){
-							basic_spots = copy.basic_spots
+						
+						if(e.spots_id == copy.spots_id){
+							if(copy.option == "Opt 1"){
+								frappe.model.set_value("Detailing Basic Spots", e.name, 'basic_spots', copy.basic_spots);
+							}
 						}
 					})
 				}
 			})
-			frappe.model.set_value("Detailing Basic Spots", ele.id, 'basic_spots', basic_spots);
 			frappe.model.set_value("Detailing Basic Spots", ele.id, ele.name, 1);
+
 		}
 		else{
-			frappe.model.set_value("Detailing Basic Spots", ele.id, 'basic_spots', '');
+			cur_frm.doc.basic_spots.forEach(e => {	
+				if(e.option == ele.value){
+					frappe.model.set_value("Detailing Basic Spots", e.name, 'basic_spots', "");
+				}
+			})
 			frappe.model.set_value("Detailing Basic Spots", ele.id, ele.name, 0);
 		}
 		html(cur_frm)
@@ -173,25 +190,36 @@ function remove_spot(spots_id){
 	// cur_frm.save()
 }
 function copy_spot(spots_id){
-	let basic_spots
+	// let basic_spots
+	// cur_frm.doc.basic_spots.forEach(ele => {
+	// 	if(ele.spots_id == spots_id){
+	// 		cur_frm.doc.basic_spots.forEach(copy =>{
+	// 			if(copy.option == "Opt 1"){
+	// 				basic_spots = copy.basic_spots
+	// 			}
+	// 		})
+	// 	}
+	// })
+	// cur_frm.doc.basic_spots.forEach(ele => {
+	// 	if(ele.spots_id == spots_id){
+	// 		cur_frm.doc.basic_spots.forEach(copy =>{
+	// 			if(copy.option != "Opt 1"){
+	// 				frappe.model.set_value(ele.doctype, ele.name, 'basic_spots', basic_spots);
+	// 				frappe.model.set_value(ele.doctype, ele.name, 'copy', 1);
+	// 			}
+	// 		})
+	// 	}
+	// })
+
 	cur_frm.doc.basic_spots.forEach(ele => {
-		if(ele.spots_id == spots_id){
-			cur_frm.doc.basic_spots.forEach(copy =>{
+		cur_frm.doc.basic_spots.forEach(copy =>{
+			if(ele.spots_id == copy.spots_id){
 				if(copy.option == "Opt 1"){
-					basic_spots = copy.basic_spots
-				}
-			})
-		}
-	})
-	cur_frm.doc.basic_spots.forEach(ele => {
-		if(ele.spots_id == spots_id){
-			cur_frm.doc.hotel_table.forEach(copy =>{
-				if(copy.option != "Opt 1"){
-					frappe.model.set_value(ele.doctype, ele.name, 'basic_spots', basic_spots);
+					frappe.model.set_value(ele.doctype, ele.name, 'basic_spots', copy.basic_spots);
 					frappe.model.set_value(ele.doctype, ele.name, 'copy', 1);
 				}
-			})
-		}
+			}
+		})
 	})
 	html(cur_frm)
 	// cur_frm.save()
@@ -646,6 +674,11 @@ var cruise_id_list = [...new Set(cruise_list)]
 					margin-top:11px;
 					border-radius: 5px;
 				}
+				.rows_single{
+					width:100%;
+					margin-top:3px;
+					border-radius: 5px;
+				}
 				.trclass{
 					border:1px solid black;
 				}
@@ -866,36 +899,41 @@ var cruise_id_list = [...new Set(cruise_list)]
 		var s_html = `
 		<html>
 			`
+		var s_op = 0
 		spots_id_list.forEach(spots_id=>{
 		s_html +=`
 				<div style="width:100%;">
 					<div class="tablediv">
-						<table class="rows">
-							<tr class="trclass">
+						<table class="rows_single">`
+						if(s_op == 0){
+							s_html += `<tr class="trclass">
 								<th class="thclass">
 									Options
 								</th>
 								`
-								for(let i=0;i<frm.doc.basic_spots.length;i++){
-									if(frm.doc.basic_spots[i].spots_id ==  spots_id){
-										s_html += `		
-											<td class="thclass">
-												<div style="text-align:center">
-												${frm.doc.basic_spots[i].option}
-												${frm.doc.basic_spots[i].option != "Opt 1"?frm.doc.basic_spots[i].copy == 1?'<span style="font-size:11px;font-weight:Bold;color:#b3ffec;">copied(opt1)</span>':'<span style="font-size:11px;font-weight:Bold;color:#ffff80;">To copy(opt1)</span>':''}
-												${frm.doc.basic_spots[i].option != "Opt 1"?frm.doc.basic_spots[i].copy == 1?'<input type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" checked >':'<input style="background-color:#ffff" type="checkbox" value='+frm.doc.basic_spots[i].spots_id+' id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" >':''}
-												</div>
-											</td>
-											`
+									for(let i=0;i<frm.doc.basic_spots.length;i++){
+										if(frm.doc.basic_spots[i].spots_id ==  spots_id){
+											s_op = 1
+											s_html += `		
+												<td class="thclass">
+													<div style="text-align:center">
+													${frm.doc.basic_spots[i].option}
+													${frm.doc.basic_spots[i].option != "Opt 1"?frm.doc.basic_spots[i].copy == 1?'<span style="font-size:11px;font-weight:Bold;color:#b3ffec;">copied(opt1)</span>':'<span style="font-size:11px;font-weight:Bold;color:#ffff80;">To copy(opt1)</span>':''}
+													${frm.doc.basic_spots[i].option != "Opt 1"?frm.doc.basic_spots[i].copy == 1?'<input type="checkbox" value="'+frm.doc.basic_spots[i].option+'" id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" checked >':'<input style="background-color:#ffff" type="checkbox" value="'+frm.doc.basic_spots[i].option+'" id='+frm.doc.basic_spots[i].name+' name="copy" onchange="frappe.spotchild(this)" >':''}
+													</div>
+												</td>
+												`
+											}
 										}
-									}
 								s_html += `	
-							</tr>
-							<tr class="trclass">
+							</tr>`
+						}
+						s_html += `<tr class="trclass">
 								<th class="thclass">
-								<a href='/app/spots/' target='_blank'>Spots</a><a href='/app/spots/new-spots-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
+								<a href='/app/spots/' target='_blank'>Spots ${s_op}</a><a href='/app/spots/new-spots-1' target='_blank'><i>${frappe.utils.icon("small-add")}</i></a>
 								</th>
 								`
+								s_op++
 								for(let i=0;i<frm.doc.basic_spots.length;i++){
 									if(frm.doc.basic_spots[i].spots_id ==  spots_id){
 										s_html += `		
@@ -917,8 +955,13 @@ var cruise_id_list = [...new Set(cruise_list)]
 							</tr>
 						</table>
 					</div>
-					<div class="sidebut">
-						<button class="copybutton"  type="button" onclick="frappe.copy_spots('${spots_id}')"><i>${frappe.utils.icon("duplicate")}</i></button>
+					<div class="sidebut">`
+					if(s_op == 2){
+						s_html += `
+						<button class="copybutton" style="margin:1px;"  type="button" onclick="frappe.copy_spots('${spots_id}')"><i>${frappe.utils.icon("duplicate")}</i></button>
+						`
+						}
+						s_html += `
 						<button class="rebutton" type="button" onclick="frappe.remove_spots('${spots_id}')">${frappe.utils.icon("delete")}</button>
 					</div>
 				</div>
