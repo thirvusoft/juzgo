@@ -33,7 +33,17 @@ frappe.ui.form.on('Project', {
                 };
             });
         }
-
+        if(frm.doc.ca_from){
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.fetch_details_from_CA",
+                args:{
+                    ca_from:frm.doc.ca_from
+                },
+                callback: function (r) {
+                    frm.set_df_property("ca_form_details","options",r.message)
+                },
+            })
+        }
     },
     phone_number:function(frm){
         if(frm.doc.phone_number){

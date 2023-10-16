@@ -558,3 +558,10 @@ def validate_check(doc,even):
 def project_exist_list(project_name):
     task_name=frappe.db.get_all("Project", filters={"project_name":["Like", "%"+project_name+"%"]}, fields=["name","project_name"])
     return task_name
+
+@frappe.whitelist()
+def fetch_details_from_CA(ca_from):
+    html = f'''
+            <h1>{ca_from}</h1>
+    '''
+    return html
