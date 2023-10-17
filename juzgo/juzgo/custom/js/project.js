@@ -1420,3 +1420,10 @@ function remove_add_fc(frm,cdt,cdn){
 //         }
 //     },
 // })
+frappe.ui.form.on('Printables', {
+	print: function(frm,cdt,cdn){
+        let row = locals[cdt][cdn]
+        var pdf_content = row.attachments;
+        var w = window.open(pdf_content);
+    },
+})
