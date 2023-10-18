@@ -211,6 +211,9 @@ scheduler_events = {
 	# "monthly": [
 	# 	"juzgo.tasks.monthly"
 	# ],
+ 	"cron":{
+		'00 10 * * *':"juzgo.juzgo.custom.py.shift_type.thirvusoft_process_auto_attendance_shift1"
+	}
 }
 
 # Testing

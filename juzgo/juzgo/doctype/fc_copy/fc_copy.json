@@ -32,8 +32,7 @@
    "fieldname": "description",
    "fieldtype": "Long Text",
    "in_list_view": 1,
-   "label": "Description",
-   "reqd": 1
+   "label": "Description"
   },
   {
    "columns": 1,
@@ -53,6 +52,7 @@
   {
    "fieldname": "file",
    "fieldtype": "Attach",
+   "in_list_view": 1,
    "label": "File"
   },
   {
@@ -64,7 +64,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-04 18:28:46.776221",
+ "modified": "2023-10-12 10:59:46.921241",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "FC Copy",

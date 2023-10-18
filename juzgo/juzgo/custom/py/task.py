@@ -148,6 +148,10 @@ def juzgo_admin_users():
         return admin_user
 
 @frappe.whitelist()
+def default_task_approvel():
+    return frappe.get_single("Projects Settings").default_task_approvel
+
+@frappe.whitelist()
 def status_approval(name,task_approval):
     task_approval = json.loads(task_approval)
     status = frappe.get_value("Task Approval", {"parent": name,"user":task_approval["user"]}, 'status')

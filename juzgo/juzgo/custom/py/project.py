@@ -565,6 +565,9 @@ def ca_form_details(ca_form):
     html = f'''<button><a target="_blank" href="/app/ca-form/{ca_form}">GO TO CA Form({ca_form})</a></button>'''
     html += '''
         <style>
+            table{
+                width:100%;
+            }
             th,td{
                 border:1px solid black;
                 padding:2px;

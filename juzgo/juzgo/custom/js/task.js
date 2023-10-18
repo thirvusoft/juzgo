@@ -104,7 +104,35 @@ frappe.ui.form.on('Task', {
         //     frm.set_df_property("task", "read_only", 0, rows.name, 'depends_on');
         //     frm.refresh_field('depends_on');
         // }
+        // for(var i=0;i<frm.doc.task_approval;i++){
+        //     if(frm.doc.task_approval[i].idx == 1 && !frm.doc.task_approval[i].user){
+        //         frappe.call({
+            
+        //             method: "juzgo.juzgo.custom.py.task.default_task_approvel",
+        //             callback: function(r) {
+        //                 frappe.model.set_value(frm.doc.task_approval[i].doctype,frm.doc.task_approval[i].name,"user",r.message)
+        //             }
+        //         })
+        //     }
+        // }
+        if(frm.is_new()){
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.task.default_task_approvel",
+                callback: function(r) {
+                    let task_approval = []
+                    if(r.message){
+                        for(let i=0;i<r.message.length;i++)task_approval.push({'user':r.message[i].user})
+                    }
+                    frm.set_value("task_approval",task_approval)
+                }
+            })
+        } else {
+            default_task_approvel(frm)
+        }
 
+    },
+    validate:function(frm){
+        default_task_approvel(frm)
     },
     assigned_to: function(frm){
         if(!frm.doc.project){
@@ -256,3 +284,28 @@ frappe.ui.form.on('Task Approval', {
         })  
 	},
 })
+ function default_task_approvel(frm){
+    frappe.call({
+        method: "juzgo.juzgo.custom.py.task.default_task_approvel",
+        callback: function(r) {
+            let task_approval = []
+            let default_approvel ='The Following User are Default Task Approvel so we cannot remove them :-<br>'
+            if(r.message){
+                for(let i=0;i<r.message.length;i++){task_approval.push(r.message[i].user); default_approvel += r.message[i].user+'<br>'}
+            }
+            frm.set_df_property("default_approvel","options",default_approvel)
+            var existing_list = []
+            for(let i=0;i<frm.doc.task_approval.length;i++)
+            {
+                existing_list.push(frm.doc.task_approval[i].user)
+            }
+            for(let i=0;i<task_approval.length;i++){
+                if(!existing_list.includes(task_approval[i])){
+                    let row = frm.add_child("task_approval")
+                    row.user = task_approval[i]
+                }
+            }
+            frm.refresh_field("task_approval")
+        }
+    })
+ }

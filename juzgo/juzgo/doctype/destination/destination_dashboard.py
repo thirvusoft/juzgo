@@ -9,10 +9,11 @@ def get_data():
 			"Project": "destination",
 			"Vehicle Detail": "destination_name",
 			"Cruise": "from_destination",
+			"Supplier": "destination_name"
 		},
 		"transactions": [
 			{"label": _(""), "items": ["Check List","Project","Vehicle Detail"]},
 			{"label": _(""), "items": ["Hotel Details","Restaurant","Cruise"]},
-			{"label": _(""), "items": ["Spots","Operator"]},
+			{"label": _(""), "items": ["Spots","Operator","Supplier"]},
 		],
 	}
