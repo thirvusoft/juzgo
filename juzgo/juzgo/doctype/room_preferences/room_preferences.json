@@ -8,8 +8,8 @@
  "field_order": [
   "family",
   "adults",
-  "child_nbs",
   "child_wbeds",
+  "child_nbs",
   "column_break_yltnz",
   "infant",
   "allocated_room",
@@ -66,13 +66,13 @@
   {
    "fieldname": "infant",
    "fieldtype": "Int",
-   "label": "Infants"
+   "label": "No of Infants"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-30 18:50:03.777447",
+ "modified": "2023-10-12 13:06:32.930904",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Room Preferences",
