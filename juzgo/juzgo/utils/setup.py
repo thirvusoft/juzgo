@@ -82,15 +82,15 @@ def setup_fields():
                 label= "Image Height",
             ),
         ],
-        'Projects Settings':[
-            dict(
-                fieldname= "default_task_approvel",
-                fieldtype= "Table",
-                insert_after= "ignore_employee_time_overlap",
-                label= "Default Task Approvel",
-                options="Default Task Approvel"
-            ),
-        ]
+        # 'Projects Settings':[
+        #     dict(
+        #         fieldname= "default_task_approvel",
+        #         fieldtype= "Table",
+        #         insert_after= "ignore_employee_time_overlap",
+        #         label= "Default Task Approvel",
+        #         options="Default Task Approvel"
+        #     ),
+        # ]
     }
     create_custom_fields(custom_fields)
 
