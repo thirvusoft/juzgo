@@ -91,17 +91,23 @@ doc_events = {
     "Notification Log" : {
         "after_insert": "juzgo.custom.py.notification_log.after_insert"
 	},
-    "Sales Invoice": {
-        "autoname": "juzgo.juzgo.custom.py.sales_invoice.autoname"
+    # "Sales Invoice": {
+    #     "autoname": "juzgo.juzgo.custom.py.sales_invoice.autoname"
+	# },
+    # "Purchase Invoice": {
+    #     "autoname": "juzgo.juzgo.custom.py.purchase_invoice.autoname"
+	# },
+    ("Purchase Invoice", "Journal Entry", "Sales Invoice", "Payment Entry"): {
+		"autoname": ["juzgo.juzgo.custom.py.naming_series.autoname"]
 	},
-    "Purchase Invoice": {
-        "autoname": "juzgo.juzgo.custom.py.purchase_invoice.autoname"
+    "Branch": {
+        "validate": "juzgo.juzgo.custom.py.branch.validate"
 	},
-    "Payment Entry": {
-        "autoname": "juzgo.juzgo.custom.py.payment_entry.autoname"
-	},
+    # "Payment Entry": {
+    #     "autoname": "juzgo.juzgo.custom.py.payment_entry.autoname"
+	# },
     "Journal Entry": {
-        "autoname": "juzgo.juzgo.custom.py.journal_entry.autoname",
+        # "autoname": "juzgo.juzgo.custom.py.journal_entry.autoname",
         "validate": "juzgo.juzgo.custom.py.journal_entry.validate"
 	}
 
