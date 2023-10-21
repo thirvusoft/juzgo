@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-10-20 17:55:30.266484",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier_mail",
+  "data",
+  "worksheet",
+  "client_copy",
+  "description",
+  "attached_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "supplier_mail",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Supplier Mail"
+  },
+  {
+   "fieldname": "data",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "worksheet",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Worksheet"
+  },
+  {
+   "fieldname": "client_copy",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Client copy"
+  },
+  {
+   "columns": 1,
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attached_by",
+   "fieldtype": "Link",
+   "label": "Attached By",
+   "options": "User"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-20 18:00:24.797254",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Project Final Copy",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
