@@ -8,4 +8,4 @@ def autoname(self,action):
                 if self.company == i.company and self.doctype == i.naming_series_for:
                     series = i.naming_series
                     self.name = make_autoname(series, doc=self)
-                    self.naming_series = parse_naming_series(series, doc=self)
+                    self.naming_series = series

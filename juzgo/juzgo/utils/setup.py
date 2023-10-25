@@ -103,6 +103,22 @@ def role_creation():
         role = frappe.new_doc("Role")
         role.role_name = "Juzgo Admin"
         role.save()
+
+    if not frappe.db.exists("File Type", "Client Copy"):
+        ft = frappe.new_doc("File Type")
+        ft.file_type = "Client Copy"
+        ft.save()
+
+    if not frappe.db.exists("File Type", "Itinerary File"):
+        ft = frappe.new_doc("File Type")
+        ft.file_type = "Itinerary File"
+        ft.save()
+
+    if not frappe.db.exists("File Type", "Air Ticketing"):
+        ft = frappe.new_doc("File Type")
+        ft.file_type = "Air Ticketing"
+        ft.save()
+        
 def service_type_table():
     list=["Land Package","Air Tickets","Bus Tickets","Train Tickets","Dharshan/Arti Tickets","Forex","Passport","Visa","Hotel Reservation","Cruise Booking"]
     for i in list:
