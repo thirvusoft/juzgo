@@ -11,22 +11,26 @@
   "no_of_nights",
   "days",
   "description",
-  "itinerary_file"
+  "itinerary_file",
+  "printable"
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "itinerary_file",
    "fieldtype": "Attach",
    "in_list_view": 1,
    "label": "Itinerary file"
   },
   {
+   "columns": 1,
    "fieldname": "cost",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Cost"
   },
   {
+   "columns": 2,
    "fieldname": "description",
    "fieldtype": "Small Text",
    "in_list_view": 1,
@@ -34,22 +38,32 @@
    "reqd": 1
   },
   {
+   "columns": 2,
    "fieldname": "no_of_nights",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Number of Nights"
+   "label": "No. of Nights"
   },
   {
+   "columns": 2,
    "fieldname": "days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Number of Days"
+   "label": "No. of Days"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "printable",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Printables"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-04 15:37:51.951773",
+ "modified": "2023-10-21 13:19:00.305365",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Itinerary Attachments",

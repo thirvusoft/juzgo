@@ -499,58 +499,42 @@ def assign_to(doc,field_name):
 
 
 def validate_check(doc,even):
-    re_list = []
-    for i in doc.destination_check_list:
-        if(i.check == 0):
-            re_list.append({'check_list_name':i.check_list_name,'members_name':i.members_name,'customer_id':i.customer_id})
-    remove_idx= []
-    for j in doc.check_list_remainder_table:
-        dele = 0
-        for i in re_list:
-            if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
-                dele = 1
-        if dele == 0:
-            remove_idx.append(j.idx-1)
-
-    for i in reversed(remove_idx):
-        doc.check_list_remainder_table.pop(i)
-    idx = 1
-    for k in doc.check_list_remainder_table:
-        k.update({'idx': idx})
-        idx = idx+1
-    for i in re_list:
-        new = 0
-        for j in doc.check_list_remainder_table:
-            if i["check_list_name"] == j.check_list and i["members_name"] == j.member_name:
-                new = 1
-        if new == 0:
-            doc.append('check_list_remainder_table',dict(
-                check_list=i["check_list_name"],
-                member_name=i['members_name'],
-                customer_id = i["customer_id"]
-            ))
-    new_fc_list=[]
+    printables =[]
     for i in doc.quotation_copy_items:
-        if i.final_copy==1:
-            new_fc_list.append(i)
-    for j in doc.supplier_final_copies:
-        if j.final_copy ==1:
-            new_fc_list.append(j)
-    for k in doc.air_ticketing:
-        if k.final_copy ==1 :
-            new_fc_list.append(k)
-    doc.fc_copy=[]
-    for h in new_fc_list:
-        doc.append("fc_copy",{
-                "supplier_mail":h.get("supplier_mail") ,
-                "attached_by":h.get("attached_by"),
-                "description":h.get("description"),
-                "file":h.get("file"),
-                "data":h.get("data")
-                
-            })
+        if i.printables == 1:printables.append({"file_type":"Client Copy","attachments":i.client_copy,"name_":i.name})
+    for i in doc.itineraries:
+        if i.printable == 1:printables.append({"file_type":"Itinerary File","attachments":i.itinerary_file,"name_":i.name})
+    for i in doc.air_ticketing:
+        if i.printables == 1:printables.append({"file_type":"Air Ticketing","attachments":i.file,"name_":i.name})
+    new_printables = []
+    for i in printables:new_printables.append(i)
+    
+    for i in printables:
+        for j in doc.printables:
+            if str(i["name_"]) == str(j.name_):
+                try:
+                    new_printables.remove(i)
+                except:
+                    pass
 
+    for i in new_printables:doc.append("printables",i)
 
+@frappe.whitelist()
+def validate_uncheck(doc_name):
+    doc = frappe.get_doc("Project",doc_name)
+    non_printables =[]
+    re_printables = []
+    for i in doc.quotation_copy_items:
+        if i.printables == 0:non_printables.append(str(i.name))
+    for i in doc.itineraries:
+        if i.printable == 0:non_printables.append(str(i.name))
+    for i in doc.air_ticketing:
+        if i.printables == 0:non_printables.append(str(i.name))
+    for i in range(len(doc.printables),0,-1):
+        if doc.printables[-i].name_:
+            if str(doc.printables[-i].name_) in non_printables:
+                re_printables.append(doc.printables[-i].name)
+    return re_printables
 
 
 
@@ -757,3 +741,6 @@ def ca_form_details(ca_form):
         </div>
     '''
     return html
+
+
+
