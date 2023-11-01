@@ -3,6 +3,7 @@
 
 # import frappe
 
+from datetime import datetime, timedelta
 
 def execute(filters=None):
 	columns, data = [], []
@@ -14,6 +15,7 @@ def execute(filters=None):
 
 
 from calendar import monthrange
+import datetime
 from itertools import groupby
 from typing import Dict, List, Optional, Tuple
 
@@ -44,6 +46,7 @@ def execute(filters: Optional[Filters] = None) -> Tuple:
 		frappe.throw(_("Please select month and year."))
 
 	attendance_map = get_attendance_map(filters)
+
 	if not attendance_map:
 		frappe.msgprint(_("No attendance records found."), alert=True, indicator="orange")
 		return [], [], None, None
@@ -188,8 +191,7 @@ def get_data(filters: Filters, attendance_map: Dict) -> List[Dict]:
 	employee_details, group_by_param_values = get_employee_related_details(filters)
 	holiday_map = get_holiday_map(filters)
 	data = []
-	frappe.errprint(employee_details)
-	frappe.errprint('++++++++++++++++++++++')
+
 
 	if filters.group_by:
 		group_by_column = frappe.scrub(filters.group_by)
@@ -199,8 +201,7 @@ def get_data(filters: Filters, attendance_map: Dict) -> List[Dict]:
 				continue
 
 			records = get_rows(employee_details[value], filters, holiday_map, attendance_map)
-			frappe.errprint(records)
-			frappe.errprint('--------------')
+
 
 			if records:
 				data.append({group_by_column: frappe.bold(value)})
@@ -208,7 +209,6 @@ def get_data(filters: Filters, attendance_map: Dict) -> List[Dict]:
 	else:
 
 		data = get_rows(employee_details, filters, holiday_map, attendance_map)
-		frappe.errprint(data)
 	return data
 
 
@@ -229,18 +229,57 @@ def get_attendance_map(filters: Filters) -> Dict:
 	}
 	"""
 	attendance_list = get_attendance_records(filters)
+	# frappe.errprint(attendance_list)
+	# frappe.errprint('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 	attendance_map = {}
 	leave_map = {}
-	frappe.errprint(attendance_list)
-	frappe.errprint('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
 
 	for d in attendance_list:
+
 		if d.status == "On Leave":
 			leave_map.setdefault(d.employee, []).append(d.day_of_month)
 			continue
 
-		attendance_map.setdefault(d.employee, {}).setdefault(d.shift, {})
-		attendance_map[d.employee][d.shift][d.day_of_month] = d.status
+		attendance_map.setdefault(d.employee, {}).setdefault(d.shift, {}).setdefault(d.day_of_month, {})
+		attendance_map[d.employee][d.shift][d.day_of_month]['status'] = d.status
+		attendance_map[d.employee][d.shift][d.day_of_month]['in_time'] = d.in_time
+		attendance_map[d.employee][d.shift][d.day_of_month]['out_time'] = d.out_time
+		attendance_map[d.employee][d.shift][d.day_of_month]['logged_hours'] = d.working_hours
+		timing=frappe.get_doc("Shift Type",d.shift)
+		if d.working_hours:
+			shifttime=timing.end_time-timing.start_time
+			shifttime = shifttime.total_seconds()/3600
+			frappe.errprint(f"""{d.day_of_month}  {timing.start_time}  {timing.end_time}   {(e:={'dd': shifttime, 'ddd': d.working_hours})}""")
+			diff=d.working_hours-shifttime
+			if diff>0:
+				attendance_map[d.employee][d.shift][d.day_of_month]['overtime'] = datetime.timedelta(seconds=diff*3600)
+			elif diff<0:
+				attendance_map[d.employee][d.shift][d.day_of_month]['undertime'] = datetime.timedelta(seconds=-1*diff*3600)
+
+
+
+
+			# work_hrs=shifttime-d.working_hours
+			frappe.errprint(d.working_hours)
+			# frappe.errprint(work_hrs)
+
+
+
+
+
+
+			# frappe.errprint(type((d.in_time).time()))			
+			# frappe.errprint((timing.start_time))
+			# frappe.errprint(type(timing.start_time))
+
+
+			# in_time=datetime.strptime(str(d.in_time), "%Y-%m-%d %H:%M:%S")
+			# time_only = in_time.time()
+
+			# overtime=((d.in_time).time()) - timing.start_time
+
+
 
 	# leave is applicable for the entire day so all shifts should show the leave entry
 	for employee, leave_days in leave_map.items():
@@ -264,7 +303,10 @@ def get_attendance_records(filters: Filters) -> List[Dict]:
 			Extract("day", Attendance.attendance_date).as_("day_of_month"),
 			Attendance.status,
 			Attendance.shift,
-			Attendance.in_time
+			Attendance.in_time,
+			Attendance.out_time,
+			Attendance.working_hours
+
 		)
 		.where(
 			(Attendance.docstatus == 1)
@@ -311,7 +353,6 @@ def get_employee_related_details(filters: Filters) -> Tuple[Dict, List]:
 		query = query.orderby(group_by)
 
 	employee_details = query.run(as_dict=True)
-	frappe.errprint(employee_details)
 	group_by_param_values = []
 	emp_map = {}
 
@@ -325,7 +366,6 @@ def get_employee_related_details(filters: Filters) -> Tuple[Dict, List]:
 	else:
 		for emp in employee_details:
 			emp_map[emp.name] = emp
-			frappe.errprint(emp_map)
 
 	return emp_map, group_by_param_values
 
@@ -371,7 +411,6 @@ def get_holiday_map(filters: Filters) -> Dict[str, List[Dict]]:
 
 	return holiday_map
 
-
 def get_rows(
 	employee_details: Dict, filters: Filters, holiday_map: Dict, attendance_map: Dict
 ) -> List[Dict]:
@@ -382,58 +421,35 @@ def get_rows(
 		emp_holiday_list = details.holiday_list or default_holiday_list
 		holidays = holiday_map.get(emp_holiday_list)
 
-		attendance = get_attendance_status_for_summarized_view(employee, filters, holidays)
-		if not attendance:
-			continue
+		if filters.summarized_view:
+			attendance = get_attendance_status_for_summarized_view(employee, filters, holidays)
+			if not attendance:
+				continue
 
-		leave_summary = get_leave_summary(employee, filters)
-		entry_exits_summary = get_entry_exits_summary(employee, filters)
+			leave_summary = get_leave_summary(employee, filters)
+			entry_exits_summary = get_entry_exits_summary(employee, filters)
 
+			row = {"employee": employee, "employee_name": details.employee_name,"indent":0}
+			set_defaults_for_summarized_view(filters, row)
+			row.update(attendance)
+			row.update(leave_summary)
+			row.update(entry_exits_summary)
 
-		frappe.errprint(entry_exits_summary)
-		frappe.errprint('//////////////////')
-		employee_attendance = attendance_map.get(employee)
-		frappe.errprint(attendance_map.get(employee))
-		frappe.errprint('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
-		if not employee_attendance:
-			continue
+			records.append(row)
+		else:
+			employee_attendance = attendance_map.get(employee)
+			if not employee_attendance:
+				continue
 
-		attendance_for_employee = get_attendance_status_for_detailed_view(
-			employee, filters, employee_attendance, holidays
-		)
+			attendance_for_employee = get_attendance_status_for_detailed_view(
+				employee, filters, employee_attendance, holidays
+			)
+			# set employee details in the first row
+			attendance_for_employee[0].update(
+				{"employee": employee, "employee_name": details.employee_name}
+			)
 
-
-		# set employee details in the first row
-		attendance_for_employee[0].update(
-			{"employee": employee, "employee_name": details.employee_name,'indent':0},
-		)
-		frappe.errprint(attendance_for_employee)
-		frappe.errprint('1111111111111111111111111111111')
-		records.extend(attendance_for_employee)
-
-
-		# row = {"employee": employee, "employee_name": details.employee_name,'indent':1}
-		row = {"employee_name": 'Time In','shift':"Time In",'indent':1}
-		row1 = {"employee_name": 'Time Out','shift':"Time Out",'indent':1}
-		row2 = {"employee_name": 'Late by','shift':"Late By",'indent':1}
-		row3 = {"employee_name": 'Early By','shift':"Early By",'indent':1}
-		row4 = {"employee_name": 'Overtime','shift':"Overtime",'indent':1}
-		row5 = {"employee_name": 'Undertime','shift':"Undertime",'indent':1}
-		row6 = {"employee_name": 'Logged Hours','shift':"Logged Hours",'indent':1}
-		# set_defaults_for_summarized_view(filters, row)
-		# row.update(attendance)
-		# row.update(leave_summary)
-		# row.update(entry_exits_summary)
-
-		records.append(row)
-		records.append(row1)
-		records.append(row2)
-		records.append(row3)
-		records.append(row4)
-		records.append(row5)
-		records.append(row6)
-		frappe.errprint(records)
-		frappe.errprint('***********')
+			records.extend(attendance_for_employee)
 
 	return records
 
@@ -539,26 +555,42 @@ def get_attendance_status_for_detailed_view(
 	"""
 	total_days = get_total_days_in_month(filters)
 	attendance_values = []
-	frappe.errprint(employee_attendance)
-	frappe.errprint(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
+	# frappe.errprint(employee_attendance)
 	for shift, status_dict in employee_attendance.items():
+		# frappe.errprint(f"status_dict {status_dict}")
 		row = {"shift": shift}
-
-
-
+		in_time_row = {'shift': 'In Time','indent':1}
+		out_time_row = {'shift': 'Out Time','indent':1}
+		late_by_row = {'shift': 'Late By','indent':1}
+		early_by_row = {'shift': 'Early By','indent':1}
+		overtime = {'shift': 'Overtime','indent':1}
+		undertime = {'shift': 'Undertime','indent':1}
+		logged_hours = {'shift': 'Logged Hours','indent':1}
 		for day in range(1, total_days + 1):
-			status = status_dict.get(day)
+			status = (status_dict.get(day) or {}).get('status')
 			if status is None and holidays:
 				status = get_holiday_status(day, holidays)
 
 			abbr = status_map.get(status, "")
 			row[day] = abbr
+			in_time_row[day] = str((date_time.time()) if (type(date_time:=((status_dict.get(day) or {}).get('in_time'))) == datetime.datetime) else date_time or '')
+			out_time_row[day] = str((date_time.time()) if (type(date_time:=((status_dict.get(day) or {}).get('out_time'))) == datetime.datetime) else date_time or '')
+			logged_hours[day] = (status_dict.get(day) or {}).get('logged_hours')
+			overtime[day] = (status_dict.get(day) or {}).get('overtime')
+			undertime[day] = (status_dict.get(day) or {}).get('undertime')
+
+
 
 		attendance_values.append(row)
-		frappe.errprint(attendance_values)
-		frappe.errprint('xxxxxxxxxxx')
-
-
+		attendance_values.append(in_time_row)
+		attendance_values.append(out_time_row)
+		attendance_values.append(late_by_row)
+		attendance_values.append(early_by_row)
+		attendance_values.append(overtime)
+		attendance_values.append(undertime)
+		attendance_values.append(logged_hours)
+	
+		
 
 	return attendance_values
 
