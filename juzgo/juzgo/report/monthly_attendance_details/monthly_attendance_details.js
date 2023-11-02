@@ -59,12 +59,12 @@ frappe.query_reports["Monthly Attendance Details"] = {
 			"fieldtype": "Select",
 			"options": ["","Branch","Grade","Department","Designation"]
 		},
-		{
-			"fieldname":"summarized_view",
-			"label": __("Summarized View"),
-			"fieldtype": "Check",
-			"Default": 0,
-		}
+		// {
+		// 	"fieldname":"summarized_view",
+		// 	"label": __("Summarized View"),
+		// 	"fieldtype": "Check",
+		// 	"Default": 0,
+		// }
 	],
 	onload: function() {
 		return  frappe.call({

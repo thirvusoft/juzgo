@@ -1,19 +1,8 @@
 # Copyright (c) 2023, Thirvusoft Pvt Limited and contributors
 # For license information, please see license.txt
 
-# import frappe
 
 from datetime import datetime, timedelta
-
-def execute(filters=None):
-	columns, data = [], []
-	return columns, data
-
-
-# Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
-# License: GNU General Public License v3. See license.txt
-
-
 from calendar import monthrange
 import datetime
 from itertools import groupby
@@ -726,6 +715,7 @@ def get_chart_data(attendance_map: Dict, filters: Filters) -> Dict:
 	absent = []
 	present = []
 	leave = []
+
 
 	for day in days:
 		labels.append(day["label"])
