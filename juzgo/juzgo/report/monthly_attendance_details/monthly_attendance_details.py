@@ -150,7 +150,7 @@ def get_columns(filters: Filters) -> List[Dict]:
 	# 		},
 	# 	]
 	# )
-	columns.append({"label": _("Shift"), "fieldname": "shift", "fieldtype": "Data", "width": 120})
+	columns.append({"label": _("Shift"), "fieldname": "shift", "fieldtype": "Data", "width": 130})
 	columns.extend(get_columns_for_days(filters))
 
 	return columns
@@ -161,8 +161,9 @@ def get_columns_for_leave_types() -> List[Dict]:
 	types = []
 	for entry in leave_types:
 		types.append(
-			{"label": entry, "fieldname": frappe.scrub(entry), "fieldtype": "Float", "width": 120}
+			{"": entry,}
 		)
+	
 
 	return types
 
@@ -178,7 +179,7 @@ def get_columns_for_days(filters: Filters) -> List[Dict]:
 		weekday = day_abbr[getdate(date).weekday()]
 		# sets days as 1 Mon, 2 Tue, 3 Wed
 		label = "{} {}".format(cstr(day), weekday)
-		days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 65})
+		days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 100})
 
 	return days
 
@@ -229,8 +230,7 @@ def get_attendance_map(filters: Filters) -> Dict:
 	}
 	"""
 	attendance_list = get_attendance_records(filters)
-	# frappe.errprint(attendance_list)
-	# frappe.errprint('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
 	attendance_map = {}
 	leave_map = {}
 
@@ -246,39 +246,19 @@ def get_attendance_map(filters: Filters) -> Dict:
 		attendance_map[d.employee][d.shift][d.day_of_month]['in_time'] = d.in_time
 		attendance_map[d.employee][d.shift][d.day_of_month]['out_time'] = d.out_time
 		attendance_map[d.employee][d.shift][d.day_of_month]['logged_hours'] = d.working_hours
+
+		attendance_map[d.employee][d.shift][d.day_of_month]['late_by_row'] = d.custom_late_by
+		attendance_map[d.employee][d.shift][d.day_of_month]['early_by_row'] = d.custom_early_by
+		
 		timing=frappe.get_doc("Shift Type",d.shift)
 		if d.working_hours:
 			shifttime=timing.end_time-timing.start_time
 			shifttime = shifttime.total_seconds()/3600
-			frappe.errprint(f"""{d.day_of_month}  {timing.start_time}  {timing.end_time}   {(e:={'dd': shifttime, 'ddd': d.working_hours})}""")
 			diff=d.working_hours-shifttime
 			if diff>0:
-				attendance_map[d.employee][d.shift][d.day_of_month]['overtime'] = datetime.timedelta(seconds=diff*3600)
+				attendance_map[d.employee][d.shift][d.day_of_month]['overtime'] = datetime.timedelta(seconds=diff*3600) or 0
 			elif diff<0:
-				attendance_map[d.employee][d.shift][d.day_of_month]['undertime'] = datetime.timedelta(seconds=-1*diff*3600)
-
-
-
-
-			# work_hrs=shifttime-d.working_hours
-			frappe.errprint(d.working_hours)
-			# frappe.errprint(work_hrs)
-
-
-
-
-
-
-			# frappe.errprint(type((d.in_time).time()))			
-			# frappe.errprint((timing.start_time))
-			# frappe.errprint(type(timing.start_time))
-
-
-			# in_time=datetime.strptime(str(d.in_time), "%Y-%m-%d %H:%M:%S")
-			# time_only = in_time.time()
-
-			# overtime=((d.in_time).time()) - timing.start_time
-
+				attendance_map[d.employee][d.shift][d.day_of_month]['undertime'] = datetime.timedelta(seconds=-1*diff*3600) or 0
 
 
 	# leave is applicable for the entire day so all shifts should show the leave entry
@@ -289,7 +269,7 @@ def get_attendance_map(filters: Filters) -> Dict:
 
 		for day in leave_days:
 			for shift in attendance_map[employee].keys():
-				attendance_map[employee][shift][day] = "On Leave"
+				attendance_map[employee][shift][day] ={"status": "On Leave"}
 
 	return attendance_map
 
@@ -305,7 +285,10 @@ def get_attendance_records(filters: Filters) -> List[Dict]:
 			Attendance.shift,
 			Attendance.in_time,
 			Attendance.out_time,
-			Attendance.working_hours
+			Attendance.working_hours,
+			Attendance.custom_late_by,
+			Attendance.custom_early_by,
+			
 
 		)
 		.where(
@@ -414,42 +397,51 @@ def get_holiday_map(filters: Filters) -> Dict[str, List[Dict]]:
 def get_rows(
 	employee_details: Dict, filters: Filters, holiday_map: Dict, attendance_map: Dict
 ) -> List[Dict]:
+	get_columns_for_leave_types()
 	records = []
+	row={}
+	row1={}
+	row2={}
 	default_holiday_list = frappe.get_cached_value("Company", filters.company, "default_holiday_list")
 
 	for employee, details in employee_details.items():
 		emp_holiday_list = details.holiday_list or default_holiday_list
 		holidays = holiday_map.get(emp_holiday_list)
 
-		if filters.summarized_view:
-			attendance = get_attendance_status_for_summarized_view(employee, filters, holidays)
-			if not attendance:
-				continue
 
-			leave_summary = get_leave_summary(employee, filters)
-			entry_exits_summary = get_entry_exits_summary(employee, filters)
+		attendance = get_attendance_status_for_summarized_view(employee, filters, holidays)
+		if not attendance:
+			continue
 
-			row = {"employee": employee, "employee_name": details.employee_name,"indent":0}
-			set_defaults_for_summarized_view(filters, row)
-			row.update(attendance)
-			row.update(leave_summary)
-			row.update(entry_exits_summary)
+		leave_summary = get_leave_summary(employee, filters)
+		entry_exits_summary = get_entry_exits_summary(employee, filters)
 
-			records.append(row)
-		else:
-			employee_attendance = attendance_map.get(employee)
-			if not employee_attendance:
-				continue
+		# row = {"employee": employee, "employee_name": details.employee_name,"indent":0}
+		set_defaults_for_summarized_view(filters, row)
+		row1={"shift":"<b style=color:red>Total Late by Count</b>","2":"<b <b style=color:red>Total Early by Count</b>",'indent':1}
+		row2={'indent':1}
 
-			attendance_for_employee = get_attendance_status_for_detailed_view(
-				employee, filters, employee_attendance, holidays
-			)
-			# set employee details in the first row
-			attendance_for_employee[0].update(
-				{"employee": employee, "employee_name": details.employee_name}
-			)
+		row.update(attendance)
+		row2.update(leave_summary)
+		row1.update(entry_exits_summary)
 
-			records.extend(attendance_for_employee)
+
+		employee_attendance = attendance_map.get(employee)
+		if not employee_attendance:
+			continue
+
+		attendance_for_employee = get_attendance_status_for_detailed_view(
+			employee, filters, employee_attendance, holidays
+		)
+		# set employee details in the first row
+		attendance_for_employee[0].update(
+			{"employee": employee, "employee_name": details.employee_name}
+		)
+
+		records.extend(attendance_for_employee)
+		records.append(row)
+		records.append(row1)
+		records.append(row2)
 
 	return records
 
@@ -484,11 +476,17 @@ def get_attendance_status_for_summarized_view(
 			total_unmarked_days += 1
 
 	return {
-		"total_present": summary.total_present + summary.total_half_days,
-		"total_leaves": summary.total_leaves + summary.total_half_days,
-		"total_absent": summary.total_absent,
-		"total_holidays": total_holidays,
-		"unmarked_days": total_unmarked_days,
+		"shift":"<b style=color:green>Total Present</b>",
+		"1": f"<b style= color:green>{summary.total_present + summary.total_half_days} </b>",
+		"2":"<b style=color:red>Total Leaves</b>",
+		"3": f"<b style = color:red>{summary.total_leaves + summary.total_half_days}</b>",
+		"4":"<b style=color:red>Total Absent</b>",
+		"5": f"<b style = color:red>{summary.total_absent}</b>",
+		"6":"<b style=color:red>Total Holidays</b>",
+		"7": f"<b style = color:red>{total_holidays}</b>",
+		"8":"<b style=color:orange>Unmarked Days</b>",
+		"9": f"<b style = color:orange>{total_unmarked_days}</b>",
+		"indent":1,
 	}
 
 
@@ -555,17 +553,25 @@ def get_attendance_status_for_detailed_view(
 	"""
 	total_days = get_total_days_in_month(filters)
 	attendance_values = []
-	# frappe.errprint(employee_attendance)
+	zero_duration = timedelta(hours=0, minutes=0, seconds=0)
+	time = timedelta(hours=0, minutes=0, seconds=0)
+	timeunder = timedelta(hours=0, minutes=0, seconds=0)
+
+	early=""
+	late =""
+
 	for shift, status_dict in employee_attendance.items():
-		# frappe.errprint(f"status_dict {status_dict}")
+
 		row = {"shift": shift}
-		in_time_row = {'shift': 'In Time','indent':1}
-		out_time_row = {'shift': 'Out Time','indent':1}
-		late_by_row = {'shift': 'Late By','indent':1}
-		early_by_row = {'shift': 'Early By','indent':1}
-		overtime = {'shift': 'Overtime','indent':1}
-		undertime = {'shift': 'Undertime','indent':1}
-		logged_hours = {'shift': 'Logged Hours','indent':1}
+		in_time_row = {'shift': '<b>In Time</b>','indent':1}
+		out_time_row = {'shift': '<b>Out Time</b>','indent':1}
+		late_by_row = {'shift': '<b>Late By</b>','indent':1}
+		early_by_row = {'shift': '<b>Early By</b>','indent':1}
+		overtime = {'shift': '<b>Overtime</b>','indent':1}
+		undertime = {'shift': '<b>Undertime</b>','indent':1}
+		logged_hours = {'shift': '<b>Logged Hours</b>','indent':1}
+		tot_overtime={}
+		tot_undertime={}
 		for day in range(1, total_days + 1):
 			status = (status_dict.get(day) or {}).get('status')
 			if status is None and holidays:
@@ -576,10 +582,27 @@ def get_attendance_status_for_detailed_view(
 			in_time_row[day] = str((date_time.time()) if (type(date_time:=((status_dict.get(day) or {}).get('in_time'))) == datetime.datetime) else date_time or '')
 			out_time_row[day] = str((date_time.time()) if (type(date_time:=((status_dict.get(day) or {}).get('out_time'))) == datetime.datetime) else date_time or '')
 			logged_hours[day] = (status_dict.get(day) or {}).get('logged_hours')
-			overtime[day] = (status_dict.get(day) or {}).get('overtime')
-			undertime[day] = (status_dict.get(day) or {}).get('undertime')
+			overtime[day] = (status_dict.get(day) or {}).get('overtime')  
+			undertime[day] = (status_dict.get(day) or {}).get('undertime') 
+			late_by_row[day] = (status_dict.get(day) or {}).get('late_by_row') or ''
+			early_by_row[day] = (status_dict.get(day) or {}).get('early_by_row') or ''
+
+			tot_overtime[day] = (status_dict.get(day) or {}).get('overtime')  or zero_duration
+			tot_undertime[day] = (status_dict.get(day) or {}).get('undertime') or zero_duration
 
 
+
+			time+=tot_overtime[day]
+			timeunder+=tot_undertime[day]
+
+			late+=late_by_row[day]
+			early+=early_by_row[day]
+
+		value_time = time.total_seconds()- timeunder.total_seconds()
+		value_time=datetime.timedelta(seconds=value_time) or 0
+
+		total_over={"shift":"<b style=color:blue>Total Overtime hrs</b>",'1':f'<b style=color:#6A5ACD>{time}</b>','2':"<b style=color:blue>Total Undertime hrs</b>","3":f'<b style=color:#6A5ACD>{timeunder}</b>',"4":"<b style=color:blue>Total Time</b>","5":f'<b style=color:#6A5ACD>{value_time}</b>',"indent":1}
+		total_early={"shift":"<b style=color:blue>Total Late by hrs</b>",'1':f'<b style=color:#6A5ACD>{late}</b>','2':"<b style=color:blue>Total Early by hrs</b>","3":f'<b style=color:#6A5ACD>{early}</b>',"indent":1}
 
 		attendance_values.append(row)
 		attendance_values.append(in_time_row)
@@ -589,6 +612,9 @@ def get_attendance_status_for_detailed_view(
 		attendance_values.append(overtime)
 		attendance_values.append(undertime)
 		attendance_values.append(logged_hours)
+		attendance_values.append(total_over)
+		attendance_values.append(total_early)
+
 	
 		
 
@@ -615,7 +641,6 @@ def get_leave_summary(employee: str, filters: Filters) -> Dict[str, float]:
 	Attendance = frappe.qb.DocType("Attendance")
 	day_case = frappe.qb.terms.Case().when(Attendance.status == "Half Day", 0.5).else_(1)
 	sum_leave_days = Sum(day_case).as_("leave_days")
-
 	leave_details = (
 		frappe.qb.from_(Attendance)
 		.select(Attendance.leave_type, sum_leave_days)
@@ -631,10 +656,17 @@ def get_leave_summary(employee: str, filters: Filters) -> Dict[str, float]:
 	).run(as_dict=True)
 
 	leaves = {}
-	for d in leave_details:
-		leave_type = frappe.scrub(d.leave_type)
-		leaves[leave_type] = d.leave_days
+	index = 1
 
+	for d in leave_details:
+		if index == 1:
+			leaves['shift'] = f"<b>{d.leave_type}</b>"
+		else:
+			leaves[str(index)] =f"<b>{d.leave_type}</b>"
+
+		index += 1
+		leaves[str(index)] = d.leave_days
+		index += 1
 	return leaves
 
 
@@ -645,10 +677,10 @@ def get_entry_exits_summary(employee: str, filters: Filters) -> Dict[str, float]
 	Attendance = frappe.qb.DocType("Attendance")
 
 	late_entry_case = frappe.qb.terms.Case().when(Attendance.late_entry == "1", "1")
-	count_late_entries = Count(late_entry_case).as_("total_late_entries")
+	count_late_entries = Count(late_entry_case).as_("1")
 
 	early_exit_case = frappe.qb.terms.Case().when(Attendance.early_exit == "1", "1")
-	count_early_exits = Count(early_exit_case).as_("total_early_exits")
+	count_early_exits = Count(early_exit_case).as_("3")
 
 	entry_exits = (
 		frappe.qb.from_(Attendance)
@@ -662,22 +694,8 @@ def get_entry_exits_summary(employee: str, filters: Filters) -> Dict[str, float]
 		)
 	).run(as_dict=True)
 
+
 	return entry_exits[0]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
