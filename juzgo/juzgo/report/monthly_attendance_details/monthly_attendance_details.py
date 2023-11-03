@@ -545,6 +545,7 @@ def get_attendance_status_for_detailed_view(
 	zero_duration = timedelta(hours=0, minutes=0, seconds=0)
 	time = timedelta(hours=0, minutes=0, seconds=0)
 	timeunder = timedelta(hours=0, minutes=0, seconds=0)
+	timeunder = timedelta(hours=0, minutes=0, seconds=0)
 
 	early=""
 	late =""
@@ -579,16 +580,43 @@ def get_attendance_status_for_detailed_view(
 			tot_overtime[day] = (status_dict.get(day) or {}).get('overtime')  or zero_duration
 			tot_undertime[day] = (status_dict.get(day) or {}).get('undertime') or zero_duration
 
-
-
 			time+=tot_overtime[day]
 			timeunder+=tot_undertime[day]
 
 			late+=late_by_row[day]
 			early+=early_by_row[day]
 
-		value_time = time.total_seconds()- timeunder.total_seconds()
-		value_time=datetime.timedelta(seconds=value_time) or 0
+		value_time =(timeunder.total_seconds()/3600)- (time.total_seconds()/3600)
+
+		if value_time>=0:
+				value_time = datetime.timedelta(seconds=value_time*3600) 
+		elif value_time<0:
+				value_time = datetime.timedelta(seconds=-1*value_time*3600) 
+
+
+		time=time.total_seconds()
+		hours = time // 3600
+		time %= 3600
+		minutes = time // 60
+		seconds = time % 60
+		time=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
+
+
+		timeunder=timeunder.total_seconds()
+		hours = timeunder // 3600
+		timeunder %= 3600
+		minutes = timeunder // 60
+		seconds = timeunder % 60
+		timeunder=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
+
+		value_time=value_time.total_seconds()
+		hours = value_time // 3600
+		value_time %= 3600
+		minutes = value_time // 60
+		seconds = value_time % 60
+		value_time=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
+
+
 
 		total_over={"shift":"<b style=color:blue>Total Overtime hrs</b>",'1':f'<b style=color:#6A5ACD>{time}</b>','2':"<b style=color:blue>Total Undertime hrs</b>","3":f'<b style=color:#6A5ACD>{timeunder}</b>',"4":"<b style=color:blue>Total Time</b>","5":f'<b style=color:#6A5ACD>{value_time}</b>',"indent":1}
 		total_early={"shift":"<b style=color:blue>Total Late by hrs</b>",'1':f'<b style=color:#6A5ACD>{late}</b>','2':"<b style=color:blue>Total Early by hrs</b>","3":f'<b style=color:#6A5ACD>{early}</b>',"indent":1}
