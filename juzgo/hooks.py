@@ -99,7 +99,10 @@ doc_events = {
 	},
     "Journal Entry": {
         "validate": "juzgo.juzgo.custom.py.journal_entry.validate"
-	}
+	},
+    
+	"Attendance":{
+        "validate":"juzgo.juzgo.utils.attendance.early_late_time"}
 
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
