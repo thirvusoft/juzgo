@@ -5,6 +5,8 @@ def validate(doc,actions):
 		assigned_to(doc,"lead_owner")
 	if doc.assign_to and (actions == "after_insert" or not doc.is_new()):
 		assigned_to(doc,"assign_to")
+	if actions == "after_insert":
+		doc.reload()
 
 def assigned_to(doc,field_name):
 	doc_ = frappe.new_doc("ToDo")        

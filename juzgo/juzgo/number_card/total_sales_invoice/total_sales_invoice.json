@@ -1,5 +1,5 @@
 {
- "aggregate_function_based_on": "base_net_total",
+ "aggregate_function_based_on": "base_grand_total",
  "color": "#29CD42",
  "creation": "2023-10-10 12:11:01.033867",
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "is_public": 1,
  "is_standard": 1,
  "label": "Total Sales Invoice",
- "modified": "2023-10-10 15:22:56.853004",
+ "modified": "2023-10-26 18:42:54.833206",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Total Sales Invoice",

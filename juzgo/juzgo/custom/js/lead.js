@@ -11,5 +11,19 @@ frappe.ui.form.on('Lead', {
                 })
 			}, "Create");
         },300)
+        frm.set_query("followed_by","follows_ups", function () {
+            return {
+                filters: {
+                    enabled: 1,
+                },
+            };
+        });
+        frm.set_query("next_followup_by","follows_ups", function () {
+            return {
+                filters: {
+                    enabled: 1,
+                },
+            };
+        });
     }
 })

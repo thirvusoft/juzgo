@@ -22,6 +22,8 @@ frappe.ui.form.on('Project', {
                         
                     }
                     frm.refresh_field("printables");
+                    if (frm.doc.__unsaved)
+                        frm.save()
                 }
             })
         }
@@ -159,6 +161,7 @@ frappe.ui.form.on('Project', {
     },
     update_passport_check_list: function(frm){
         add_passport_details(frm)
+        multi_customer(frm)
         visa_list(frm)
         frm.save()
     },
