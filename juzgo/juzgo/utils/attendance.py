@@ -21,7 +21,7 @@ def early_late_time(self,event):
     if self.out_time:
         shift = frappe.get_doc('Shift Type', self.shift)
         out_time_str = self.out_time
-        if isinstance(self.in_time, str):
+        if isinstance(self.out_time, str):
             out_time_str = datetime.strptime(self.out_time, '%Y-%m-%d %H:%M:%S')
 
         start_time_str = str(shift.end_time)
