@@ -50,14 +50,16 @@ def assign_row(row, is_payment=None):
 				total[scrub(ah.name)] = 0
 			for j in row:
 				if j.get('voucher_no'):
+					for ah in account_head:
+						j[scrub(ah.name)] = 0
 					account_head_name = frappe.get_all("Payment Entry Reference",filters={"reference_name":j.get('voucher_no')},fields=["parent","allocated_amount"])
 					for set_amt_acc in account_head_name:
 						p_entry = frappe.get_doc("Payment Entry",set_amt_acc.parent)
 						if p_entry.payment_type == "Receive":
-							j[scrub(p_entry.paid_to)] = (set_amt_acc.get('allocated_amount') or 0)
+							j[scrub(p_entry.paid_to)] = j[scrub(p_entry.paid_to)] + (set_amt_acc.get('allocated_amount') or 0)
 							total[scrub(p_entry.paid_to)] = total[scrub(p_entry.paid_to)] + (set_amt_acc.get('allocated_amount') or 0)
 						elif p_entry.payment_type == "Pay":
-							j[scrub(p_entry.paid_from)] = (set_amt_acc.get('allocated_amount') or 0)
+							j[scrub(p_entry.paid_from)] = j[scrub(p_entry.paid_from)] +(set_amt_acc.get('allocated_amount') or 0)
 							total[scrub(p_entry.paid_from)] = total[scrub(p_entry.paid_from)] + (set_amt_acc.get('allocated_amount') or 0)
 				total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
 				total['tax'] = total['tax'] + (j.get('tax') or 0)

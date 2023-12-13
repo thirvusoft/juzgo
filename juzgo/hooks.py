@@ -16,7 +16,7 @@ app_include_js = ["juzgo.bundle.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/juzgo/css/juzgo.css"
-web_include_js = ["juzgo.bundle.js"]
+web_include_js = ["juzgo.bundle.js", "juzgoweb.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "juzgo/public/scss/website"
@@ -102,7 +102,8 @@ doc_events = {
 	},
     
 	"Attendance":{
-        "validate":"juzgo.juzgo.utils.attendance.early_late_time"}
+         "validate":"juzgo.juzgo.utils.attendance.early_late_time"
+	}
 
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
