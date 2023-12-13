@@ -174,7 +174,6 @@ def add_visa_des(destination,doc,old_destination_check_list,check_list_for):
         for j in old_destination_check_list:
             if ((i['members_name'] == j.members_name) and (str(i['age']) == str(j.age)) and (i['gender'] == j.gender) and (i['check_list_name'] == j.check_list_name) and (i['family_member_details_name'] == j.family_member_details_name) and (i['customer_id'] == j.customer_id) and (i['destination'] == j.destination)):
                 i['check'] = j.check
-    print("-----------------------",list)
     return(list)
 
 @frappe.whitelist()
