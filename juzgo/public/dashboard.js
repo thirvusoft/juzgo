@@ -1,17 +1,16 @@
 class FormDashboard extends frappe.ui.form.Dashboard {
     after_refresh() {
-        console.log("ll")
 		// show / hide new buttons (if allowed)
 		this.links_area.body.find(".btn-new").each((i, el) => {
-            if(!frappe.user.has_role("Juzgo Admin") || !frappe.user.has_role("Thirvu Admin")){
-			    if($(el).attr("data-doctype") != "Project"){
+            if(frappe.user.has_role("Juzgo Admin") || frappe.user.has_role("Thirvu Admin")){
+			    if (this.frm.can_create($(el).attr("data-doctype"))) {
+                    $(el).removeClass("hidden");
+                }
+			} else {
+                if($(el).attr("data-doctype") != "Project"){
                     if (this.frm.can_create($(el).attr("data-doctype"))) {
                         $(el).removeClass("hidden");
                     }
-                }
-			} else {
-                if (this.frm.can_create($(el).attr("data-doctype"))) {
-                    $(el).removeClass("hidden");
                 }
             }
 		});
