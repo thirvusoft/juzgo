@@ -131,10 +131,12 @@ doc_events = {
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-#	"methods": "juzgo.utils.jinja_methods",
-#	"filters": "juzgo.utils.jinja_filters"
-# }
+jinja = {
+    "methods":[
+        	"juzgo.juzgo.custom.py.sales_invoice.tax_details"
+	]
+	# "filters": "juzgo.utils.jinja_filters"
+}
 
 # Installation
 # ------------
