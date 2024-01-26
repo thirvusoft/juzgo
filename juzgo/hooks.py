@@ -12,7 +12,8 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/juzgo/css/juzgo.css"
-app_include_js = ["juzgo.bundle.js"]
+# app_include_css = ["juzgo.bundle.css"]
+app_include_js = ["juzgo.bundle.js","/assets/juzgo/node_modules/vuetify/dist/vuetify.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/juzgo/css/juzgo.css"

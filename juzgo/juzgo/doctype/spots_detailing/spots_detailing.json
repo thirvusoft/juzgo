@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-19 19:24:20.482019",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "options",
+  "spots",
+  "transfer_type",
+  "det_id",
+  "det_idx"
+ ],
+ "fields": [
+  {
+   "fieldname": "options",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Options"
+  },
+  {
+   "fieldname": "transfer_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transfer Type ",
+   "options": "\nPrivate\nSIC"
+  },
+  {
+   "fieldname": "spots",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Spots",
+   "options": "Spots"
+  },
+  {
+   "fieldname": "det_id",
+   "fieldtype": "Data",
+   "label": "Det ID"
+  },
+  {
+   "fieldname": "det_idx",
+   "fieldtype": "Data",
+   "label": "Det Idx"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-01-26 12:58:38.112968",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Spots Detailing",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
