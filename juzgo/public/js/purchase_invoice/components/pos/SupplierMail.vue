@@ -23,7 +23,7 @@
           <v-spacer></v-spacer>
           <v-dialog
             v-model="visaSupplierdialog"
-            max-width="500px"
+            max-width="700px"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -64,7 +64,7 @@
                         label="Supplier"
                       ></v-text-field>
                     </v-col>
-                    <v-col
+                    <!-- <v-col
                       cols="12"
                       sm="6"
                       md="4"
@@ -73,7 +73,7 @@
                         v-model="visaSuppliereditedItem.supplier_name"
                         label="Supplier Name"
                       ></v-text-field>
-                    </v-col>
+                    </v-col> -->
                     <v-col
                       cols="12"
                       sm="6"
@@ -82,6 +82,94 @@
                       <v-text-field
                         v-model="visaSuppliereditedItem.supplier_mail_id"
                         label="Supplier Email ID"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <!-- <v-card-subtitle>
+                    <span class="text-h6">CA Form Detailes</span>
+                  </v-card-subtitle> -->
+                  
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.travel_from_dates"
+                        label="Travel From dates"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.travel_to_dates"
+                        label="Travel To dates"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.duration_of_stay_in_destination"
+                        label="Duration of stay in Destination"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.no_of_adults"
+                        label="No of Adults"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.no_of_child"
+                        label="No of Child"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.child_ages"
+                        label="Child Ages"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.visa_type"
+                        label="Visa Type"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="visaSuppliereditedItem.questions"
+                        label="Questions"
                       ></v-text-field>
                     </v-col>
                   </v-row>
