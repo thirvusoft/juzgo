@@ -472,7 +472,7 @@
    "print_hide_if_no_value": 0,
    "print_width": null,
    "read_only": 0,
-   "read_only_depends_on": null,
+   "read_only_depends_on": "eval:!doc.__islocal",
    "report_hide": 0,
    "reqd": 1,
    "search_index": 0,

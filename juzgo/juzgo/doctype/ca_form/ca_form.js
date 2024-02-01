@@ -2,6 +2,9 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('CA Form', {
+	onload: function(frm){
+		option_for_room_preferences(frm)
+	},
 	temple: function(frm) {
 		frappe.call({
 			method: "juzgo.juzgo.doctype.ca_form.ca_form.temple_notes",
@@ -178,6 +181,7 @@ function option_for_room_preferences(frm){
 			'options',
 			option
 			);
+			frm.fields_dict.room_preferences.grid.refresh()
 	}
 	
 }

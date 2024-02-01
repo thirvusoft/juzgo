@@ -538,13 +538,15 @@ class FormTimeline extends BaseTimeline {
 
 		let edit_button = $();
 		let current_user = frappe.session.user;
-		if (["Administrator", doc.owner].includes(current_user)) {
+		//thirvusoft customization
+		if (["Administrator", "Juzgo Admin","Thirvu Admin"].includes(current_user)) {
 			edit_button = $(`<button class="btn btn-link action-btn">${__("Edit")}</a>`).click(
 				() => {
 					edit_button.edit_mode ? edit_box.submit() : edit_button.toggle_edit_mode();
 				}
 			);
 		}
+		//thirvusoft end
 
 		edit_button.toggle_edit_mode = () => {
 			edit_button.edit_mode = !edit_button.edit_mode;
