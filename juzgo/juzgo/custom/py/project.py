@@ -575,7 +575,7 @@ def ca_form_details(ca_form):
                             No. of Family :- {ca_doc.no_of_familys or 0}
                         </td>
                         <td>
-                            No of Adults :- {ca_doc.no_of_adults or 0}
+                            No of Adults :- {ca_doc.no_of_adult or 0}
                         </td>
                         <td>
                             Child With Bed (CWB) :- {ca_doc.no_of_childrens or 0}

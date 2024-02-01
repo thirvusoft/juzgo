@@ -12,20 +12,35 @@ frappe.ui.form.ControlAttach = class ControlAttach extends frappe.ui.form.Contro
 					me.on_attach_doc_image();
 				},
 			});
-		this.$value = $(
-			`<div class="attached-file flex justify-between align-center">
-				<div class="ellipsis">
-					<i class="fa fa-paperclip"></i>
-					<a class="attached-file-link" target="_blank"></a>
-				</div>
-				<div>
-					<a class="btn btn-xs btn-default" data-action="reload_attachment">${__("Reload File")}</a>
-					<a class="btn btn-xs btn-default" data-action="clear_attachment">${__("Clear")}</a>
-				</div>
-			</div>`
-		)
-			.prependTo(me.input_area)
-			.toggle(false);
+		// thirvusoft customization
+		if (frappe.user.has_role("System Manager") || frappe.user.has_role("Juzgo Admin") || frappe.user.has_role("Thirvusoft Admin")) {
+			this.$value = $(
+				`<div class="attached-file flex justify-between align-center">
+					<div class="ellipsis">
+						<i class="fa fa-paperclip"></i>
+						<a class="attached-file-link" target="_blank"></a>
+					</div>
+					<div>
+						
+						<a class="btn btn-xs btn-default" data-action="clear_attachment">${__("Clear")}</a>
+					</div>
+				</div>`
+			)
+				.prependTo(me.input_area)
+				.toggle(false);
+		} else {
+			this.$value = $(
+				`<div class="attached-file flex justify-between align-center">
+					<div class="ellipsis">
+						<i class="fa fa-paperclip"></i>
+						<a class="attached-file-link" target="_blank"></a>
+					</div>
+				</div>`
+			)
+				.prependTo(me.input_area)
+				.toggle(false);
+		}
+		//thirvusoft end
 		this.input = this.$input.get(0);
 		this.set_input_attributes();
 		this.has_input = true;
@@ -106,7 +121,9 @@ frappe.ui.form.ControlAttach = class ControlAttach extends frappe.ui.form.Contro
 			let file_url_split = this.value.split("/");
 			filename = file_url_split[file_url_split.length - 1]
 			await frappe.db.get_value("File", {"file_url": "/files/"+filename}, "file_url", (r) => {
-				this.value = r.file_url
+				if(r.file_url){
+					this.value = r.file_url
+				}
 			});
 			//end 
 			this.$value

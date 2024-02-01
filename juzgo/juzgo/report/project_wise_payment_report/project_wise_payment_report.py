@@ -18,13 +18,13 @@ def assign_row(row, is_payment=None):
 	if is_payment and row:
 		for i in is_payment:
 			rows.append({'voucher_no':frappe.bold(i+" Advance Amount")})
-			total = {'party':frappe.bold(i+" Advance Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+			total = {'party':frappe.bold(i+" Advance Total"),'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 			account_head = frappe.get_all("Account",{"account_type":['in',['Cash','Bank']],"is_group":0})
 			for ah in account_head:
 				total[scrub(ah.name)] = 0
 			for j in row:
 				if i == j.party_type:
-					total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
+					total['base_net_total'] = total['base_net_total'] + (j.get('base_net_total') or 0)
 					total['tax'] = total['tax'] + (j.get('tax') or 0)
 					total['total_amount'] = total['total_amount'] + (j.total_amount or 0)
 					total['paid'] = total['paid'] + (j.get('paid') or 0)
@@ -44,7 +44,7 @@ def assign_row(row, is_payment=None):
 	else:
 		if row:
 			rows.append({'voucher_no':frappe.bold(row[0].voucher_type)})
-			total = {'party':frappe.bold(row[0].voucher_type+" Total"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+			total = {'party':frappe.bold(row[0].voucher_type+" Total"),'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 			account_head = frappe.get_all("Account",{"account_type":['in',['Cash','Bank']],"is_group":0})
 			for ah in account_head:
 				total[scrub(ah.name)] = 0
@@ -61,7 +61,7 @@ def assign_row(row, is_payment=None):
 						elif p_entry.payment_type == "Pay":
 							j[scrub(p_entry.paid_from)] = j[scrub(p_entry.paid_from)] +(set_amt_acc.get('allocated_amount') or 0)
 							total[scrub(p_entry.paid_from)] = total[scrub(p_entry.paid_from)] + (set_amt_acc.get('allocated_amount') or 0)
-				total['net_total'] = total['net_total'] + (j.get('net_total') or 0)
+				total['base_net_total'] = total['base_net_total'] + (j.get('base_net_total') or 0)
 				total['tax'] = total['tax'] + (j.get('tax') or 0)
 				total['total_amount'] = total['total_amount'] + (j.total_amount or 0)
 				total['paid'] = total['paid'] + (j.get('paid') or 0)
@@ -73,10 +73,10 @@ def assign_row(row, is_payment=None):
 				totals.append(total)
 	return rows, totals
 def get_diff(total):
-		diff = {'party':frappe.bold("Diff"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		sp = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		pp = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		dd = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		diff = {'party':frappe.bold("Diff"),'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		sp = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		pp = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		dd = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 		account_head = frappe.get_all("Account",{"account_type":['in',['Cash','Bank']],"is_group":0})
 		for ah in account_head:
 			diff[scrub(ah.name)] = 0
@@ -85,7 +85,7 @@ def get_diff(total):
 			dd[scrub(ah.name)] = 0
 		for tot in total:
 			if tot.get('party') == "<strong>Sales Invoice Total</strong>":
-				sp['net_total'] = (tot.get('net_total') or 0)
+				sp['base_net_total'] = (tot.get('base_net_total') or 0)
 				sp['tax'] = (tot.get('tax') or 0)
 				sp['total_amount'] = (tot.get('total_amount') or 0)
 				sp['paid'] = (tot.get('paid') or 0)
@@ -93,7 +93,7 @@ def get_diff(total):
 				for ah in account_head:
 					sp[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Purchase Invoice Total</strong>':
-				pp['net_total'] = (tot.get('net_total') or 0)
+				pp['base_net_total'] = (tot.get('base_net_total') or 0)
 				pp['tax'] = (tot.get('tax') or 0)
 				pp['total_amount'] = (tot.get('total_amount') or 0)
 				pp['paid'] = (tot.get('paid') or 0)
@@ -101,14 +101,14 @@ def get_diff(total):
 				for ah in account_head:
 					pp[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Delivery Note Total</strong>':
-				dd['net_total'] = (tot.get('net_total') or 0)
+				dd['base_net_total'] = (tot.get('base_net_total') or 0)
 				dd['tax'] = (tot.get('tax') or 0)
 				dd['total_amount'] = (tot.get('total_amount') or 0)
 				dd['paid'] = (tot.get('paid') or 0)
 				dd['outstanding_amount'] = (tot.get('outstanding_amount') or 0)
 				for ah in account_head:
 					dd[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
-		diff['net_total'] = sp['net_total'] - pp['net_total'] - dd['net_total']
+		diff['base_net_total'] = sp['base_net_total'] - pp['base_net_total'] - dd['base_net_total']
 		diff['tax'] = sp['tax'] - pp['tax'] - dd['tax']
 		diff['total_amount'] = sp['total_amount'] - pp['total_amount'] - dd['total_amount']
 		diff['paid'] = sp['paid'] - pp['paid'] - dd['paid']
@@ -118,12 +118,12 @@ def get_diff(total):
 		return diff
 
 def get_net_in_hand(total):
-		net_in_hand = {'party':frappe.bold("Net in Hand"),'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		sp = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		pp = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		dd = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		ad_pay = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
-		ad_re = {'net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		net_in_hand = {'party':frappe.bold("Net in Hand"),'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		sp = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		pp = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		dd = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		ad_pay = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
+		ad_re = {'base_net_total':0, 'tax':0,'total_amount':0,'paid':0,'outstanding_amount':0}
 		account_head = frappe.get_all("Account",{"account_type":['in',['Cash','Bank']],"is_group":0})
 		for ah in account_head:
 			net_in_hand[scrub(ah.name)] = 0
@@ -134,7 +134,7 @@ def get_net_in_hand(total):
 			ad_re[scrub(ah.name)] = 0
 		for tot in total:
 			if tot.get('party') == "<strong>Sales Invoice Total</strong>":
-				sp['net_total'] = (tot.get('net_total') or 0)
+				sp['base_net_total'] = (tot.get('base_net_total') or 0)
 				sp['tax'] = (tot.get('tax') or 0)
 				sp['total_amount'] = (tot.get('total_amount') or 0)
 				sp['paid'] = (tot.get('paid') or 0)
@@ -142,7 +142,7 @@ def get_net_in_hand(total):
 				for ah in account_head:
 					sp[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Purchase Invoice Total</strong>':
-				pp['net_total'] = (tot.get('net_total') or 0)
+				pp['base_net_total'] = (tot.get('base_net_total') or 0)
 				pp['tax'] = (tot.get('tax') or 0)
 				pp['total_amount'] = (tot.get('total_amount') or 0)
 				pp['paid'] = (tot.get('paid') or 0)
@@ -150,7 +150,7 @@ def get_net_in_hand(total):
 				for ah in account_head:
 					pp[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Delivery Note Total</strong>':
-				dd['net_total'] = (tot.get('net_total') or 0)
+				dd['base_net_total'] = (tot.get('base_net_total') or 0)
 				dd['tax'] = (tot.get('tax') or 0)
 				dd['total_amount'] = (tot.get('total_amount') or 0)
 				dd['paid'] = (tot.get('paid') or 0)
@@ -158,7 +158,7 @@ def get_net_in_hand(total):
 				for ah in account_head:
 					dd[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Supplier Advance Total</strong>':
-				ad_pay['net_total'] = (tot.get('net_total') or 0)
+				ad_pay['base_net_total'] = (tot.get('base_net_total') or 0)
 				ad_pay['tax'] = (tot.get('tax') or 0)
 				ad_pay['total_amount'] = (tot.get('total_amount') or 0)
 				ad_pay['paid'] = (tot.get('paid') or 0)
@@ -166,14 +166,14 @@ def get_net_in_hand(total):
 				for ah in account_head:
 					ad_pay[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
 			if tot.get('party') == '<strong>Customer Advance Total</strong>':
-				ad_re['net_total'] = (tot.get('net_total') or 0)
+				ad_re['base_net_total'] = (tot.get('base_net_total') or 0)
 				ad_re['tax'] = (tot.get('tax') or 0)
 				ad_re['total_amount'] = (tot.get('total_amount') or 0)
 				ad_re['paid'] = (tot.get('paid') or 0)
 				ad_re['outstanding_amount'] = (tot.get('outstanding_amount') or 0)
 				for ah in account_head:
 					ad_re[scrub(ah.name)] = (tot.get(scrub(ah.name)) or 0)
-		net_in_hand['net_total'] = sp['net_total'] - pp['net_total'] - dd['net_total'] + (ad_re['net_total'] - ad_pay['net_total'])
+		net_in_hand['base_net_total'] = sp['base_net_total'] - pp['base_net_total'] - dd['base_net_total'] + (ad_re['base_net_total'] - ad_pay['base_net_total'])
 		net_in_hand['tax'] = sp['tax'] - pp['tax'] - dd['tax'] + (ad_re['tax'] - ad_pay['tax'])
 		net_in_hand['total_amount'] = sp['total_amount'] - pp['total_amount'] - dd['total_amount'] + (ad_re['total_amount'] - ad_pay['total_amount'])
 		net_in_hand['paid'] = sp['paid'] - pp['paid'] - dd['paid'] + (ad_re['paid'] - ad_pay['paid'])
@@ -364,7 +364,7 @@ def get_payment_entry(filters,project=None):
 		"""
 			select
 				project as project_id, project_name, posting_date, party_type, party, party_name,
-				name as voucher_no, remarks, unallocated_amount as paid, paid_to, paid_from
+				name as voucher_no, remarks, unallocated_amount * target_exchange_rate as paid, paid_to, paid_from
 			from `tabPayment Entry`
 			where {conditions}
 			
@@ -383,7 +383,7 @@ def get_sales_invoice(filters,project=None):
 		"""
 			select
 				project as project_id, project_name, posting_date, customer as party, remarks,
-				name as voucher_no, net_total, total_taxes_and_charges as tax, grand_total as total_amount, grand_total - outstanding_amount as paid, outstanding_amount, due_date	
+				name as voucher_no, base_net_total, base_total_taxes_and_charges as tax, base_grand_total as total_amount, base_grand_total - (outstanding_amount * conversion_rate) as paid, outstanding_amount * conversion_rate as outstanding_amount, due_date	
 			from `tabSales Invoice`
 			where {conditions}
 			
@@ -405,7 +405,7 @@ def get_purchase_invoice(filters,project=None):
 		"""
 			select
 				project as project_id, project_name, posting_date, supplier as party, remarks,
-				name as voucher_no, net_total, total_taxes_and_charges as tax, grand_total as total_amount, grand_total - outstanding_amount as paid, outstanding_amount, due_date	
+				name as voucher_no, base_net_total, base_total_taxes_and_charges as tax, base_grand_total as total_amount, base_grand_total - (outstanding_amount * conversion_rate) as paid, outstanding_amount * conversion_rate as outstanding_amount, due_date	
 			from `tabPurchase Invoice`
 			where {conditions}
 			
@@ -427,7 +427,7 @@ def get_delivery_note(filters,project=None):
 		"""
 			select
 				project as project_id, project_name, posting_date, customer as party,
-				name as voucher_no, net_total, total_taxes_and_charges as tax, rounded_total as total_amount
+				name as voucher_no, base_net_total, base_total_taxes_and_charges as tax, base_rounded_total as total_amount
 			from `tabDelivery Note`
 			where {conditions}
 			
@@ -473,7 +473,7 @@ def get_columns(filters):
 		},
 		{
 			"label": _("Net Total"),
-			"fieldname": "net_total",
+			"fieldname": "base_net_total",
 			"fieldtype": "Float",
 			"width": 130,
 		},

@@ -1,0 +1,70 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"KonwTr2cIs\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Role Permission</span>\",\"col\":12}},{\"id\":\"t_uJNrAPus\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User\",\"col\":3}},{\"id\":\"eX5afKIWZf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Role\",\"col\":3}},{\"id\":\"UwJTBzWu6p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Role Profile\",\"col\":3}},{\"id\":\"yy4_djWuTy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Module Profile\",\"col\":3}},{\"id\":\"UA3CV_BAzu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Permission Manager\",\"col\":3}},{\"id\":\"NdIH0VaqIe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User Permission\",\"col\":3}}]",
+ "creation": "2024-01-06 12:06:47.480134",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 1,
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Role Permission",
+ "links": [],
+ "modified": "2024-01-06 12:24:12.107002",
+ "modified_by": "Administrator",
+ "module": "Role Creation",
+ "name": "Role Permission",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 42.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "User",
+   "link_to": "User",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Role",
+   "link_to": "Role",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Role Profile",
+   "link_to": "Role Profile",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Module Profile",
+   "link_to": "Module Profile",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Permission Manager",
+   "link_to": "permission-manager",
+   "type": "Page"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "User Permission",
+   "link_to": "User Permission",
+   "type": "DocType"
+  }
+ ],
+ "title": "Role Permission"
+}

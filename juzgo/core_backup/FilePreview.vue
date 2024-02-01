@@ -24,7 +24,7 @@
 			</div>
 			<!-- thirvu change -->
 			<div>
-				<label><input type="text" placeholder="Enter File Name" v-model="file.system_file_name_">.{{file.name.split('.')[1]}}</label>
+				<label><input type="text" placeholder="Enter File Name" v-model="file.system_file_name_">.{{file.name.split('.')[(file.name).split('.').length-1]}}</label>
 			</div>
 			<!-- end -->
 			<div class="flex config-area">
