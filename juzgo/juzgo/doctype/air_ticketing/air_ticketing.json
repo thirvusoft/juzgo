@@ -19,6 +19,7 @@
   "attach_by",
   "column_break_zj8bn",
   "final_copy",
+  "printables",
   "description"
  ],
  "fields": [
@@ -75,8 +76,10 @@
    "label": "Baggage (Kg)"
   },
   {
+   "columns": 1,
    "fieldname": "meal",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Meal",
    "options": "Yes\nNo"
   },
@@ -97,14 +100,22 @@
    "default": "0",
    "fieldname": "final_copy",
    "fieldtype": "Check",
-   "in_list_view": 1,
+   "hidden": 1,
    "label": "Final Copy"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "printables",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Printables"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-09 19:49:58.830744",
+ "modified": "2023-10-21 13:22:20.521936",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Air Ticketing",

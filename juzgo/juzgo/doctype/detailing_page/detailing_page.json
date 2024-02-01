@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:DP-{project}-{YY}-{#}",
+ "creation": "2024-01-18 15:29:47.575817",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "internal_operations_tab",
+  "project",
+  "prepare_quote",
+  "column_break_rzpqq",
+  "project_name",
+  "ca_form",
+  "column_break_1gbqy",
+  "customer",
+  "customer_name",
+  "column_break_1yjim",
+  "no_of_options",
+  "options",
+  "column_break_2tadn",
+  "remarks",
+  "column_break_30ukv",
+  "visa_supplier",
+  "supplier",
+  "inclusion_tab",
+  "hotels_html",
+  "hotels",
+  "spots",
+  "optional_cost_needed_for",
+  "others",
+  "vehicle",
+  "cruise",
+  "common_features",
+  "notes_tab",
+  "notes_for_our_reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "internal_operations_tab",
+   "fieldtype": "Tab Break",
+   "label": "Internal operations "
+  },
+  {
+   "fieldname": "inclusion_tab",
+   "fieldtype": "Tab Break",
+   "label": "Inclusion "
+  },
+  {
+   "fetch_from": "project.ca_form",
+   "fieldname": "ca_form",
+   "fieldtype": "Link",
+   "label": "CA Form",
+   "options": "CA Form",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "project.project_name",
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Table MultiSelect",
+   "label": "Customer",
+   "options": "Multi Customer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prepare_quote",
+   "fieldtype": "Select",
+   "label": "Prepare Quote?",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "no_of_options",
+   "fieldtype": "Int",
+   "label": "No of Options"
+  },
+  {
+   "fieldname": "options",
+   "fieldtype": "Int",
+   "label": "Options "
+  },
+  {
+   "fieldname": "visa_supplier",
+   "fieldtype": "Table",
+   "label": "Visa Supplier",
+   "options": "Visa Supplier Table"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Table",
+   "label": "Supplier",
+   "options": "Detailing Supplier"
+  },
+  {
+   "fieldname": "hotels",
+   "fieldtype": "Table",
+   "label": "Hotels",
+   "options": "Hotels Detailing"
+  },
+  {
+   "fieldname": "spots",
+   "fieldtype": "Table",
+   "label": "Spots",
+   "options": "Spots Detailing"
+  },
+  {
+   "fieldname": "optional_cost_needed_for",
+   "fieldtype": "Table",
+   "label": "Optional cost needed for",
+   "options": "Optional cost Detailing"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Table",
+   "label": "Others ",
+   "options": "Others Detailing"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Table",
+   "label": "Vehicle",
+   "options": "Vehicle Detailing"
+  },
+  {
+   "fieldname": "cruise",
+   "fieldtype": "Table",
+   "label": "Cruise",
+   "options": "Cruise Detailing"
+  },
+  {
+   "fieldname": "common_features",
+   "fieldtype": "Text",
+   "label": "Common Features"
+  },
+  {
+   "fieldname": "notes_for_our_reference",
+   "fieldtype": "Text Editor",
+   "label": "Notes for Our Reference"
+  },
+  {
+   "fieldname": "notes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_rzpqq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_1gbqy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_1yjim",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_30ukv",
+   "fieldtype": "Tab Break",
+   "label": "Supplier Mail Details"
+  },
+  {
+   "fieldname": "column_break_2tadn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hotels_html",
+   "fieldtype": "HTML",
+   "label": "Hotels HTML"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-01-26 12:04:21.501823",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Detailing Page",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

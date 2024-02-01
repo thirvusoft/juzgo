@@ -12,11 +12,12 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/juzgo/css/juzgo.css"
-app_include_js = ["juzgo.bundle.js"]
+# app_include_css = ["juzgo.bundle.css"]
+app_include_js = ["juzgo.bundle.js","/assets/juzgo/node_modules/vuetify/dist/vuetify.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/juzgo/css/juzgo.css"
-web_include_js = ["juzgo.bundle.js"]
+web_include_js = ["juzgo.bundle.js", "juzgoweb.bundle.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "juzgo/public/scss/website"
@@ -91,18 +92,18 @@ doc_events = {
     "Notification Log" : {
         "after_insert": "juzgo.custom.py.notification_log.after_insert"
 	},
-    "Sales Invoice": {
-        "autoname": "juzgo.juzgo.custom.py.sales_invoice.autoname"
+    ("Purchase Invoice", "Journal Entry", "Sales Invoice", "Payment Entry"): {
+		"autoname": ["juzgo.juzgo.custom.py.naming_series.autoname"]
 	},
-    "Purchase Invoice": {
-        "autoname": "juzgo.juzgo.custom.py.purchase_invoice.autoname"
-	},
-    "Payment Entry": {
-        "autoname": "juzgo.juzgo.custom.py.payment_entry.autoname"
+    "Branch": {
+        "validate": "juzgo.juzgo.custom.py.branch.validate"
 	},
     "Journal Entry": {
-        "autoname": "juzgo.juzgo.custom.py.journal_entry.autoname",
         "validate": "juzgo.juzgo.custom.py.journal_entry.validate"
+	},
+    
+	"Attendance":{
+         "validate":"juzgo.juzgo.utils.attendance.early_late_time"
 	}
 
 }
@@ -131,10 +132,12 @@ doc_events = {
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-#	"methods": "juzgo.utils.jinja_methods",
-#	"filters": "juzgo.utils.jinja_filters"
-# }
+jinja = {
+    "methods":[
+        	"juzgo.juzgo.custom.py.sales_invoice.tax_details"
+	]
+	# "filters": "juzgo.utils.jinja_filters"
+}
 
 # Installation
 # ------------
@@ -211,6 +214,9 @@ scheduler_events = {
 	# "monthly": [
 	# 	"juzgo.tasks.monthly"
 	# ],
+ 	"cron":{
+		'00 10 * * *':"juzgo.juzgo.custom.py.shift_type.thirvusoft_process_auto_attendance_shift1"
+	}
 }
 
 # Testing

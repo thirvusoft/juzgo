@@ -5,7 +5,7 @@
    "label": "Open Projects"
   }
  ],
- "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"gvLuROA6rj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"U8F5Q6pc6I\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Check List\",\"col\":3}},{\"id\":\"ce3-_s6aCU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CA Form\",\"col\":3}},{\"id\":\"v2kKBDOKaX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Lead\",\"col\":3}},{\"id\":\"hl_7kvAH7f\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Comment\",\"col\":3}},{\"id\":\"jE81UG6dJB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Ua98wx7fIg\",\"type\":\"card\",\"data\":{\"card_name\":\"Project\",\"col\":4}},{\"id\":\"TehAzT_DaG\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"uWcvULFO4P\",\"type\":\"card\",\"data\":{\"card_name\":\"Lead Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"Phcfo_t7fj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Open Projects\",\"col\":12}},{\"id\":\"Z6XRsQMSXY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project\",\"col\":3}},{\"id\":\"THXiR03yKx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Task\",\"col\":3}},{\"id\":\"gvLuROA6rj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"DICpRV2u8e\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Event\",\"col\":3}},{\"id\":\"U8F5Q6pc6I\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Check List\",\"col\":3}},{\"id\":\"ce3-_s6aCU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CA Form\",\"col\":3}},{\"id\":\"v2kKBDOKaX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Lead\",\"col\":3}},{\"id\":\"hl_7kvAH7f\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Comment\",\"col\":3}},{\"id\":\"jE81UG6dJB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Ua98wx7fIg\",\"type\":\"card\",\"data\":{\"card_name\":\"Project\",\"col\":4}},{\"id\":\"TehAzT_DaG\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"uWcvULFO4P\",\"type\":\"card\",\"data\":{\"card_name\":\"Lead Reports\",\"col\":4}}]",
  "creation": "2023-06-13 16:00:08.019671",
  "custom_blocks": [],
  "docstatus": 0,
@@ -142,8 +142,8 @@
    "type": "Link"
   }
  ],
- "modified": "2023-09-08 14:16:33.700558",
- "modified_by": "prithivraj@thirvusoft.in",
+ "modified": "2023-10-30 09:41:14.065382",
+ "modified_by": "Administrator",
  "module": "Operational Executive",
  "name": "Project Master",
  "number_cards": [],
@@ -192,6 +192,13 @@
    "doc_view": "List",
    "label": "Project",
    "link_to": "Project",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Event",
+   "link_to": "Event",
    "type": "DocType"
   },
   {

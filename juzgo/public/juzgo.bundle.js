@@ -1,11 +1,15 @@
 import "./attach_formatter";
 import "./assign_to";
 import "./page.js";
-import "./comman_func"
+import "./comman_func";
+import "./list_view.js";
+import "./dashboard.js";
+// import "./link.js";
 import "../templates/web_form/interview/error.html";
 import "../templates/web_form/interview/already_responded.html";
 import "../templates/web_form/interview/not_opened_or_closed.html";
 import "../templates/web_form/interview/not_opened_or_closed.html";
+import "./js/purchase_invoice/purchase_invocie.js";
 
 $(document).on('app_ready', function () {
     frappe.realtime.off("show_notification")

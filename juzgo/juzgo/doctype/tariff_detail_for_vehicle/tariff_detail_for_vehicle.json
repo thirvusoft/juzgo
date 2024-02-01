@@ -7,7 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "tariff",
-  "tariff_based_on"
+  "tariff_based_on",
+  "class",
+  "season"
  ],
  "fields": [
   {
@@ -18,16 +20,30 @@
   },
   {
    "fieldname": "tariff_based_on",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Tariff Based On",
-   "options": "KM based\nHour Based\nNo of persons"
+   "options": "Tariff Based On"
+  },
+  {
+   "fieldname": "class",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Class",
+   "options": "Class"
+  },
+  {
+   "fieldname": "season",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Season",
+   "options": "Season"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-28 15:57:53.740897",
+ "modified": "2023-10-13 11:31:47.141988",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Tariff Detail for Vehicle",

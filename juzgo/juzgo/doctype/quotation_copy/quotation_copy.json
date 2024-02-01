@@ -10,10 +10,11 @@
   "data",
   "worksheet",
   "client_copy",
+  "attached_by",
+  "column_break_5",
   "description",
-  "final_copy",
   "printables",
-  "attached_by"
+  "final_copy"
  ],
  "fields": [
   {
@@ -51,6 +52,7 @@
    "options": "User"
   },
   {
+   "default": "Today",
    "fieldname": "data",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -67,14 +69,18 @@
    "default": "0",
    "fieldname": "final_copy",
    "fieldtype": "Check",
-   "in_list_view": 1,
+   "hidden": 1,
    "label": "Final Copy"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-09 19:51:20.115418",
+ "modified": "2023-10-26 16:06:11.078998",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Quotation Copy",

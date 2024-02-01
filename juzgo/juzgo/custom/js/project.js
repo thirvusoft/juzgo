@@ -5,6 +5,29 @@ var remainder_group
 var remainder_group_details = {}
 var pass_form,visa_form
 frappe.ui.form.on('Project', {
+    after_save:function (frm){
+        if(!frm.is_new()){
+            frappe.call({
+                method:'juzgo.juzgo.custom.py.project.validate_uncheck',
+                args:{
+                    doc_name:frm.doc.name,
+                },
+                callback(r1){
+                    if(r1.message){
+                        r1.message.forEach(d =>{ 
+                            if (cur_frm.fields_dict["printables"].grid.grid_rows_by_docname[d]) {
+                                cur_frm.fields_dict["printables"].grid.grid_rows_by_docname[d].remove()
+                            }
+                        })
+                        
+                    }
+                    frm.refresh_field("printables");
+                    if (frm.doc.__unsaved)
+                        frm.save()
+                }
+            })
+        }
+    },
     refresh:function (frm,cdt,cdn) {   
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-add-row')[0].style.display = 'none'
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-rows')[0].style.display = 'none'
@@ -138,6 +161,7 @@ frappe.ui.form.on('Project', {
     },
     update_passport_check_list: function(frm){
         add_passport_details(frm)
+        multi_customer(frm)
         visa_list(frm)
         frm.save()
     },
@@ -1420,3 +1444,10 @@ function remove_add_fc(frm,cdt,cdn){
 //         }
 //     },
 // })
+frappe.ui.form.on('Printables', {
+	print: function(frm,cdt,cdn){
+        let row = locals[cdt][cdn]
+        var pdf_content = row.attachments;
+        var w = window.open(pdf_content);
+    },
+})
