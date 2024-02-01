@@ -41,7 +41,7 @@ doctype_js = {
 		"Lead" : "/juzgo/custom/js/lead.js",
     	"Employee" : "/juzgo/custom/js/employee.js",
 		"Journal Entry" : "/juzgo/custom/js/journal_entry.js",
-
+		"Bank Statement Import" : "/juzgo/custom/js/bank_statement.js",
 		"Customer" : "/juzgo/custom/js/customer.js"
 
 	}
