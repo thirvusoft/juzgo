@@ -1,5 +1,5 @@
 {
- "aggregate_function_based_on": "base_net_total",
+ "aggregate_function_based_on": "base_grand_total",
  "color": "#EC864B",
  "creation": "2023-10-10 12:18:52.863142",
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "is_public": 1,
  "is_standard": 1,
  "label": "Total Purchase Invoice",
- "modified": "2023-10-10 15:24:08.290968",
+ "modified": "2023-10-30 12:02:19.209702",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Total Purchase Invoice",

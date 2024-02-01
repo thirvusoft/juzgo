@@ -35,16 +35,6 @@ def tax_details(doc):
 
                     for i in range (0, len(sgst_list), 1):
 
-<<<<<<< HEAD
-                        if sgst_list[i].get(f"SGST@ {value[0]} %"):
-                            sgst_list[i][f"SGST@ {value[0]} %"] += value[1]
-                            break
-
-                        if len(sgst_list) == i + 1 and not matched:
-                            sgst_list.append({f"SGST@ {value[0]} %": value[1]})
-                else:
-                    sgst_list.append({f"SGST@ {value[0]} %": value[1]})
-=======
                         if value[0] != 0:
 
                             if sgst_list[i].get(f"SGST@ {value[0]} %"):
@@ -56,7 +46,6 @@ def tax_details(doc):
                 else:
                     if value[0] != 0:
                         sgst_list.append({f"SGST@ {value[0]} %": value[1]})
->>>>>>> c06d5715bf2a77bcea50c88e7b8892c64b139710
 
         if "CGST" in tax.account_head and tax.tax_amount != 0:
             tax_details = json.loads(tax.item_wise_tax_detail)
@@ -70,16 +59,6 @@ def tax_details(doc):
 
                     for i in range (0, len(cgst_list), 1):
 
-<<<<<<< HEAD
-                        if cgst_list[i].get(f"CGST@ {value[0]} %"):
-                            cgst_list[i][f"CGST@ {value[0]} %"] += value[1]
-                            break
-
-                        if len(cgst_list) == i + 1 and not matched:
-                            cgst_list.append({f"CGST@ {value[0]} %": value[1]})
-                else:
-                    cgst_list.append({f"CGST@ {value[0]} %": value[1]})
-=======
                         if value[0] != 0:
 
                             if cgst_list[i].get(f"CGST@ {value[0]} %"):
@@ -91,7 +70,6 @@ def tax_details(doc):
                 else:
                     if value[0] != 0:
                         cgst_list.append({f"CGST@ {value[0]} %": value[1]})
->>>>>>> c06d5715bf2a77bcea50c88e7b8892c64b139710
 
         if "IGST" in tax.account_head and tax.tax_amount != 0:
             tax_details = json.loads(tax.item_wise_tax_detail)
@@ -105,16 +83,6 @@ def tax_details(doc):
 
                     for i in range (0, len(igst_list), 1):
 
-<<<<<<< HEAD
-                        if igst_list[i].get(f"IGST@ {value[0]} %"):
-                            igst_list[i][f"IGST@ {value[0]} %"] += value[1]
-                            break
-
-                        if len(igst_list) == i + 1 and not matched:
-                            igst_list.append({f"IGST@ {value[0]} %": value[1]})
-                else:
-                    igst_list.append({f"IGST@ {value[0]} %": value[1]})
-=======
                         if value[0] != 0:
 
                             if igst_list[i].get(f"IGST@ {value[0]} %"):
@@ -126,7 +94,6 @@ def tax_details(doc):
                 else:
                     if value[0] != 0:
                         igst_list.append({f"IGST@ {value[0]} %": value[1]})
->>>>>>> c06d5715bf2a77bcea50c88e7b8892c64b139710
 
         if "TCS" in tax.account_head and tax.tax_amount != 0:
             tax_details = json.loads(tax.item_wise_tax_detail)

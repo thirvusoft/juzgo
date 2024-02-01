@@ -34,9 +34,6 @@
    "card": "ICICI - JH Balance"
   },
   {
-   "card": "Juzgo LLP - ICICI - JH Balance"
-  },
-  {
    "card": "Juzgo LLP - JH Balance"
   },
   {
@@ -68,7 +65,7 @@
  "idx": 0,
  "is_default": 1,
  "is_standard": 1,
- "modified": "2023-10-10 16:30:59.549447",
+ "modified": "2023-10-26 17:34:13.630227",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Accounts Dashboard",
