@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-20 10:29:22.181762",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "options",
+  "check_in_date",
+  "check_out_date",
+  "no_of_adults",
+  "no_of_child",
+  "child_ages",
+  "no_of_rooms_required",
+  "room_type",
+  "cabin_size",
+  "view_from_rooms",
+  "max_no_of_beds_in_this_cabin_possible_to_be_accomodated",
+  "room_spec_and_amenities",
+  "cost_per_pax_in_detail"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "options",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Options"
+  },
+  {
+   "columns": 1,
+   "fieldname": "check_in_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Check in date"
+  },
+  {
+   "columns": 1,
+   "fieldname": "check_out_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Check out date"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_adults",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "No of adults"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_child",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": " No of child"
+  },
+  {
+   "columns": 1,
+   "fieldname": "child_ages",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": " Child ages"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_rooms_required",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "No of rooms required "
+  },
+  {
+   "columns": 1,
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cabin_size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cabin Size"
+  },
+  {
+   "columns": 1,
+   "fieldname": "view_from_rooms",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "View from Rooms"
+  },
+  {
+   "columns": 1,
+   "fieldname": "max_no_of_beds_in_this_cabin_possible_to_be_accomodated",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Max No of Beds in this Cabin Possible to be accomodated"
+  },
+  {
+   "fieldname": "room_spec_and_amenities",
+   "fieldtype": "Data",
+   "label": "Room spec and amenities"
+  },
+  {
+   "description": "Provide us with the cost of cabin or cost per adult /extra adult /child with and without bed ",
+   "fieldname": "cost_per_pax_in_detail",
+   "fieldtype": "Data",
+   "label": "Cost per pax in detail"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-01-20 12:19:58.017679",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Cruise Detailing",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
