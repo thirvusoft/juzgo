@@ -1,0 +1,68 @@
+<link href="{{ base_url }}/assets/frappe/css/bootstrap.css" rel="stylesheet">
+<h2 class="text-center">{{ "Customer Statement" }}</h2>
+<h3 class="text-center">{{ company }}</h3>
+<h4 class="text-center">{{ address }}</h4>
+<h4 class="text-center">
+	{% if filters.party_name %}
+		{{ filters.party_name }}
+	{% elif filters.party and filters.party|length %}
+		{{ filters.party[0] }}
+	{% elif filters.account %}
+		{{ filters.account }}
+	{% endif %}
+</h4>
+
+<h6 class="text-center">
+	{% if filters.tax_id %}
+		{{ "Tax Id: " }} {{ filters.tax_id }}
+	{% endif %}
+</h6>
+
+<h5 class="text-center">
+	{{ frappe.utils.formatdate(filters.from_date, "dd-MM-yyyy") }}
+	{{ "to" }}
+	{{ frappe.utils.formatdate(filters.to_date, "dd-MM-yyyy") }}
+</h5>
+<hr>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" style="width: 12%">{{ "Date" }}</th>
+			<th class="text-center" style="width: 15%">{{ "Reference" }}</th>
+			<th class="text-center" style="width: 15%">{{ "Invoice Value" }}</th>
+			<th class="text-center" style="width: 15%">{{ "Received" }}</th>
+			<th class="text-center" style="width: 18%">{{ "Balance" }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for data_row in data %}
+			<tr>
+			{% if data_row.posting_date %}
+				<td>{{ frappe.utils.formatdate(data_row.posting_date, "dd-MM-yyyy") }}</td>
+				<td>{{ data_row.voucher_type }}
+					<br>{{ data_row.voucher_no }}
+				</td>
+				
+				<td style="text-align: right">
+					{{ frappe.utils.fmt_money(data_row.debit) }}
+				</td>
+				<td style="text-align: right">
+					{{ frappe.utils.fmt_money(data_row.credit) }}
+				</td>
+			{% else %}
+				<td></td>
+				<td><b>{{ frappe.format(data_row.account, {"fieldtype": "Link"}) or "&nbsp;" }}</b></td>
+				<td style="text-align: right">
+					{{ data_row.account and frappe.utils.fmt_money(data_row.debit) }}
+				</td>
+				<td style="text-align: right">
+					{{ data_row.account and frappe.utils.fmt_money(data_row.credit) }}
+				</td>
+			{% endif %}
+				<td style="text-align: right">
+					{{ frappe.utils.fmt_money(data_row.balance) }}
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

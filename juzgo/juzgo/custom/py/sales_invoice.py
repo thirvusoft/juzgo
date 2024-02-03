@@ -1,6 +1,15 @@
 from frappe.model.naming import parse_naming_series, make_autoname
 from frappe.model.naming import parse_naming_series
 import frappe
+from frappe import get_print
+from frappe.utils.jinja import render_template
+from frappe.utils.pdf import get_pdf
+from datetime import datetime
+from erpnext.accounts.report.general_ledger.general_ledger import execute
+# from juzgo.juzgo.report.customer_statement_gl.customer_statement_gl import execute
+from frappe.utils import today, nowdate
+from frappe.utils.data import today
+from erpnext.accounts.utils import get_fiscal_year
 
 import json
 
@@ -156,3 +165,51 @@ def tax_details(doc):
         value.append(final_value)
 
     return key, value
+from dateutil.relativedelta import relativedelta
+@frappe.whitelist()
+def customer_statement(doc):
+    DATE_FORMAT = "%Y-%m-%d"
+    doc = json.loads(doc)
+    report_doctype = frappe.db.get_value("Report", "General Ledger")
+    gl_filters = frappe._dict({
+        "company": doc.get('company')
+        ,"from_date": datetime.strptime(doc.get('posting_date'), '%Y-%m-%d').date() - relativedelta(years=1)
+        ,"to_date":datetime.strptime(today(), DATE_FORMAT).date()
+        ,"account":[]
+        ,"party_type":"Customer"
+        ,"party":[doc.get('customer')]
+        ,"group_by":"Group by Voucher (Consolidated)"
+        ,"cost_center":[]
+        ,"project":[]
+        ,"branch":[]
+        ,"include_dimensions":1
+        })
+    columns, data = execute(gl_filters)
+    gl_html = frappe.render_template(
+        "juzgo/juzgo/report/customer_statement_gl/customer_statement_gl.html",
+        {
+            "title": doc.get('customer_name'),
+            "description": "",
+            "columns": columns,
+            "data": data,
+            "filters":gl_filters,
+            "base_url":frappe.utils.get_url(),
+            "company":doc.get('company'),
+            "address":doc.get('company_address_display')
+        },
+        safe_render=False
+    )
+    time = datetime.now()
+    
+    file_name = f"{doc.get('customer')}-{time}.pdf"
+    file = frappe.get_doc({
+        "doctype": "File",
+        "file_name": file_name,
+        "is_private": 0,
+        "content": file_name ,
+        }) 
+    file.save(ignore_permissions=True)
+    pdf = get_pdf(gl_html)
+    file.save_file(pdf)
+    link=frappe.utils.get_url()+file.file_url
+    return link

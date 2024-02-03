@@ -42,7 +42,8 @@ doctype_js = {
     	"Employee" : "/juzgo/custom/js/employee.js",
 		"Journal Entry" : "/juzgo/custom/js/journal_entry.js",
 		"Bank Statement Import" : "/juzgo/custom/js/bank_statement.js",
-		"Customer" : "/juzgo/custom/js/customer.js"
+		"Customer" : "/juzgo/custom/js/customer.js",
+        "Sales Invoice" : "/juzgo/custom/js/sales_invoice.js"
 
 	}
 doc_events = {
