@@ -24,7 +24,8 @@ function checkForExistingDocuments(frm) {
                 filters: {
                     bank_account: frm.doc.bank_account,
                     from_date: ['<=', frm.doc.to_date],
-                    to_date: ['>=', frm.doc.from_date]
+                    to_date: ['>=', frm.doc.from_date],
+                    name: ['!=', frm.doc.name]
                 },
                 fields: ['name']
             },
@@ -51,8 +52,7 @@ function checkForExistingDocuments(frm) {
                             return `<a href="/app/bank-statement-import/${doc}">${doc}</a>`;
                         }).join(', ');
 
-                        frappe.msgprint(__("Documents already exist with overlapping date range: {0}", [links]));
-                        // You may want to clear the fields or take other actions here
+                        frappe.throw(__("Documents already exist with overlapping date range: {0}", [links]));
                     }
                 }
             }
