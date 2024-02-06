@@ -105,6 +105,10 @@ doc_events = {
     
 	"Attendance":{
          "validate":"juzgo.juzgo.utils.attendance.early_late_time"
+	},
+    
+	"Purchase Invoice":{
+        "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert"
 	}
 
 }

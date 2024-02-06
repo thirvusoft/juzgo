@@ -1451,3 +1451,12 @@ frappe.ui.form.on('Printables', {
         var w = window.open(pdf_content);
     },
 })
+
+frappe.ui.form.on('Final Supplier Invoices in Project', {
+    create_pi: function (frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+
+        frappe.route_options = {"supplier": row.supplier,"currency":row.currency,"project":frm.doc.name,"company":frm.doc.company,"bill_no":row.invoice_id,"tt_agent":row.tt_agent,"tt_agent_value":row.tt_net_value,"reference_name":row.name};
+        frappe.set_route("Form", "Purchase Invoice", "new")
+    },
+});
