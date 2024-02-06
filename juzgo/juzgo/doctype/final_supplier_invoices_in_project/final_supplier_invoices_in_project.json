@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-03 19:34:28.616367",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "invoice_copy",
+  "invoice_id",
+  "currency",
+  "tt_agent",
+  "tt_net_value",
+  "tt_agent_copy",
+  "notes",
+  "create_pi"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "columns": 1,
+   "fieldname": "invoice_copy",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Invoice Copy"
+  },
+  {
+   "columns": 1,
+   "fieldname": "invoice_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Invoice ID"
+  },
+  {
+   "columns": 1,
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "columns": 2,
+   "fieldname": "tt_agent",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "TT Agent",
+   "options": "Supplier"
+  },
+  {
+   "columns": 1,
+   "fieldname": "tt_net_value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TT Net Value"
+  },
+  {
+   "columns": 1,
+   "fieldname": "tt_agent_copy",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "TT agent Copy"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "columns": 1,
+   "fieldname": "create_pi",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Create PI "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-03 19:34:28.616367",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Final Supplier Invoices in Project",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

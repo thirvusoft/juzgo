@@ -742,4 +742,23 @@ def ca_form_details(ca_form):
     return html
 
 
+from frappe.model.mapper import get_mapped_doc
+@frappe.whitelist()
+def make_PI(source_name, target_doc=None):
 
+	target_doc = get_mapped_doc(
+		"Final Supplier Invoices in Project",
+		source_name,
+		{"Final Supplier Invoices in Project": {"doctype": "Purchase Invoice", "field_map": {"supplier": "supplier"}}},
+		target_doc,
+	)
+
+	price_list, currency = frappe.db.get_value(
+		"Customer", {"name": source_name}, ["default_price_list", "default_currency"]
+	)
+	if price_list:
+		target_doc.selling_price_list = price_list
+	if currency:
+		target_doc.currency = currency
+
+	return target_doc
