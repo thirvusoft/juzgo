@@ -29,6 +29,3 @@ def insert(self, action):
             "attached_to_name": self.name,
             "file_url": doc.tt_agent_copy
         }).insert()
-
-
-        print("lllllll")
