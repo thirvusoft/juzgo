@@ -154,12 +154,13 @@
   },
   {
    "fieldname": "common_features",
-   "fieldtype": "Text",
-   "label": "Common Features"
+   "fieldtype": "Table",
+   "label": "Common Features",
+   "options": "Airticket Detailing"
   },
   {
    "fieldname": "notes_for_our_reference",
-   "fieldtype": "Text Editor",
+   "fieldtype": "Long Text",
    "label": "Notes for Our Reference"
   },
   {
@@ -196,7 +197,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-26 12:04:21.501823",
+ "modified": "2024-02-12 18:24:43.500437",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",

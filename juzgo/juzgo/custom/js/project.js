@@ -29,6 +29,27 @@ frappe.ui.form.on('Project', {
         }
     },
     refresh:function (frm,cdt,cdn) {   
+        setTimeout(() => {
+            frm.remove_custom_button(__("Duplicate Project with Tasks"),"Actions")
+            frm.remove_custom_button(__("Update Total Purchase Cost"),"Actions")
+            frm.remove_custom_button(__("Set Project Status"),"Actions")
+            frm.add_custom_button(__('Go Detailing Page'), function () {
+                frappe.set_route("detailing1");
+            }, __('Actions'));
+            frm.add_custom_button(__('Create Detailing Page'), function () {
+
+            frappe.call({
+                method: "juzgo.juzgo.custom.py.project.make_detailing_page",
+                args:{
+                    doc:frm.doc,
+                },
+                callback(r1){
+                    frappe.set_route("detailing1");
+                }
+            })
+            }, __('Actions'));
+          }, 500);
+        
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-add-row')[0].style.display = 'none'
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-rows')[0].style.display = 'none'
         cur_frm.fields_dict.final_copy.$wrapper.find('.grid-remove-all-rows')[0].style.display = 'none'  

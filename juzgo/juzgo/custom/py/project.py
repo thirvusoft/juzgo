@@ -743,3 +743,11 @@ def ca_form_details(ca_form):
 
 
 
+@frappe.whitelist()
+def make_detailing_page(doc):
+    doc = json.loads(doc)
+    dp = frappe.new_doc("Detailing Page")
+    dp.project = doc.get("name")
+    dp.save()
+    
+    return 1
