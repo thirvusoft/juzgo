@@ -44,8 +44,8 @@ doctype_js = {
 		"Bank Statement Import" : "/juzgo/custom/js/bank_statement.js",
 		"Customer" : "/juzgo/custom/js/customer.js",
         "Sales Invoice" : "/juzgo/custom/js/sales_invoice.js",
-        "Salary Slip" : "/juzgo/custom/js/salary_slip.js"
-
+        "Salary Slip" : "/juzgo/custom/js/salary_slip.js",
+        "Quotation": "/juzgo/custom/js/quotation.js"
 	}
 doc_events = {
     "Task" : {
