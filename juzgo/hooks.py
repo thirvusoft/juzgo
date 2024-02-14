@@ -41,8 +41,10 @@ doctype_js = {
 		"Lead" : "/juzgo/custom/js/lead.js",
     	"Employee" : "/juzgo/custom/js/employee.js",
 		"Journal Entry" : "/juzgo/custom/js/journal_entry.js",
-
-		"Customer" : "/juzgo/custom/js/customer.js"
+		"Bank Statement Import" : "/juzgo/custom/js/bank_statement.js",
+		"Customer" : "/juzgo/custom/js/customer.js",
+        "Sales Invoice" : "/juzgo/custom/js/sales_invoice.js",
+        "Salary Slip" : "/juzgo/custom/js/salary_slip.js"
 
 	}
 doc_events = {
@@ -104,6 +106,10 @@ doc_events = {
     
 	"Attendance":{
          "validate":"juzgo.juzgo.utils.attendance.early_late_time"
+	},
+    
+	"Purchase Invoice":{
+        "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert"
 	}
 
 }

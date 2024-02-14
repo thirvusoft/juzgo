@@ -520,7 +520,7 @@ export default {
 				// thirvu change
 				let system_file_name
 				if(file.name){
-					system_file_name= file.system_file_name_+'.'+file.name.split('.')[1]
+					system_file_name= file.system_file_name_+'.'+file.name.split('.')[(file.name).split('.').length-1]
 				}
 				if (file.file_obj) {
 					if (file.system_file_name_) {

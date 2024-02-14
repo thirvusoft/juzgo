@@ -229,12 +229,17 @@ def get_attendance_map(filters: Filters) -> Dict:
 		if d.status == "On Leave":
 			leave_map.setdefault(d.employee, []).append(d.day_of_month)
 			continue
+		hours = int(d.working_hours)
+		minutes = int((d.working_hours - hours) * 60)
 
+		logged_time = datetime.time(hours, minutes)
+
+		formatted_time = logged_time.strftime('%H:%M')
 		attendance_map.setdefault(d.employee, {}).setdefault(d.shift, {}).setdefault(d.day_of_month, {})
 		attendance_map[d.employee][d.shift][d.day_of_month]['status'] = d.status
 		attendance_map[d.employee][d.shift][d.day_of_month]['in_time'] = d.in_time
 		attendance_map[d.employee][d.shift][d.day_of_month]['out_time'] = d.out_time
-		attendance_map[d.employee][d.shift][d.day_of_month]['logged_hours'] = d.working_hours
+		attendance_map[d.employee][d.shift][d.day_of_month]['logged_hours'] = logged_time
 
 		attendance_map[d.employee][d.shift][d.day_of_month]['late_by_row'] = d.custom_late_by
 		attendance_map[d.employee][d.shift][d.day_of_month]['early_by_row'] = d.custom_early_by
@@ -427,8 +432,8 @@ def get_rows(
 			{"employee": employee, "employee_name": details.employee_name}
 		)
 
-		records.extend(attendance_for_employee)
-		records.append(row)
+		records += attendance_for_employee
+		records.append(row.copy())
 		records.append(row1)
 		records.append(row2)
 
@@ -467,14 +472,18 @@ def get_attendance_status_for_summarized_view(
 	return {
 		"shift":"<b style=color:green>Total Present</b>",
 		"1": f"<b style= color:green>{summary.total_present + summary.total_half_days} </b>",
-		"2":"<b style=color:red>Total Leaves</b>",
-		"3": f"<b style = color:red>{summary.total_leaves + summary.total_half_days}</b>",
-		"4":"<b style=color:red>Total Absent</b>",
-		"5": f"<b style = color:red>{summary.total_absent}</b>",
-		"6":"<b style=color:red>Total Holidays</b>",
-		"7": f"<b style = color:red>{total_holidays}</b>",
-		"8":"<b style=color:orange>Unmarked Days</b>",
-		"9": f"<b style = color:orange>{total_unmarked_days}</b>",
+		"2":"<b style=color:green>Present Hrs</b>",
+		"3": f"<b style= color:green>{(summary.total_present + summary.total_half_days)*8}/{(total_days-total_holidays)*8} </b>",
+		"4":"<b style=color:green>Payment Days</b>",
+		"5": f"<b style= color:green>{summary.total_present + summary.total_half_days + total_holidays} </b>",
+		"6":"<b style=color:red>Total Leaves</b>",
+		"7": f"<b style = color:red>{summary.total_leaves + summary.total_half_days}</b>",
+		"8":"<b style=color:red>Total Absent</b>",
+		"9": f"<b style = color:red>{summary.total_absent}</b>",
+		"10":"<b style=color:red>Total Holidays</b>",
+		"11": f"<b style = color:red>{total_holidays}</b>",
+		"12":"<b style=color:orange>Unmarked Days</b>",
+		"13": f"<b style = color:orange>{total_unmarked_days}</b>",
 		"indent":1,
 	}
 
@@ -543,12 +552,13 @@ def get_attendance_status_for_detailed_view(
 	total_days = get_total_days_in_month(filters)
 	attendance_values = []
 	zero_duration = timedelta(hours=0, minutes=0, seconds=0)
-	time = timedelta(hours=0, minutes=0, seconds=0)
+	time1 = timedelta(hours=0, minutes=0, seconds=0)
 	timeunder = timedelta(hours=0, minutes=0, seconds=0)
 	timeunder = timedelta(hours=0, minutes=0, seconds=0)
+	tot_logged_hrs =  datetime.time(0, 0)
 
-	early=""
-	late =""
+	early = timedelta()
+	late = timedelta()
 
 	for shift, status_dict in employee_attendance.items():
 
@@ -580,26 +590,49 @@ def get_attendance_status_for_detailed_view(
 			tot_overtime[day] = (status_dict.get(day) or {}).get('overtime')  or zero_duration
 			tot_undertime[day] = (status_dict.get(day) or {}).get('undertime') or zero_duration
 
-			time+=tot_overtime[day]
+			time1+=tot_overtime[day]
 			timeunder+=tot_undertime[day]
 
-			late+=late_by_row[day]
-			early+=early_by_row[day]
+			late_by_str = (status_dict.get(day) or {}).get('late_by_row') or '0:0:0'
+			if isinstance(late_by_str, str):
+				late_by_row_day = timedelta(hours=int(late_by_str.split(':')[0]),
+											minutes=int(late_by_str.split(':')[1]),
+											seconds=int(late_by_str.split(':')[2]))
+			elif isinstance(late_by_str, timedelta):
+				late_by_row_day = late_by_str
+			else:
+				late_by_row_day = timedelta()  # Default to zero time if not a valid format
 
-		value_time =(timeunder.total_seconds()/3600)- (time.total_seconds()/3600)
+			# Convert early_by_row[day] to timedelta
+			early_by_str = (status_dict.get(day) or {}).get('early_by_row') or '0:0:0'
+			if isinstance(early_by_str, str):
+				early_by_row_day = timedelta(hours=int(early_by_str.split(':')[0]),
+											minutes=int(early_by_str.split(':')[1]),
+											seconds=int(early_by_str.split(':')[2]))
+			elif isinstance(early_by_str, timedelta):
+				early_by_row_day = early_by_str
+			else:
+				early_by_row_day = timedelta()  # Default to zero time if not a valid format
 
+			# Add timedelta values to late and early
+			late += late_by_row_day
+			early += early_by_row_day
+
+		value_time =(time1.total_seconds()/3600)-(timeunder.total_seconds()/3600)
+		nav = ""
 		if value_time>=0:
 				value_time = datetime.timedelta(seconds=value_time*3600) 
 		elif value_time<0:
 				value_time = datetime.timedelta(seconds=-1*value_time*3600) 
+				nav = "-"
 
 
-		time=time.total_seconds()
-		hours = time // 3600
-		time %= 3600
-		minutes = time // 60
-		seconds = time % 60
-		time=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
+		time1=time1.total_seconds()
+		hours = time1 // 3600
+		time1 %= 3600
+		minutes = time1 // 60
+		seconds = time1 % 60
+		time1=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
 
 
 		timeunder=timeunder.total_seconds()
@@ -616,10 +649,21 @@ def get_attendance_status_for_detailed_view(
 		seconds = value_time % 60
 		value_time=(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
 
+		from datetime import time
+		total_hours = 0
+		total_minutes = 0
 
+		for key, value in logged_hours.items():
+			if isinstance(value, time):
+				total_hours += value.hour
+				total_minutes += value.minute
 
-		total_over={"shift":"<b style=color:blue>Total Overtime hrs</b>",'1':f'<b style=color:#6A5ACD>{time}</b>','2':"<b style=color:blue>Total Undertime hrs</b>","3":f'<b style=color:#6A5ACD>{timeunder}</b>',"4":"<b style=color:blue>Total Time</b>","5":f'<b style=color:#6A5ACD>{value_time}</b>',"indent":1}
-		total_early={"shift":"<b style=color:blue>Total Late by hrs</b>",'1':f'<b style=color:#6A5ACD>{late}</b>','2':"<b style=color:blue>Total Early by hrs</b>","3":f'<b style=color:#6A5ACD>{early}</b>',"indent":1}
+		# Convert excess minutes to hours if necessary
+		total_hours += total_minutes // 60
+		total_minutes %= 60
+
+		total_over={"shift":"<b style=color:blue>Total Overtime hrs</b>",'1':f'<b style=color:#6A5ACD>{time1}</b>','2':"<b style=color:blue>Total Undertime hrs</b>","3":f'<b style=color:#6A5ACD>{timeunder}</b>',"4":"<b style=color:blue>Total Time</b>","5":f'<b style=color:#6A5ACD>{nav}{value_time}</b>',"indent":1}
+		total_early={"shift":"<b style=color:blue>Total Late by hrs</b>",'1':f'<b style=color:#6A5ACD>{late}</b>','2':"<b style=color:blue>Total Early by hrs</b>","3":f'<b style=color:#6A5ACD>{early}</b>',"4":f"<b style=color:blue>Total Logged Hrs</b>","5": f"<b style=color:#6A5ACD>{total_hours}hrs {total_minutes}mins</b>","indent":1}
 
 		attendance_values.append(row)
 		attendance_values.append(in_time_row)

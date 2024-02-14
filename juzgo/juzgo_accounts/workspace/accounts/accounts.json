@@ -15,34 +15,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Accounts reports",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Accounts Payable",
-   "link_count": 0,
-   "link_to": "Accounts Payable",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Accounts Receivable",
-   "link_count": 0,
-   "link_to": "Accounts Receivable",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Import",
    "link_count": 1,
    "onboard": 0,
@@ -133,6 +105,54 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounts reports",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Accounts Payable",
+   "link_count": 0,
+   "link_to": "Accounts Payable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Accounts Receivable",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TDS Payable Monthly",
+   "link_count": 0,
+   "link_to": "TDS Payable Monthly",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TDS Computation Summary",
+   "link_count": 0,
+   "link_to": "TDS Computation Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
  "modified": "2023-10-26 17:41:06.130192",
@@ -209,6 +229,14 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "stats_filter": "{\"status\":[\"!=\",\"Cancelled\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Accounts Dashboard",
    "link_to": "Accounts Dashboard",
    "type": "Dashboard"
@@ -230,8 +258,9 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Purchase Invoice",
-   "link_to": "Purchase Invoice",
+   "label": "Payment Entry",
+   "link_to": "Payment Entry",
+   "stats_filter": "{\"status\":[\"!=\",\"Cancelled\"]}",
    "type": "DocType"
   },
   {
@@ -239,13 +268,7 @@
    "doc_view": "List",
    "label": "Sales Invoice",
    "link_to": "Sales Invoice",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Payment Entry",
-   "link_to": "Payment Entry",
+   "stats_filter": "{\"status\":[\"!=\",\"Cancelled\"]}",
    "type": "DocType"
   }
  ],
