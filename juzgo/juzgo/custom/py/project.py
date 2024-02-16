@@ -745,7 +745,6 @@ def ca_form_details(ca_form):
 from frappe.model.mapper import get_mapped_doc
 @frappe.whitelist()
 def make_PI(source_name, target_doc=None):
-
 	target_doc = get_mapped_doc(
 		"Final Supplier Invoices in Project",
 		source_name,
@@ -762,3 +761,12 @@ def make_PI(source_name, target_doc=None):
 		target_doc.currency = currency
 
 	return target_doc
+
+@frappe.whitelist()
+def make_detailing_page(doc):
+    doc = json.loads(doc)
+    dp = frappe.new_doc("Detailing Page")
+    dp.project = doc.get("name")
+    dp.save()
+    
+    return 1

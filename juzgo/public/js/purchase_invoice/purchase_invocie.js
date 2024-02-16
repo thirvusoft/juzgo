@@ -21,7 +21,7 @@ frappe.juzgo.detailing1 = class {
                         themes: {
                             light: {
                                 background: '#FFFFFF',
-                                primary: '#0097A7',
+                                primary: '#2490ef',
                                 secondary: '#00BCD4',
                                 accent: '#9575CD',
                                 success: '#66BB6A',

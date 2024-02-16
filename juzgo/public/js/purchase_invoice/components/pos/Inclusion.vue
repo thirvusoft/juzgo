@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="Hotel.length > 0">
     <v-card
       class="selection mx-auto grey lighten-5 mt-3"
       style="max-height: 80vh; height: 80vh"
@@ -14,7 +14,7 @@
       </div>
 
       <v-expansion-panels
-        class="overflow-y-auto" style="max-height: 80vh"
+        class="overflow-y-auto" style="max-height: 75vh"
         v-model="panel"
         multiple
       >
@@ -39,12 +39,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Hotel)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Hotel)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,Hotel)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Hotel)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,Hotel)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -68,7 +69,7 @@
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,Hotel,Hotel_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,Hotel,Hotel_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -185,6 +186,7 @@
                         <v-row>
                           <v-col class="text-left">
                             <v-textarea
+                              auto-grow
                               dense
                               color="primary"
                               background-color="white"
@@ -222,12 +224,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Spots)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Spots)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,Spots)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Spots)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,Spots)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -251,7 +254,7 @@
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,Spots,Spots_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,Spots,Spots_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -299,12 +302,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,OptionalcostDetailing)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,OptionalcostDetailing)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,OptionalcostDetailing)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,OptionalcostDetailing)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,OptionalcostDetailing)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -328,7 +332,7 @@
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,OptionalcostDetailing,OptionalcostDetailing_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,OptionalcostDetailing,OptionalcostDetailing_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -376,12 +380,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Others)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Others)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,Others)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Others)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,Others)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -396,13 +401,14 @@
                               background-color="white"
                               hide-details
                               required
+                              auto-grow
                             >
                             </v-textarea>
                           </v-col>
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,Others,Other_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,Others,Other_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                   </table>
@@ -432,12 +438,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Vehicle)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Vehicle)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,Vehicle)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Vehicle)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,Vehicle)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -461,7 +468,7 @@
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,Vehicle,Vehicle_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,Vehicle,Vehicle_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -496,6 +503,7 @@
                               v-model="item.notes"
                               background-color="white"
                               hide-details
+                              auto-grow
                             >
                             </v-textarea>
                           </v-col>
@@ -529,12 +537,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Cruise)"><v-icon small>mdi-content-copy</v-icon></button>
+                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Cruise)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <button @click="clearRow(item,Cruise)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Cruise)"><v-icon>mdi-content-copy</v-icon></button>
+                        <button @click="copyAll(item_ids,Cruise)"><v-icon color="white">mdi-content-copy</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -574,7 +583,7 @@
                         </v-row>
                       </td>
                       <th>
-                        <button @click="deleteRow(item_ids,Cruise,Cruise_ids)"><v-icon>mdi-delete-circle</v-icon></button>
+                        <button @click="deleteRow(item_ids,Cruise,Cruise_ids)"><v-icon color="white">mdi-delete-circle</v-icon></button>
                       </th>
                     </tr>
                     <tr>
@@ -789,6 +798,9 @@
       </v-expansion-panels>
     </v-card>
   </div>
+  <div v-else>
+    <H1>Click Again Inclusion</H1>
+  </div>
 </template>
 
 <script>
@@ -797,6 +809,8 @@ import { evntBus } from '../../bus';
 export default {
   data() {
     return {
+      data:[],
+
       panel: [],
       items: 6,
 
@@ -864,7 +878,7 @@ export default {
 
     AddOptionalcostDetailing(){
       var id = this.makeid(20)
-      for(var i=1;i<6;i++){
+      for(var i=1;i<2;i++){
         this.OptionalcostDetailing.push({
           options: "Option "+i,
           det_id: id, 
@@ -878,7 +892,7 @@ export default {
 
     AddOther(){
       var id = this.makeid(20)
-      for(var i=1;i<6;i++){
+      for(var i=1;i<2;i++){
         this.Others.push({
           options: "Option "+i,
           det_id: id, 
@@ -891,7 +905,7 @@ export default {
 
     AddVehicle(){
       var id = this.makeid(20)
-      for(var i=1;i<6;i++){
+      for(var i=1;i<2;i++){
         this.Vehicle.push({
           options: "Option "+i,
           det_id: id, 
@@ -997,6 +1011,18 @@ export default {
         }
       }
     },
+    clearRow(item,field_name){
+      let non_changable = ['name', 'owner', 'det_id', 'det_idx', 'creation', "modified", "modified_by", "docstatus", "idx", "parent", "parentfield", "parenttype", "doctype", "options"]
+      for (var i = 0; i < field_name.length; i++) {
+        if (field_name[i].det_idx == item.det_idx) {
+          for (const key in field_name[i]) {
+            if (field_name[(i)].hasOwnProperty(key) && !non_changable.includes(key)) {
+              Vue.set(item, key, '');
+            }
+          }
+        }
+      }
+    },
     deleteRow(item_ids,field_name,item_ids_list){
       let ids = []
       for(var i=0;i<field_name.length;i++){
@@ -1032,6 +1058,7 @@ export default {
   created() {
     this.$nextTick(() => {
       evntBus.$on('send_detailing_detail', (data) => {
+        this.data = data
         this.Spots = data.spots
         this.push_ids_list(this.Spots,this.Spots_ids)
         this.Hotel = data.hotels
@@ -1067,7 +1094,7 @@ export default {
   border: 1px solid #ddd;
   padding: 3px;
   text-align: left;
-  background-color: #0097A7;
+  background-color: #2490ef;
   color: aliceblue;
 }
 

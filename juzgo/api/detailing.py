@@ -87,3 +87,11 @@ def get_caform_names():
         as_dict=1,
     )
     return caforms
+
+@frappe.whitelist()
+def get_attach(detailing_detail):
+    doc = json.loads(detailing_detail)
+    file =[]
+    for i in doc.get("common_features"):
+        file.append(frappe.get_doc("File",{"file_url":i["airticket"]}))
+    return file

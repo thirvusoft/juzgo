@@ -156,7 +156,7 @@
               readonly
             ></v-select>
           </v-col>
-          <v-col cols="6">
+          <!-- <v-col cols="6">
             <v-text-field
               v-model="detailing_detail.no_of_options"
               :label="frappe._('No of Options')"
@@ -179,7 +179,7 @@
               color="primary"
               hide-details
             ></v-text-field>
-          </v-col>
+          </v-col> -->
           <v-col cols="12">
             <v-select
               dense
@@ -202,7 +202,6 @@
               v-model="detailing_detail.remarks"
               background-color="white"
               auto-grow
-              rows="3"
               row-height="25"
             ></v-textarea>
           </v-col>
