@@ -20,6 +20,7 @@
   "column_break_1yjim",
   "no_of_options",
   "options",
+  "destination",
   "column_break_2tadn",
   "remarks",
   "column_break_30ukv",
@@ -193,11 +194,17 @@
    "fieldname": "hotels_html",
    "fieldtype": "HTML",
    "label": "Hotels HTML"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Table MultiSelect",
+   "label": "Destination",
+   "options": "Project Destination"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-12 18:24:43.500437",
+ "modified": "2024-02-16 15:04:54.888212",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",
