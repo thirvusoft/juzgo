@@ -6,6 +6,7 @@ from frappe.model.document import Document
 from frappe.utils import (
 	get_link_to_form
 )
+import random
 
 class DetailingPage(Document):
 	def validate(self):
@@ -48,11 +49,12 @@ class DetailingPage(Document):
 				spot_list=frappe.get_doc("Destination", dest.destination_name)
 				if spot_list:
 					for spot in spot_list.default_spots:
-						detail_spot.append({'options': "Option 1", 'spots':spot.spots_name})
-						detail_spot.append({'options': "Option 2"})
-						detail_spot.append({'options': "Option 3"})
-						detail_spot.append({'options': "Option 4"})
-						detail_spot.append({'options': "Option 5"})
+						det_id = random.randint(0,9)
+						detail_spot.append({'options': "Option 1", 'spots':spot.spots_name, 'det_id':det_id})
+						detail_spot.append({'options': "Option 2", 'det_id':det_id})
+						detail_spot.append({'options': "Option 3", 'det_id':det_id})
+						detail_spot.append({'options': "Option 4", 'det_id':det_id})
+						detail_spot.append({'options': "Option 5", 'det_id':det_id})
 					self.update({"spots": detail_spot})
      
 @frappe.whitelist()

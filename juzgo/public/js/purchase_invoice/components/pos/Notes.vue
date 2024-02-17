@@ -1,5 +1,5 @@
 <template>
-  <div v-if="AirTicket.length > 0">
+  <div>
     <v-card
       class="selection mx-auto grey lighten-5 mt-3 overflow-y-auto"
       style="max-height: 80vh; height: 80vh"
@@ -172,9 +172,6 @@
         </v-data-table>
       </v-row>
     </v-card>
-  </div>
-  <div v-else>
-    <H1>Click Again Notes & Comman Features</H1>
   </div>
 </template>
    

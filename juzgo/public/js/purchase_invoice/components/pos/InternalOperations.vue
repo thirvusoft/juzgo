@@ -62,7 +62,7 @@
               :no-data-text="__('CA Form not found')"
               hide-details
               :filter="caformFilter"
-              :disabled="readonly"
+              readonly
             >
               <template v-slot:item="data">
                 <template>
@@ -156,6 +156,17 @@
               readonly
             ></v-select>
           </v-col>
+          <v-col cols="12">
+            <v-select
+              outlined
+              v-model="destination_name"
+              :items="destination_list"
+              :label="frappe._('Destination')"
+              multiple
+              chips
+              readonly
+            ></v-select>
+          </v-col>
           <!-- <v-col cols="6">
             <v-text-field
               v-model="detailing_detail.no_of_options"
@@ -209,7 +220,7 @@
       </v-card>
       <v-card class="cards mb-0 mt-3 pa-2 grey lighten-5">
         <v-row no-gutters align="center" justify="center">
-          <v-col cols="6" class="mt-2">
+          <v-col cols="12" class="mt-2">
             <v-btn
               block
               class="pa-0"
@@ -219,7 +230,7 @@
               >{{ __('Save') }}</v-btn
             >
           </v-col>
-          <v-col cols="6" class="mt-2">
+          <!-- <v-col cols="6" class="mt-2">
             <v-btn
               block
               class="pa-0"
@@ -228,7 +239,7 @@
               dark
               >{{ __('Print') }}</v-btn
             >
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-card>
     </div>
@@ -248,7 +259,9 @@
         ca_form:'',
         ca_forms: [],
         customers_list: [],
-        customer:[]
+        customer:[],
+        destination_name:[],
+        destination_list:[],
       };
     },
   
@@ -297,6 +310,9 @@
         const vm = this;
         frappe.call({
           method: 'juzgo.api.detailing.get_detailing_names',
+          args:{
+            project:vm.project
+          },
           callback: function (r) {
             if (r.message) {
               vm.detailing_ids = r.message;
@@ -366,8 +382,12 @@
                   vm.ca_form = data.ca_form
                   vm.detailing_detail = data 
                   vm.customer_name = []
+                  vm.destination_name = []
                   data.customer.forEach((ele)=>{
                     vm.customer_name.push(ele.customer)
+                  })
+                  data.destination.forEach((ele)=>{
+                    vm.destination_name.push(ele.destination_name)
                   })
                 }
               },
@@ -378,6 +398,7 @@
           vm.ca_form = ''
           vm.detailing_detail = '' 
           vm.customer_name = []
+          vm.destination_name = []
         }
       },    
       async save(){
@@ -421,8 +442,12 @@
               vm.project = data.project
               vm.ca_form = data.ca_form
               vm.customer_name = []
+              vm.destination_name = []
               data.customer.forEach((ele)=>{
                 vm.customer_name.push(ele.customer)
+              })
+              data.destination.forEach((ele)=>{
+                vm.destination_name.push(ele.destination_name)
               })
               vm.detailing_detail = data 
             }
@@ -448,7 +473,30 @@
             });
           }
         });
-    },
+      },
+      get_destination_list(){
+      if (this.destination_list.length > 0) return;
+      const vm = this;
+      frappe.db
+        .get_list('Destination', {
+          fields: ['name'],
+          limit: 5000,
+          order_by: 'name',
+        })
+        .then((data) => {
+          if (data.length > 0) {
+            data.forEach((el) => {
+              vm.destination_list.push(el.name);
+            });
+          }
+        });
+      },
+      save_doc(e) {
+        if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          this.save();
+        }
+      },
     },
   
     created() {
@@ -459,15 +507,21 @@
         this.get_detailing()
         this.get_caform_names()
         this.get_customers_list()
+        this.get_destination_list()
       })
+      document.addEventListener('keydown', this.save_doc.bind(this));
     },
+    
     destroyed() {
-      
+      document.removeEventListener('keydown', this.save_doc);
     },
     watch: {
       detailing_detail() {
         evntBus.$emit('send_detailing_detail', this.detailing_detail);
       },
+      project(){
+        this.get_detailing_names()
+      }
     },
   };
   </script>

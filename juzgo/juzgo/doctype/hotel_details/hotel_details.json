@@ -22,6 +22,7 @@
   "is_advance__prepaid_hotel",
   "hotel_type",
   "star_rating",
+  "hotel_category",
   "contact_person",
   "budget_from_",
   "budget_to_",
@@ -385,12 +386,18 @@
    "fieldtype": "Table MultiSelect",
    "label": "Supplier",
    "options": "Hotel Supplier"
+  },
+  {
+   "fieldname": "hotel_category",
+   "fieldtype": "Link",
+   "label": "Hotel Category  ",
+   "options": "Hotel Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2023-10-13 12:53:12.540335",
+ "modified": "2024-02-17 16:55:13.359475",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Hotel Details",

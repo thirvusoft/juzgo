@@ -16,7 +16,7 @@
 
       <v-spacer></v-spacer>
       <v-btn style="cursor: unset" text color="primary">
-        <span right>{{ "HI I am Sibi" }}</span>
+        <span right>{{detailing_detail.name}}</span>
       </v-btn>
       <div class="text-center">
         <v-menu offset-y>
@@ -160,6 +160,7 @@ export default {
       freeze: false,
       freezeTitle: '',
       freezeMsg: '',
+      detailing_detail: '',
     };
   },
   methods: {
@@ -221,6 +222,10 @@ export default {
         this.freeze = false;
         this.freezTitle = '';
         this.freezeMsg = '';
+      });
+      evntBus.$on('send_detailing_detail', (data) => {
+        this.detailing_detail = data
+       
       });
     });
   },

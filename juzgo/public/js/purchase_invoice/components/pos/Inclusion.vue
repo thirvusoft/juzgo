@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Hotel.length > 0">
+  <div>
     <v-card
       class="selection mx-auto grey lighten-5 mt-3"
       style="max-height: 80vh; height: 80vh"
@@ -63,6 +63,7 @@
                               :no-data-text="__('Hotel not found')"
                               hide-details
                               required
+                              @change="fetch_hotel_category(item)"
                             >
                             </v-autocomplete>
                           </v-col>
@@ -798,9 +799,7 @@
       </v-expansion-panels>
     </v-card>
   </div>
-  <div v-else>
-    <H1>Click Again Inclusion</H1>
-  </div>
+  
 </template>
 
 <script>
@@ -1052,6 +1051,11 @@ export default {
           id_list.push(ele.det_id);
         }
       });
+    },
+    fetch_hotel_category(item){
+      frappe.db.get_value('Hotel Details', item.hotel_name, ['hotel_category'], (r) => {
+        Vue.set(item, "hotel_category", r.hotel_category);
+      })
     },
   },
 

@@ -6,8 +6,22 @@
     >
       <v-tabs-slider color="primary"></v-tabs-slider>
       <v-tab value="supplier_mail_details">Supplier Mail Details</v-tab>
-      <v-tab value="inclusion" @click="pass_detailing_detail()">Inclusion</v-tab>
-      <v-tab value="notes" @click="pass_detailing_detail()">Notes & Common Features</v-tab>
+      <v-tab value="inclusion" @click="pass_detailing_detail()">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">Inclusion</span>
+          </template>
+          <span>Double Click</span>
+        </v-tooltip>
+      </v-tab>
+      <v-tab value="notes" @click="pass_detailing_detail()">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">Notes & Common Features</span>
+          </template>
+          <span>Double Click</span>
+        </v-tooltip>
+      </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
