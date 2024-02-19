@@ -60,7 +60,10 @@ def get_detailing_names(project=None):
 def get_detailing(detailing_id):
     detailing = frappe.get_doc("Detailing Page",detailing_id)
     return detailing
-
+@frappe.whitelist()
+def get_quotation_compare(quotation_compare_id):
+    quotation_compare = frappe.get_doc("DP-Quotation comparission",quotation_compare_id)
+    return quotation_compare
 @frappe.whitelist()
 def get_last_data():
     detailing = frappe.get_all("Detailing Page", filters={"modified_by":frappe.session.user}, fields=["name","modified"], limit=1, order_by="modified desc")

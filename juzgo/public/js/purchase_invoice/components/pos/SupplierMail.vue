@@ -1171,16 +1171,18 @@
     created () {
       this.$nextTick(function () {
         evntBus.$on('send_detailing_detail', (data) => {
-          this.visaSupplier = data.visa_supplier
-          this.detailing_detail = data
-          this.Supplier = data.supplier
-          this.Supplier.forEach(ele => {
-            ele.page_row_id = this.makeid(20)
-          });
-          this.visaSupplier.forEach(ele => {
-            ele.page_row_id = this.makeid(20)
-          });
-          this.name_list_order()
+          if(data){
+            this.visaSupplier = data.visa_supplier
+            this.detailing_detail = data
+            this.Supplier = data.supplier
+            this.Supplier.forEach(ele => {
+              ele.page_row_id = this.makeid(20)
+            });
+            this.visaSupplier.forEach(ele => {
+              ele.page_row_id = this.makeid(20)
+            });
+            this.name_list_order()
+          }
         });
       });
     },

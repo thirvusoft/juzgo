@@ -141,6 +141,7 @@ export default {
       item: 0,
       items: [
         { text: 'Detailing', icon: 'mdi-point-of-sale' },
+        { text: 'Quotation Comparission', icon: 'mdi-compare' },
         { text: 'Home', icon: 'mdi-home-city' },
         { text: 'Project', icon: 'mdi-minus-box' },
         { text: 'CA Form', icon: 'mdi-minus-box' },
@@ -225,7 +226,7 @@ export default {
       });
       evntBus.$on('send_detailing_detail', (data) => {
         this.detailing_detail = data
-       
+        evntBus.$emit('send_detailing_detail_id',data)
       });
     });
   },
