@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-16 19:20:53.730236",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "spots",
+  "notes",
+  "supplier"
+ ],
+ "fields": [
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "spots",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Spots",
+   "options": "Spots"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-17 16:33:09.695547",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "DP-Spots",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

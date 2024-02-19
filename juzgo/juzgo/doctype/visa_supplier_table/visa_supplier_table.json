@@ -11,6 +11,7 @@
   "supplier",
   "supplier_name",
   "supplier_mail_id",
+  "column_break_kzveo",
   "ca_form_details_section",
   "travel_from_dates",
   "travel_to_dates",
@@ -54,6 +55,7 @@
   },
   {
    "columns": 1,
+   "fetch_from": "supplier.email_id",
    "fieldname": "supplier_mail_id",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -141,12 +143,16 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Send mail"
+  },
+  {
+   "fieldname": "column_break_kzveo",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-02-14 10:48:40.215060",
+ "modified": "2024-02-16 13:26:19.930730",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Visa Supplier Table",

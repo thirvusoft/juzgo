@@ -27,6 +27,7 @@
             <v-select
               v-model="item.supplier"
               :items="get_supplier"
+              @change="get_supplier_details(item)"
             ></v-select>
           </template>
           <template v-slot:item.supplier_mail_id="{ item }">
@@ -36,7 +37,7 @@
           </template>
           <template v-slot:item.travel_from_dates="{ item }">
             <v-menu
-              v-model="item.check_travel_from_dates"
+              v-model="item.check_travel_from_datess"
               :close-on-content-click="false"
               transition="scale-transition"
               dense
@@ -58,14 +59,14 @@
                 color="primary"
                 no-title
                 scrollable
-                @input="item.check_travel_from_dates = false"
+                @input="item.check_travel_from_datess= false"
               >
               </v-date-picker>
             </v-menu>
           </template>
           <template v-slot:item.travel_to_dates="{ item }">
             <v-menu
-              v-model="item.check_travel_to_dates"
+              v-model="item.check_travel_to_datess"
               :close-on-content-click="false"
               transition="scale-transition"
               dense
@@ -87,7 +88,7 @@
                 color="primary"
                 no-title
                 scrollable
-                @input="item.check_travel_to_dates = false"
+                @input="item.check_travel_to_datess = false"
               >
               </v-date-picker>
             </v-menu>
@@ -148,6 +149,7 @@
                           md="4"
                         >
                           <v-select
+                            @change="get_supplier_details(visaSuppliereditedItem)"
                             v-model="visaSuppliereditedItem.supplier"
                             :items="get_supplier"
                             label="Supplier"
@@ -302,8 +304,8 @@
                         </v-col>
                         <v-col
                           cols="12"
-                          sm="6"
-                          md="4"
+                          sm="12"
+                          md="12"
                         >
                           <v-textarea
                             v-model="visaSuppliereditedItem.questions"
@@ -355,6 +357,7 @@
                   <v-select
                     dense
                     outlined
+                    @change="get_supplier_details(item)"
                     color="primary"
                     :label="frappe._('Supplier')"
                     :items="get_supplier"
@@ -372,6 +375,7 @@
                     background-color="white"
                     hide-details
                     v-model="item.supplier_name"
+                    readonly
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4">
@@ -506,7 +510,7 @@
                     v-model="item.visa_type"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="4">
+                <v-col cols="12">
                   <v-textarea
                     dense
                     outlined
@@ -639,9 +643,10 @@
                             :items="get_supplier"
                             background-color="white"
                             v-model="SuppliereditedItem.supplier"
+                            @change="get_supplier_details(SuppliereditedItem,'supplier')"
                           ></v-select>
                         </v-col>
-                        <v-col 
+                        <!-- <v-col 
                           cols="12"
                           sm="6"
                           md="4"
@@ -653,7 +658,7 @@
                             background-color="white"
                             v-model="SuppliereditedItem.supplier_name"
                           ></v-text-field>
-                        </v-col>
+                        </v-col> -->
                         <v-col 
                           cols="12"
                           sm="6"
@@ -883,6 +888,12 @@
             >
               mdi-delete
             </v-icon>
+            <v-icon
+              small
+              @click="SupplieremailsendItemConfirm(item)"
+            >
+              mdi-email-send
+            </v-icon>
           </template>
         </v-data-table>
       </v-card>
@@ -1009,8 +1020,46 @@
             }
           },
         });
-        
+      },
+      async SupplieremailsendItemConfirm (item){
+        frappe.call({
+          method: 'juzgo.api.detailing.get_mailing_details',
+          args:{
+            detailing_detail:this.detailing_detail,
+            item:item,
+          },
+          callback: function (r) {
+            if (r.message) {
+              console.log(r.message)
+            }
+          },
+        });
+        const { message } = await frappe.call({
+            method: "frappe.email.doctype.email_template.email_template.get_email_template",
+            args: {
+                template_name: "Supplier",
+                doc: this.detailing_detail,
+            },
+        });
+        frappe.call({
+          method: 'juzgo.api.detailing.get_attach',
+          args:{
+            detailing_detail:this.detailing_detail
+          },
+          callback: function (r) {
+            if (r.message) {
+              const args = {
+                subject: message.subject,
+                recipients: item.supplier_mail_id,
+                attach_document_print: false, 
+                message: message.message,
+                attachments: r.message,
+              };
 
+              new frappe.views.CommunicationComposer(args);
+            }
+          },
+        });
       },
 
       visaSupplierclose () {
@@ -1056,6 +1105,22 @@
         this.Supplierclose()
       },
 
+      async get_supplier_details(item,only_supplier=null){
+        frappe.db.get_value('Supplier', item.supplier, ['email_id','supplier_name'], (r) => {
+          Vue.set(item, "supplier_mail_id", r.email_id);
+          Vue.set(item, "supplier_name", r.supplier_name);
+        })
+        if(only_supplier){
+          frappe.db.get_value('CA Form', this.detailing_detail.ca_form, ['travel_start_date','travel_end_date', 'no_of_adult', 'no_of_childrens', 'child_without_bed', 'no_of_infant'], (r) => {
+            Vue.set(item, "travel_from_dates", r.travel_start_date);
+            Vue.set(item, "travel_to_dates", r.travel_end_date);
+            Vue.set(item, "no_of_adults", r.no_of_adult);
+            Vue.set(item, "no_of_child", r.no_of_childrens + r.child_without_bed + r.no_of_infant);
+            console.log(this.detailing_detail,r)
+          })
+        }
+        
+      },
 
       makeid(length) {
         let result = '';
@@ -1072,6 +1137,7 @@
       name_list_order(){
         this.get_supplier = this.get_list("Supplier",this.get_supplier)
         this.get_destination = this.get_list("Destination",this.get_destination)
+        evntBus.$emit('send_destination_list', this.detailing_detail);
       },
 
       get_list(doctype,list){
@@ -1105,16 +1171,18 @@
     created () {
       this.$nextTick(function () {
         evntBus.$on('send_detailing_detail', (data) => {
-          this.visaSupplier = data.visa_supplier
-          this.detailing_detail = data
-          this.Supplier = data.supplier
-          this.Supplier.forEach(ele => {
-            ele.page_row_id = this.makeid(20)
-          });
-          this.visaSupplier.forEach(ele => {
-            ele.page_row_id = this.makeid(20)
-          });
-          this.name_list_order()
+          if(data){
+            this.visaSupplier = data.visa_supplier
+            this.detailing_detail = data
+            this.Supplier = data.supplier
+            this.Supplier.forEach(ele => {
+              ele.page_row_id = this.makeid(20)
+            });
+            this.visaSupplier.forEach(ele => {
+              ele.page_row_id = this.makeid(20)
+            });
+            this.name_list_order()
+          }
         });
       });
     },

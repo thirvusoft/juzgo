@@ -10,19 +10,22 @@
 </template>
 
 <script>
-
+import { evntBus } from './bus';
 import Navbar from './components/Navbar.vue';
 import DetailingMain from './components/pos/DetailingMain.vue';
+import QuotationCompareMain from './components/pos/QuotationCompareMain.vue';
 
 export default {
   data: function () {
     return {
+      detailing_detail:'',
       page: 'DetailingMain',
     };
   },
   components: {
     Navbar,
     DetailingMain,
+    QuotationCompareMain
   },
   methods: {
     setPage(page_name) {
@@ -47,6 +50,9 @@ export default {
           '_blank'
         );
         win.focus();
+      }
+      if(page_name == "Quotation Comparission"){
+        this.page = "QuotationCompareMain";
       }
       if(page_name == "Detailing"){
         this.page = "DetailingMain";
