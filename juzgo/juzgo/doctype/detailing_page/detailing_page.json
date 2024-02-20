@@ -20,7 +20,6 @@
   "column_break_1yjim",
   "no_of_options",
   "options",
-  "destination",
   "column_break_2tadn",
   "remarks",
   "column_break_30ukv",
@@ -36,7 +35,8 @@
   "cruise",
   "common_features",
   "notes_tab",
-  "notes_for_our_reference"
+  "notes_for_our_reference",
+  "refresh"
  ],
  "fields": [
   {
@@ -196,15 +196,16 @@
    "label": "Hotels HTML"
   },
   {
-   "fieldname": "destination",
-   "fieldtype": "Table MultiSelect",
-   "label": "Destination",
-   "options": "Project Destination"
+   "default": "0",
+   "fieldname": "refresh",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Refresh"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-16 15:04:54.888212",
+ "modified": "2024-02-20 09:59:43.828532",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",
