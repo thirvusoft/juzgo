@@ -34,7 +34,15 @@ frappe.ui.form.on('Project', {
             frm.remove_custom_button(__("Update Total Purchase Cost"),"Actions")
             frm.remove_custom_button(__("Set Project Status"),"Actions")
             frm.add_custom_button(__('Go Detailing Page'), function () {
-                frappe.set_route("detailing1");
+                frappe.call({
+                    method: "juzgo.juzgo.custom.py.project.go_detailing_page",
+                    args:{
+                        doc:frm.doc,
+                    },
+                    callback(r1){
+                        frappe.set_route("detailing1");
+                    }
+                })
             }, __('Actions'));
             frm.add_custom_button(__('Create Detailing Page'), function () {
 

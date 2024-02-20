@@ -196,6 +196,12 @@
    "label": "Hotels HTML"
   },
   {
+   "fieldname": "destination",
+   "fieldtype": "Table MultiSelect",
+   "label": "Destination",
+   "options": "Project Destination"
+  },
+  {
    "default": "0",
    "fieldname": "refresh",
    "fieldtype": "Check",
@@ -205,7 +211,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-20 09:59:43.828532",
+ "modified": "2024-02-20 10:01:31.365523",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",
