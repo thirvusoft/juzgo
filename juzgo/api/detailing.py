@@ -123,5 +123,6 @@ def get_mailing_details(detailing_detail,item):
         list.update({"others":doc.get("others")})
     if item.get("cruise"):
         list.update({"cruise":doc.get("cruise")})
+    list.update({"doc":doc})
 
     return list

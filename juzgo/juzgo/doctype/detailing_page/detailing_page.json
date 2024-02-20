@@ -21,6 +21,16 @@
   "no_of_options",
   "options",
   "destination",
+  "section_break_uofrh",
+  "travel_from_dates",
+  "travel_to_dates",
+  "column_break_dllhq",
+  "no_of_adults",
+  "no_of_child",
+  "no_of_pax",
+  "column_break_tlx7y",
+  "duration_of_stay_in_destination",
+  "child_ages",
   "column_break_2tadn",
   "remarks",
   "column_break_30ukv",
@@ -99,11 +109,13 @@
   {
    "fieldname": "no_of_options",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "No of Options"
   },
   {
    "fieldname": "options",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Options "
   },
   {
@@ -208,11 +220,62 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Refresh"
+  },
+  {
+   "fieldname": "section_break_uofrh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "ca_form.travel_start_date",
+   "fieldname": "travel_from_dates",
+   "fieldtype": "Date",
+   "label": "Travel From dates"
+  },
+  {
+   "fetch_from": "ca_form.travel_end_date",
+   "fieldname": "travel_to_dates",
+   "fieldtype": "Date",
+   "label": "Travel To dates"
+  },
+  {
+   "fieldname": "column_break_dllhq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "ca_form.no_of_adult",
+   "fieldname": "no_of_adults",
+   "fieldtype": "Int",
+   "label": "No of Adults"
+  },
+  {
+   "fieldname": "no_of_child",
+   "fieldtype": "Int",
+   "label": "No of Child"
+  },
+  {
+   "fieldname": "column_break_tlx7y",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration_of_stay_in_destination",
+   "fieldtype": "Data",
+   "label": "Duration of stay in Destination"
+  },
+  {
+   "fieldname": "child_ages",
+   "fieldtype": "Data",
+   "label": "Child Ages"
+  },
+  {
+   "fetch_from": "ca_form.no_of_paxs",
+   "fieldname": "no_of_pax",
+   "fieldtype": "Int",
+   "label": "No of Pax"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-20 10:01:31.365523",
+ "modified": "2024-02-20 17:25:31.694301",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",

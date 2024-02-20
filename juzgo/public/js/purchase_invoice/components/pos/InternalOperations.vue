@@ -167,10 +167,49 @@
               readonly
             ></v-select>
           </v-col>
-          <!-- <v-col cols="6">
+          <v-col cols="4">
             <v-text-field
-              v-model="detailing_detail.no_of_options"
-              :label="frappe._('No of Options')"
+              v-model="detailing_detail.no_of_adults"
+              :label="frappe._('No of Adults')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+              hide-details
+              readonly
+            ></v-text-field>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              v-model="detailing_detail.no_of_child"
+              :label="frappe._('No of Child')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+              hide-details
+              readonly
+            ></v-text-field>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              v-model="detailing_detail.no_of_pax"
+              :label="frappe._('No of Pax')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+              hide-details
+              readonly
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              v-model="detailing_detail.duration_of_stay_in_destination"
+              :label="frappe._('Duration of stay in Destination')"
               outlined
               dense
               background-color="white"
@@ -181,8 +220,8 @@
           </v-col>
           <v-col cols="6">
             <v-text-field
-              v-model="detailing_detail.options"
-              :label="frappe._('Options')"
+              v-model="detailing_detail.child_ages"
+              :label="frappe._('Child Ages')"
               outlined
               dense
               background-color="white"
@@ -190,7 +229,7 @@
               color="primary"
               hide-details
             ></v-text-field>
-          </v-col> -->
+          </v-col>
           <v-col cols="12">
             <v-select
               dense

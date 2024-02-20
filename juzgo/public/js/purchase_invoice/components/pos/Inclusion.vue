@@ -24,14 +24,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddHotel()"
-                    >
-                      Add Hotels
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in Hotel_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -199,6 +191,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddHotel()"
+                  >
+                    Add Hotels
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -210,14 +210,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddSpots()"
-                    >
-                      Add Spots
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in Spots_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -277,6 +269,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddSpots()"
+                  >
+                    Add Spots
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -288,14 +288,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddOptionalcostDetailing()"
-                    >
-                      Add Optional Cost Detailing
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in OptionalcostDetailing_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -355,6 +347,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddOptionalcostDetailing()"
+                  >
+                    Add Optional Cost Detailing
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -366,14 +366,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddOther()"
-                    >
-                      Add Others
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Other_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -413,6 +406,14 @@
                       </th>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddOther()"
+                  >
+                    Add Others
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -424,14 +425,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddVehicle()"
-                    >
-                      Add Vehicle
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Vehicle_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -512,6 +506,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddVehicle()"
+                  >
+                    Add Vehicle
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -523,14 +525,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddCruise()"
-                    >
-                      Add Cruise
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Cruise_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -791,6 +786,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddCruise()"
+                  >
+                    Add Cruise
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -879,7 +882,7 @@ export default {
       var id = this.makeid(20)
       for(var i=1;i<2;i++){
         this.OptionalcostDetailing.push({
-          options: "Option "+i,
+          options: "Comman",
           det_id: id, 
           det_idx: this.makeid(20), 
           spots:'', 
@@ -893,7 +896,7 @@ export default {
       var id = this.makeid(20)
       for(var i=1;i<2;i++){
         this.Others.push({
-          options: "Option "+i,
+          options: "Comman",
           det_id: id, 
           det_idx: this.makeid(20), 
           others:'', 
@@ -904,7 +907,7 @@ export default {
 
     AddVehicle(){
       var id = this.makeid(20)
-      for(var i=1;i<2;i++){
+      for(var i=1;i<6;i++){
         this.Vehicle.push({
           options: "Option "+i,
           det_id: id, 

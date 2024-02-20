@@ -60,7 +60,7 @@
                         {{ item }}
                       </th>
                     </tr>
-                    <tr v-for="item in quota_hotel_supplier" :key="item">
+                    <tr v-for="item in quota_hotel_dict" :key="item">
                       <th>
                         {{ quota_hotel_dict }}
                       </th>
@@ -94,6 +94,7 @@ export default {
       quota_hotel_supplier:[],
       quota_hotel_list:[],
       quota_hotel_dict:[],
+      quota_supplier_name:'',
 
       panel: [],
       items: 2,

@@ -7,6 +7,362 @@
       <v-card
       class="overflow-y-auto" style="max-height: 82vh"
       >
+      <v-data-table
+          :headers="SupplierHeaders"
+          :items="Supplier"
+          :single-expand="SuppliersingleExpand"
+          :expanded.sync="Supplierexpanded"
+          item-key="page_row_id"
+          show-expand
+          sort-by="destination"
+          class="elevation-1"
+        >
+          <template v-slot:item.supplier="{ item }">
+            <v-select
+              color="primary"
+              :items="get_supplier"
+              background-color="white"
+              v-model="item.supplier"
+            ></v-select>
+          </template>
+          <template v-slot:item.supplier_mail_id="{ item }">
+            <v-text-field
+              color="primary"
+              background-color="white"
+              v-model="item.supplier_mail_id"
+            ></v-text-field>
+          </template>
+          <template v-slot:item.hotels="{ item }">
+            <v-simple-checkbox
+              v-model="item.hotels"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:item.spots="{ item }">
+            <v-simple-checkbox
+              v-model="item.spots"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:item.vehicle="{ item }">
+            <v-simple-checkbox
+              v-model="item.vehicle"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:item.optional_costs="{ item }">
+            <v-simple-checkbox
+              v-model="item.optional_costs"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:item.others="{ item }">
+            <v-simple-checkbox
+              v-model="item.others"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:item.cruise="{ item }">
+            <v-simple-checkbox
+              v-model="item.cruise"
+            ></v-simple-checkbox>
+          </template>
+          <template v-slot:top>
+            <v-toolbar
+              flat
+            >
+              <v-toolbar-title>Supplier</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+              ></v-divider>
+              <v-spacer></v-spacer>
+              <v-dialog
+                v-model="Supplierdialog"
+                max-width="700px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    New Supplier
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formTitle }}</span>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <v-container>
+                      
+                      <v-row>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-select
+                            dense
+                            color="primary"
+                            :label="frappe._('Supplier')"
+                            :items="get_supplier"
+                            background-color="white"
+                            v-model="SuppliereditedItem.supplier"
+                            @change="get_supplier_details(SuppliereditedItem,'supplier')"
+                          ></v-select>
+                        </v-col>
+                        <!-- <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            dense
+                            color="primary"
+                            :label="frappe._('Supplier Name')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.supplier_name"
+                          ></v-text-field>
+                        </v-col> -->
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            dense
+                            color="primary"
+                            :label="frappe._('Supplier Mail ID')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.supplier_mail_id"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Hotels')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.hotels"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Spots')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.spots"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Vehicle')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.vehicle"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Optional Costs')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.optional_costs"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Others')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.others"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col 
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-checkbox
+                            dense
+                            color="primary"
+                            :label="frappe._('Cruise')"
+                            background-color="white"
+                            v-model="SuppliereditedItem.cruise"
+                          ></v-checkbox>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="Supplierclose"
+                    >
+                      Cancel
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="Suppliersave"
+                    >
+                      Save
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-toolbar>
+          </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <v-row class="ma-0 pa-0">
+                <v-col cols="4">
+                  <v-select
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Supplier')"
+                    background-color="white"
+                    hide-details
+                    :items="get_supplier"
+                    v-model="item.supplier"
+                  ></v-select>
+                </v-col>
+                <v-col cols="4">
+                  <v-text-field
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Supplier Name')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.supplier_name"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4">
+                  <v-text-field
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Supplier Mail ID')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.supplier_mail_id"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Hotels')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.hotels"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Spots')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.spots"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Vehicle')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.vehicle"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Optional Costs')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.optional_costs"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Others')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.others"
+                  ></v-checkbox>
+                </v-col>
+                <v-col cols="4">
+                  <v-checkbox
+                    dense
+                    outlined
+                    color="primary"
+                    :label="frappe._('Cruise')"
+                    background-color="white"
+                    hide-details
+                    v-model="item.cruise"
+                  ></v-checkbox>
+                </v-col>
+              </v-row>
+            </td>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              small
+              @click="SupplierdeleteItemConfirm"
+            >
+              mdi-delete
+            </v-icon>
+            <v-icon
+              small
+              @click="SupplieremailsendItemConfirm(item)"
+            >
+              mdi-email-send
+            </v-icon>
+          </template>
+        </v-data-table>
+        
         <v-data-table
           :headers="visaSupplierHeaders"
           :items="visaSupplier"
@@ -540,362 +896,6 @@
             </v-icon>
           </template>
         </v-data-table>
-
-        <v-data-table
-          :headers="SupplierHeaders"
-          :items="Supplier"
-          :single-expand="SuppliersingleExpand"
-          :expanded.sync="Supplierexpanded"
-          item-key="page_row_id"
-          show-expand
-          sort-by="destination"
-          class="elevation-1"
-        >
-          <template v-slot:item.supplier="{ item }">
-            <v-select
-              color="primary"
-              :items="get_supplier"
-              background-color="white"
-              v-model="item.supplier"
-            ></v-select>
-          </template>
-          <template v-slot:item.supplier_mail_id="{ item }">
-            <v-text-field
-              color="primary"
-              background-color="white"
-              v-model="item.supplier_mail_id"
-            ></v-text-field>
-          </template>
-          <template v-slot:item.hotels="{ item }">
-            <v-simple-checkbox
-              v-model="item.hotels"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.spots="{ item }">
-            <v-simple-checkbox
-              v-model="item.spots"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.vehicle="{ item }">
-            <v-simple-checkbox
-              v-model="item.vehicle"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.optional_costs="{ item }">
-            <v-simple-checkbox
-              v-model="item.optional_costs"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.others="{ item }">
-            <v-simple-checkbox
-              v-model="item.others"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.cruise="{ item }">
-            <v-simple-checkbox
-              v-model="item.cruise"
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:top>
-            <v-toolbar
-              flat
-            >
-              <v-toolbar-title>Supplier</v-toolbar-title>
-              <v-divider
-                class="mx-4"
-                inset
-                vertical
-              ></v-divider>
-              <v-spacer></v-spacer>
-              <v-dialog
-                v-model="Supplierdialog"
-                max-width="700px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    color="primary"
-                    dark
-                    class="mb-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    New Supplier
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="text-h5">{{ formTitle }}</span>
-                  </v-card-title>
-
-                  <v-card-text>
-                    <v-container>
-                      
-                      <v-row>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-select
-                            dense
-                            color="primary"
-                            :label="frappe._('Supplier')"
-                            :items="get_supplier"
-                            background-color="white"
-                            v-model="SuppliereditedItem.supplier"
-                            @change="get_supplier_details(SuppliereditedItem,'supplier')"
-                          ></v-select>
-                        </v-col>
-                        <!-- <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            dense
-                            color="primary"
-                            :label="frappe._('Supplier Name')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.supplier_name"
-                          ></v-text-field>
-                        </v-col> -->
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            dense
-                            color="primary"
-                            :label="frappe._('Supplier Mail ID')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.supplier_mail_id"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Hotels')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.hotels"
-                          ></v-checkbox>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Spots')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.spots"
-                          ></v-checkbox>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Vehicle')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.vehicle"
-                          ></v-checkbox>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Optional Costs')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.optional_costs"
-                          ></v-checkbox>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Others')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.others"
-                          ></v-checkbox>
-                        </v-col>
-                        <v-col 
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-checkbox
-                            dense
-                            color="primary"
-                            :label="frappe._('Cruise')"
-                            background-color="white"
-                            v-model="SuppliereditedItem.cruise"
-                          ></v-checkbox>
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-card-text>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="Supplierclose"
-                    >
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="Suppliersave"
-                    >
-                      Save
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-toolbar>
-          </template>
-          <template v-slot:expanded-item="{ headers, item }">
-            <td :colspan="headers.length">
-              <v-row class="ma-0 pa-0">
-                <v-col cols="4">
-                  <v-select
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Supplier')"
-                    background-color="white"
-                    hide-details
-                    :items="get_supplier"
-                    v-model="item.supplier"
-                  ></v-select>
-                </v-col>
-                <v-col cols="4">
-                  <v-text-field
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Supplier Name')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.supplier_name"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4">
-                  <v-text-field
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Supplier Mail ID')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.supplier_mail_id"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Hotels')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.hotels"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Spots')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.spots"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Vehicle')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.vehicle"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Optional Costs')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.optional_costs"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Others')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.others"
-                  ></v-checkbox>
-                </v-col>
-                <v-col cols="4">
-                  <v-checkbox
-                    dense
-                    outlined
-                    color="primary"
-                    :label="frappe._('Cruise')"
-                    background-color="white"
-                    hide-details
-                    v-model="item.cruise"
-                  ></v-checkbox>
-                </v-col>
-              </v-row>
-            </td>
-          </template>
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              @click="SupplierdeleteItemConfirm"
-            >
-              mdi-delete
-            </v-icon>
-            <v-icon
-              small
-              @click="SupplieremailsendItemConfirm(item)"
-            >
-              mdi-email-send
-            </v-icon>
-          </template>
-        </v-data-table>
       </v-card>
     </v-card>
   </div>
@@ -1022,44 +1022,46 @@
         });
       },
       async SupplieremailsendItemConfirm (item){
+        const vm = this
         frappe.call({
           method: 'juzgo.api.detailing.get_mailing_details',
           args:{
-            detailing_detail:this.detailing_detail,
+            detailing_detail:vm.detailing_detail,
             item:item,
           },
-          callback: function (r) {
+          callback: async function (r) {
             if (r.message) {
               console.log(r.message)
-            }
-          },
-        });
-        const { message } = await frappe.call({
-            method: "frappe.email.doctype.email_template.email_template.get_email_template",
-            args: {
-                template_name: "Supplier",
-                doc: this.detailing_detail,
-            },
-        });
-        frappe.call({
-          method: 'juzgo.api.detailing.get_attach',
-          args:{
-            detailing_detail:this.detailing_detail
-          },
-          callback: function (r) {
-            if (r.message) {
-              const args = {
-                subject: message.subject,
-                recipients: item.supplier_mail_id,
-                attach_document_print: false, 
-                message: message.message,
-                attachments: r.message,
-              };
+              const { message } = await frappe.call({
+                method: "frappe.email.doctype.email_template.email_template.get_email_template",
+                args: {
+                    template_name: "Supplier",
+                    doc: r.message,
+                },
+            });
+            frappe.call({
+              method: 'juzgo.api.detailing.get_attach',
+              args:{
+                detailing_detail:vm.detailing_detail
+              },
+              callback: function (ra) {
+                if (ra.message) {
+                  const args = {
+                    subject: message.subject,
+                    recipients: item.supplier_mail_id,
+                    attach_document_print: false, 
+                    message: message.message,
+                    attachments: ra.message,
+                  };
 
-              new frappe.views.CommunicationComposer(args);
+                  new frappe.views.CommunicationComposer(args);
+                }
+              },
+            });
             }
           },
         });
+        
       },
 
       visaSupplierclose () {
