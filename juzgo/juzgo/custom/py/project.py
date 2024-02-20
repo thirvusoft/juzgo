@@ -770,3 +770,17 @@ def make_detailing_page(doc):
     dp.save()
     
     return 1
+@frappe.whitelist()
+def go_detailing_page(doc):
+    doc = json.loads(doc)
+    detailing = frappe.get_all("Detailing Page", filters={"project":doc.get("name")}, fields=["name","modified"], limit=1, order_by="modified desc")
+    if not detailing:
+        frappe.throw("There is no Detailing Page. So,Create Detailing Page.")
+    detailing = frappe.get_doc("Detailing Page", detailing[0].name)
+    if detailing.refresh:
+        detailing.refresh = 0
+    else:
+        detailing.refresh = 1
+    detailing.save()
+
+    return 1

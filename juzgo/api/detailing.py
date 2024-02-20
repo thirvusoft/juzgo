@@ -67,6 +67,8 @@ def get_quotation_compare(quotation_compare_id):
 @frappe.whitelist()
 def get_last_data():
     detailing = frappe.get_all("Detailing Page", filters={"modified_by":frappe.session.user}, fields=["name","modified"], limit=1, order_by="modified desc")
+    if not detailing:
+        frappe.throw("There is no Detailing Page for recent open, so open from the project.")
     detailing = frappe.get_doc("Detailing Page", detailing[0].name)
     return detailing
 
