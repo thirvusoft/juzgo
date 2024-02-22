@@ -36,7 +36,8 @@
   "common_features",
   "notes_tab",
   "notes_for_our_reference",
-  "refresh"
+  "refresh",
+  "destination"
  ],
  "fields": [
   {
@@ -211,7 +212,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-20 10:01:31.365523",
+ "modified": "2024-02-20 14:38:07.160340",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",
@@ -227,6 +228,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
    "share": 1,
    "write": 1
   }
