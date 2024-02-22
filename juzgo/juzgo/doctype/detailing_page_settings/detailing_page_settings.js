@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Thirvusoft Pvt Limited and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Detail Page Settings', {
+frappe.ui.form.on('Detailing Page Settings', {
 	// refresh: function(frm) {
 
 	// }

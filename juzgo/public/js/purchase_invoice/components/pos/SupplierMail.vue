@@ -996,10 +996,17 @@
         this.visaSupplier.splice(this.visaSuppliereditedIndex, 1)
       },
       async visaSupplieremailsendItemConfirm (item){
+        var template_name = ''
+        await frappe.db.get_single_value("Detailing Page Settings", "visa_supplier_template").then((enabled) => {
+          if(!enabled){
+            frappe.throw("Select Email Template in Detailing Page Setting.")
+          }
+          template_name = enabled
+        })
         const { message } = await frappe.call({
             method: "frappe.email.doctype.email_template.email_template.get_email_template",
             args: {
-                template_name: "Detailing Page Visa",
+                template_name: template_name,
                 doc: item,
             },
         });
@@ -1025,6 +1032,13 @@
       },
       async SupplieremailsendItemConfirm (item){
         const vm = this
+        var template_name = ''
+        await frappe.db.get_single_value("Detailing Page Settings", "supplier").then((enabled) => {
+          if(!enabled){
+            frappe.throw("Select Email Template in Detailing Page Setting.")
+          }
+          template_name = enabled
+        })
         frappe.call({
           method: 'juzgo.api.detailing.get_mailing_details',
           args:{
@@ -1037,7 +1051,7 @@
               const { message } = await frappe.call({
                 method: "frappe.email.doctype.email_template.email_template.get_email_template",
                 args: {
-                    template_name: "Supplier",
+                    template_name: template_name,
                     doc: r.message,
                 },
             });

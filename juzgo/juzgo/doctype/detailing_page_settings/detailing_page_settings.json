@@ -8,7 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "visa_supplier_template",
-  "spplier",
+  "supplier",
   "default_cc_email"
  ],
  "fields": [
@@ -19,25 +19,25 @@
    "options": "Email Template"
   },
   {
-   "fieldname": "spplier",
-   "fieldtype": "Link",
-   "label": "Spplier",
-   "options": "Supplier"
-  },
-  {
    "fieldname": "default_cc_email",
    "fieldtype": "Data",
    "label": "Default CC Email",
    "options": "Email"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier Template",
+   "options": "Email Template"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-02-20 18:56:45.267893",
+ "modified": "2024-02-22 15:38:10.450616",
  "modified_by": "Administrator",
  "module": "Juzgo",
- "name": "Detail Page Settings",
+ "name": "Detailing Page Settings",
  "owner": "Administrator",
  "permissions": [
   {
