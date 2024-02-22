@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:DP-{project}-{YY}-{#}",
+ "autoname": "format:DP-{project_name}-{#}",
  "creation": "2024-01-18 15:29:47.575817",
  "default_view": "List",
  "doctype": "DocType",
@@ -275,7 +275,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-20 17:25:31.694301",
+ "modified": "2024-02-21 10:16:32.403219",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",

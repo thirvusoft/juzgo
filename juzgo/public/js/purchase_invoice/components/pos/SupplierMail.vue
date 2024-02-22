@@ -23,6 +23,7 @@
               :items="get_supplier"
               background-color="white"
               v-model="item.supplier"
+              @change="get_supplier_details(item)"
             ></v-select>
           </template>
           <template v-slot:item.supplier_mail_id="{ item }">
@@ -109,7 +110,7 @@
                             :items="get_supplier"
                             background-color="white"
                             v-model="SuppliereditedItem.supplier"
-                            @change="get_supplier_details(SuppliereditedItem,'supplier')"
+                            @change="get_supplier_details(SuppliereditedItem)"
                           ></v-select>
                         </v-col>
                         <!-- <v-col 
@@ -254,6 +255,7 @@
                     hide-details
                     :items="get_supplier"
                     v-model="item.supplier"
+                    @change="get_supplier_details(item)"
                   ></v-select>
                 </v-col>
                 <v-col cols="4">
@@ -383,7 +385,7 @@
             <v-select
               v-model="item.supplier"
               :items="get_supplier"
-              @change="get_supplier_details(item)"
+              @change="get_supplier_details(item,'supplier')"
             ></v-select>
           </template>
           <template v-slot:item.supplier_mail_id="{ item }">
@@ -505,7 +507,7 @@
                           md="4"
                         >
                           <v-select
-                            @change="get_supplier_details(visaSuppliereditedItem)"
+                            @change="get_supplier_details(visaSuppliereditedItem,'supplier')"
                             v-model="visaSuppliereditedItem.supplier"
                             :items="get_supplier"
                             label="Supplier"
@@ -713,7 +715,7 @@
                   <v-select
                     dense
                     outlined
-                    @change="get_supplier_details(item)"
+                    @change="get_supplier_details(item,'supplier')"
                     color="primary"
                     :label="frappe._('Supplier')"
                     :items="get_supplier"

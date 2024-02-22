@@ -7,6 +7,7 @@ from frappe.utils import (
 	get_link_to_form
 )
 import random
+import string
 
 class DetailingPage(Document):
 	def validate(self):
@@ -48,8 +49,12 @@ class DetailingPage(Document):
 			for dest in self.destination:
 				spot_list=frappe.get_doc("Destination", dest.destination_name)
 				if spot_list:
+					det_id_list=[]
 					for spot in spot_list.default_spots:
-						det_id = random.randint(0,9)
+						det_id = random.randint(0,100000000)
+						if det_id in det_id_list:
+							det_id = ''.join(random.choices(string.ascii_lowercase, k=12))
+						det_id_list.append(det_id)
 						detail_spot.append({'options': "Option 1", 'spots':spot.spots_name, 'det_id':det_id})
 						detail_spot.append({'options': "Option 2", 'det_id':det_id})
 						detail_spot.append({'options': "Option 3", 'det_id':det_id})

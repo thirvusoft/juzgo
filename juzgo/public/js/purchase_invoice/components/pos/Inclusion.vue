@@ -860,21 +860,23 @@ export default {
 
     AddHotel(){
       var id = this.makeid(20)
-      for(var i=1;i<6;i++){
-        this.Hotel.push({
-          options: "Option "+i,
-          det_id: id, 
-          det_idx: this.makeid(20), 
-          hotel_name: '', 
-          no_of_nights: '', 
-          no_of_days: '', 
-          number_of_pax: '',
-          room_category: '',
-          meal_preference: '',
-          any_other: '',
-          hotel_category: '',
-        })
-      }
+      frappe.db.get_value('CA Form', {'name': this.data.ca_form}, ['no_of_nights','nos_of_days','no_of_paxs'], (r) => {
+        for(var i=1;i<6;i++){
+          this.Hotel.push({
+            options: "Option "+i,
+            det_id: id, 
+            det_idx: this.makeid(20), 
+            hotel_name: '', 
+            no_of_nights: r.no_of_nights, 
+            no_of_days: r.nos_of_days, 
+            number_of_pax: r.no_of_paxs,
+            room_category: '',
+            meal_preference: '',
+            any_other: '',
+            hotel_category: '',
+          })
+        }
+      })
       this.Hotel_ids.push(id)
     },
 
@@ -959,19 +961,23 @@ export default {
     },
 
     name_list_order(){
-      this.get_spots = this.get_list("Spots",this.get_spots)
-      this.get_hotel = this.get_list("Hotel Details",this.get_hotel)
+      var dis = []
+      this.data.destination.forEach( (ele)=>{
+        dis.push(ele.destination_name)
+      })
+      this.get_spots = this.get_list("Spots",this.get_spots,{'destination':['in',dis]})
+      this.get_hotel = this.get_list("Hotel Details",this.get_hotel,{'destination':['in',dis]})
       this.get_hotel_category = this.get_list("Hotel Category",this.get_hotel_category)
       this.get_transfer_type = this.get_list("Transfers",this.get_transfer_type)
       this.get_vehicle = this.get_list("Vehicle Detail",this.get_vehicle)
       this.get_room_type = this.get_list("Room Type",this.get_room_type)
     },
 
-    get_list(doctype,list){
-      if (list.length > 0) return;
+    get_list(doctype,list,filter=null){
       frappe.db
         .get_list(doctype, {
           fields: ['name'],
+          filters: filter,
           limit: 5000,
           order_by: 'name',
         })
@@ -1078,8 +1084,8 @@ export default {
         this.push_ids_list(this.Vehicle,this.Vehicle_ids)
         this.Cruise = data.cruise
         this.push_ids_list(this.Cruise,this.Cruise_ids)
+        this.name_list_order()
       });
-      this.name_list_order()
     });
   },
 
