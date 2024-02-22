@@ -14,26 +14,31 @@ frappe.ui.form.on("Quotation", {
             let total_pack = 0
             {
                 frm.doc.custom_package_details.forEach(rows => {
-                    amount +=rows.amount
-                    total_pack=amount +frm.doc.custom_service_item+frm.doc.custom_gst_service_charges__+frm.doc.custom_file_handling_charge
+                    amount += rows.amount
+                    total_pack = amount+frm.doc.custom_other_charges_total
                     frm.set_value('custom_total_package_amount', total_pack)
                 });
             }
         }
-        if(frm.doc.custom_file_handling_charge){
+        if(frm.doc.custom_other_charges){
             let amount = 0
-            let total_pack = 0
+            {
+                frm.doc.custom_other_charges.forEach(rows => {
+                    amount +=rows.total_amount
+                    frm.set_value('custom_other_charges_total', amount)
+                });
+            }
+        }
+        if(frm.doc.custom_other_charges_total){
+            let amount = 0
+            let total_pack=0
             {
                 frm.doc.custom_package_details.forEach(rows => {
                     amount +=rows.amount
-                    total_pack=amount +frm.doc.custom_service_item+frm.doc.custom_gst_service_charges__+frm.doc.custom_file_handling_charge
+                    total_pack=amount+frm.doc.custom_other_charges_total
                     frm.set_value('custom_total_package_amount', total_pack)
                 });
             }
-        }
-        if(frm.doc.custom_service_item){
-            let tax_amount = frm.doc.custom_service_item *frm.doc.custom_gst_percentage/100
-            frm.set_value('custom_gst_service_charges__', tax_amount)
         }
         if(frm.doc.custom_total_package_amount){
             let account_pay = frm.doc.custom_total_package_amount*frm.doc.custom_package_amount_percentage/100
@@ -42,6 +47,10 @@ frappe.ui.form.on("Quotation", {
         if(frm.doc.custom_package_amount_account){
             let cash_pay=frm.doc.custom_total_package_amount-frm.doc.custom_package_amount_account
             frm.set_value("custom_package_amount_cash", cash_pay)
+        }
+        if(frm.doc.custom_total_airtickets_amount){
+            let total_account_amount = frm.doc.custom_total_airtickets_amount + frm.doc.custom_package_amount_account
+            frm.set_value("custom_net_payable_in_account", total_account_amount)
         }
         if(frm.doc.custom_total_airtickets_amount && frm.doc.custom_package_amount_account){
             let total_account_amount = frm.doc.custom_total_airtickets_amount + frm.doc.custom_package_amount_account
@@ -55,10 +64,6 @@ frappe.ui.form.on("Quotation", {
             let nettotal=frm.doc.custom_net_payable_in_account +frm.doc.custom_net_payable_in_cash
             frm.set_value("custom_net_total", nettotal)
         }
-        if(frm.doc.custom_gst_percentage){
-            let tax_amount = frm.doc.custom_service_item *frm.doc.custom_gst_percentage/100
-            frm.set_value('custom_gst_service_charges__', tax_amount)
-        }
         if(frm.doc.custom_package_amount_percentage){
             let account_pay = frm.doc.custom_total_package_amount*frm.doc.custom_package_amount_percentage/100
             frm.set_value("custom_package_amount_account", account_pay)
@@ -68,12 +73,6 @@ frappe.ui.form.on("Quotation", {
         if(frm.doc.custom_package_amount_account){
             let cash_percent_pay=frm.doc.custom_total_package_amount*(100-frm.doc.custom_package_amount_percentage)/100
             frm.set_value("custom_package_cash_percentage", cash_percent_pay)
-        }
-    },
-    custom_service_item: function(frm){
-        if(frm.doc.custom_service_item){
-            let tax_amount = frm.doc.custom_service_item *frm.doc.custom_gst_percentage/100
-            frm.set_value('custom_gst_service_charges__', tax_amount)
         }
     },
     custom_total_package_amount: function(frm){
@@ -94,6 +93,10 @@ frappe.ui.form.on("Quotation", {
     },
     custom_total_airtickets_amount: function(frm){
         if(frm.doc.custom_total_airtickets_amount && frm.doc.custom_package_amount_account){
+            let total_account_amount = frm.doc.custom_total_airtickets_amount + frm.doc.custom_package_amount_account
+            frm.set_value("custom_net_payable_in_account", total_account_amount)
+        }
+        if(frm.doc.custom_total_airtickets_amount){
             let total_account_amount = frm.doc.custom_total_airtickets_amount + frm.doc.custom_package_amount_account
             frm.set_value("custom_net_payable_in_account", total_account_amount)
         }
@@ -124,20 +127,14 @@ frappe.ui.form.on("Quotation", {
             frm.set_value("custom_cash_percentage", cash_percent)
         }
     },
-    custom_gst_percentage: function(frm){
-        if(frm.doc.custom_gst_percentage){
-            let tax_amount = frm.doc.custom_service_item *frm.doc.custom_gst_percentage/100
-            frm.set_value('custom_gst_service_charges__', tax_amount)
-        }
-    },
-    custom_file_handling_charge: function(frm){
-        if(frm.doc.custom_file_handling_charge){
+    custom_other_charges_total: function(frm){
+        if(frm.doc.custom_other_charges_total){
             let amount = 0
-            let total_pack = 0
+            let total_pack=0
             {
                 frm.doc.custom_package_details.forEach(rows => {
                     amount +=rows.amount
-                    total_pack=amount +frm.doc.custom_service_item+frm.doc.custom_gst_service_charges__+frm.doc.custom_file_handling_charge
+                    total_pack=amount+frm.doc.custom_other_charges_total
                     frm.set_value('custom_total_package_amount', total_pack)
                 });
             }
@@ -163,9 +160,40 @@ frappe.ui.form.on("Packages", {
         let row = locals[cdt][cdn];
         {
             frm.doc.custom_package_details.forEach(rows => {
-                amount +=rows.amount
-                total_pack=amount +frm.doc.custom_service_item+frm.doc.custom_gst_service_charges__+frm.doc.custom_file_handling_charge
+                amount +=rows.amount+frm.doc.custom_other_charges_total
+                total_pack=amount
                 frm.set_value('custom_total_package_amount', total_pack)
+            });
+        }
+    }
+})
+frappe.ui.form.on("Other Charge", {
+   
+    amount: function(frm, cdt, cdn){
+        let row = locals[cdt][cdn];
+        if(row.percent == 0.00){
+            frappe.model.set_value(cdt, cdn, "total_amount", flt(row.amount));
+        } else{
+            frappe.model.set_value(cdt, cdn, "total_amount", flt((row.percent/100)*parseInt(row.amount)));
+        }
+
+    },
+    percent:function(frm, cdt, cdn){
+        let row = locals[cdt][cdn];
+        if(row.percent == 0.00){
+            frappe.model.set_value(cdt, cdn, "total_amount", flt(row.amount));
+        } else{
+            frappe.model.set_value(cdt, cdn, "total_amount", flt((row.percent/100)*parseInt(row.amount)));
+        }
+
+    },
+    total_amount: function(frm, cdt, cdn){
+        let amount = 0
+        let row = locals[cdt][cdn];
+        {
+            frm.doc.custom_other_charges.forEach(rows => {
+                amount +=rows.total_amount
+                frm.set_value('custom_other_charges_total', amount)
             });
         }
     }
