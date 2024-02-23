@@ -112,7 +112,8 @@ doc_events = {
         "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert"
 	},
 	"Quotation":{
-		"validate":"juzgo.juzgo.custom.py.quotation.item_adding"
+		"validate":"juzgo.juzgo.custom.py.quotation.item_adding",
+		"on_update":"juzgo.juzgo.custom.py.quotation.item_adding"
 	}
 
 }
