@@ -7,6 +7,7 @@ def setup():
     role_creation()
     property_setter()
     service_type_table()
+    email_template()
 def property_setter():
     make_property_setter("Task", "status", "options", "Open\nWorking\nPending Review\nReviewed\nOverdue\nTemplate\nCompleted\nCancelled", "Long Text")
 def setup_fields():
@@ -127,3 +128,292 @@ def service_type_table():
             new.service_type = i
             new.save()
             
+def email_template():
+    if not frappe.db.exists("Email Template", "Visa Supplier"):
+        new = frappe.new_doc("Email Template")
+        new.name = "Visa Supplier"
+        new.subject = "Quotation Request-{{doc.project}}/{% for i in doc.destination %}{{i.destination_name}},{% endfor %}/PAX:-{{doc.no_of_pax}}/{{doc.travel_from_dates}}/{{doc.travel_to_dates}}"
+        new.use_html = 1
+        new.response_html = '''<h3>Dear {{supplier_name}},</h3>
+
+            <p>Warm greetings from JuzGo Holidays Co.!</p>
+            <p>We hope this message finds you well.</p>
+            <p>We are currently in need of your esteemed services to facilitate a Group Tour/Individual tour  for the following dates and specifications:</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;Destination: {% for i in doc.destination %}{{i.destination_name}},{% endfor %}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Travel dates <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Duration of stay : {{doc.duration_of_stay_in_destination}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Total Pax: {{doc.no_of_pax}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;No. Of Adults: {{doc.no_of_adults}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;No. Of Child : {{doc.no_of_child}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Child Ages: {{doc.child_ages}}
+            <br>
+            <br>
+            <br>
+            <p>We kindly request your assistance in providing a comprehensive package that aligns with our requirements. Additionally, please include details regarding any additional services or amenities available, as well as any relevant terms and conditions.
+            <br><br>
+            We prioritize professionalism, reliability, and customer satisfaction, and we are confident that your expertise and services will greatly contribute to the success of our Group Tour.
+            <br><br>
+            Looking forward to your prompt response and partnership in this endeavor.
+            <br><br>
+            Thank you for your attention and cooperation.</p>
+            <br>
+            Best Regards,
+            <br><br>
+            {{doc.modified_by}} <br>
+            JuzGo Holidays Co <br>
+            Signature and phone numbers <br>
+            
+        
+        '''
+    if not frappe.db.exists("Email Template", "DMC Supplier"):
+        new = frappe.new_doc("Email Template")
+        new.name = "DMC Supplier"
+        new.subject = "Quotation Request-{{doc.project}}/{% for i in doc.destination %}{{i.destination_name}},{% endfor %}/PAX:-{{doc.no_of_pax}}/{{doc.travel_from_dates}}/{{doc.travel_to_dates}}"
+        new.use_html = 1
+        new.response_html = '''<h3>Dear {{supplier_name}},</h3>
+
+            <p>Warm greetings from JuzGo Holidays Co.!</p>
+            <p>We hope this message finds you well.</p>
+            <p>We are currently in need of your esteemed services to facilitate a Group Tour/Individual tour  for the following dates and specifications:</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;Destination: {% for i in doc.destination %}{{i.destination_name}},{% endfor %}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Travel dates <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Duration of stay : {{doc.duration_of_stay_in_destination}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Total Pax: {{doc.no_of_pax}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;No. Of Adults: {{doc.no_of_adults}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;No. Of Child : {{doc.no_of_child}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Child Ages: {{doc.child_ages}} <br>
+            {% if spots or hotels or vehicle %}
+            <h3 style="text-align:center;">Inclusions:</h3>
+            <table class="table table-bordered">
+                <tr style="boder:1px soild black;">
+                    <td style="boder:1px soild black;">
+                        Options Descriptions
+                    </td>
+                    <td>
+                        Option 1
+                    </td>
+                    <td>
+                        Option 2
+                    </td>
+                    <td>
+                        Option 3
+                    </td>
+                    <td>
+                        Option 4
+                    </td>
+                    <td>
+                        Option 5
+                    </td>
+                </tr>
+                {% if hotels %}
+                <tr>
+                    <td>
+                        Accommodation Details
+                    </td>
+                    <td>
+                        {% for i in hotels %}
+                            {% if i.options == "Option 1" and  i.hotel_name %}
+                                {{i.hotel_name}}({{i.room_category}})
+                                and Meal Plan is {{ i.meal_preference }}
+                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+
+                    </td>
+                    <td>
+                        {% for i in hotels %}
+                            {% if i.options == "Option 2" and  i.hotel_name%}
+                                {{i.hotel_name}}({{i.room_category}})
+                                and Meal Plan is {{ i.meal_preference }}
+                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in hotels %}
+                            {% if i.options == "Option 3" and  i.hotel_name%}
+                                {{i.hotel_name}}({{i.room_category}})
+                                and Meal Plan is {{ i.meal_preference }}
+                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in hotels %}
+                            {% if i.options == "Option 4" and  i.hotel_name%}
+                                {{i.hotel_name}}({{i.room_category}})
+                                and Meal Plan is {{ i.meal_preference }}
+                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in hotels %}
+                            {% if i.options == "Option 5" and  i.hotel_name%}
+                                {{i.hotel_name}}({{i.room_category}}) 
+                                and Meal Plan is {{ i.meal_preference }}
+                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+                {% if spots %}
+                <tr>
+                    <td>
+                        Sightseeing Details
+                    </td>
+                    <td>
+                        {% for i in spots %}
+                            {% if i.options == "Option 1" and  i.spots%}
+                                {{i.spots}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in spots %}
+                            {% if i.options == "Option 2" and  i.spots%}
+                                {{i.spots}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in spots %}
+                            {% if i.options == "Option 3" and  i.spots%}
+                                {{i.spots}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in spots %}
+                            {% if i.options == "Option 4" and  i.spots%}
+                                {{i.spots}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in spots %}
+                            {% if i.options == "Option 5" and  i.spots%}
+                                {{i.spots}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+                {% if vehicle %}
+                <tr>
+                    <td>
+                        Vehicle Details
+                    </td>
+                    <td>
+                        {% for i in vehicle %}
+                            {% if i.options == "Option 1" and  i.vehicle%}
+                                {{i.vehicle}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in vehicle %}
+                            {% if i.options == "Option 2" and  i.vehicle%}
+                                {{i.vehicle}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in vehicle %}
+                            {% if i.options == "Option 3" and  i.vehicle%}
+                                {{i.vehicle}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in vehicle %}
+                            {% if i.options == "Option 4" and  i.vehicle%}
+                                {{i.vehicle}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for i in vehicle %}
+                            {% if i.options == "Option 5" and  i.vehicle%}
+                                {{i.vehicle}} on 
+                                {{i.transfer_type}}
+                                {{"----------------"}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+            {% endif %}
+            {% if others %}
+            <h4>Others Details :</h4>
+
+            {% for i in others %}
+                {% if i.others %}
+                    {{i.others}}<br>
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% endif %}
+            <h4>Guide services Details:</h4>
+            English Speaking Guide Mandatory
+            <br>
+            <br>
+            <p>Please provide optional costs for the below tours to accommodate the client preferences. Your prompt response is appreciated for crafting tailored itineraries</p>
+            {% if optional_costs %}
+            <br>
+            <h4>Optional costs needed for the below tours :</h4>
+            {% for i in optional_costs %}
+                {% if i.spots %}
+                    {{i.spots}} on {{i.transfer_type}}
+                    <br>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+            <br>
+            <br>
+            <br>
+            <p>We kindly request your assistance in providing a comprehensive package that aligns with our requirements. Additionally, please include details regarding any additional services or amenities available, as well as any relevant terms and conditions.
+            <br><br>
+            We prioritize professionalism, reliability, and customer satisfaction, and we are confident that your expertise and services will greatly contribute to the success of our Group Tour.
+            <br><br>
+            Looking forward to your prompt response and partnership in this endeavor.
+            <br><br>
+            Thank you for your attention and cooperation.</p>
+            <br>
+            Best Regards,
+            <br><br>
+            {{doc.modified_by}} <br>
+            JuzGo Holidays Co <br>
+            Signature and phone numbers <br>
+            
+            '''
+        new.save()

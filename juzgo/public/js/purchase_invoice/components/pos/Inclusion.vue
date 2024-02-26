@@ -24,14 +24,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddHotel()"
-                    >
-                      Add Hotels
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in Hotel_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -199,6 +191,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddHotel()"
+                  >
+                    Add Hotels
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -210,14 +210,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddSpots()"
-                    >
-                      Add Spots
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in Spots_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -277,6 +269,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddSpots()"
+                  >
+                    Add Spots
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -288,14 +288,6 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddOptionalcostDetailing()"
-                    >
-                      Add Optional Cost Detailing
-                    </v-btn>
                   <table class="custom-table" v-for="item_ids in OptionalcostDetailing_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -355,6 +347,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddOptionalcostDetailing()"
+                  >
+                    Add Optional Cost Detailing
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -366,14 +366,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddOther()"
-                    >
-                      Add Others
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Other_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -413,6 +406,14 @@
                       </th>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddOther()"
+                  >
+                    Add Others
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -424,14 +425,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddVehicle()"
-                    >
-                      Add Vehicle
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Vehicle_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -512,6 +506,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddVehicle()"
+                  >
+                    Add Vehicle
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -523,14 +525,7 @@
             <template>
               <v-row>
                 <v-col>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="AddCruise()"
-                    >
-                      Add Cruise
-                    </v-btn>
+                    
                   <table class="custom-table" v-for="item_ids in Cruise_ids" :key="item_ids">
                     <tr>
                       <th>Options</th>
@@ -791,6 +786,14 @@
                       </td>
                     </tr>
                   </table>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddCruise()"
+                  >
+                    Add Cruise
+                  </v-btn>
                 </v-col>
               </v-row>
             </template>
@@ -857,21 +860,23 @@ export default {
 
     AddHotel(){
       var id = this.makeid(20)
-      for(var i=1;i<6;i++){
-        this.Hotel.push({
-          options: "Option "+i,
-          det_id: id, 
-          det_idx: this.makeid(20), 
-          hotel_name: '', 
-          no_of_nights: '', 
-          no_of_days: '', 
-          number_of_pax: '',
-          room_category: '',
-          meal_preference: '',
-          any_other: '',
-          hotel_category: '',
-        })
-      }
+      frappe.db.get_value('CA Form', {'name': this.data.ca_form}, ['no_of_nights','nos_of_days','no_of_paxs'], (r) => {
+        for(var i=1;i<6;i++){
+          this.Hotel.push({
+            options: "Option "+i,
+            det_id: id, 
+            det_idx: this.makeid(20), 
+            hotel_name: '', 
+            no_of_nights: r.no_of_nights, 
+            no_of_days: r.nos_of_days, 
+            number_of_pax: r.no_of_paxs,
+            room_category: '',
+            meal_preference: '',
+            any_other: '',
+            hotel_category: '',
+          })
+        }
+      })
       this.Hotel_ids.push(id)
     },
 
@@ -879,7 +884,7 @@ export default {
       var id = this.makeid(20)
       for(var i=1;i<2;i++){
         this.OptionalcostDetailing.push({
-          options: "Option "+i,
+          options: "Comman",
           det_id: id, 
           det_idx: this.makeid(20), 
           spots:'', 
@@ -893,7 +898,7 @@ export default {
       var id = this.makeid(20)
       for(var i=1;i<2;i++){
         this.Others.push({
-          options: "Option "+i,
+          options: "Comman",
           det_id: id, 
           det_idx: this.makeid(20), 
           others:'', 
@@ -904,7 +909,7 @@ export default {
 
     AddVehicle(){
       var id = this.makeid(20)
-      for(var i=1;i<2;i++){
+      for(var i=1;i<6;i++){
         this.Vehicle.push({
           options: "Option "+i,
           det_id: id, 
@@ -956,19 +961,26 @@ export default {
     },
 
     name_list_order(){
-      this.get_spots = this.get_list("Spots",this.get_spots)
-      this.get_hotel = this.get_list("Hotel Details",this.get_hotel)
+      var dis = []
+      this.data.destination.forEach( (ele)=>{
+        dis.push(ele.destination_name)
+      })
+      this.get_spots = this.get_list("Spots",this.get_spots,{'destination':['in',dis]})
+      this.get_hotel = this.get_list("Hotel Details",this.get_hotel,{'destination':['in',dis]})
       this.get_hotel_category = this.get_list("Hotel Category",this.get_hotel_category)
       this.get_transfer_type = this.get_list("Transfers",this.get_transfer_type)
       this.get_vehicle = this.get_list("Vehicle Detail",this.get_vehicle)
       this.get_room_type = this.get_list("Room Type",this.get_room_type)
     },
 
-    get_list(doctype,list){
-      if (list.length > 0) return;
+    get_list(doctype,list,filter=null){
+      if (!filter){
+        filter = {}
+      }
       frappe.db
         .get_list(doctype, {
           fields: ['name'],
+          filters: filter,
           limit: 5000,
           order_by: 'name',
         })
@@ -1075,8 +1087,8 @@ export default {
         this.push_ids_list(this.Vehicle,this.Vehicle_ids)
         this.Cruise = data.cruise
         this.push_ids_list(this.Cruise,this.Cruise_ids)
+        this.name_list_order()
       });
-      this.name_list_order()
     });
   },
 

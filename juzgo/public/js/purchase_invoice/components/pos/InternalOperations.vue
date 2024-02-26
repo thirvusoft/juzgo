@@ -6,8 +6,7 @@
       >
         <v-divider></v-divider>
         <span class="font-weight-bold">Internal Operations</span>
-        <v-divider></v-divider>
-        <v-row dense class="overflow-y-auto" style="max-height: 67vh">
+        <v-row dense class="overflow-y-auto" style="max-height: 67vh;padding-top: 5px;">
           <v-col cols="12">
             <v-autocomplete
               dense
@@ -60,8 +59,9 @@
               item-value="name"
               background-color="white"
               :no-data-text="__('CA Form not found')"
-              hide-details
               :filter="caformFilter"
+              prepend-inner-icon="mdi-pencil"
+              @click:prepend-inner="view_exists_doc('ca-form/'+ca_form)"
               readonly
             >
               <template v-slot:item="data">
@@ -112,6 +112,8 @@
               hide-details
               :filter="projectsFilter"
               :disabled="readonly"
+              prepend-inner-icon="mdi-pencil"
+              @click:prepend-inner="view_exists_doc('project/'+project)"
             >
               <template v-slot:item="data">
                 <template>
@@ -167,30 +169,126 @@
               readonly
             ></v-select>
           </v-col>
-          <!-- <v-col cols="6">
+          <v-col cols="6">
+            <v-menu
+              v-model="detailing_detail.check_travel_from_datess"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              dense
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="detailing_detail.travel_from_dates"
+                  label="Travel From Date"
+                  outlined
+                  readonly
+                  dense
+                  clearable
+                  hide-details
+                  v-bind="attrs"
+                  v-on="on"
+                  color="primary"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="detailing_detail.travel_from_dates"
+                color="primary"
+                no-title
+                scrollable
+                @input="detailing_detail.check_travel_from_datess= false"
+              >
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+          <v-col cols="6">
+            <v-menu
+              v-model="detailing_detail.check_travel_to_datess"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              dense
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="detailing_detail.travel_to_dates"
+                  label="Travel To Date"
+                  outlined
+                  readonly
+                  dense
+                  clearable
+                  hide-details
+                  v-bind="attrs"
+                  v-on="on"
+                  color="primary"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="detailing_detail.travel_to_dates"
+                color="primary"
+                no-title
+                scrollable
+                @input="detailing_detail.check_travel_to_datess= false"
+              >
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+          <v-col cols="4">
             <v-text-field
-              v-model="detailing_detail.no_of_options"
-              :label="frappe._('No of Options')"
+              v-model="detailing_detail.no_of_adults"
+              :label="frappe._('Adults')"
               outlined
               dense
               background-color="white"
               clearable
               color="primary"
-              hide-details
+              readonly
+            ></v-text-field>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              v-model="detailing_detail.no_of_child"
+              :label="frappe._('Child')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+              readonly
+            ></v-text-field>
+          </v-col>
+          <v-col cols="4">
+            <v-text-field
+              v-model="detailing_detail.no_of_pax"
+              :label="frappe._('Pax')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+              readonly
             ></v-text-field>
           </v-col>
           <v-col cols="6">
             <v-text-field
-              v-model="detailing_detail.options"
-              :label="frappe._('Options')"
+              v-model="detailing_detail.duration_of_stay_in_destination"
+              :label="frappe._('Duration of stay in Destination')"
               outlined
               dense
               background-color="white"
               clearable
               color="primary"
-              hide-details
             ></v-text-field>
-          </v-col> -->
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              v-model="detailing_detail.child_ages"
+              :label="frappe._('Child Ages')"
+              outlined
+              dense
+              background-color="white"
+              clearable
+              color="primary"
+            ></v-text-field>
+          </v-col>
           <v-col cols="12">
             <v-select
               dense
@@ -273,6 +371,13 @@
     },
   
     methods: {
+      view_exists_doc(link){
+        const win = window.open(
+          link,
+          '_blank'
+        );
+        win.focus();
+      },
       get_project_names() {
         const vm = this;
         frappe.call({

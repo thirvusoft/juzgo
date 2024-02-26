@@ -123,5 +123,16 @@ def get_mailing_details(detailing_detail,item):
         list.update({"others":doc.get("others")})
     if item.get("cruise"):
         list.update({"cruise":doc.get("cruise")})
+    list.update({"doc":doc})
 
     return list
+
+@frappe.whitelist()
+def get_visa_mailing_details(detailing_detail,item):
+    doc = json.loads(detailing_detail)
+    item = json.loads(item)
+    list={}
+    list.update(item)
+    list.update({"doc":doc})
+
+    return list   

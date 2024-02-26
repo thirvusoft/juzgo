@@ -2,7 +2,7 @@
   <div>
     <v-card
       class="selection mx-auto grey lighten-5 mt-3 overflow-y-auto"
-      style="max-height: 80vh; height: 80vh"
+      style="max-height: 80vh; height: 80vh;padding-top: 5px;"
     >
       <v-row>
         <v-col col="12">

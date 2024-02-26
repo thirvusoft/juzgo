@@ -5,7 +5,6 @@
       align-with-title
     >
       <v-tabs-slider color="primary"></v-tabs-slider>
-      <v-tab value="supplier_mail_details">Supplier Mail Details</v-tab>
       <v-tab value="inclusion" @click="pass_detailing_detail()">
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
@@ -22,16 +21,17 @@
           <span>Double Click</span>
         </v-tooltip>
       </v-tab>
+      <v-tab value="supplier_mail_details" @click="pass_detailing_detail()">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">Supplier Mail Details</span>
+          </template>
+          <span>Double Click</span>
+        </v-tooltip>
+      </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            <SupplierMail></SupplierMail>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
       <v-tab-item>
         <v-card flat>
           <v-card-text>
@@ -43,6 +43,13 @@
         <v-card flat>
           <v-card-text>
             <Notes></Notes>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            <SupplierMail></SupplierMail>
           </v-card-text>
         </v-card>
       </v-tab-item>

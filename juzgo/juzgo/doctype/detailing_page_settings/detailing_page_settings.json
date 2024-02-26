@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-20 18:49:06.008195",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "visa_supplier_template",
+  "supplier",
+  "default_cc_email"
+ ],
+ "fields": [
+  {
+   "fieldname": "visa_supplier_template",
+   "fieldtype": "Link",
+   "label": "Visa Supplier Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "default_cc_email",
+   "fieldtype": "Data",
+   "label": "Default CC Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier Template",
+   "options": "Email Template"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-02-22 15:38:10.450616",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Detailing Page Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
