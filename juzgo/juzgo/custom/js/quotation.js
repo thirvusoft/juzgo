@@ -1,4 +1,26 @@
 frappe.ui.form.on("Quotation", {
+    refresh: function(frm){
+        if(frm.doc.custom_airtickets_details_){
+            let amount = 0
+            {
+                frm.doc.custom_airtickets_details_.forEach(rows => {
+                    amount +=rows.amount
+                    frm.set_value('custom_total_airtickets_amount', amount)
+                });
+            }
+        }
+        if(frm.doc.custom_package_details){
+            let amount = 0
+            let total_pack = 0
+            {
+                frm.doc.custom_package_details.forEach(rows => {
+                    amount += rows.amount
+                    total_pack = amount+frm.doc.custom_other_charges_total
+                    frm.set_value('custom_total_package_amount', total_pack)
+                });
+            }
+        }
+    },
     validate: function(frm){
         if(frm.doc.custom_airtickets_details_){
             let amount = 0
@@ -171,7 +193,7 @@ frappe.ui.form.on("Other Charge", {
    
     amount: function(frm, cdt, cdn){
         let row = locals[cdt][cdn];
-        if(row.percent == 0.00){
+        if(row.percent == 0.00 || row.percent == null){
             frappe.model.set_value(cdt, cdn, "total_amount", flt(row.amount));
         } else{
             frappe.model.set_value(cdt, cdn, "total_amount", flt((row.percent/100)*parseInt(row.amount)));
@@ -180,7 +202,7 @@ frappe.ui.form.on("Other Charge", {
     },
     percent:function(frm, cdt, cdn){
         let row = locals[cdt][cdn];
-        if(row.percent == 0.00){
+        if(row.percent == 0.00 || row.percent == null){
             frappe.model.set_value(cdt, cdn, "total_amount", flt(row.amount));
         } else{
             frappe.model.set_value(cdt, cdn, "total_amount", flt((row.percent/100)*parseInt(row.amount)));
