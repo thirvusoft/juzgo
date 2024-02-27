@@ -39,7 +39,7 @@ class DetailingPage(Document):
 				destination.append(i.destination_name)
 		if self.ca_form:
 			ca_dest=frappe.db.get_value("CA Form", self.ca_form, "freezed_destination")
-			if ca_dest not in destination:
+			if ca_dest and ca_dest not in destination:
 				destination_l.append({'destination_name': ca_dest})
 		self.update({"destination": destination_l})
 		

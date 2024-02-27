@@ -275,7 +275,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-21 10:16:32.403219",
+ "modified": "2024-02-22 16:48:08.770251",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page",
@@ -291,6 +291,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
    "share": 1,
    "write": 1
   }

@@ -126,6 +126,7 @@ def get_mailing_details(detailing_detail,item):
     list.update({"doc":doc})
 
     return list
+
 @frappe.whitelist()
 def get_visa_mailing_details(detailing_detail,item):
     doc = json.loads(detailing_detail)
