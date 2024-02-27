@@ -147,10 +147,9 @@ def email_template():
             &nbsp;&nbsp;&nbsp;&nbsp;Total Pax: {{doc.no_of_pax}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;No. Of Adults: {{doc.no_of_adults}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;No. Of Child : {{doc.no_of_child}} <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Child Ages: {{doc.child_ages}}
-            <br>
-            <br>
-            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Child Ages: {{doc.child_ages}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Visa Type: {{visa_type}} <br>
+			&nbsp;&nbsp;&nbsp;&nbsp;Question: {{questions}} <br>
             <p>We kindly request your assistance in providing a comprehensive package that aligns with our requirements. Additionally, please include details regarding any additional services or amenities available, as well as any relevant terms and conditions.
             <br><br>
             We prioritize professionalism, reliability, and customer satisfaction, and we are confident that your expertise and services will greatly contribute to the success of our Group Tour.

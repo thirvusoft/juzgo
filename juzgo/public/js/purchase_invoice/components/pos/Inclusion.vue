@@ -295,13 +295,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,OptionalcostDetailing)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <!-- <button v-if="'Option 1' !== item.options || 'Comman' !== item.options" @click="copyTonext(item,OptionalcostDetailing)"><v-icon color="white" small>mdi-content-copy</v-icon></button> -->
                             <button @click="clearRow(item,OptionalcostDetailing)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,OptionalcostDetailing)"><v-icon color="white">mdi-content-copy</v-icon></button>
+                        <!-- <button @click="copyAll(item_ids,OptionalcostDetailing)"><v-icon color="white">mdi-content-copy</v-icon></button> -->
                       </th>
                     </tr>
                     <tr>
@@ -374,13 +374,13 @@
                         <v-row>
                           <v-col class="text-left">
                             {{ item.options }}
-                            <button v-if="'Option 1' !== item.options" @click="copyTonext(item,Others)"><v-icon color="white" small>mdi-content-copy</v-icon></button>
+                            <!-- <button v-if="'Option 1' !== item.options || 'Comman' !== item.options" @click="copyTonext(item,Others)"><v-icon color="white" small>mdi-content-copy</v-icon></button> -->
                             <button @click="clearRow(item,Others)"><v-icon color="white" small>mdi-trash-can-outline</v-icon></button>
                           </v-col>
                         </v-row>
                       </th>
                       <th>
-                        <button @click="copyAll(item_ids,Others)"><v-icon color="white">mdi-content-copy</v-icon></button>
+                        <!-- <button @click="copyAll(item_ids,Others)"><v-icon color="white">mdi-content-copy</v-icon></button> -->
                       </th>
                     </tr>
                     <tr>
@@ -974,6 +974,9 @@ export default {
     },
 
     get_list(doctype,list,filter=null){
+      if (!filter){
+        filter = {}
+      }
       frappe.db
         .get_list(doctype, {
           fields: ['name'],

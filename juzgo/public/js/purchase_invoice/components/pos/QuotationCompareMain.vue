@@ -26,6 +26,14 @@
         <v-btn @click="none">
           Collapse ALL
         </v-btn>
+        <v-btn
+          block
+          class="pa-0"
+          color="primary"
+          dark
+          @click="save"
+          >{{ __('Save') }}</v-btn
+        >
       </div>
 
       <v-expansion-panels
@@ -60,13 +68,30 @@
                         {{ item }}
                       </th>
                     </tr>
-                    <tr v-for="item in quota_hotel_dict" :key="item">
+                    <tr v-for="item in quota_hotel_list" :key="item">
                       <th>
-                        {{ quota_hotel_dict }}
+                        {{ item }}
                       </th>
-                      <th>
-                        {{ quota_hotel_dict}}
-                      </th>
+                      <td v-for="dict in quota_hotel_dict" :key="dict">
+                        <div v-for="d in Object.values(dict)" :key="d[0].name" >
+                          <div v-for="dl in d" :key="dl.name" v-if="item == dl.hotel">
+                            <v-row>
+                              <v-col class="text-left">
+                                <v-textarea
+                                  dense
+                                  color="primary"
+                                  v-model="dl.notes"
+                                  background-color="white"
+                                  hide-details
+
+                                  auto-grow
+                                >
+                                </v-textarea>
+                              </v-col>
+                            </v-row>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   </table>
                 </v-col>
@@ -127,6 +152,37 @@ export default {
         );
       }
       return result;
+    },
+
+    async save(){
+      const vm = this
+      if(vm.quotation_comparission){
+          await frappe.call({
+            method: 'juzgo.api.detailing.save_detailing_compare',
+            args: {
+              quotation_comparission_id : vm.quotation_comparission,
+              quotation_comparission_data: vm.quotation_comparission_data
+
+            },
+            callback: function (r) {
+              if (r.message) {
+                evntBus.$emit('show_mesage', {
+                  text: `Detailing Comparission ${vm.quotation_comparission} is Saved`,
+                  color: 'success',
+                });
+                frappe.utils.play_sound('submit');
+              }
+            },
+          });
+        window.location.reload();
+      }
+      else{
+        evntBus.$emit('show_mesage', {
+          text: `Detailing Comparission ID is Not Selected...`,
+          color: 'error',
+        });
+        frappe.utils.play_sound('error');
+      }
     },
 
     name_list_order(){
@@ -207,6 +263,7 @@ export default {
         }
       });
     },
+    
   },
 
   created() {

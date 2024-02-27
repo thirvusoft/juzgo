@@ -126,3 +126,23 @@ def get_mailing_details(detailing_detail,item):
     list.update({"doc":doc})
 
     return list
+@frappe.whitelist()
+def get_visa_mailing_details(detailing_detail,item):
+    doc = json.loads(detailing_detail)
+    item = json.loads(item)
+    list={}
+    list.update(item)
+    list.update({"doc":doc})
+
+    return list   
+
+@frappe.whitelist()
+def save_detailing_compare(quotation_comparission_id,quotation_comparission_data):
+    data = json.loads(quotation_comparission_data)
+    if data.get("name"):
+        detailing = frappe.get_doc("DP-Quotation comparission", data.get("name"))
+        detailing.update(data)
+        detailing.save()
+        return 1
+
+    return 0

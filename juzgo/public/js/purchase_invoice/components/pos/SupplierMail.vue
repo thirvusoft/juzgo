@@ -996,36 +996,56 @@
         this.visaSupplier.splice(this.visaSuppliereditedIndex, 1)
       },
       async visaSupplieremailsendItemConfirm (item){
+        const vm = this
         var template_name = ''
+        var email = ''
+        await frappe.db.get_single_value("Detailing Page Settings", "default_cc_email").then((enabled) => {
+          if(enabled){
+            email = enabled
+          }
+        })
         await frappe.db.get_single_value("Detailing Page Settings", "visa_supplier_template").then((enabled) => {
           if(!enabled){
             frappe.throw("Select Email Template in Detailing Page Setting.")
           }
           template_name = enabled
         })
-        const { message } = await frappe.call({
-            method: "frappe.email.doctype.email_template.email_template.get_email_template",
-            args: {
-                template_name: template_name,
-                doc: item,
-            },
-        });
         frappe.call({
-          method: 'juzgo.api.detailing.get_attach',
+          method: 'juzgo.api.detailing.get_visa_mailing_details',
           args:{
-            detailing_detail:this.detailing_detail
+            detailing_detail:vm.detailing_detail,
+            item:item,
           },
-          callback: function (r) {
+          callback: async function (r) {
             if (r.message) {
-              const args = {
-                subject: message.subject,
-                recipients: item.supplier_mail_id,
-                attach_document_print: false, 
-                message: message.message,
-                attachments: r.message,
-              };
+              console.log(r.message)
+              const { message } = await frappe.call({
+                method: "frappe.email.doctype.email_template.email_template.get_email_template",
+                args: {
+                    template_name: template_name,
+                    doc: r.message,
+                },
+            });
+            await frappe.call({
+              method: 'juzgo.api.detailing.get_attach',
+              args:{
+                detailing_detail:vm.detailing_detail
+              },
+              callback: function (r) {
+                if (r.message) {
+                  const args = {
+                    subject: message.subject,
+                    recipients: item.supplier_mail_id,
+                    cc: email,
+                    attach_document_print: false, 
+                    message: message.message,
+                    attachments: r.message,
+                  };
 
-              new frappe.views.CommunicationComposer(args);
+                  new frappe.views.CommunicationComposer(args);
+                }
+              },
+            });
             }
           },
         });
@@ -1033,6 +1053,12 @@
       async SupplieremailsendItemConfirm (item){
         const vm = this
         var template_name = ''
+        var email = ''
+        await frappe.db.get_single_value("Detailing Page Settings", "default_cc_email").then((enabled) => {
+          if(enabled){
+            email = enabled
+          }
+        })
         await frappe.db.get_single_value("Detailing Page Settings", "supplier").then((enabled) => {
           if(!enabled){
             frappe.throw("Select Email Template in Detailing Page Setting.")
@@ -1065,6 +1091,7 @@
                   const args = {
                     subject: message.subject,
                     recipients: item.supplier_mail_id,
+                    cc: email,
                     attach_document_print: false, 
                     message: message.message,
                     attachments: ra.message,
