@@ -33,6 +33,8 @@ frappe.ui.form.on('Project', {
             frm.remove_custom_button(__("Duplicate Project with Tasks"),"Actions")
             frm.remove_custom_button(__("Update Total Purchase Cost"),"Actions")
             frm.remove_custom_button(__("Set Project Status"),"Actions")
+            frm.remove_custom_button('Gantt Chart', 'View')
+            frm.remove_custom_button('Kanban Board', 'View')
             frm.add_custom_button(__('Go Detailing Page'), function () {
                 frappe.call({
                     method: "juzgo.juzgo.custom.py.project.go_detailing_page",
@@ -97,6 +99,17 @@ frappe.ui.form.on('Project', {
             })
         }
 
+    },
+    go_detailing_page: function(frm){
+        frappe.call({
+            method: "juzgo.juzgo.custom.py.project.go_detailing_page",
+            args:{
+                doc:frm.doc,
+            },
+            callback(r1){
+                frappe.set_route("detailing1");
+            }
+        })
     },
     phone_number:function(frm){
         if(frm.doc.phone_number){
