@@ -45,7 +45,11 @@ doctype_js = {
 		"Customer" : "/juzgo/custom/js/customer.js",
         "Sales Invoice" : "/juzgo/custom/js/sales_invoice.js",
         "Salary Slip" : "/juzgo/custom/js/salary_slip.js",
-        "Quotation": "/juzgo/custom/js/quotation.js"
+        "Quotation": "/juzgo/custom/js/quotation.js",
+        "Item":"/juzgo/custom/js/item.js",
+        "Supplier":"/juzgo/custom/js/supplier.js",
+        "Purchase Invoice":"/juzgo/custom/js/purchase_invoice.js",
+        "Salary Structure":"/juzgo/custom/js/salary_structure.js"
 	}
 doc_events = {
     "Task" : {

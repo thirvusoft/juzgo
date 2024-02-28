@@ -1,6 +1,10 @@
 var form
 frappe.ui.form.on('Customer', {
     refresh:function (frm,cdt,cdn) {
+        setTimeout(()=>{
+            cur_frm.remove_custom_button('Get Customer Group Details', 'Actions')
+            cur_frm.remove_custom_button('Pricing Rule', 'Create')
+        },300)
         check_list(frm)
         if(!frm.is_new()){
             // option_in_members(frm)
