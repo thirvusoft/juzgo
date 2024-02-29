@@ -14,5 +14,12 @@ frappe.ui.form.on('Salary Slip', {
                 }
             }
         });
-    }
+    },
+    custom__monthly_attendance_details: function(frm){
+        let dateStr = frm.doc.posting_date;
+        let dateParts = dateStr.split("-");
+        let monthNumber = parseInt(dateParts[1], 10);
+        let year = new Date(dateStr).getFullYear();
+        frappe.set_route('query-report', 'Monthly Attendance Details', {month:monthNumber, year:year, employee: frm.doc.employee});
+    },
 });
