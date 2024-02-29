@@ -138,14 +138,22 @@ def get_visa_mailing_details(detailing_detail,item):
     return list   
 
 @frappe.whitelist()
-def save_detailing_compare(quotation_comparission_id,quotation_comparission_data,comarission_of_hotel):
+def save_detailing_compare(quotation_comparission_id,quotation_comparission_data,comarission_of_hotel,comarission_of_spots):
     comarission_of_hotel = json.loads(comarission_of_hotel)
+    comarission_of_spots = json.loads(comarission_of_spots)
     data = json.loads(quotation_comparission_data)
     data['hotel'] = []
+    data['spots'] = []
     for i in comarission_of_hotel:
         for value in i.values():
             for j in value:
+                j["supplier"] = list(filter(lambda x: i[x] == value, i))[0]
                 data['hotel'].append(j)
+    for i in comarission_of_spots:
+        for value in i.values():
+            for j in value:
+                j["supplier"] = list(filter(lambda x: i[x] == value, i))[0]
+                data['spots'].append(j)
     if data.get("name"):
         detailing = frappe.get_doc("DP-Quotation comparission", data.get("name"))
         detailing.update(data)
