@@ -10,6 +10,57 @@
           <v-col cols="12">
             <v-autocomplete
               dense
+              auto-select-first
+              outlined
+              color="primary"
+              :label="frappe._('Project')"
+              v-model="project"
+              :items="projects"
+              item-text="project_name"
+              item-value="name"
+              background-color="white"
+              :no-data-text="__('Project not found')"
+              hide-details
+              :filter="projectsFilter"
+              :disabled="readonly"
+              prepend-inner-icon="mdi-pencil"
+              @click:prepend-inner="view_exists_doc('project/'+project)"
+            >
+              <template v-slot:item="data">
+                <template>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="primary--text subtitle-1"
+                      v-html="data.item.project_name"
+                    ></v-list-item-title>
+                    <v-list-item-subtitle
+                      v-if="data.item.project_name != data.item.name"
+                      v-html="`ID: ${data.item.name}`"
+                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      v-if="data.item.abbr"
+                      v-html="`Abbr.: ${data.item.abbr}`"
+                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      v-if="data.item.phone_number"
+                      v-html="`Phone No.: ${data.item.phone_number}`"
+                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      v-if="data.item.lead"
+                      v-html="`Lead: ${data.item.lead}`"
+                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      v-if="data.item.ca_form"
+                      v-html="`CA Form: ${data.item.ca_form}`"
+                    ></v-list-item-subtitle>
+                  </v-list-item-content>
+                </template>
+              </template>
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="12">
+            <v-autocomplete
+              dense
               clearable
               auto-select-first
               outlined
@@ -96,57 +147,7 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col cols="12">
-            <v-autocomplete
-              dense
-              auto-select-first
-              outlined
-              color="primary"
-              :label="frappe._('Project')"
-              v-model="project"
-              :items="projects"
-              item-text="project_name"
-              item-value="name"
-              background-color="white"
-              :no-data-text="__('Project not found')"
-              hide-details
-              :filter="projectsFilter"
-              :disabled="readonly"
-              prepend-inner-icon="mdi-pencil"
-              @click:prepend-inner="view_exists_doc('project/'+project)"
-            >
-              <template v-slot:item="data">
-                <template>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      class="primary--text subtitle-1"
-                      v-html="data.item.project_name"
-                    ></v-list-item-title>
-                    <v-list-item-subtitle
-                      v-if="data.item.project_name != data.item.name"
-                      v-html="`ID: ${data.item.name}`"
-                    ></v-list-item-subtitle>
-                    <v-list-item-subtitle
-                      v-if="data.item.abbr"
-                      v-html="`Abbr.: ${data.item.abbr}`"
-                    ></v-list-item-subtitle>
-                    <v-list-item-subtitle
-                      v-if="data.item.phone_number"
-                      v-html="`Phone No.: ${data.item.phone_number}`"
-                    ></v-list-item-subtitle>
-                    <v-list-item-subtitle
-                      v-if="data.item.lead"
-                      v-html="`Lead: ${data.item.lead}`"
-                    ></v-list-item-subtitle>
-                    <v-list-item-subtitle
-                      v-if="data.item.ca_form"
-                      v-html="`CA Form: ${data.item.ca_form}`"
-                    ></v-list-item-subtitle>
-                  </v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
-          </v-col>
+          
           <v-col cols="12">
             <v-select
               outlined
