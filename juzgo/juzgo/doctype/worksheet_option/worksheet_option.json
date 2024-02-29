@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{worksheet_name}-{worksheet}",
+ "creation": "2024-02-29 17:22:22.702595",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "worksheet_name",
+  "details",
+  "inclusions_worksheet",
+  "cost_calculations"
+ ],
+ "fields": [
+  {
+   "fieldname": "details",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Worksheet",
+   "options": "Worksheet",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "inclusions_worksheet",
+   "fieldtype": "Table",
+   "label": "Inclusions Worksheet",
+   "options": "Inclusions Worksheet"
+  },
+  {
+   "fieldname": "cost_calculations",
+   "fieldtype": "Table",
+   "label": "Cost Calculations",
+   "options": "Cost Calculations"
+  },
+  {
+   "fieldname": "worksheet_name",
+   "fieldtype": "Data",
+   "label": "Worksheet Name",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-02-29 17:54:24.404628",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Worksheet Option",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

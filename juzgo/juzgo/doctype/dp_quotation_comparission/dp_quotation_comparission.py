@@ -16,17 +16,22 @@ class DPQuotationcomparission(Document):
 			for j in detailing_page.spots:
 				if j.spots not in spots_list and j.spots != '':
 					spots_list.append(j.spots)
+			
 			if detailing_page.supplier:
-				for i in detailing_page.supplier:
-					if i.hotels and len(self.hotel) == 0:
-						for j in hotel_list:
-							self.append("hotel",dict(
-								supplier = i.supplier,
-								hotel = j
-							))
-					if i.spots and len(self.spots) == 0:
-						for j in spots_list:
-							self.append("spots",dict(
-								supplier = i.supplier,
-								spots = j
-							))
+				if len(self.hotel) == 0:
+					for j in hotel_list:
+						for i in detailing_page.supplier:
+							if i.hotels:
+								self.append("hotel",dict(
+									supplier = i.supplier,
+									hotel = j
+								))
+				if len(self.spots) == 0:
+					for j in spots_list:
+						for i in detailing_page.supplier:
+							if i.spots:
+								self.append("spots",dict(
+									supplier = i.supplier,
+									spots = j
+								))
+					

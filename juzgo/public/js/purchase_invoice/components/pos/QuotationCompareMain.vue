@@ -161,7 +161,8 @@ export default {
             method: 'juzgo.api.detailing.save_detailing_compare',
             args: {
               quotation_comparission_id : vm.quotation_comparission,
-              quotation_comparission_data: vm.quotation_comparission_data
+              quotation_comparission_data: vm.quotation_comparission_data,
+              comarission_of_hotel: vm.quota_hotel_dict
 
             },
             callback: function (r) {
@@ -270,11 +271,8 @@ export default {
     this.name_list_order()
   },
   mounted: function () {
-    console.log("0000000")
     this.$nextTick(function () {
-      console.log("000110000")
       evntBus.$on('send_detailing_detail_id', (data) => {
-        console.log("00011000--0",data)
         this.data = data
       })
     });

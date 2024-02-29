@@ -1088,6 +1088,7 @@
               },
               callback: function (ra) {
                 if (ra.message) {
+                  console.log(message.message)
                   const args = {
                     subject: message.subject,
                     recipients: item.supplier_mail_id,
@@ -1233,3 +1234,12 @@
     },
   }
 </script>
+
+<style>
+  .ql-editor td {
+    border: 1px solid black !important;
+  }
+  .ql-editor {
+	font-family: gill sans mt;
+}
+</style>

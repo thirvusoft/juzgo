@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-29 17:29:15.034957",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "details",
+  "descriptions"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "details",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Details"
+  },
+  {
+   "columns": 7,
+   "fieldname": "descriptions",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Descriptions"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-29 18:19:40.369172",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Inclusions Worksheet",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

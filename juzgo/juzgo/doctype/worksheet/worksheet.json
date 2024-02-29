@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{detailing_page}-{#}",
+ "creation": "2024-02-29 16:34:53.775352",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "detailing_page",
+  "ca_form",
+  "column_break_lm9lp",
+  "project",
+  "exchange_rate",
+  "section_break_d5fbe",
+  "currency",
+  "column_break_ntnra",
+  "worksheet_options",
+  "options_tab",
+  "section_break_j1fsc",
+  "optional_tours",
+  "complimentaries",
+  "tab_break_abmij",
+  "html"
+ ],
+ "fields": [
+  {
+   "fieldname": "detailing_page",
+   "fieldtype": "Link",
+   "label": "Detailing Page",
+   "options": "Detailing Page"
+  },
+  {
+   "fetch_from": "detailing_page.ca_form",
+   "fieldname": "ca_form",
+   "fieldtype": "Link",
+   "label": "CA Form",
+   "options": "CA Form"
+  },
+  {
+   "fetch_from": "detailing_page.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "default": "https://www.xe.com/",
+   "fieldname": "exchange_rate",
+   "fieldtype": "Read Only",
+   "label": "Exchange Rate",
+   "options": "URL"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Table",
+   "label": "Currency",
+   "options": "Worksheet Currency"
+  },
+  {
+   "fieldname": "worksheet_options",
+   "fieldtype": "Table",
+   "label": "Worksheet Options",
+   "options": "Worksheet Options"
+  },
+  {
+   "fieldname": "optional_tours",
+   "fieldtype": "Table",
+   "label": "Optional Tours",
+   "options": "Optional Tours Worksheet"
+  },
+  {
+   "fieldname": "complimentaries",
+   "fieldtype": "Table",
+   "label": "Complimentaries",
+   "options": "Complimentaries Worksheet"
+  },
+  {
+   "fieldname": "html",
+   "fieldtype": "HTML",
+   "label": " of all the options without GST and TCS"
+  },
+  {
+   "fieldname": "column_break_lm9lp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_d5fbe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ntnra",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_j1fsc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tab_break_abmij",
+   "fieldtype": "Tab Break",
+   "label": "Consolidated View"
+  },
+  {
+   "fieldname": "options_tab",
+   "fieldtype": "Tab Break",
+   "label": "Optional and Complimentaries"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-02-29 17:57:02.491764",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Worksheet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Juzgo Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
