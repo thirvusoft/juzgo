@@ -99,6 +99,64 @@
             </template>
           </v-expansion-panel-content>
         </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>Spots</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <template>
+              <v-row>
+                <v-col>
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    @click="AddSpots()"
+                  >
+                    Add Spots
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <table class="custom-table">
+                    <tr>
+                      <th>
+                        Spots
+                      </th>
+                      <th v-for="item in quota_spot_supplier" :key="item">
+                        {{ item }}
+                      </th>
+                    </tr>
+                    <tr v-for="item in quota_spot_list" :key="item">
+                      <th>
+                        {{ item }}
+                      </th>
+                      <td v-for="dict in quota_spot_dict" :key="dict">
+                        <div v-for="d in Object.values(dict)" :key="d[0].name" >
+                          <div v-for="dl in d" :key="dl.name" v-if="item == dl.spots">
+                            <v-row>
+                              <v-col class="text-left">
+                                <v-textarea
+                                  dense
+                                  color="primary"
+                                  v-model="dl.notes"
+                                  background-color="white"
+                                  hide-details
+
+                                  auto-grow
+                                >
+                                </v-textarea>
+                              </v-col>
+                            </v-row>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </v-col>
+              </v-row>
+            </template>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-expansion-panels>
     </v-card>
   </div>
@@ -119,7 +177,9 @@ export default {
       quota_hotel_supplier:[],
       quota_hotel_list:[],
       quota_hotel_dict:[],
-      quota_supplier_name:'',
+      quota_spot_supplier:[],
+      quota_spot_list:[],
+      quota_spot_dict:[],
 
       panel: [],
       items: 2,
@@ -161,7 +221,9 @@ export default {
             method: 'juzgo.api.detailing.save_detailing_compare',
             args: {
               quotation_comparission_id : vm.quotation_comparission,
-              quotation_comparission_data: vm.quotation_comparission_data
+              quotation_comparission_data: vm.quotation_comparission_data,
+              comarission_of_hotel: vm.quota_hotel_dict,
+              comarission_of_spots: vm.quota_spot_dict,
 
             },
             callback: function (r) {
@@ -260,6 +322,33 @@ export default {
             return result;
           }, []);
           vm.quota_hotel_dict = output
+          vm.quotation_comparission_data.spots.forEach( ele =>{
+            if (!vm.quota_spot_supplier.includes(ele.supplier)) {
+              vm.quota_spot_supplier.push(ele.supplier)
+            }
+            if (!vm.quota_spot_list.includes(ele.spots)) {
+              vm.quota_spot_list.push(ele.spots)
+            }
+          })
+          vm.quotation_comparission_data.spots.forEach( ele =>{
+            vm.quota_spot_supplier[ele.supplier]={"spots":ele.spots,"notes":ele.notes}
+          })
+
+          output = vm.quotation_comparission_data.spots.reduce((result, item) => {
+            let group = result.find(group => group[item.supplier]);
+            
+            if (!group) {
+              group = { [item.supplier]: [] };
+              result.push(group);
+            }
+
+            let { supplier, ...itemWithoutSupp } = item;
+            group[supplier].push(itemWithoutSupp);
+
+            return result;
+          }, []);
+          vm.quota_spot_dict = output
+
         }
       });
     },
@@ -270,11 +359,8 @@ export default {
     this.name_list_order()
   },
   mounted: function () {
-    console.log("0000000")
     this.$nextTick(function () {
-      console.log("000110000")
       evntBus.$on('send_detailing_detail_id', (data) => {
-        console.log("00011000--0",data)
         this.data = data
       })
     });

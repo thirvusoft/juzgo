@@ -135,14 +135,15 @@ def email_template():
         new.subject = "Quotation Request-{{doc.project}}/{% for i in doc.destination %}{{i.destination_name}},{% endfor %}/PAX:-{{doc.no_of_pax}}/{{doc.travel_from_dates}}/{{doc.travel_to_dates}}"
         new.use_html = 1
         new.response_html = '''<h3>Dear {{supplier_name}},</h3>
-
-            <p>Warm greetings from JuzGo Holidays Co.!</p>
-            <p>We hope this message finds you well.</p>
+<br>
+            <p>Warm greetings from JuzGo Holidays Co.!</p><br>
+            <p>We hope this message finds you well.</p><br>
             <p>We are currently in need of your esteemed services to facilitate a Group Tour/Individual tour  for the following dates and specifications:</p>
+            <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Destination: {% for i in doc.destination %}{{i.destination_name}},{% endfor %}<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Travel dates <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Duration of stay : {{doc.duration_of_stay_in_destination}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Total Pax: {{doc.no_of_pax}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;No. Of Adults: {{doc.no_of_adults}} <br>
@@ -164,6 +165,7 @@ def email_template():
             JuzGo Holidays Co <br>
             Signature and phone numbers <br>
             
+            
         
         '''
     if not frappe.db.exists("Email Template", "DMC Supplier"):
@@ -171,233 +173,472 @@ def email_template():
         new.name = "DMC Supplier"
         new.subject = "Quotation Request-{{doc.project}}/{% for i in doc.destination %}{{i.destination_name}},{% endfor %}/PAX:-{{doc.no_of_pax}}/{{doc.travel_from_dates}}/{{doc.travel_to_dates}}"
         new.use_html = 1
-        new.response_html = '''<h3>Dear {{supplier_name}},</h3>
-
-            <p>Warm greetings from JuzGo Holidays Co.!</p>
-            <p>We hope this message finds you well.</p>
+        new.response_html = '''<html>
+    <body>
+            <h3>Dear {{supplier_name}},</h3>
+            <br>
+            <p>Warm greetings from JuzGo Holidays Co.!</p><br>
+            <p>We hope this message finds you well.</p><br>
             <p>We are currently in need of your esteemed services to facilitate a Group Tour/Individual tour  for the following dates and specifications:</p>
+            <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Destination: {% for i in doc.destination %}{{i.destination_name}},{% endfor %}<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Travel dates <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From : {{doc.travel_from_dates}} <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To: {{doc.travel_to_dates}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Duration of stay : {{doc.duration_of_stay_in_destination}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Total Pax: {{doc.no_of_pax}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;No. Of Adults: {{doc.no_of_adults}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;No. Of Child : {{doc.no_of_child}} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;Child Ages: {{doc.child_ages}} <br>
             {% if spots or hotels or vehicle %}
-            <h3 style="text-align:center;">Inclusions:</h3>
-            <table class="table table-bordered">
-                <tr style="boder:1px soild black;">
-                    <td style="boder:1px soild black;">
-                        Options Descriptions
-                    </td>
-                    <td>
-                        Option 1
-                    </td>
-                    <td>
-                        Option 2
-                    </td>
-                    <td>
-                        Option 3
-                    </td>
-                    <td>
-                        Option 4
-                    </td>
-                    <td>
-                        Option 5
-                    </td>
-                </tr>
-                {% if hotels %}
-                <tr>
-                    <td>
-                        Accommodation Details
-                    </td>
-                    <td>
-                        {% for i in hotels %}
-                            {% if i.options == "Option 1" and  i.hotel_name %}
-                                {{i.hotel_name}}({{i.room_category}})
-                                and Meal Plan is {{ i.meal_preference }}
-                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-
-                    </td>
-                    <td>
-                        {% for i in hotels %}
-                            {% if i.options == "Option 2" and  i.hotel_name%}
-                                {{i.hotel_name}}({{i.room_category}})
-                                and Meal Plan is {{ i.meal_preference }}
-                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in hotels %}
-                            {% if i.options == "Option 3" and  i.hotel_name%}
-                                {{i.hotel_name}}({{i.room_category}})
-                                and Meal Plan is {{ i.meal_preference }}
-                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in hotels %}
-                            {% if i.options == "Option 4" and  i.hotel_name%}
-                                {{i.hotel_name}}({{i.room_category}})
-                                and Meal Plan is {{ i.meal_preference }}
-                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in hotels %}
-                            {% if i.options == "Option 5" and  i.hotel_name%}
-                                {{i.hotel_name}}({{i.room_category}}) 
-                                and Meal Plan is {{ i.meal_preference }}
-                                for {{i.no_of_nights}} Nights {{i.no_of_days}} days
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endif %}
-                {% if spots %}
-                <tr>
-                    <td>
-                        Sightseeing Details
-                    </td>
-                    <td>
-                        {% for i in spots %}
-                            {% if i.options == "Option 1" and  i.spots%}
-                                {{i.spots}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in spots %}
-                            {% if i.options == "Option 2" and  i.spots%}
-                                {{i.spots}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in spots %}
-                            {% if i.options == "Option 3" and  i.spots%}
-                                {{i.spots}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in spots %}
-                            {% if i.options == "Option 4" and  i.spots%}
-                                {{i.spots}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in spots %}
-                            {% if i.options == "Option 5" and  i.spots%}
-                                {{i.spots}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endif %}
-                {% if vehicle %}
-                <tr>
-                    <td>
-                        Vehicle Details
-                    </td>
-                    <td>
-                        {% for i in vehicle %}
-                            {% if i.options == "Option 1" and  i.vehicle%}
-                                {{i.vehicle}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in vehicle %}
-                            {% if i.options == "Option 2" and  i.vehicle%}
-                                {{i.vehicle}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in vehicle %}
-                            {% if i.options == "Option 3" and  i.vehicle%}
-                                {{i.vehicle}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in vehicle %}
-                            {% if i.options == "Option 4" and  i.vehicle%}
-                                {{i.vehicle}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for i in vehicle %}
-                            {% if i.options == "Option 5" and  i.vehicle%}
-                                {{i.vehicle}} on 
-                                {{i.transfer_type}}
-                                {{"----------------"}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endif %}
-            </table>
+            <h2 style="text-align:center;">Inclusions</h2>
+            {% if hotels %}
+                <h3>
+                    Accommodation Details
+                </h3>
+                <h4 style>Option 1</h4>
+                {% set no = [] %}
+                {% for i in hotels %}
+                    {% if i.options == "Option 1" and  i.hotel_name %}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.hotel_name}}
+                        {% if i.room_category %}
+                            ({{i.room_category}})
+                        {% endif %}
+                        {% if i.meal_preference %}
+                            and Meal Plan is {{ i.meal_preference }}
+                        {% endif %}
+                        {% if i.no_of_nights or i.no_of_days %}
+                            for {{i.no_of_nights}} Nights {{i.no_of_days}} days.
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 2</h4>
+                {% set no = [] %}
+                {% for i in hotels %}
+                    {% if i.options == "Option 2" and  i.hotel_name %}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.hotel_name}}
+                        {% if i.room_category %}
+                            ({{i.room_category}})
+                        {% endif %}
+                        {% if i.meal_preference %}
+                            and Meal Plan is {{ i.meal_preference }}
+                        {% endif %}
+                        {% if i.no_of_nights or i.no_of_days %}
+                            for {{i.no_of_nights}} Nights {{i.no_of_days}} days.
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 3</h4>
+                {% set no = [] %}
+                {% for i in hotels %}
+                    {% if i.options == "Option 3" and  i.hotel_name %}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.hotel_name}}
+                        {% if i.room_category %}
+                            ({{i.room_category}})
+                        {% endif %}
+                        and Meal Plan is {{ i.meal_preference }}
+                        for {{i.no_of_nights}} Nights {{i.no_of_days}} days.
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 4</h4>
+                {% set no = [] %}
+                {% for i in hotels %}
+                    {% if i.options == "Option 4" and  i.hotel_name %}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.hotel_name}}
+                        {% if i.room_category %}
+                            ({{i.room_category}})
+                        {% endif %}
+                        {% if i.meal_preference %}
+                            and Meal Plan is {{ i.meal_preference }}
+                        {% endif %}
+                        {% if i.no_of_nights or i.no_of_days %}
+                            for {{i.no_of_nights}} Nights {{i.no_of_days}} days.
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 5</h4>
+                {% set no = [] %}
+                {% for i in hotels %}
+                    {% if i.options == "Option 5" and  i.hotel_name %}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.hotel_name}}
+                        {% if i.room_category %}
+                            ({{i.room_category}})
+                        {% endif %}
+                        {% if i.meal_preference %}
+                            and Meal Plan is {{ i.meal_preference }}
+                        {% endif %}
+                        {% if i.no_of_nights or i.no_of_days %}
+                            for {{i.no_of_nights}} Nights {{i.no_of_days}} days.
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
+            {% if spots %}
+                <br>
+                <h3>
+                    Sightseeing Details
+                </h3>
+                <h4 style>Option 1</h4>
+                {% set no = [] %}
+                {% for i in spots %}
+                    {% if i.options == "Option 1" and  i.spots%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.spots}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 2</h4>
+                {% set no = [] %}
+                {% for i in spots %}
+                    {% if i.options == "Option 2" and  i.spots%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.spots}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 3</h4>
+                {% set no = [] %}
+                {% for i in spots %}
+                    {% if i.options == "Option 3" and  i.spots%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.spots}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 4</h4>
+                {% set no = [] %}
+                {% for i in spots %}
+                    {% if i.options == "Option 4" and  i.spots%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.spots}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4 style>Option 5</h4>
+                {% set no = [] %}
+                {% for i in spots %}
+                    {% if i.options == "Option 5" and  i.spots%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.spots}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if vehicle %}
+                <br>
+                <h3>
+                    Vehicle Details
+                </h3>
+                <h4>Option 1</h4>
+                {% set no = [] %}
+                {% for i in vehicle %}
+                    {% if i.options == "Option 1" and  i.vehicle%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.vehicle}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4>Option 2</h4>
+                {% set no = [] %}
+                {% for i in vehicle %}
+                    {% if i.options == "Option 2" and  i.vehicle%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.vehicle}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4>Option 3</h4>
+                {% set no = [] %}
+                {% for i in vehicle %}
+                    {% if i.options == "Option 3" and  i.vehicle%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.vehicle}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4>Option 4</h4>
+                {% set no = [] %}
+                {% for i in vehicle %}
+                    {% if i.options == "Option 4" and  i.vehicle%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.vehicle}} 
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <h4>Option 5</h4>
+                {% set no = [] %}
+                {% for i in vehicle %}
+                    {% if i.options == "Option 5" and  i.vehicle%}
+                        {% set _ = no.append(1) %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{no|len}}{{".\t"}}
+                        {{i.vehicle}}
+                        {% if i.transfer_type %}
+                            on {{i.transfer_type}}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <!--<table>-->
+            <!--    <tr style="boder:1px soild black;">-->
+            <!--        <td style="boder:1px soild black;">-->
+            <!--            Options Descriptions-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            Option 1-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            Option 2-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            Option 3-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            Option 4-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            Option 5-->
+            <!--        </td>-->
+            <!--    </tr>-->
+            <!--    {% if hotels %}-->
+            <!--    <tr>-->
+            <!--        <td>-->
+            <!--            Accommodation Details-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% set no = [] %}-->
+            <!--            {% for i in hotels %}-->
+            <!--                {% if i.options == "Option 1" and  i.hotel_name %}-->
+            <!--                    {% set _ = no.append(1) %}-->
+            <!--                    {{no|len}}{{".\t"}}-->
+            <!--                    {{i.hotel_name}}({{i.room_category}})-->
+            <!--                    and Meal Plan is {{ i.meal_preference }}-->
+            <!--                    for {{i.no_of_nights}} Nights {{i.no_of_days}} days.-->
+                               
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in hotels %}-->
+            <!--                {% if i.options == "Option 2" and  i.hotel_name%}-->
+            <!--                    {{i.hotel_name}}({{i.room_category}})-->
+            <!--                    and Meal Plan is {{ i.meal_preference }}-->
+            <!--                    for {{i.no_of_nights}} Nights {{i.no_of_days}} days-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in hotels %}-->
+            <!--                {% if i.options == "Option 3" and  i.hotel_name%}-->
+            <!--                    {{i.hotel_name}}({{i.room_category}})-->
+            <!--                    and Meal Plan is {{ i.meal_preference }}-->
+            <!--                    for {{i.no_of_nights}} Nights {{i.no_of_days}} days-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in hotels %}-->
+            <!--                {% if i.options == "Option 4" and  i.hotel_name%}-->
+            <!--                    {{i.hotel_name}}({{i.room_category}})-->
+            <!--                    and Meal Plan is {{ i.meal_preference }}-->
+            <!--                    for {{i.no_of_nights}} Nights {{i.no_of_days}} days-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in hotels %}-->
+            <!--                {% if i.options == "Option 5" and  i.hotel_name%}-->
+            <!--                    {{i.hotel_name}}({{i.room_category}}) -->
+            <!--                    and Meal Plan is {{ i.meal_preference }}-->
+            <!--                    for {{i.no_of_nights}} Nights {{i.no_of_days}} days-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--    </tr>-->
+            <!--    {% endif %}-->
+            <!--    {% if spots %}-->
+            <!--    <tr>-->
+            <!--        <td>-->
+            <!--            Sightseeing Details-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in spots %}-->
+            <!--                {% if i.options == "Option 1" and  i.spots%}-->
+            <!--                    {{i.spots}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in spots %}-->
+            <!--                {% if i.options == "Option 2" and  i.spots%}-->
+            <!--                    {{i.spots}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in spots %}-->
+            <!--                {% if i.options == "Option 3" and  i.spots%}-->
+            <!--                    {{i.spots}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in spots %}-->
+            <!--                {% if i.options == "Option 4" and  i.spots%}-->
+            <!--                    {{i.spots}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in spots %}-->
+            <!--                {% if i.options == "Option 5" and  i.spots%}-->
+            <!--                    {{i.spots}} on -->
+            <!--                    {{i.transfer_type}}-->
+
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--    </tr>-->
+            <!--    {% endif %}-->
+            <!--    {% if vehicle %}-->
+            <!--    <tr>-->
+            <!--        <td>-->
+            <!--            Vehicle Details-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in vehicle %}-->
+            <!--                {% if i.options == "Option 1" and  i.vehicle%}-->
+            <!--                    {{i.vehicle}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                    {{"----------------"}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in vehicle %}-->
+            <!--                {% if i.options == "Option 2" and  i.vehicle%}-->
+            <!--                    {{i.vehicle}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                    {{"----------------"}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in vehicle %}-->
+            <!--                {% if i.options == "Option 3" and  i.vehicle%}-->
+            <!--                    {{i.vehicle}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                    {{"----------------"}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in vehicle %}-->
+            <!--                {% if i.options == "Option 4" and  i.vehicle%}-->
+            <!--                    {{i.vehicle}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                    {{"----------------"}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--        <td>-->
+            <!--            {% for i in vehicle %}-->
+            <!--                {% if i.options == "Option 5" and  i.vehicle%}-->
+            <!--                    {{i.vehicle}} on -->
+            <!--                    {{i.transfer_type}}-->
+            <!--                    {{"----------------"}}-->
+            <!--                {% endif %}-->
+            <!--            {% endfor %}-->
+            <!--        </td>-->
+            <!--    </tr>-->
+            <!--    {% endif %}-->
+            <!--</table>-->
+            {% endif %}
+            <br>
             {% if others %}
-            <h4>Others Details :</h4>
+            <h3>Others Details :</h3>
 
             {% for i in others %}
                 {% if i.others %}
-                    {{i.others}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{i.others}}<br>
                 {% endif %}
             {% endfor %}
             <br>
             {% endif %}
-            <h4>Guide services Details:</h4>
-            English Speaking Guide Mandatory
+            <h3>Guide services Details:</h3>
+            &nbsp;&nbsp;&nbsp;&nbsp;English Speaking Guide Mandatory
             <br>
             <br>
             <p>Please provide optional costs for the below tours to accommodate the client preferences. Your prompt response is appreciated for crafting tailored itineraries</p>
             {% if optional_costs %}
             <br>
-            <h4>Optional costs needed for the below tours :</h4>
+            <h3>Optional costs needed for the below tours :</h3>
             {% for i in optional_costs %}
                 {% if i.spots %}
-                    {{i.spots}} on {{i.transfer_type}}
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{i.spots}} 
+                    {% if i.transfer_type %}
+                        on {{i.transfer_type}}
+                    {% endif %}
                     <br>
                 {% endif %}
             {% endfor %}
             {% endif %}
-            <br>
             <br>
             <br>
             <p>We kindly request your assistance in providing a comprehensive package that aligns with our requirements. Additionally, please include details regarding any additional services or amenities available, as well as any relevant terms and conditions.
@@ -413,6 +654,9 @@ def email_template():
             {{doc.modified_by}} <br>
             JuzGo Holidays Co <br>
             Signature and phone numbers <br>
+    </body>
+</html>
+            
             
             '''
         new.save()

@@ -1088,6 +1088,7 @@
               },
               callback: function (ra) {
                 if (ra.message) {
+                  console.log(message.message)
                   const args = {
                     subject: message.subject,
                     recipients: item.supplier_mail_id,

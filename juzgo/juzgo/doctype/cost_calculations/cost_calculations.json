@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-29 17:36:47.310358",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "details",
+  "cost_1",
+  "cost_2",
+  "cost_3",
+  "cost_4",
+  "cost_5",
+  "cost_6",
+  "total_in_inr",
+  "optional_tours_in_inr",
+  "complimentaries_in_inr",
+  "miscellaneous_in_inr",
+  "cp_in_inr",
+  "margins",
+  "sp_in_inr"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "details",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost Calculations"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cost_1",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Cost 1",
+   "options": "USD"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cost_2",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Cost 2",
+   "options": "EURO"
+  },
+  {
+   "fieldname": "cost_3",
+   "fieldtype": "Currency",
+   "label": "Cost 3"
+  },
+  {
+   "fieldname": "cost_4",
+   "fieldtype": "Currency",
+   "label": "Cost 4"
+  },
+  {
+   "fieldname": "cost_5",
+   "fieldtype": "Currency",
+   "label": "Cost 5"
+  },
+  {
+   "fieldname": "cost_6",
+   "fieldtype": "Currency",
+   "label": "Cost 6"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total in INR ",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "optional_tours_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Optional tours in INR",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "complimentaries_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Complimentaries in INR",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "miscellaneous_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Miscellaneous in INR",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "cp_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "CP in INR",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "margins",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Margins",
+   "options": "INR"
+  },
+  {
+   "columns": 1,
+   "fieldname": "sp_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "SP in INR",
+   "options": "INR"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-29 17:44:45.089967",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Cost Calculations",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
