@@ -40,8 +40,9 @@
   },
   {
    "fieldname": "worksheet_name",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "label": "Worksheet Name",
+   "options": "Option 1\nOption 2\nOption 3\nOption 4\nOption 5",
    "reqd": 1
   },
   {
@@ -114,7 +115,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-01 18:47:00.252143",
+ "modified": "2024-03-02 15:17:29.982012",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet Option",

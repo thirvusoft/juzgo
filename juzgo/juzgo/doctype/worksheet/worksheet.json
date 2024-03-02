@@ -18,9 +18,25 @@
   "column_break_ntnra",
   "worksheet_options",
   "options_tab",
-  "section_break_j1fsc",
   "optional_tours",
+  "section_break_j1fsc",
+  "option_1_adult",
+  "option_1_child",
+  "column_break_le6nn",
+  "option_2_adult",
+  "option_2_child",
+  "column_break_bueif",
+  "option_3_adult",
+  "option_3_child",
+  "column_break_c3cwf",
+  "option_4_adult",
+  "option_4_child",
+  "column_break_r7liu",
+  "option_5_adult",
+  "option_5_child",
+  "section_break_39f6p",
   "complimentaries",
+  "total_cost_price",
   "tab_break_abmij",
   "html"
  ],
@@ -109,11 +125,108 @@
    "fieldname": "options_tab",
    "fieldtype": "Tab Break",
    "label": "Optional and Complimentaries"
+  },
+  {
+   "fieldname": "section_break_39f6p",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_le6nn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "option_1_adult",
+   "fieldtype": "Currency",
+   "label": "Option 1 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_2_adult",
+   "fieldtype": "Currency",
+   "label": "Option 2 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_3_adult",
+   "fieldtype": "Currency",
+   "label": "Option 3 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_4_adult",
+   "fieldtype": "Currency",
+   "label": "Option 4 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_5_adult",
+   "fieldtype": "Currency",
+   "label": "Option 5 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_1_child",
+   "fieldtype": "Currency",
+   "label": "Option 1 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_2_child",
+   "fieldtype": "Currency",
+   "label": "Option 2 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_3_child",
+   "fieldtype": "Currency",
+   "label": "Option 3 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_4_child",
+   "fieldtype": "Currency",
+   "label": "Option 4 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_5_child",
+   "fieldtype": "Currency",
+   "label": "Option 5 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bueif",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_c3cwf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_r7liu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_cost_price",
+   "fieldtype": "Currency",
+   "label": "Total Cost Price",
+   "options": "INR",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-02 11:24:14.173352",
+ "modified": "2024-03-02 17:36:53.523634",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet",
