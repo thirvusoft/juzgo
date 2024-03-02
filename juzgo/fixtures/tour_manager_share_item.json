@@ -1,0 +1,75 @@
+[
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Airtickets - international",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Airtickets - international"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Airtickets - Domestic",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Airtickets - Domestic"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Single sharing Cost (on adding supplement cost )",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Single sharing Cost (on adding supplement cost )"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Local Expenses in Coimbatore",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Local Expenses in Coimbatore"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Luggage Assistance",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Luggage Assistance"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Visa",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Visa"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Stationaries",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Stationaries"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Kit and Others",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Kit and Others"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Tour Manager Share Item",
+        "share_items": "Miscellaneous",
+        "default": "1",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Miscellaneous"
+    }
+   
+]

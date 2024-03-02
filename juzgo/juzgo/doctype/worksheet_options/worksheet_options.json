@@ -25,7 +25,7 @@
    "fieldname": "view_edit",
    "fieldtype": "Button",
    "in_list_view": 1,
-   "label": "View Edit"
+   "label": "View/Edit"
   },
   {
    "columns": 3,
@@ -38,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-02-29 18:08:20.945766",
+ "modified": "2024-03-02 11:25:27.375276",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet Options",

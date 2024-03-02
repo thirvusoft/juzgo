@@ -1,0 +1,40 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-01 18:23:31.003515",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "share_item",
+  "amount_in_inr"
+ ],
+ "fields": [
+  {
+   "fieldname": "share_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Share Item",
+   "options": "Tour Manager Share Item"
+  },
+  {
+   "fieldname": "amount_in_inr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount In INR",
+   "options": "INR"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-01 18:23:31.003515",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Tour Manager Share Worksheet",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

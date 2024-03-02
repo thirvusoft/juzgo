@@ -28,8 +28,11 @@
   {
    "fieldname": "detailing_page",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Detailing Page",
-   "options": "Detailing Page"
+   "options": "Detailing Page",
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fetch_from": "detailing_page.ca_form",
@@ -110,7 +113,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-29 17:57:02.491764",
+ "modified": "2024-03-02 11:24:14.173352",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet",

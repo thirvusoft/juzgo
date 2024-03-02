@@ -9,9 +9,20 @@
  "engine": "InnoDB",
  "field_order": [
   "worksheet_name",
+  "column_break_3xa69",
   "worksheet",
+  "section_break_5xjqn",
   "inclusions_worksheet",
-  "cost_calculations"
+  "cost_calculations",
+  "tab_break_kivdk",
+  "section_break_zlsjx",
+  "tour_manager_share",
+  "column_break_cepla",
+  "total_in_inr",
+  "reduce_foc_cost_in_inr",
+  "final_total_amount",
+  "total_no_of_pax",
+  "amount_per_pax"
  ],
  "fields": [
   {
@@ -40,11 +51,70 @@
    "label": "Worksheet",
    "options": "Worksheet",
    "reqd": 1
+  },
+  {
+   "fieldname": "total_in_inr",
+   "fieldtype": "Currency",
+   "label": "Total In INR",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reduce_foc_cost_in_inr",
+   "fieldtype": "Currency",
+   "label": "Reduce FOC Cost in INR",
+   "options": "INR"
+  },
+  {
+   "fieldname": "final_total_amount",
+   "fieldtype": "Currency",
+   "label": "Final Total Amount ",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_no_of_pax",
+   "fieldtype": "Int",
+   "label": "Total No. of PAX"
+  },
+  {
+   "fieldname": "amount_per_pax",
+   "fieldtype": "Currency",
+   "label": "Amount per PAX",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tour_manager_share",
+   "fieldtype": "Table",
+   "label": "Tour Manager Share",
+   "options": "Tour Manager Share Worksheet"
+  },
+  {
+   "fieldname": "section_break_zlsjx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_cepla",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tab_break_kivdk",
+   "fieldtype": "Tab Break",
+   "label": "Tour Manager Share"
+  },
+  {
+   "fieldname": "column_break_3xa69",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_5xjqn",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-29 18:35:51.029061",
+ "modified": "2024-03-01 18:47:00.252143",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet Option",
