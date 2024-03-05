@@ -140,7 +140,6 @@ function cost_cal(frm,cdt,cdn){
 	var row = locals[cdt][cdn]
 	var total_cost = 0
 	for(let i=1;i<=6;i++){
-		console.log( currency[map_field_currency['cost_'+i]])
 		total_cost += ((row['cost_'+i] || 0) * (currency[map_field_currency['cost_'+i]] || 0))
 	}
 	frappe.model.set_value(cdt,cdn,"total_in_inr",total_cost)

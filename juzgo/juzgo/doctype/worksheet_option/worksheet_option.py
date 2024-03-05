@@ -8,7 +8,7 @@ from frappe.model.document import Document
 class WorksheetOption(Document):
 	def validate(doc):
 		final_calculate(doc)
-		print(_fetch_worksheet_details(doc))
+		_fetch_worksheet_details(doc)
 
 def final_calculate(doc):
 	total_price = 0
