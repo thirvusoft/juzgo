@@ -1234,7 +1234,6 @@
     },
   }
 </script>
-
 <style>
   .ql-editor td {
     border: 1px solid black !important;
