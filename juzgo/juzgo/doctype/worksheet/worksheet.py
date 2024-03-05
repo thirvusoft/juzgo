@@ -5,10 +5,12 @@ import frappe
 from frappe.model.document import Document
 import json
 import re
+from juzgo.juzgo.doctype.worksheet_option.worksheet_option import final_calculate,_fetch_worksheet_details
 
 class Worksheet(Document):
 	def validate(doc):
-		  cal_optional_tours(doc)
+		cal_optional_tours(doc)
+		update_to_option(doc)
 
 def cal_optional_tours(doc):
 
@@ -67,6 +69,13 @@ def cal_optional_tours(doc):
 
 	return doc
 		  
+def update_to_option(doc):
+	for i in doc.worksheet_options:
+		wo=frappe.get_doc("Worksheet Option",i.options)
+		final_calculate(wo)
+		_fetch_worksheet_details(wo)
+		wo.save()
+
 @frappe.whitelist()
 def duplicate(option):
 	old_option = frappe.get_doc("Worksheet Option",option)
