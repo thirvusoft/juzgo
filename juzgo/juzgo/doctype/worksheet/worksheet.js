@@ -123,14 +123,60 @@ frappe.ui.form.on('Complimentaries Worksheet', {
 	cost_price: function(frm,cdt,cdn) {
 		cal_complimentaries(frm,cdt,cdn)
 	},
+	option_1: function(frm,cdt,cdn) {
+		cal_complimentaries(frm,cdt,cdn)
+	},
+	option_2: function(frm,cdt,cdn) {
+		cal_complimentaries(frm,cdt,cdn)
+	},
+	option_3: function(frm,cdt,cdn) {
+		cal_complimentaries(frm,cdt,cdn)
+	},
+	option_4: function(frm,cdt,cdn) {
+		cal_complimentaries(frm,cdt,cdn)
+	},
+	option_5: function(frm,cdt,cdn) {
+		cal_complimentaries(frm,cdt,cdn)
+	},
 });
 
 function cal_complimentaries(frm,cdt,cdn){
 	let doc = frm.doc
     let total_cost_price = 0
+	var option_1 = 0 
+	var option_2 = 0 
+	var option_3 = 0 
+	var option_4 = 0 
+	var option_5 = 0
 	doc.complimentaries.forEach( i =>{
 		total_cost_price += i.cost_price
+		if(i.option_1){
+			option_1 += i.cost_price
+		}
+		if(i.option_2){
+			option_2 += i.cost_price
+		}
+		if(i.option_3){
+			option_3 += i.cost_price
+		}
+		if(i.option_4){
+			option_4 += i.cost_price
+		}
+		if(i.option_5){
+			option_5 += i.cost_price
+		}
 	})
+
 	frm.set_value("total_cost_price",total_cost_price)
 	refresh_field("total_cost_price")
+	frm.set_value("complimentarie_option_1",option_1)
+	refresh_field("complimentarie_option_1")
+	frm.set_value("complimentarie_option_2",option_2)
+	refresh_field("complimentarie_option_2")
+	frm.set_value("complimentarie_option_3",option_3)
+	refresh_field("complimentarie_option_3")
+	frm.set_value("complimentarie_option_4",option_4)
+	refresh_field("complimentarie_option_4")
+	frm.set_value("complimentarie_option_5",option_5)
+	refresh_field("complimentarie_option_5")
 }

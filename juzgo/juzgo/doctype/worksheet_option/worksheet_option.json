@@ -9,8 +9,10 @@
  "engine": "InnoDB",
  "field_order": [
   "worksheet_name",
-  "column_break_3xa69",
   "worksheet",
+  "column_break_3xa69",
+  "project",
+  "detailing_page",
   "section_break_5xjqn",
   "inclusions_worksheet",
   "cost_calculations",
@@ -43,7 +45,8 @@
    "fieldtype": "Select",
    "label": "Worksheet Name",
    "options": "Option 1\nOption 2\nOption 3\nOption 4\nOption 5",
-   "reqd": 1
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "worksheet",
@@ -51,7 +54,8 @@
    "in_list_view": 1,
    "label": "Worksheet",
    "options": "Worksheet",
-   "reqd": 1
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "total_in_inr",
@@ -100,6 +104,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:!doc.__islocal",
    "fieldname": "tab_break_kivdk",
    "fieldtype": "Tab Break",
    "label": "Tour Manager Share"
@@ -109,13 +114,30 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:!doc.__islocal",
    "fieldname": "section_break_5xjqn",
    "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "worksheet.project",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "worksheet.detailing_page",
+   "fieldname": "detailing_page",
+   "fieldtype": "Link",
+   "label": "Detailing Page",
+   "options": "Detailing Page",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-02 15:17:29.982012",
+ "modified": "2024-03-04 11:30:55.637748",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet Option",
