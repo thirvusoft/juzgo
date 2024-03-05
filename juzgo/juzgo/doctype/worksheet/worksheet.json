@@ -18,9 +18,33 @@
   "column_break_ntnra",
   "worksheet_options",
   "options_tab",
-  "section_break_j1fsc",
   "optional_tours",
+  "section_break_j1fsc",
+  "option_1_adult",
+  "option_1_child",
+  "column_break_le6nn",
+  "option_2_adult",
+  "option_2_child",
+  "column_break_bueif",
+  "option_3_adult",
+  "option_3_child",
+  "column_break_c3cwf",
+  "option_4_adult",
+  "option_4_child",
+  "column_break_r7liu",
+  "option_5_adult",
+  "option_5_child",
+  "section_break_39f6p",
   "complimentaries",
+  "section_break_qimnt",
+  "total_cost_price",
+  "complimentarie_option_1",
+  "column_break_eflgn",
+  "complimentarie_option_2",
+  "complimentarie_option_3",
+  "column_break_8kghf",
+  "complimentarie_option_4",
+  "complimentarie_option_5",
   "tab_break_abmij",
   "html"
  ],
@@ -109,11 +133,156 @@
    "fieldname": "options_tab",
    "fieldtype": "Tab Break",
    "label": "Optional and Complimentaries"
+  },
+  {
+   "fieldname": "section_break_39f6p",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_le6nn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "option_1_adult",
+   "fieldtype": "Currency",
+   "label": "Option 1 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_2_adult",
+   "fieldtype": "Currency",
+   "label": "Option 2 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_3_adult",
+   "fieldtype": "Currency",
+   "label": "Option 3 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_4_adult",
+   "fieldtype": "Currency",
+   "label": "Option 4 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_5_adult",
+   "fieldtype": "Currency",
+   "label": "Option 5 Adult",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_1_child",
+   "fieldtype": "Currency",
+   "label": "Option 1 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_2_child",
+   "fieldtype": "Currency",
+   "label": "Option 2 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_3_child",
+   "fieldtype": "Currency",
+   "label": "Option 3 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_4_child",
+   "fieldtype": "Currency",
+   "label": "Option 4 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "option_5_child",
+   "fieldtype": "Currency",
+   "label": "Option 5 Child",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bueif",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_c3cwf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_r7liu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_cost_price",
+   "fieldtype": "Currency",
+   "label": "Total Cost Price",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complimentarie_option_1",
+   "fieldtype": "Currency",
+   "label": "Option 1",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complimentarie_option_2",
+   "fieldtype": "Currency",
+   "label": "Option 2",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complimentarie_option_3",
+   "fieldtype": "Currency",
+   "label": "Option 3",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complimentarie_option_4",
+   "fieldtype": "Currency",
+   "label": "Option 4",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complimentarie_option_5",
+   "fieldtype": "Currency",
+   "label": "Option 5",
+   "options": "INR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_qimnt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_eflgn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8kghf",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-02 11:24:14.173352",
+ "modified": "2024-03-04 17:58:32.996906",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet",
