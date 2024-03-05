@@ -1,0 +1,72 @@
+[
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Land Package",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Land Package"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Air Tickets",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Air Tickets"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Bus Tickets",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Bus Tickets"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Train Tickets",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Train Tickets"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Dharshan/Arti Tickets",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Dharshan/Arti Tickets"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Forex",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Forex"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Passport",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Passport"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Visa",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Visa"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Hotel Reservation",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Hotel Reservation"
+    },
+    {
+        "docstatus": 0,
+        "doctype": "Service Type Requested",
+        "service_type": "Cruise Booking",
+        "modified": "2024-03-01 17:45:26.0000",
+        "name": "Cruise Booking"
+    }
+]
