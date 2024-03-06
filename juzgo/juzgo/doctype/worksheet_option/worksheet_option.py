@@ -13,7 +13,7 @@ class WorksheetOption(Document):
 def final_calculate(doc):
 	total_price = 0
 	for i in doc.tour_manager_share:
-		total_price += i.amount_in_inr
+		total_price += i.amount_in_inr or 0
 
 	doc.total_in_inr = total_price
 	doc.final_total_amount =((doc.total_in_inr or 0) - (doc.reduce_foc_cost_in_inr or 0))
