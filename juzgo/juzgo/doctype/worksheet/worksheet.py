@@ -146,49 +146,24 @@ def complementory(doc):
 		return opt_com1, opt_com2, opt_com3, opt_com4, opt_com5
 
 @frappe.whitelist()
-def accomadation(doc):
+def worksheet_inclusions(doc):
     doc = json.loads(doc)
-    opt_acc = [[] for _ in range(5)]
+    list =[]
+    detail_list =[]
     if doc.get('worksheet_options'):
         for acc in doc.get('worksheet_options'):
             if acc.get('options'):
                 worksheet = frappe.get_doc("Worksheet Option", acc['options'])
                 for work in worksheet.inclusions_worksheet:
-                    option_index = int(worksheet.worksheet_name[-1]) - 1
-                    if work.details == "Accommodation Details":
-                        opt_acc[option_index].append(work.descriptions)
-
-    return opt_acc[0], opt_acc[1], opt_acc[2], opt_acc[3], opt_acc[4]
-
-@frappe.whitelist()
-def sighting_details(doc):
-    doc = json.loads(doc)
-    opt_sight = [[] for _ in range(5)]
-    if doc.get('worksheet_options'):
-        for acc in doc.get('worksheet_options'):
-            if acc.get('options'):
-                worksheet = frappe.get_doc("Worksheet Option", acc['options'])
-                for work in worksheet.inclusions_worksheet:
-                    option_index = int(worksheet.worksheet_name[-1]) - 1
-                    if work.details == "Sightseeing Details":
-                        opt_sight[option_index].append(work.descriptions)
-
-    return opt_sight[0], opt_sight[1], opt_sight[2], opt_sight[3], opt_sight[4]
-
-@frappe.whitelist()
-def vehicle_details(doc):
-    doc = json.loads(doc)
-    opt_veh = [[] for _ in range(5)]
-    if doc.get('worksheet_options'):
-        for acc in doc.get('worksheet_options'):
-            if acc.get('options'):
-                worksheet = frappe.get_doc("Worksheet Option", acc['options'])
-                for work in worksheet.inclusions_worksheet:
-                    option_index = int(worksheet.worksheet_name[-1]) - 1
-                    if work.details == "Vehicle Details":
-                        opt_veh[option_index].append(work.descriptions)
-
-    return opt_veh[0], opt_veh[1], opt_veh[2], opt_veh[3], opt_veh[4]
+                    if work.details not in detail_list:
+                        detail_list.append(work.details)
+                        list.append({work.details:[{"descriptions":work.descriptions,"option":worksheet.worksheet_name}]})
+                    else:
+                        for i in list:
+                            for j in i:
+                                if j == work.details:
+                                    i[j].append({"descriptions":work.descriptions,"option":worksheet.worksheet_name})
+        return list,detail_list
 
 @frappe.whitelist()
 def miscellenous_details(doc):
@@ -204,7 +179,26 @@ def miscellenous_details(doc):
                         opt_mis[option_index].append(f"{cost.miscellaneous_in_inr}({cost.details})")
 
     return opt_mis[0], opt_mis[1], opt_mis[2], opt_mis[3], opt_mis[4]
-					
+
+@frappe.whitelist()
+def worksheet_cost_calculations(doc):
+    doc = json.loads(doc)
+    list =[]
+    detail_list =[]
+    if doc.get('worksheet_options'):
+        for acc in doc.get('worksheet_options'):
+            if acc.get('options'):
+                worksheet = frappe.get_doc("Worksheet Option", acc['options'])
+                for work in worksheet.cost_calculations:
+                    if work.details not in detail_list:
+                        detail_list.append(work.details)
+                        list.append({work.details:[{"cost":work.sp_in_inr,"option":worksheet.worksheet_name}]})
+                    else:
+                        for i in list:
+                            for j in i:
+                                if j == work.details:
+                                    i[j].append({"cost":work.sp_in_inr,"option":worksheet.worksheet_name})
+        return list,detail_list				
 @frappe.whitelist()
 def adult_double(doc):
     doc = json.loads(doc)
