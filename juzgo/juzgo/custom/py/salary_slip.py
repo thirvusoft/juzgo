@@ -2,7 +2,7 @@
 import frappe
 
 @frappe.whitelist()
-def get_last_from_date(employee, salary_structure, posting_date):
+def get_last_from_date(employee=None, salary_structure=None, posting_date=None):
     last_salary_assignment = frappe.get_list(
         'Salary Structure Assignment',
         filters={
