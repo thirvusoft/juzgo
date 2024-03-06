@@ -28,6 +28,7 @@ def fetch_default_value(doc):
 	ws = frappe.get_doc("Worksheet",doc.get("worksheet"))
 	for i in ws.currency:
 		currency[i.currency] = i.workout_based_on
+	currency["INR"] = 1
 	return cost_calculations, tour_manager_share_item, inclusions_worksheet(doc), currency
 
 def inclusions_worksheet(doc):
@@ -99,6 +100,7 @@ def fetch_worksheet_details(doc):
 		age_type = frappe.get_value("Cost Calculations Category",i.get("details"),"age_category")
 		i["optional_tours_in_inr"] = (ws.get(doc.get("worksheet_name").lower().replace(" ", "_")+"_"+age_type.lower()))/(frappe.get_value("Cost Calculations Category",i.get("details"),"share") or 1)
 		i["complimentaries_in_inr"] = ws.get("complimentarie_"+doc.get("worksheet_name").lower().replace(" ", "_"))
+		i["tour_manager_share"] = doc.get("amount_per_pax")
 	return doc.get('cost_calculations')
 
 def _fetch_worksheet_details(doc):
@@ -106,11 +108,24 @@ def _fetch_worksheet_details(doc):
 	currency ={}
 	for i in ws.currency:
 		currency[i.currency] = i.workout_based_on
+	currency["INR"] = 1
+	s_no = 1
+	map_field_currency={"cost_1":"INR","cost_2":"INR","cost_3":"INR","cost_4":"INR","cost_5":"INR","cost_6":"INR"}
+	for i in currency:
+		map_field_currency['cost_'+str(s_no)] = i
+		s_no += 1	
+
 	for i in doc.get('cost_calculations'):
 		age_type = frappe.get_value("Cost Calculations Category",i.get("details"),"age_category")
+		total_cost = 0
+		for j in range(1,6,1):
+			total_cost += ((i.get('cost_'+str(j)) or 0) * (currency[map_field_currency['cost_'+str(j)]] or 0))
+
+		i.total_in_inr = total_cost
 		i.optional_tours_in_inr = (ws.get(doc.get("worksheet_name").lower().replace(" ", "_")+"_"+age_type.lower()))/(frappe.get_value("Cost Calculations Category",i.get("details"),"share") or 1)
 		i.complimentaries_in_inr = ws.get("complimentarie_"+doc.get("worksheet_name").lower().replace(" ", "_"))
-		i.cp_in_inr = (i.total_in_inr or 0)+(i.optional_tours_in_inr or 0)+(i.complimentaries_in_inr or 0)+(i.miscellaneous_in_inr or 0)
+		i.tour_manager_share = doc.get("amount_per_pax")
+		i.cp_in_inr = (i.total_in_inr or 0)+(i.optional_tours_in_inr or 0)+(i.complimentaries_in_inr or 0)+(i.miscellaneous_in_inr or 0)+(doc.amount_per_pax or 0)
 		i.sp_in_inr  = (i.cp_in_inr or 0)+(i.margins or 0)
 	
 	return doc.get('cost_calculations')

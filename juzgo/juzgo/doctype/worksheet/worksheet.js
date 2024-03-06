@@ -2,6 +2,207 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Worksheet', {
+	onload: async function(frm){
+		let data=`<table style="font-size:14px; border:1px solid black;width:100%">
+
+			<tr style="font-weight:bold; border:1px solid black; padding:5px;">
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Desc
+				</center>
+				</th>
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Option 1
+				</center>
+				</th>
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Option 2
+				</center>
+				</th>
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Option 3
+				</center>
+				</th>
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Option 4
+				</center>
+				</th>
+				<th style="border:1px solid black; padding:5px;">
+				<center>
+					Option 5
+				</center>
+				</th>
+			</tr>
+			<tr style="font-weight:bold; border:1px solid black; padding:5px;">
+				<th style="border:1px solid black; padding:5px;" colspan="6">
+				<center>
+					Inclusions
+				</center>
+				</th>
+			</tr>
+			`
+			await frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.worksheet_inclusions",
+				args:{doc:frm.doc},
+				callback: function(r){
+					if(r.message[0]){
+						for(var i=0;r.message[1].length>i;i++){
+							data += 			
+							`
+							<tr style="border:1px solid black; padding:5px;">
+								<th style="border:1px solid black; padding:5px;font-weight:bold;">
+								<center>
+									`+Object.keys(r.message[0][i])[0]+`
+								</center>
+								</th>`
+								
+							for(var j=0;Object.values(r.message[0][i])[0].length>j;j++){
+								data += 			
+								`<td style="border:1px solid black; padding:5px;">
+									`+ Object.values(r.message[0][i])[0][j].descriptions+`
+								</td>`
+							}
+							data += 			
+								`</tr>`
+						}
+					}
+				}
+			})
+			await frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.optional_tours",
+				args:{doc:frm.doc},
+				callback: function(r){
+					data += 			`
+					<tr style="border:1px solid black; padding:5px;">
+						<th style="border:1px solid black; padding:5px;font-weight:bold;">
+						<center>
+							Optional tours
+						</center>
+						</th>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[0]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[1]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[2]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[3]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[4]+`
+						</td>
+
+					`
+				}
+			})
+			await frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.complementory",
+				args:{doc:frm.doc},
+				callback: function(r){
+					data += 			`
+					<tr style="border:1px solid black; padding:5px;">
+						<th style="border:1px solid black; padding:5px;font-weight:bold;">
+						<center>
+							Complimentaries
+						</center>
+						</th>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[0]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[1]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[2]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[3]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[4]+`
+						</td>
+
+					`
+				}
+			})
+			await frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.miscellenous_details",
+				args:{doc:frm.doc},
+				callback: function(r){
+					data += 			`
+					<tr style="border:1px solid black; padding:5px;">
+						<th style="border:1px solid black; padding:5px;font-weight:bold;">
+						<center>
+							Miscellaneous
+						</center>
+						</th>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[0]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[1]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[2]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[3]+`
+						</td>
+						<td style="border:1px solid black; padding:5px;">
+						`+ r.message[4]+`
+						</td>
+
+					`
+				}
+			})
+			data +=
+			`<tr style="font-weight:bold; border:1px solid black; padding:5px;">
+				<td style="border:1px solid black; padding:5px;" colspan="6">
+					<center>
+						Net Selling Prices
+					</center>
+				</td>
+			</tr>`
+			await frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.worksheet_cost_calculations",
+				args:{doc:frm.doc},
+				callback: function(r){
+					console.log(r.message)
+					if(r.message[0]){
+						for(var i=0;r.message[1].length>i;i++){
+							data += 			
+							`
+							<tr style="border:1px solid black; padding:5px;font-weight:bold;">
+								<th style="border:1px solid black; padding:5px;">
+								<center>
+									`+Object.keys(r.message[0][i])[0]+`
+								</center>
+								</th>`
+								
+							for(var j=0;Object.values(r.message[0][i])[0].length>j;j++){
+								data += 			
+								`<td style="border:1px solid black; padding:5px;">
+									<center>
+									`+ Object.values(r.message[0][i])[0][j].cost+`
+									</center>
+								</td>`
+							}
+							data += 			
+								`</tr>`
+						}
+					}
+				}
+			})
+		data += `</table>`
+		frm.get_field("html").$wrapper.html( data);
+	}
 	// refresh: function(frm) {
 
 	// }

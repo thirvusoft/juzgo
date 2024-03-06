@@ -147,7 +147,7 @@ function cost_cal(frm,cdt,cdn){
 
 function cp_in_inr_cal(frm,cdt,cdn){
 	var row = locals[cdt][cdn]
-	var total_cp  = (row.total_in_inr || 0)+(row.optional_tours_in_inr || 0)+(row.complimentaries_in_inr || 0)+(row.miscellaneous_in_inr || 0)
+	var total_cp  = (row.total_in_inr || 0)+(row.optional_tours_in_inr || 0)+(row.complimentaries_in_inr || 0)+(row.miscellaneous_in_inr || 0)+(row.tour_manager_share || 0)
 	frappe.model.set_value(cdt,cdn,"cp_in_inr",total_cp)
 }
 
