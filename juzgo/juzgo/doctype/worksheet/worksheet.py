@@ -278,9 +278,19 @@ def cwb(doc):
 def option_link(doc):
     doc = json.loads(doc)
     name_opt = [[] for _ in range(5)]
-    for opts in doc.get('worksheet_options'):
-        if opts.get('options'):
-            worksheet = frappe.get_doc("Worksheet Option", opts['options'])
-            option_index = int(worksheet.worksheet_name[-1]) - 1
-            name_opt[option_index].append(worksheet.name)
-    return name_opt[0], name_opt[1], name_opt[2], name_opt[3], name_opt[4]
+    if doc.get('worksheet_options'):
+        for opts in doc.get('worksheet_options'):
+            if opts.get('options'):
+                worksheet = frappe.get_doc("Worksheet Option", opts['options'])
+                option_index = int(worksheet.worksheet_name[-1]) - 1
+                name_opt[option_index].append(worksheet.name)
+        return name_opt[0], name_opt[1], name_opt[2], name_opt[3], name_opt[4]
+
+@frappe.whitelist()
+def complimentaries_items():
+    item_list=[]
+    items=frappe.db.get_list("Item", filters={"disabled":0, "item_group":"Complimentaries"}, fields=["name", "item_name"])
+    for item in items:
+        if item.name:
+            item_list.append(item.name)
+    return item_list

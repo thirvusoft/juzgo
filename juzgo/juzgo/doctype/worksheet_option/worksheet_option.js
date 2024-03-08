@@ -185,7 +185,9 @@ function worksheet_currency(frm){
 		method:"juzgo.juzgo.doctype.worksheet_option.worksheet_option.currency_table",
 		args:{worksheet:frm.doc.worksheet},
 		callback: function(r){
-			cur_frm.set_value("currency", r.message);
+			if(r.message){
+				cur_frm.set_value("currency", r.message);
+			}
 		}
 	})
 }

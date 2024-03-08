@@ -12,11 +12,13 @@ frappe.ui.form.on('Worksheet', {
 			method:"juzgo.juzgo.doctype.worksheet.worksheet.option_link",
 			args:{doc:frm.doc},
 			callback: function(r){
-				opt1=r.message[0][0]
-				opt2=r.message[1][0]
-				opt3=r.message[2][0]
-				opt4=r.message[3][0]
-				opt5=r.message[4][0]
+				if(r.message){
+					opt1=r.message[0][0]
+					opt2=r.message[1][0]
+					opt3=r.message[2][0]
+					opt4=r.message[3][0]
+					opt5=r.message[4][0]
+				}
 			}
 		})
 		let data=`<table style="font-size:14px; border:1px solid black;width:100%">
@@ -116,90 +118,96 @@ frappe.ui.form.on('Worksheet', {
 				method:"juzgo.juzgo.doctype.worksheet.worksheet.optional_tours",
 				args:{doc:frm.doc},
 				callback: function(r){
-					data += 			`
-					<tr style="border:1px solid black; padding:5px;">
-						<th style="border:1px solid black; padding:5px;font-weight:bold;">
-						<center>
-							Optional tours
-						</center>
-						</th>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[0]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[1]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[2]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[3]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[4]+`
-						</td>
+					if(r.message){
+						data += 			`
+						<tr style="border:1px solid black; padding:5px;">
+							<th style="border:1px solid black; padding:5px;font-weight:bold;">
+							<center>
+								Optional tours
+							</center>
+							</th>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[0]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[1]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[2]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[3]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[4]+`
+							</td>
 
-					`
+						`
+					}
 				}
 			})
 			await frappe.call({
 				method:"juzgo.juzgo.doctype.worksheet.worksheet.complementory",
 				args:{doc:frm.doc},
 				callback: function(r){
-					data += 			`
-					<tr style="border:1px solid black; padding:5px;">
-						<th style="border:1px solid black; padding:5px;font-weight:bold;">
-						<center>
-							Complimentaries
-						</center>
-						</th>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[0]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[1]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[2]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[3]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[4]+`
-						</td>
+					if(r.message){
+						data += 			`
+						<tr style="border:1px solid black; padding:5px;">
+							<th style="border:1px solid black; padding:5px;font-weight:bold;">
+							<center>
+								Complimentaries
+							</center>
+							</th>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[0]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[1]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[2]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[3]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[4]+`
+							</td>
 
-					`
+						`
+					}
 				}
 			})
 			await frappe.call({
 				method:"juzgo.juzgo.doctype.worksheet.worksheet.miscellenous_details",
 				args:{doc:frm.doc},
 				callback: function(r){
-					data += 			`
-					<tr style="border:1px solid black; padding:5px;">
-						<th style="border:1px solid black; padding:5px;font-weight:bold;">
-						<center>
-							Miscellaneous
-						</center>
-						</th>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[0]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[1]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[2]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[3]+`
-						</td>
-						<td style="border:1px solid black; padding:5px;">
-						`+ r.message[4]+`
-						</td>
+					if(r.message){
+						data += 			`
+						<tr style="border:1px solid black; padding:5px;">
+							<th style="border:1px solid black; padding:5px;font-weight:bold;">
+							<center>
+								Miscellaneous
+							</center>
+							</th>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[0]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[1]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[2]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[3]+`
+							</td>
+							<td style="border:1px solid black; padding:5px;">
+							`+ r.message[4]+`
+							</td>
 
-					`
+						`
+					}
 				}
 			})
 			data +=
@@ -241,6 +249,20 @@ frappe.ui.form.on('Worksheet', {
 			})
 		data += `</table>`
 		frm.get_field("html").$wrapper.html( data);
+		if (frm.is_new()) {
+			frappe.call({
+				method:"juzgo.juzgo.doctype.worksheet.worksheet.complimentaries_items",
+				args:{doc:frm.doc},
+				callback: function(r){
+					if(r.message){
+						r.message.forEach(item => {
+							frm.add_child("complimentaries", {complimentaries:item});
+						});
+					}
+					frm.refresh_field("complimentaries");
+				}
+			})
+		}
 	},
 	refresh: function(frm) {
 		frm.set_query('complimentaries',"complimentaries", function(doc){
@@ -250,7 +272,6 @@ frappe.ui.form.on('Worksheet', {
                 }
             }
         })
-
 	}
 });
 
@@ -270,11 +291,13 @@ frappe.ui.form.on('Worksheet Options', {
 				option: row.options
 			},
 			callback: function(r){
-				let child = frm.add_child("worksheet_options");
-				child.options = r.message.name
-				refresh_field("worksheet_options")
-				frm.save()
-				window.open("/app/worksheet-option/"+r.message.name, '_blank')
+				if(r.message){
+					let child = frm.add_child("worksheet_options");
+					child.options = r.message.name
+					refresh_field("worksheet_options")
+					frm.save()
+					window.open("/app/worksheet-option/"+r.message.name, '_blank')
+				}
 			}
 		})
 	}
