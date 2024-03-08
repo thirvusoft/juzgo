@@ -10,9 +10,11 @@
  "field_order": [
   "worksheet_name",
   "worksheet",
-  "column_break_3xa69",
   "project",
   "detailing_page",
+  "description",
+  "column_break_3xa69",
+  "currency",
   "section_break_5xjqn",
   "inclusions_worksheet",
   "cost_calculations",
@@ -52,6 +54,7 @@
    "fieldname": "worksheet",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "is_virtual": 1,
    "label": "Worksheet",
    "options": "Worksheet",
    "reqd": 1,
@@ -133,11 +136,24 @@
    "label": "Detailing Page",
    "options": "Detailing Page",
    "read_only": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Table",
+   "label": "Currency",
+   "options": "Worksheet Currency",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-04 11:30:55.637748",
+ "modified": "2024-03-07 17:29:36.835513",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Worksheet Option",

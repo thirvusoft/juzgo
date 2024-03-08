@@ -304,4 +304,4 @@ override_doctype_dashboards = {
 #	"juzgo.auth.validate"
 # ]
 
-fixtures = ["Cost Calculations Category","Service Type Requested","Tour Manager Share Item"]
+fixtures = ["Cost Calculations Category","Service Type Requested","Tour Manager Share Item","Item Group"]

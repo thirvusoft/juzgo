@@ -7,11 +7,13 @@ frappe.ui.form.on('Worksheet Option', {
 		if (frm.doc.worksheet){
 			fetch_worksheet(frm)
 			fetch_worksheet_details(frm)
+			// worksheet_currency(frm)
 		}
 	},
 	worksheet: function(frm) {
 		fetch_worksheet(frm)
 		fetch_worksheet_details(frm)
+		worksheet_currency(frm)
 	},
 	reduce_foc_cost_in_inr: function(frm){
 		frm.set_value("final_total_amount",((frm.doc.total_in_inr || 0) - (frm.doc.reduce_foc_cost_in_inr || 0)))
@@ -176,4 +178,14 @@ function cal_tour_manager_share(frm,cdt,cdn){
 
 	frm.set_value("total_in_inr",total_price)
 	refresh_field("total_in_inr")
+}
+
+function worksheet_currency(frm){
+	frappe.call ({
+		method:"juzgo.juzgo.doctype.worksheet_option.worksheet_option.currency_table",
+		args:{worksheet:frm.doc.worksheet},
+		callback: function(r){
+			cur_frm.set_value("currency", r.message);
+		}
+	})
 }
