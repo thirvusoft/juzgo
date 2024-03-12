@@ -67,6 +67,13 @@ def get_message() -> str:
 			</span>
 		"""
 		count += 1
+	message += f"""<br> <span style='border-left: 2px solid red; padding-right: 12px; padding-left: 5px; margin-right: 3px;'>
+					 Less Than 5 Hours - <b style="color: red;">Absent</b></span>
+     			<span style='border-left: 2px solid orange; padding-right: 12px; padding-left: 5px; margin-right: 3px;'>
+				 Between 5 to 6 Hours - <b style="color: orange;">Half Day</b></span>
+				<span style='border-left: 2px solid green; padding-right: 12px; padding-left: 5px; margin-right: 3px;'>
+				 Greater Than 6 Hours - <b style="color: green;">Present</b></span>
+			 """
 
 	return message
 

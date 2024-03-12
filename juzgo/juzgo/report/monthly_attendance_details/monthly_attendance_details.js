@@ -40,7 +40,8 @@ frappe.query_reports["Monthly Attendance Details"] = {
 				var company = frappe.query_report.get_filter_value('company');
 				return {
 					filters: {
-						'company': company
+						'company': company,
+						'status':"Active"
 					}
 				};
 			}
