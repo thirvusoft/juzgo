@@ -1238,7 +1238,4 @@
   .ql-editor td {
     border: 1px solid black !important;
   }
-  .ql-editor {
-	font-family: gill sans mt;
-}
 </style>
