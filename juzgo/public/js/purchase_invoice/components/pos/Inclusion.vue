@@ -1000,8 +1000,8 @@ export default {
         if(field_name[i].det_id == item_ids && field_name[i].options == "Option 1"){
           for(var j=0;j<field_name.length;j++){
             if(field_name[j].det_id == item_ids && field_name[j].options != "Option 1"){
-              for (const key in field_name[j]) {
-                if (field_name[j].hasOwnProperty(key) && !non_changable.includes(key)) {
+              for (const key in field_name[i]) {
+                if (field_name[i].hasOwnProperty(key) && !non_changable.includes(key)) {
                   Vue.set(field_name[j], key, field_name[i][key]);
                 }
               }

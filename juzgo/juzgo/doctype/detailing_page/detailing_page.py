@@ -55,11 +55,11 @@ class DetailingPage(Document):
 						if det_id in det_id_list:
 							det_id = ''.join(random.choices(string.ascii_lowercase, k=12))
 						det_id_list.append(det_id)
-						detail_spot.append({'options': "Option 1", 'spots':spot.spots_name, 'det_id':det_id})
-						detail_spot.append({'options': "Option 2", 'det_id':det_id})
-						detail_spot.append({'options': "Option 3", 'det_id':det_id})
-						detail_spot.append({'options': "Option 4", 'det_id':det_id})
-						detail_spot.append({'options': "Option 5", 'det_id':det_id})
+						detail_spot.append({'options': "Option 1", 'spots':spot.spots_name, 'det_id':det_id, 'det_idx':str(det_id)+"123"})
+						detail_spot.append({'options': "Option 2", 'det_id':det_id, 'det_idx':str(det_id)+"234"})
+						detail_spot.append({'options': "Option 3", 'det_id':det_id, 'det_idx':str(det_id)+"345"})
+						detail_spot.append({'options': "Option 4", 'det_id':det_id, 'det_idx':str(det_id)+"456"})
+						detail_spot.append({'options': "Option 5", 'det_id':det_id, 'det_idx':str(det_id)+"567"})
 					self.update({"spots": detail_spot})
      
 @frappe.whitelist()

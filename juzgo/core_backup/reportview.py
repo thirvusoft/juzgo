@@ -60,7 +60,7 @@ def get_count():
 
 	return data
 
-
+#thirvusoft customiation
 def execute(doctype, *args, **kwargs):
 	try:
 		if(doctype == 'Task' or doctype == "Project" or doctype == "Lead" or doctype == "CA Form"):
@@ -100,6 +100,7 @@ def get_task_userwise(doctype):
 	for i in shared:task.append(i.name)
 	for i in assigned_to:task.append(i)
 	return task
+#end thirvusoft customiation
 
 def get_form_params():
 	"""Stringify GET request parameters."""

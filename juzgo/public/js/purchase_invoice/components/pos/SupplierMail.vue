@@ -393,7 +393,7 @@
               v-model="item.supplier_mail_id"
             ></v-text-field>
           </template>
-          <template v-slot:item.travel_from_dates="{ item }">
+          <!-- <template v-slot:item.travel_from_dates="{ item }">
             <v-menu
               v-model="item.check_travel_from_datess"
               :close-on-content-click="false"
@@ -450,12 +450,12 @@
               >
               </v-date-picker>
             </v-menu>
-          </template>
-          <template v-slot:item.duration_of_stay_in_destination="{ item }">
+          </template> -->
+          <template v-slot:item.visa_type="{ item }">
             <v-text-field
-              v-model="item.duration_of_stay_in_destination"
+              v-model="item.visa_type"
             ></v-text-field>
-          </template>
+          </template> 
           <template v-slot:top>
             <v-toolbar
               flat
@@ -538,7 +538,7 @@
                         <span class="text-h6">CA Form Detailes</span>
                       </v-card-subtitle> -->
                       
-                      <v-row>
+                      <!-- <v-row>
                         <v-col
                           cols="12"
                           sm="6"
@@ -648,7 +648,7 @@
                             label="Child Ages"
                           ></v-text-field>
                         </v-col>
-                      </v-row>
+                      </v-row> -->
                       <v-row>
                         <v-col
                           cols="12"
@@ -747,7 +747,7 @@
                     v-model="item.supplier_mail_id"
                   ></v-text-field>
                 </v-col>
-                <v-col
+                <!-- <v-col
                   cols="4"
                 >
                   <v-menu
@@ -856,7 +856,7 @@
                     hide-details
                     v-model="item.child_ages"
                   ></v-text-field>
-                </v-col>
+                </v-col> -->
                 <v-col cols="4">
                   <v-text-field
                     dense
@@ -925,13 +925,13 @@
         { text: 'Supplier', value: 'supplier' },
         // { text: 'Supplier Name', value: 'supplier_name' },
         { text: 'Supplier Mail ID', value: 'supplier_mail_id' },
-        { text: 'Travel From dates ', value: 'travel_from_dates' },
-        { text: 'Travel To dates ', value: 'travel_to_dates' },
-        { text: 'Duration of stay in Destination', value: 'duration_of_stay_in_destination' },
+        // { text: 'Travel From dates ', value: 'travel_from_dates' },
+        // { text: 'Travel To dates ', value: 'travel_to_dates' },
+        // { text: 'Duration of stay in Destination', value: 'duration_of_stay_in_destination' },
         // { text: 'No of Adults', value: 'no_of_adults' },
         // { text: 'No of Child', value: 'no_of_child' },
         // { text: 'Child Ages', value: 'child_ages' },
-        // { text: 'Visa type', value: 'visa_type' },
+        { text: 'Visa type', value: 'visa_type' },
         // { text: 'Questions', value: 'questions' },
         // { text: 'Send mail', value: 'no_of_adults',sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
