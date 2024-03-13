@@ -495,6 +495,7 @@
                   data.destination.forEach((ele)=>{
                     vm.destination_name.push(ele.destination_name)
                   })
+                  if(vm.detailing_detail.ca_form){vm.get_ca_from_details()}
                 }
               },
             });
@@ -556,9 +557,21 @@
                 vm.destination_name.push(ele.destination_name)
               })
               vm.detailing_detail = data 
+              if(vm.detailing_detail.ca_form){vm.get_ca_from_details()}
             }
           },
         });
+      },
+      async get_ca_from_details(){
+        const vm = this
+        await frappe.db.get_value('CA Form', {'name': vm.detailing_detail.ca_form}, ['travel_end_date','travel_start_date','no_of_nights','nos_of_days','no_of_paxs','no_of_adult','no_of_childrens','child_without_bed'], (r) => {
+          vm.detailing_detail.no_of_adults = r.no_of_adult
+          vm.detailing_detail.no_of_child = (r.no_of_childrens || 0) + (r.child_without_bed || 0)
+          vm.detailing_detail.no_of_pax = r.no_of_paxs
+          vm.detailing_detail.duration_of_stay_in_destination = r.no_of_nights+"N "+ r.nos_of_days+"D"
+          vm.detailing_detail.travel_from_dates = r.travel_start_date
+          vm.detailing_detail.travel_to_dates = r.travel_end_date
+      })
       },
       print(){
 

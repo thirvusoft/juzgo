@@ -19,7 +19,9 @@
   "view_from_rooms",
   "max_no_of_beds_in_this_cabin_possible_to_be_accomodated",
   "room_spec_and_amenities",
-  "cost_per_pax_in_detail"
+  "cost_per_pax_in_detail",
+  "det_id",
+  "det_idx"
  ],
  "fields": [
   {
@@ -121,12 +123,22 @@
    "fieldname": "cost_per_pax_in_detail",
    "fieldtype": "Data",
    "label": "Cost per pax in detail"
+  },
+  {
+   "fieldname": "det_id",
+   "fieldtype": "Data",
+   "label": "Det id"
+  },
+  {
+   "fieldname": "det_idx",
+   "fieldtype": "Data",
+   "label": "Det idx"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-01-20 12:19:58.017679",
+ "modified": "2024-03-13 15:41:28.770688",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Cruise Detailing",
