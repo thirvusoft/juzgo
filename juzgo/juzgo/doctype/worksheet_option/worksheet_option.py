@@ -129,3 +129,13 @@ def _fetch_worksheet_details(doc):
 		i.sp_in_inr  = (i.cp_in_inr or 0)+(i.margins or 0)
 	
 	return doc.get('cost_calculations')
+
+@frappe.whitelist()
+def currency_table(worksheet):
+	if worksheet:
+		ws= frappe.get_doc("Worksheet", worksheet)
+		currency=[]
+		for cur in ws.currency:
+			currency_dict={}
+			currency.append({**currency_dict, 'currency':cur.currency, 'actual_value':cur.actual_value ,'workout_based_on':cur.workout_based_on})
+		return currency

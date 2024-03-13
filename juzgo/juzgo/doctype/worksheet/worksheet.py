@@ -176,7 +176,7 @@ def miscellenous_details(doc):
                 for cost in worksheet.cost_calculations:
                     option_index = int(worksheet.worksheet_name[-1]) - 1
                     if cost.miscellaneous_in_inr:
-                        opt_mis[option_index].append(f"{cost.miscellaneous_in_inr}({cost.details})")
+                        opt_mis[option_index].append(f"{round(cost.miscellaneous_in_inr)}({cost.details})")
 
     return opt_mis[0], opt_mis[1], opt_mis[2], opt_mis[3], opt_mis[4]
 
@@ -192,12 +192,12 @@ def worksheet_cost_calculations(doc):
                 for work in worksheet.cost_calculations:
                     if work.details not in detail_list:
                         detail_list.append(work.details)
-                        list.append({work.details:[{"cost":work.sp_in_inr,"option":worksheet.worksheet_name}]})
+                        list.append({work.details:[{"cost":round(work.sp_in_inr),"option":worksheet.worksheet_name}]})
                     else:
                         for i in list:
                             for j in i:
                                 if j == work.details:
-                                    i[j].append({"cost":work.sp_in_inr,"option":worksheet.worksheet_name})
+                                    i[j].append({"cost":round(work.sp_in_inr),"option":worksheet.worksheet_name})
         return list,detail_list				
 @frappe.whitelist()
 def adult_double(doc):
@@ -273,4 +273,24 @@ def cwb(doc):
                         opt_cwb[option_index].append(cost.sp_in_inr)
 
     return opt_cwb[0], opt_cwb[1], opt_cwb[2], opt_cwb[3], opt_cwb[4]
-					
+	
+@frappe.whitelist()
+def option_link(doc):
+    doc = json.loads(doc)
+    name_opt = [[] for _ in range(5)]
+    if doc.get('worksheet_options'):
+        for opts in doc.get('worksheet_options'):
+            if opts.get('options'):
+                worksheet = frappe.get_doc("Worksheet Option", opts['options'])
+                option_index = int(worksheet.worksheet_name[-1]) - 1
+                name_opt[option_index].append(worksheet.name)
+        return name_opt[0], name_opt[1], name_opt[2], name_opt[3], name_opt[4]
+
+@frappe.whitelist()
+def complimentaries_items():
+    item_list=[]
+    items=frappe.db.get_list("Item", filters={"disabled":0, "item_group":"Complimentaries"}, fields=["name", "item_name"])
+    for item in items:
+        if item.name:
+            item_list.append(item.name)
+    return item_list
