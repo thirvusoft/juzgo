@@ -7,7 +7,7 @@ def make_entry(doc, method):
         project.append("custom_sales_invocie_table", {
             'sales_invoice': doc.name,
             'customer': doc.customer,
-           
+             "status" : doc.status,
             "posting_date": doc.posting_date,
             "net_total": doc.total,
             "tax_and_charges": doc.total_taxes_and_charges,

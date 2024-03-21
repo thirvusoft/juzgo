@@ -8,7 +8,7 @@ def make_entry(doc, method):
         project.append("custom_payment_receive_table", {
             'payment_entry': doc.name,
             'grand_total': doc.total_allocated_amount,
-           
+             "status" : doc.status,
             "posting_date": doc.posting_date,
             "paid_amount": doc.paid_amount,  # Corrected typo here
             "mode_of_payment": doc.mode_of_payment
@@ -22,7 +22,7 @@ def make_entry(doc, method):
         project.append("custom_payment_pay_table", {
             'payment_entry': doc.name,
             'grand_total': doc.total_allocated_amount,
-            "status": "ok",
+            "status" : doc.status,
             "posting_date": doc.posting_date,
             "paid_amount": doc.paid_amount,  # Corrected typo here
             "mode_of_payment": doc.mode_of_payment
