@@ -96,11 +96,12 @@ def inclusions_worksheet(doc):
 def fetch_worksheet_details(doc):
 	doc = json.loads(doc)
 	ws= frappe.get_doc("Worksheet",doc.get("worksheet"))
-	for i in doc.get('cost_calculations'):
-		age_type = frappe.get_value("Cost Calculations Category",i.get("details"),"age_category")
-		i["optional_tours_in_inr"] = (ws.get(doc.get("worksheet_name").lower().replace(" ", "_")+"_"+age_type.lower()))/(frappe.get_value("Cost Calculations Category",i.get("details"),"share") or 1)
-		i["complimentaries_in_inr"] = ws.get("complimentarie_"+doc.get("worksheet_name").lower().replace(" ", "_"))
-		i["tour_manager_share"] = doc.get("amount_per_pax")
+	if doc.get('cost_calculations'):
+		for i in doc.get('cost_calculations'):
+			age_type = frappe.get_value("Cost Calculations Category",i.get("details"),"age_category")
+			i["optional_tours_in_inr"] = (ws.get(doc.get("worksheet_name").lower().replace(" ", "_")+"_"+age_type.lower()))/(frappe.get_value("Cost Calculations Category",i.get("details"),"share") or 1)
+			i["complimentaries_in_inr"] = ws.get("complimentarie_"+doc.get("worksheet_name").lower().replace(" ", "_"))
+			i["tour_manager_share"] = doc.get("amount_per_pax")
 	return doc.get('cost_calculations')
 
 def _fetch_worksheet_details(doc):

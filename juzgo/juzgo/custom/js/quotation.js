@@ -2,24 +2,39 @@ frappe.ui.form.on("Quotation", {
     refresh: function(frm){
         if(frm.doc.custom_airtickets_details_){
             let amount = 0
-            {
-                frm.doc.custom_airtickets_details_.forEach(rows => {
-                    amount +=rows.amount
-                    frm.set_value('custom_total_airtickets_amount', amount)
-                });
-            }
+            frm.doc.custom_airtickets_details_.forEach(rows => {
+                amount +=rows.amount
+            });
+            if(frm.doc.custom_total_airtickets_amount != amount)frm.set_value('custom_total_airtickets_amount', amount)
         }
         if(frm.doc.custom_package_details){
             let amount = 0
             let total_pack = 0
-            {
-                frm.doc.custom_package_details.forEach(rows => {
-                    amount += rows.amount
-                    total_pack = amount+frm.doc.custom_other_charges_total
-                    frm.set_value('custom_total_package_amount', total_pack)
-                });
-            }
+            
+            frm.doc.custom_package_details.forEach(rows => {
+                amount += rows.amount
+                total_pack = amount+frm.doc.custom_other_charges_total
+            });
+            if(frm.doc.custom_total_package_amount != total_pack)frm.set_value('custom_total_package_amount', total_pack)
         }
+        var items_total = 0
+        var taxes_total = 0
+        if(frm.doc.items){
+            frm.doc.items.forEach(rows => {
+                if(rows.item_tax_template)items_total += rows.net_amount
+            });
+        }
+        if(frm.doc.taxes){
+            for (let i = 0; i < frm.doc.taxes.length; i++) {
+                if(frm.doc.taxes[i].charge_type == "Actual"){
+                    break
+                }
+                if(frm.doc.taxes[i].charge_type == "On Net Total"){
+                    taxes_total += frm.doc.taxes[i].tax_amount
+                }
+            } 
+        }
+        frm.set_value('tcs_amount', ((taxes_total+items_total)/100)*5)
     },
     validate: function(frm){
         if(frm.doc.custom_airtickets_details_){
