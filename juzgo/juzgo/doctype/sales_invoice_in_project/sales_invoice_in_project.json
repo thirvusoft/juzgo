@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-21 16:36:40.292578",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sales_invoice",
+  "customer",
+  "status",
+  "posting_date",
+  "net_total",
+  "tax_and_charges",
+  "grand_total"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sales_invoice.grand_total",
+   "fieldname": "grand_total",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Grand Total"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "sales_invoice.posting_date",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sales_invoice.net_total",
+   "fieldname": "net_total",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Total"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sales_invoice.total_taxes_and_charges",
+   "fieldname": "tax_and_charges",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tax and Charges"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sales_invoice.status",
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Status"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "sales_invoice.customer",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-21 20:35:18.501186",
+ "modified_by": "Administrator",
+ "module": "Juzgo",
+ "name": "Sales Invoice in Project",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

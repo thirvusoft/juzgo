@@ -113,11 +113,20 @@ doc_events = {
 	},
     
 	"Purchase Invoice":{
-        "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert"
+        "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert" ,
+         "on_submit":"juzgo.custom.py.purchase_incoice.make_entry"
+        
 	},
+    "Sales Invoice":{
+         "on_submit":"juzgo.custom.py.sales_invoice.make_entry"
+        
+	} ,
 	"Quotation":{
 		"validate":"juzgo.juzgo.custom.py.quotation.item_adding",
 		"on_update":"juzgo.juzgo.custom.py.quotation.item_adding"
+	},
+    "Payment Entry" :{
+        "on_submit":"juzgo.custom.py.payment_entry.make_entry"
 	}
 
 }

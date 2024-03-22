@@ -111,6 +111,12 @@ frappe.ui.form.on('Project', {
             }
         })
     },
+    custom_open_projectwise_payment: function(frm){
+        window.open('/app/query-report/Project-Wise Payment Report?company='+frm.doc.company+'&project='+frm.doc.name+'&group_by=Group by Voucher&purchase_invoice=1&sales_invoice=1&sales_payment_entry=1&purchase_payment_entry=1&delivery_note=1', '_blank')
+    },
+    custom_open_payment_reconciliation: function(frm){
+        window.open('/app/payment-reconciliation/Payment Reconciliation', '_blank')
+    },
     phone_number:function(frm){
         if(frm.doc.phone_number){
             var phoneno = /^\d{10,12}$/;
