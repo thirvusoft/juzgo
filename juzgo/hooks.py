@@ -49,7 +49,7 @@ doctype_js = {
         "Item":"/juzgo/custom/js/item.js",
         "Supplier":"/juzgo/custom/js/supplier.js",
         "Purchase Invoice":"/juzgo/custom/js/purchase_invoice.js",
-        "Salary Structure":"/juzgo/custom/js/salary_structure.js"
+        "Salary Structure":"/juzgo/custom/js/salary_structure.js" ,
 	}
 doc_events = {
     "Task" : {

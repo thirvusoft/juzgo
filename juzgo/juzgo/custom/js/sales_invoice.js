@@ -1,4 +1,11 @@
+
+var branch = "" // initiating the branch value
+
 frappe.ui.form.on('Sales Invoice', {
+    branch: function(frm) {
+            branch = frm.doc.branch  // setting the branch variable value
+        },
+
     refresh: function(frm) {
         setTimeout(()=>{
             cur_frm.remove_custom_button('Quality Inspection(s)', 'Create')
@@ -26,5 +33,11 @@ frappe.ui.form.on('Sales Invoice', {
                 })
 			});
 		}
+    }
+});
+
+frappe.ui.form.on('Sales Invoice Item', {
+    item_code(frm, cdt, cdn) {
+            frappe.model.set_value(cdt , cdn, "branch", branch); // set the branch value to the child table field
     }
 });
