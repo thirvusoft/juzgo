@@ -38,3 +38,34 @@ def make_entry(doc, method):
             "mode_of_payment": doc.mode_of_payment
         })
         project.save()
+
+def remove_entry(doc, event):
+    project_name = ""
+    if doc.references and doc.references[0].project:
+        project_name = doc.references[0].project
+    elif doc.project:
+        project_name = doc.project
+
+    if project_name:
+        project = frappe.get_doc("Project", project_name) 
+        if project:
+            if doc.payment_type == "Pay":
+                for row in project.custom_payment_pay_table:
+                    if row.payment_entry == doc.name:
+                        project.custom_payment_pay_table.remove(row)
+                        break  
+            elif doc.payment_type == "Receive":
+                for row in project.custom_payment_receive_table:
+                    if row.payment_entry == doc.name:
+                        project.custom_payment_receive_table.remove(row)
+                        break  
+            else:
+                frappe.msgprint("Invalid payment type: {}".format(doc.payment_type))
+                
+            project.save() 
+            project.reload()
+          
+
+    
+
+
