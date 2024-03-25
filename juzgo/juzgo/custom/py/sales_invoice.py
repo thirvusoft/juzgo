@@ -13,6 +13,14 @@ from erpnext.accounts.utils import get_fiscal_year
 
 import json
 
+
+
+def branch(self, events):
+    for item in self.items:
+        item.update({'branch' :self.branch} )
+    return self
+
+
 def autoname(self,action):
     if self.branch == "Test":
         series = 'SI-TST-.YY.-'

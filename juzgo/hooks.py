@@ -49,7 +49,7 @@ doctype_js = {
         "Item":"/juzgo/custom/js/item.js",
         "Supplier":"/juzgo/custom/js/supplier.js",
         "Purchase Invoice":"/juzgo/custom/js/purchase_invoice.js",
-        "Salary Structure":"/juzgo/custom/js/salary_structure.js"
+        "Salary Structure":"/juzgo/custom/js/salary_structure.js" ,
 	}
 doc_events = {
     "Task" : {
@@ -90,7 +90,10 @@ doc_events = {
         "validate" : ["juzgo.juzgo.custom.py.project.project_head",
                       "juzgo.juzgo.custom.py.project.validate_check"
 					  ],
-		"after_insert" : "juzgo.juzgo.custom.py.project.project_head"
+		"after_insert" : "juzgo.juzgo.custom.py.project.project_head" ,
+        "on_update" : ["juzgo.custom.py.project.update_total",
+                       "juzgo.custom.py.project.update_net_total",
+                        "juzgo.custom.py.project.update_tax_total"]
 	},
     "Contact":{
         "validate" : "juzgo.juzgo.custom.py.contact.add_phone_and_contact" 
@@ -114,11 +117,14 @@ doc_events = {
     
 	"Purchase Invoice":{
         "after_insert":"juzgo.juzgo.custom.py.purchase_invoice.insert" ,
-         "on_submit":"juzgo.custom.py.purchase_incoice.make_entry"
-        
+        "on_submit":"juzgo.custom.py.purchase_incoice.make_entry" ,
+        "on_cancel": "juzgo.custom.py.purchase_incoice.delete_entry",
+        "validate" : "juzgo.juzgo.custom.py.purchase_invoice.branch"
 	},
     "Sales Invoice":{
-         "on_submit":"juzgo.custom.py.sales_invoice.make_entry"
+         "on_submit":"juzgo.custom.py.sales_invoice.make_entry" ,
+         "on_cancel": "juzgo.custom.py.sales_invoice.delete_entry",
+         "validate" : "juzgo.juzgo.custom.py.sales_invoice.branch"
         
 	} ,
 	"Quotation":{
@@ -126,7 +132,8 @@ doc_events = {
 		"on_update":"juzgo.juzgo.custom.py.quotation.item_adding"
 	},
     "Payment Entry" :{
-        "on_submit":"juzgo.custom.py.payment_entry.make_entry"
+        "on_submit":"juzgo.custom.py.payment_entry.make_entry" ,
+        "on_cancel":"juzgo.custom.py.payment_entry.remove_entry"
 	}
 
 }

@@ -1,4 +1,14 @@
+var branch = "" // initiating the branch value
+
 frappe.ui.form.on('Purchase Invoice', {
+
+    branch: function(frm) {
+        // Iterate over each child row
+        frm.doc.items.forEach(function(item) {
+            // Set the branch value for each child row
+            frappe.model.set_value(item.doctype, item.name, 'branch', frm.doc.branch);
+        });
+    },
     refresh: function(frm){
         setTimeout(()=>{
             cur_frm.remove_custom_button('Quality Inspection(s)', 'Create')
@@ -11,3 +21,5 @@ frappe.ui.form.on('Purchase Invoice', {
         }, 1000)
     }
 })
+
+
