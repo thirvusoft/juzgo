@@ -23,8 +23,3 @@ frappe.ui.form.on('Purchase Invoice', {
 })
 
 
-frappe.ui.form.on('Purchase Invoice Item', {
-    item_code(frm, cdt, cdn) {
-            frappe.model.set_value(cdt , cdn, "branch", branch); // set the branch value to the child table field
-    }
-});

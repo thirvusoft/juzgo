@@ -1,6 +1,12 @@
 from frappe.model.naming import parse_naming_series, make_autoname
 from frappe.model.naming import parse_naming_series
 import frappe
+
+def branch(self, events):
+    for item in self.items:
+        item.update({'branch' :self.branch} )
+    return self
+
 def autoname(self,action):
     if self.branch == "Test":
         series = 'PI-TST-.YY.-'
