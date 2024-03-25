@@ -91,7 +91,9 @@ doc_events = {
                       "juzgo.juzgo.custom.py.project.validate_check"
 					  ],
 		"after_insert" : "juzgo.juzgo.custom.py.project.project_head" ,
-        "on_update" : "juzgo.custom.py.project.update_total"
+        "on_update" : ["juzgo.custom.py.project.update_total",
+                       "juzgo.custom.py.project.update_net_total",
+                        "juzgo.custom.py.project.update_tax_total"]
 	},
     "Contact":{
         "validate" : "juzgo.juzgo.custom.py.contact.add_phone_and_contact" 

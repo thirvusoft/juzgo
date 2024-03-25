@@ -3,8 +3,11 @@ var branch = "" // initiating the branch value
 frappe.ui.form.on('Purchase Invoice', {
 
     branch: function(frm) {
-        branch = frm.doc.branch  // setting the branch variable value
-        
+        // Iterate over each child row
+        frm.doc.items.forEach(function(item) {
+            // Set the branch value for each child row
+            frappe.model.set_value(item.doctype, item.name, 'branch', frm.doc.branch);
+        });
     },
     refresh: function(frm){
         setTimeout(()=>{
