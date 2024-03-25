@@ -33,13 +33,16 @@
   },
   {
    "columns": 1,
+   "fetch_from": "payment_entry.target_exchange_rate",
    "fieldname": "status",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Status"
   },
   {
    "columns": 2,
+   "fetch_from": "payment_entry.posting_date",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "in_list_view": 1,

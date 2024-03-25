@@ -28,9 +28,11 @@ frappe.ui.form.on('Worksheet Option', {
 		frm.set_value("amount_per_pax",((frm.doc.final_total_amount || 0) / (frm.doc.total_no_of_pax || 1)))
 	},
 	amount_per_pax: function(frm){
-		frm.doc.cost_calculations.forEach( ele =>{
-			frappe.model.set_value(ele.doctype,ele.name,"tour_manager_share",frm.doc.amount_per_pax || 0)
-		})
+		if(frm.doc.cost_calculations){
+			frm.doc.cost_calculations.forEach( ele =>{
+				frappe.model.set_value(ele.doctype,ele.name,"tour_manager_share",frm.doc.amount_per_pax || 0)
+			})
+		}
 	}
 });
 
@@ -41,27 +43,33 @@ function fetch_worksheet(frm){
 			doc: frm.doc
 		},
 		callback: function(r){
-			if(frm.doc.cost_calculations.length == 0){
-				r.message[0].forEach( ele =>{
-					let child = frm.add_child("cost_calculations");
-					child.details = ele
-				})
-				refresh_field("cost_calculations")
+			if(frm.doc.cost_calculations){
+				if(frm.doc.cost_calculations.length == 0){
+					r.message[0].forEach( ele =>{
+						let child = frm.add_child("cost_calculations");
+						child.details = ele
+					})
+					refresh_field("cost_calculations")
+				}
 			}
-			if(frm.doc.tour_manager_share.length == 0){
-				r.message[1].forEach( ele =>{
-					let child = frm.add_child("tour_manager_share");
-					child.share_item = ele
-				})
-				refresh_field("tour_manager_share")
+			if(frm.doc.tour_manager_share){
+				if(frm.doc.tour_manager_share.length == 0){
+					r.message[1].forEach( ele =>{
+						let child = frm.add_child("tour_manager_share");
+						child.share_item = ele
+					})
+					refresh_field("tour_manager_share")
+				}
 			}
-			if(frm.doc.inclusions_worksheet.length == 0){
-				r.message[2].forEach( ele =>{
-					let child = frm.add_child("inclusions_worksheet");
-					child.details = ele.details
-					child.descriptions = ele.descriptions
-				})
-				refresh_field("inclusions_worksheet")
+			if(frm.doc.inclusions_worksheet){
+				if(frm.doc.inclusions_worksheet.length == 0){
+					r.message[2].forEach( ele =>{
+						let child = frm.add_child("inclusions_worksheet");
+						child.details = ele.details
+						child.descriptions = ele.descriptions
+					})
+					refresh_field("inclusions_worksheet")
+				}
 			}
 			let s_no = 1
 			currency = r.message[3]

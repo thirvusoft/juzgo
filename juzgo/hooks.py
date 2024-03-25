@@ -270,6 +270,12 @@ override_doctype_dashboards = {
     "Lead": "juzgo.custom.py.dashboards.lead.get_data",
 }
 
+after_migrate = [
+        "juzgo.juzgo.doctype.ts_custom_docperm.ts_custom_docperm.after_migrate",
+    ]
+
+before_migrate = "juzgo.juzgo.doctype.ts_custom_docperm.ts_custom_docperm.before_migrate"
+
 # exempt linked doctypes from being automatically cancelled
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]

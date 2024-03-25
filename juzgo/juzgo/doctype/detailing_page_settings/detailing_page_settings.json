@@ -34,7 +34,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-02-22 15:38:10.450616",
+ "modified": "2024-03-06 17:38:05.790642",
  "modified_by": "Administrator",
  "module": "Juzgo",
  "name": "Detailing Page Settings",
@@ -47,6 +47,16 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Juzgo Admin",
    "share": 1,
    "write": 1
   }

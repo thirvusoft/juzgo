@@ -137,9 +137,9 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "TDS Payable Monthly",
+   "label": "TCS Payable Monthly",
    "link_count": 0,
-   "link_to": "TDS Payable Monthly",
+   "link_to": "TCS Payable Monthly",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -155,7 +155,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-10-26 17:41:06.130192",
+ "modified": "2024-03-14 11:38:24.105824",
  "modified_by": "Administrator",
  "module": "Juzgo Accounts",
  "name": "Accounts",

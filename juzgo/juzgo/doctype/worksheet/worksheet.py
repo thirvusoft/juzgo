@@ -43,21 +43,21 @@ def cal_optional_tours(doc):
 	option_5 = 0
 	
 	for i in doc.complimentaries:
-		total_cost_price += i.cost_price
+		total_cost_price += (i.cost_price or 0)
 		if(i.option_1):
-			option_1 += i.cost_price
+			option_1 += (i.cost_price or 0) 
 		
 		if(i.option_2):
-			option_2 += i.cost_price
+			option_2 += (i.cost_price or 0)
 		
 		if(i.option_3):
-			option_3 += i.cost_price
+			option_3 += (i.cost_price or 0)
 		
 		if(i.option_4):
-			option_4 += i.cost_price
+			option_4 += (i.cost_price or 0)
 		
 		if(i.option_5):
-			option_5 += i.cost_price
+			option_5 += (i.cost_price or 0)
 		
 	doc.total_cost_price = total_cost_price
 	doc.complimentarie_option_1 = option_1

@@ -272,6 +272,13 @@ frappe.ui.form.on('Worksheet', {
                 }
             }
         })
+		frm.set_query('options',"worksheet_options", function(doc){
+            return {
+                filters:{
+                    'worksheet':frm.doc.name,
+                }
+            }
+        })
 	}
 });
 
@@ -419,21 +426,21 @@ function cal_complimentaries(frm,cdt,cdn){
 	var option_4 = 0 
 	var option_5 = 0
 	doc.complimentaries.forEach( i =>{
-		total_cost_price += i.cost_price
+		total_cost_price += i.cost_price || 0
 		if(i.option_1){
-			option_1 += i.cost_price
+			option_1 += i.cost_price || 0
 		}
 		if(i.option_2){
-			option_2 += i.cost_price
+			option_2 += i.cost_price || 0
 		}
 		if(i.option_3){
-			option_3 += i.cost_price
+			option_3 += i.cost_price || 0
 		}
 		if(i.option_4){
-			option_4 += i.cost_price
+			option_4 += i.cost_price || 0
 		}
 		if(i.option_5){
-			option_5 += i.cost_price
+			option_5 += i.cost_price || 0
 		}
 	})
 
